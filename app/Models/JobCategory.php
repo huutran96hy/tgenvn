@@ -9,6 +9,6 @@ class JobCategory extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'skill_id';
-    protected $fillable = ['skill_name'];
+    protected $primaryKey = 'category_id';
+    protected $fillable = ['category_name','description'];
 }
