@@ -27,7 +27,7 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'employer_id' => 'required|exists:employers,employer_id',
             'job_title' => 'required|string',
             'job_description' => 'required|string',
@@ -39,7 +39,7 @@ class JobController extends Controller
             'expiry_date' => 'required|date',
         ]);
 
-        $job = Job::create($request->all());
+        $job = Job::create($validated);
 
         return response()->json([
             'success' => true,
@@ -65,7 +65,7 @@ class JobController extends Controller
      */
     public function update(Request $request, Job $job)
     {
-        $request->validate([
+        $validated = $request->validate([
             'job_title' => 'sometimes|string',
             'job_description' => 'sometimes|string',
             'requirements' => 'sometimes|string',
@@ -75,7 +75,8 @@ class JobController extends Controller
             'expiry_date' => 'sometimes|date',
         ]);
 
-        $job->update($request->all());
+        $job->update($validated);
+
         return response()->json([
             'success' => true,
             'message' => 'Job updated successfully',

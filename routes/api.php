@@ -7,6 +7,9 @@ use App\Http\Controllers\Api\{
     CandidateController,
     EmployerController,
     JobController,
+    JobCategoryController,
+    ApplicationController,
+    SkillController,
 };
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -22,7 +25,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('candidate', CandidateController::class);
     Route::apiResource('employer', EmployerController::class);
     Route::apiResource('job', JobController::class);
-    
+    Route::apiResource('job-category', JobCategoryController::class);
+    Route::apiResource('application', ApplicationController::class);
+    Route::apiResource('skills', SkillController::class);
+
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/profile', [AuthController::class, 'profile']);
 });
