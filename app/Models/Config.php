@@ -8,6 +8,7 @@ class Config extends Model
 {
     use HasFactory;
 
+    protected $table = 'config'; 
     protected $primaryKey = 'config_id';
     protected $fillable = ['config_key', 'config_value', 'description'];
 }
