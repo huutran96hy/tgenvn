@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="navbar navbar-sm navbar-footer border-top">
     <div class="container-fluid">
         <span>&copy; 2025 <a
@@ -35,3 +36,5 @@
         </ul>
     </div>
 </div>
+=======
+>>>>>>> 060d6baaab7a1b6279fcaeafa62679e7fb547650
