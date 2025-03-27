@@ -12,7 +12,7 @@
             </div>
 
             <div class="card-body">
-                <form action="{{ isset($job) ? route('admin.jobs.update', $job->id) : route('admin.jobs.store') }}"
+                <form action="{{ isset($job) ? route('admin.jobs.update', $job->job_id) : route('admin.jobs.store') }}"
                     method="POST">
                     @csrf
                     @if (isset($job))
@@ -28,6 +28,11 @@
                     <div class="mb-3">
                         <label class="form-label">Mô tả công việc</label>
                         <textarea name="job_description" class="form-control" required>{{ old('job_description', $job->job_description ?? '') }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Yêu cầu công việc</label>
+                        <textarea name="requirements" class="form-control" required>{{ old('requirements', $job->requirements ?? '') }}</textarea>
                     </div>
 
                     <div class="mb-3">
@@ -59,9 +64,9 @@
                         <select name="category_id" class="form-control" required>
                             <option value="">Chọn danh mục</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}"
-                                    {{ isset($job) && $job->category_id == $category->id ? 'selected' : '' }}>
-                                    {{ $category->name }}</option>
+                                <option value="{{ $category->category_id }}"
+                                    {{ isset($job) && $job->category_id == $category->category_id ? 'selected' : '' }}>
+                                    {{ $category->category_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -71,9 +76,9 @@
                         <select name="employer_id" class="form-control" required>
                             <option value="">Chọn nhà tuyển dụng</option>
                             @foreach ($employers as $employer)
-                                <option value="{{ $employer->id }}"
-                                    {{ isset($job) && $job->employer_id == $employer->id ? 'selected' : '' }}>
-                                    {{ $employer->name }}</option>
+                                <option value="{{ $employer->employer_id }}"
+                                    {{ isset($job) && $job->employer_id == $employer->employer_id ? 'selected' : '' }}>
+                                    {{ $employer->company_name }}</option>
                             @endforeach
                         </select>
                     </div>

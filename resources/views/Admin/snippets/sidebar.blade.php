@@ -73,7 +73,14 @@
                         <span>Danh sách Job Categories</span>
                     </a>
                 </li>
-                <!-- Các menu khác, bạn có thể dán thêm đoạn code menu từ file mẫu -->
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.employers.index') }}"
+                        class="nav-link {{ isActive('admin.employers.*') }}">
+                        <i class="ph-table"></i>
+                        <span>Danh sách Employers</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- /main navigation -->

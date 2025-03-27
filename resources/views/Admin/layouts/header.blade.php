@@ -113,20 +113,12 @@
                         <img src="{{ asset('assets/images/demo/users/face11.jpg') }}" class="w-32px h-32px rounded-pill" alt="">
                         <span class="status-indicator bg-success"></span>
                     </div>
-                    <span class="d-none d-lg-inline-block mx-lg-2">Victoria</span>
+                    <span class="d-none d-lg-inline-block mx-lg-2">Admin</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
                     <a href="#" class="dropdown-item">
                         <i class="ph-user-circle me-2"></i>
                         My profile
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <i class="ph-currency-circle-dollar me-2"></i>
-                        My subscription
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <i class="ph-shopping-cart me-2"></i>
-                        My orders
                     </a>
                     <a href="#" class="dropdown-item">
                         <i class="ph-envelope-open me-2"></i>

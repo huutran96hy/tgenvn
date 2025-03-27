@@ -26,6 +26,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware([AdminAccess::class])->group(function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
         Route::resource('users', UserController::class);
         Route::resource('jobs', JobController::class);
         Route::resource('job-categories', JobCategoryController::class);

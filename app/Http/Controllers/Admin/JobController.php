@@ -56,13 +56,14 @@ class JobController extends Controller
             'requirements' => 'required|string',
             'salary' => 'nullable|string',
             'location' => 'required|string',
-            'category_id' => 'required|exists:categories,id',
-            'employer_id' => 'required|exists:employers,id',
+            'category_id' => 'required|exists:job_categories,category_id',
+            'employer_id' => 'required|exists:employers,employer_id',
             'posted_date' => 'required|date',
             'expiry_date' => 'required|date|after:posted_date',
         ]);
 
         Job::create($validated);
+
         return redirect()->route('admin.jobs.index')->with('success', 'Công việc đã được tạo thành công.');
     }
 
@@ -70,7 +71,6 @@ class JobController extends Controller
     {
         $categories = JobCategory::all();
         $employers = Employer::all();
-
         return view('Admin.pages.jobs.add_edit', compact('job', 'categories', 'employers'));
     }
 
@@ -82,8 +82,8 @@ class JobController extends Controller
             'requirements' => 'required|string',
             'salary' => 'nullable|string',
             'location' => 'required|string',
-            'category_id' => 'required|exists:categories,id',
-            'employer_id' => 'required|exists:employers,id',
+            'category_id' => 'required|exists:job_categories,category_id',
+            'employer_id' => 'required|exists:employers,employer_id',
             'posted_date' => 'required|date',
             'expiry_date' => 'required|date|after:posted_date',
         ]);

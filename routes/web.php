@@ -31,8 +31,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Trang danh sách job & chi tiết job
-Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
-Route::get('/jobs/{job}', [JobController::class, 'show'])->name('jobs.show');
+// Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
+// Route::get('/jobs/{job}', [JobController::class, 'show'])->name('jobs.show');
 
 // Trang danh mục công việc
 Route::get('/job-categories', [JobCategoryController::class, 'index'])->name('job-categories.index');
@@ -48,35 +48,35 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 
 // Các route yêu cầu đăng nhập
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+    // Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
 
-    // Nhà tuyển dụng
-    Route::middleware('can:manage-employers')->group(function () {
-        Route::resource('employers', EmployerController::class)->except(['index']);
-        Route::resource('jobs', JobController::class)->except(['index', 'show']);
-    });
+    // // Nhà tuyển dụng
+    // Route::middleware('can:manage-employers')->group(function () {
+    //     Route::resource('employers', EmployerController::class)->except(['index']);
+    //     Route::resource('jobs', JobController::class)->except(['index', 'show']);
+    // });
 
-    // Ứng viên
-    Route::middleware('can:manage-candidates')->group(function () {
-        Route::resource('candidates', CandidateController::class)->except(['index']);
-        Route::resource('applications', ApplicationController::class);
-    });
+    // // Ứng viên
+    // Route::middleware('can:manage-candidates')->group(function () {
+    //     Route::resource('candidates', CandidateController::class)->except(['index']);
+    //     Route::resource('applications', ApplicationController::class);
+    // });
 
-    // Quản lý tin tức (Chỉ Admin)
-    Route::middleware('can:manage-news')->group(function () {
-        Route::resource('news', NewsController::class)->except(['index', 'show']);
-        Route::resource('news-categories', NewsCategoryController::class)->except(['index']);
-    });
+    // // Quản lý tin tức (Chỉ Admin)
+    // Route::middleware('can:manage-news')->group(function () {
+    //     Route::resource('news', NewsController::class)->except(['index', 'show']);
+    //     Route::resource('news-categories', NewsCategoryController::class)->except(['index']);
+    // });
 
-    // Quản lý liên hệ (Admin)
-    Route::middleware('can:manage-contacts')->group(function () {
-        Route::resource('contacts', ContactController::class)->except(['create', 'store']);
-    });
+    // // Quản lý liên hệ (Admin)
+    // Route::middleware('can:manage-contacts')->group(function () {
+    //     Route::resource('contacts', ContactController::class)->except(['create', 'store']);
+    // });
 
-    // Cấu hình hệ thống (Admin)
-    Route::middleware('can:manage-configs')->group(function () {
-        Route::resource('configs', ConfigController::class);
-    });
+    // // Cấu hình hệ thống (Admin)
+    // Route::middleware('can:manage-configs')->group(function () {
+    //     Route::resource('configs', ConfigController::class);
+    // });
 });
 
 // Route::get('/', function () {

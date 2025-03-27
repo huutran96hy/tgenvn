@@ -53,9 +53,8 @@ class JobCategoryController extends Controller
 
         $jobCategory->update($validated);
 
-        return redirect()->route('admin.job-categories.index')->with('success', 'Cập nhật danh mục công việc thành công');
+        return back()->with('success', 'Cập nhật danh mục công việc thành công');
     }
-
 
     public function destroy(JobCategory $jobCategory)
     {

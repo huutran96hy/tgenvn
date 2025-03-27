@@ -23,9 +23,9 @@
                             <select name="category" class="form-control">
                                 <option value="">Tất cả danh mục</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}"
-                                        {{ request('category') == $category->id ? 'selected' : '' }}>
-                                        {{ $category->name }}
+                                    <option value="{{ $category->category_id }}"
+                                        {{ request('category') == $category->category_id ? 'selected' : '' }}>
+                                        {{ $category->category_name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -52,8 +52,8 @@
                                 <td>{{ Str::limit($job->job_description, 50) }}</td>
                                 <td>{{ $job->salary ?? 'Thỏa thuận' }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('admin.jobs.edit', $job->id) }}" class="btn btn-sm btn-info">Sửa</a>
-                                    <form action="{{ route('admin.jobs.destroy', $job->id) }}" method="POST"
+                                    <a href="{{ route('admin.jobs.edit', $job->job_id) }}" class="btn btn-sm btn-info">Sửa</a>
+                                    <form action="{{ route('admin.jobs.destroy', $job->job_id) }}" method="POST"
                                         class="d-inline">
                                         @csrf
                                         @method('DELETE')
