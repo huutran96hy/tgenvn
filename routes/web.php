@@ -77,9 +77,11 @@ Route::middleware('auth')->group(function () {
     Route::middleware('can:manage-configs')->group(function () {
         Route::resource('configs', ConfigController::class);
     });
-Route::get('/', function () {
-    return view('admin.dashboard');
 });
-Route::get('/news', function () {
-    return view('admin.news.index');
-});
+
+// Route::get('/', function () {
+//     return view('admin.dashboard');
+// });
+// Route::get('/news', function () {
+//     return view('admin.news.index');
+// });

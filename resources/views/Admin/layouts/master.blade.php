@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title')</title>
+    @stack('meta')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Limitless - Admin Dashboard')</title>
 
     <!-- Global stylesheets -->
@@ -23,52 +25,43 @@
     <script src="{{ asset('assets/demo/pages/dashboard.js') }}"></script>
     <script src="{{ asset('assets/demo/charts/pages/dashboard/progress.js') }}"></script>
     <script src="{{ asset('assets/demo/charts/pages/dashboard/bullets.js') }}"></script>
-    <!-- /theme JS files -->
 
     @yield('head')
 </head>
 
 <body>
+    @if (Route::currentRouteName() !== 'admin.login')
+        <!-- Header -->
+        @include('Admin.layouts.header')
+    @endif
 
-    <!-- Main navbar -->
-    @include('layouts.admin.header')
-
-    <!-- Page content -->
+    <!-- Main -->
     <div class="page-content">
-        <!-- Main sidebar -->
-        @include('layouts.admin.sidebar')
-
-        <!-- Main content -->
-        <div class="content-wrapper">
-            <!-- Inner content -->
-            <div class="content-inner">
-
-                <!-- Page header -->
-                @yield('page_header')
-
-                <!-- Content area -->
-                <div class="content">
+        @if (Route::is('admin.login'))
+            @yield('content')
+        @else
+            @include('Admin.snippets.sidebar')
+            <div class="content-wrapper">
+                <div class="content-inner">
                     @yield('content')
+                    @include('Admin.layouts.footer')
                 </div>
-                <!-- /content area -->
-
             </div>
-            <!-- /inner content -->
-        </div>
-        <!-- /main content -->
+        @endif
     </div>
-    <!-- /page content -->
 
     <!-- Notifications (nếu cần) -->
-    @include('layouts.admin.notifications')
+    @include('Admin.layouts.notifications')
 
     <!-- Demo config (nếu cần) -->
-    @include('layouts.admin.demo_config')
+    @include('Admin.layouts.demo_config')
 
     <!-- Footer -->
-    @include('layouts.admin.footer')
-    @yield('scripts')
+    {{-- @include('Admin.layouts.footer') --}}
 
+    @include('Admin.layouts.script_default')
+
+    @stack('scripts')
 </body>
 
 </html>

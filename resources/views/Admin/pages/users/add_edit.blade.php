@@ -1,4 +1,4 @@
-@extends('Admin.layouts.app')
+@extends('Admin.layouts.master')
 
 @section('pageTitle', isset($user) ? 'Chỉnh sửa người dùng' : 'Thêm người dùng')
 

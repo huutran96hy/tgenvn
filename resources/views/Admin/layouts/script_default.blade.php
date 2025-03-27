@@ -5,37 +5,6 @@
 
 <script>
     $(document).ready(function() {
-        // Dropdown for profile
-        $(".dropdown-toggle-custom").on("click", function(e) {
-            e.preventDefault();
-            var dropdownMenu = $(this).closest(".nav-item").find(".dropdown-menu");
-
-            $(".dropdown-menu").not(dropdownMenu).removeClass("show").css("right", "");
-
-            // Toggle dropdown này và thêm right: 0;
-            if (dropdownMenu.hasClass("show")) {
-                dropdownMenu.removeClass("show").css("right", "");
-            } else {
-                dropdownMenu.addClass("show").css("right", "0");
-            }
-        });
-
-        // Ẩn dropdown khi click ra ngoài
-        $(document).on("click", function(e) {
-            if (!$(e.target).closest(".nav-item").length) {
-                $(".dropdown-menu").removeClass("show").css("right", "");
-            }
-        });
-
-        // Đóng mở sidebar
-        $(".sidebar-main-resize").on("click", function() {
-            $(".sidebar").toggleClass("sidebar-main-resized");
-        });
-
-        // $(".sidebar-mobile-main-toggle").on("click", function() {
-        //     $(".sidebar").toggleClass("open"); 
-        // });
-
         // Đổi theme
         let body = $("body");
 

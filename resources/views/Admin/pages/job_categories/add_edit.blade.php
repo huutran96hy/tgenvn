@@ -1,4 +1,4 @@
-@extends('Admin.layouts.app')
+@extends('Admin.layouts.master')
 
 @section('pageTitle', isset($jobCategory) ? 'Chỉnh sửa danh mục công việc' : 'Thêm danh mục công việc')
 

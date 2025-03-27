@@ -1,4 +1,4 @@
-@extends('Admin.layouts.app')
+@extends('Admin.layouts.master')
 
 @section('pageTitle', 'Users')
 
