@@ -14,87 +14,97 @@ class JobController extends Controller
      */
     public function index()
     {
-        $jobs = Job::all();
-        return response()->json([
-            'success' => true,
-            'message' => 'Job list retrieved successfully',
-            'data' => JobResource::collection($jobs),
-        ]);
+        $records = Job::all();
+        return view('admin.jobs.index', compact('records'));
+    }
+
+    public function create()
+    {
+        // Nếu cần load dữ liệu cho dropdown (employers, categories) thì thực hiện tại đây
+        // Ví dụ:
+        // $employers = Employer::all();
+        // $categories = Category::all();
+
+        return view('admin.jobs.create'); // compact('employers', 'categories') nếu cần
     }
 
     /**
-     * Store a newly created job in storage.
+     * Lưu một job mới vào cơ sở dữ liệu.
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'employer_id' => 'required|exists:employers,employer_id',
-            'job_title' => 'required|string',
+        $validatedData = $request->validate([
+            'employer_id'     => 'required|integer',
+            'job_title'       => 'required|string|max:255',
             'job_description' => 'required|string',
-            'requirements' => 'required|string',
-            'salary' => 'nullable|string',
-            'location' => 'required|string',
-            'category_id' => 'required|exists:job_categories,category_id',
-            'posted_date' => 'required|date',
-            'expiry_date' => 'required|date',
+            'requirements'    => 'required|string',
+            'salary'          => 'required|numeric',
+            'location'        => 'required|string|max:255',
+            'category_id'     => 'required|integer',
+            'posted_date'     => 'required|date',
+            'expiry_date'     => 'required|date|after_or_equal:posted_date',
         ]);
 
-        $job = Job::create($validated);
+        // Tạo job mới
+        $job = Job::create($validatedData);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Job created successfully',
-            'data' => new JobResource($job),
-        ], 201);
+        return redirect()->route('jobs.index')->with('success', 'Job created successfully.');
     }
 
     /**
-     * Display the specified job.
+     * Hiển thị chi tiết của một job.
      */
-    public function show(Job $job)
+    public function show($id)
     {
-        return response()->json([
-            'success' => true,
-            'message' => 'Job retrieved successfully',
-            'data' => new JobResource($job),
-        ]);
+        $job = Job::with(['employer', 'category'])->findOrFail($id);
+        return view('admin.jobs.show', compact('job'));
     }
 
     /**
-     * Update the specified job in storage.
+     * Hiển thị form chỉnh sửa job.
      */
-    public function update(Request $request, Job $job)
+    public function edit($id)
     {
-        $validated = $request->validate([
-            'job_title' => 'sometimes|string',
-            'job_description' => 'sometimes|string',
-            'requirements' => 'sometimes|string',
-            'salary' => 'sometimes|string',
-            'location' => 'sometimes|string',
-            'category_id' => 'sometimes|exists:job_categories,category_id',
-            'expiry_date' => 'sometimes|date',
-        ]);
+        $job = Job::findOrFail($id);
+        // Nếu cần load thêm dữ liệu cho dropdown (employers, categories) thì thực hiện tại đây
+        // $employers = Employer::all();
+        // $categories = Category::all();
 
-        $job->update($validated);
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Job updated successfully',
-            'data' => new JobResource($job),
-        ]);
+        return view('admin.jobs.edit', compact('job'));
     }
 
     /**
-     * Remove the specified job from storage.
+     * Cập nhật job đã chỉnh sửa vào cơ sở dữ liệu.
      */
-    public function destroy(Job $job)
+    public function update(Request $request, $id)
     {
+        $job = Job::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'employer_id'     => 'required|integer',
+            'job_title'       => 'required|string|max:255',
+            'job_description' => 'required|string',
+            'requirements'    => 'required|string',
+            'salary'          => 'required|numeric',
+            'location'        => 'required|string|max:255',
+            'category_id'     => 'required|integer',
+            'posted_date'     => 'required|date',
+            'expiry_date'     => 'required|date|after_or_equal:posted_date',
+        ]);
+
+        $job->update($validatedData);
+
+        return redirect()->route('jobs.index')->with('success', 'Job updated successfully.');
+    }
+
+    /**
+     * Xóa một job khỏi cơ sở dữ liệu.
+     */
+    public function destroy($id)
+    {
+        $job = Job::findOrFail($id);
         $job->delete();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Job deleted successfully',
-            'data' => null,
-        ]);
+        return redirect()->route('jobs.index')->with('success', 'Job deleted successfully.');
     }
 }
