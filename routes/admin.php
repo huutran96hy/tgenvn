@@ -10,6 +10,9 @@ use App\Http\Controllers\Admin\{
     ConfigController,
     JobCategoryController,
     EmployerController,
+    NewsCategoryController,
+    ApplicationController,
+    CandidateController,
 };
 use App\Http\Middleware\AdminAccess;
 use App\Http\Middleware\RedirectIfAdmin;
@@ -29,9 +32,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::resource('users', UserController::class);
         Route::resource('jobs', JobController::class);
+        Route::post('/jobs/{job}/update-status', [JobController::class, 'updateStatus'])->name('jobs.update-status');
+
         Route::resource('job-categories', JobCategoryController::class);
         Route::resource('employers', EmployerController::class);
         Route::resource('news', NewsController::class);
+        Route::resource('news-categories', NewsCategoryController::class);
+        Route::resource('applications', ApplicationController::class);
+        Route::resource('candidates', CandidateController::class);
         Route::resource('configs', ConfigController::class);
     });
 });

@@ -27,7 +27,7 @@
     <script src="{{ asset('assets/demo/charts/pages/dashboard/progress.js') }}"></script>
     <script src="{{ asset('assets/demo/charts/pages/dashboard/bullets.js') }}"></script>
 
-    @yield('head')
+    @stack('head')
 </head>
 
 <body>

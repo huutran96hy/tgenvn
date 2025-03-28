@@ -1,6 +1,6 @@
 @extends('Admin.layouts.master')
 
-@section('pageTitle', 'Jobs')
+@section('pageTitle', 'Công việc')
 
 @section('content')
     @include('Admin.snippets.page_header')
@@ -15,19 +15,30 @@
             <div class="card-body">
                 <form action="{{ route('admin.jobs.index') }}" method="GET" class="mb-3">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <input type="text" name="search" class="form-control"
                                 placeholder="Tìm kiếm theo tiêu đề hoặc mô tả" value="{{ request('search') }}">
                         </div>
                         <div class="col-md-3">
-                            <select name="category" class="form-control">
+                            <select name="category_id" class="form-control">
                                 <option value="">Tất cả danh mục</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->category_id }}"
-                                        {{ request('category') == $category->category_id ? 'selected' : '' }}>
+                                        {{ request('category_id') == $category->category_id ? 'selected' : '' }}>
                                         {{ $category->category_name }}
                                     </option>
                                 @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select name="approval_status" class="form-control">
+                                <option value="">Tất cả trạng thái</option>
+                                <option value="pending" {{ request('approval_status') == 'pending' ? 'selected' : '' }}>Chờ
+                                    duyệt</option>
+                                <option value="approved" {{ request('approval_status') == 'approved' ? 'selected' : '' }}>Đã
+                                    duyệt</option>
+                                <option value="rejected" {{ request('approval_status') == 'rejected' ? 'selected' : '' }}>Bị
+                                    từ chối</option>
                             </select>
                         </div>
                         <div class="col-md-2">
@@ -36,12 +47,13 @@
                     </div>
                 </form>
 
-                <table class="table table-bordered table-hover">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>Tiêu đề</th>
                             <th>Mô tả</th>
                             <th>Mức lương</th>
+                            <th class="text-center">Trạng thái</th>
                             <th class="text-center">Hành động</th>
                         </tr>
                     </thead>
@@ -49,17 +61,38 @@
                         @foreach ($jobs as $job)
                             <tr>
                                 <td>{{ $job->job_title }}</td>
-                                <td>{{ Str::limit($job->job_description, 50) }}</td>
+                                <td>{!! Str::limit($job->job_description, 50) !!}</td>
                                 <td>{{ $job->salary ?? 'Thỏa thuận' }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('admin.jobs.edit', $job->job_id) }}" class="btn btn-sm btn-info">Sửa</a>
-                                    <form action="{{ route('admin.jobs.destroy', $job->job_id) }}" method="POST"
-                                        class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger"
-                                            onclick="return confirm('Xác nhận xóa?')">Xóa</button>
-                                    </form>
+                                    <div class="dropdown">
+                                        <button
+                                            class="btn btn-sm dropdown-toggle 
+                                            {{ $job->approval_status == 'pending' ? 'btn-warning' : ($job->approval_status == 'approved' ? 'btn-success' : 'btn-danger') }}"
+                                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            @if ($job->approval_status == 'pending')
+                                                Chờ duyệt
+                                            @elseif ($job->approval_status == 'approved')
+                                                Đã duyệt
+                                            @else
+                                                Bị từ chối
+                                            @endif
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item change-status"
+                                                    data-url="{{ route('admin.jobs.update-status', $job->job_id) }}"
+                                                    data-status="pending">Chờ duyệt</a></li>
+                                            <li><a class="dropdown-item change-status"
+                                                    data-url="{{ route('admin.jobs.update-status', $job->job_id) }}"
+                                                    data-status="approved">Đã duyệt</a></li>
+                                            <li><a class="dropdown-item change-status"
+                                                    data-url="{{ route('admin.jobs.update-status', $job->job_id) }}"
+                                                    data-status="rejected">Bị từ chối</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <x-action-dropdown editRoute="admin.jobs.edit" deleteRoute="admin.jobs.destroy"
+                                        :id="$job->job_id" />
                                 </td>
                             </tr>
                         @endforeach
@@ -73,3 +106,49 @@
         </div>
     </div>
 @endsection
+
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $(".change-status").click(function(e) {
+                e.preventDefault();
+                let newStatus = $(this).data("status");
+                let updateUrl = $(this).data("url");
+                let button = $(this).closest(".dropdown").find("button");
+
+                $.ajax({
+                    url: updateUrl,
+                    type: "POST",
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr("content"),
+                        approval_status: newStatus
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            let statusText = {
+                                pending: "Chờ duyệt",
+                                approved: "Đã duyệt",
+                                rejected: "Bị từ chối"
+                            };
+                            let statusClass = {
+                                pending: "btn-warning",
+                                approved: "btn-success",
+                                rejected: "btn-danger"
+                            };
+
+                            button.text(statusText[newStatus]);
+                            button.attr("class", "btn btn-sm dropdown-toggle " + statusClass[
+                                newStatus]);
+                        } else {
+                            alert("Có lỗi xảy ra!");
+                        }
+                    },
+                    error: function() {
+                        alert("Có lỗi xảy ra khi cập nhật trạng thái.");
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

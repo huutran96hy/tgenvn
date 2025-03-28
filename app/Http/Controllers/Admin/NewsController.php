@@ -3,63 +3,83 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\News;
+use App\Models\User;
+use App\Models\NewsCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $news = News::with('category', 'author')->latest()->paginate(10);
+        $categories = NewsCategory::all();
+
+        return view('Admin.pages.news.index', compact('news','categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $categories = NewsCategory::all();
+        $users = User::all();
+        return view('Admin.pages.news.add_edit', compact('categories','users'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required',
+            'published_date' => 'required|date|date_format:Y-m-d',
+            'status' => 'required|in:draft,published',
+            'news_category_id' => 'required|exists:news_categories,news_category_id',
+        ]);
+
+        News::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'published_date' => $request->published_date,
+            'status' => $request->status,
+            'author_id' => Auth::id(),
+            'news_category_id' => $request->news_category_id,
+        ]);
+
+        return redirect()->route('admin.news.index')->with('success', 'News created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(News $news)
     {
-        //
+        $categories = NewsCategory::all();
+        $users = User::all();
+        return view('Admin.pages.news.add_edit', compact('news', 'categories','users'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, News $news)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required',
+            'published_date' => 'required|date|date_format:Y-m-d',
+            'status' => 'required|in:draft,published',
+            'news_category_id' => 'required|exists:news_categories,news_category_id',
+        ]);
+
+        $news->update([
+            'title' => $request->title,
+            'content' => $request->content,
+            'published_date' => $request->published_date,
+            'status' => $request->status,
+            'news_category_id' => $request->news_category_id,
+            'updated_date' => now(),
+        ]);
+
+        return back()->with('success', 'News updated successfully.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(News $news)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $news->delete();
+        return redirect()->route('admin.news.index')->with('success', 'News deleted successfully.');
     }
 }

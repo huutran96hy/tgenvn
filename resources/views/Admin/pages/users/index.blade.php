@@ -1,6 +1,6 @@
 @extends('Admin.layouts.master')
 
-@section('pageTitle', 'Users')
+@section('pageTitle', 'Người dùng')
 
 @section('content')
     @include('Admin.snippets.page_header')
@@ -37,7 +37,7 @@
                     </div>
                 </form>
 
-                <table class="table table-bordered table-hover">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>Tên</th>
@@ -53,15 +53,8 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ ucwords(str_replace('_', ' ', $user->role)) }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('admin.users.edit', $user->id) }}"
-                                        class="btn btn-sm btn-info">Sửa</a>
-                                    <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
-                                        class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger"
-                                            onclick="return confirm('Xác nhận xóa?')">Xóa</button>
-                                    </form>
+                                    <x-action-dropdown editRoute="admin.users.edit" deleteRoute="admin.users.destroy"
+                                        :id="$user->id" />
                                 </td>
                             </tr>
                         @endforeach
