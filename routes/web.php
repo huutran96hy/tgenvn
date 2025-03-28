@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\JobController;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\{
     AuthController,
@@ -78,3 +80,19 @@ Route::middleware('auth')->group(function () {
     //     Route::resource('configs', ConfigController::class);
     // });
 });
+
+// Route::get('/', function () {
+//     return view('admin.dashboard');
+// });
+// Route::get('/news', function () {
+//     return view('admin.news.index');
+// });
+Route::get('/news/create', function () {
+    return view('admin.news.create');
+});
+Route::resource('jobs', JobController::class);
+Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
+    ->name('ckfinder_connector');
+
+Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
+    ->name('ckfinder_browser');
