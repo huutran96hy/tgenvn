@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\JobController;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\{
     AuthController,

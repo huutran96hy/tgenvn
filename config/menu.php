@@ -40,5 +40,20 @@ return [
             'label' => 'Danh sách Applications',
             'icon' => 'ph-briefcase',
         ],
+        [
+            'route' => 'admin.skills.index',
+            'label' => 'Danh sách Skills',
+            'icon' => 'ph-briefcase',
+        ],
+        [
+            'route' => 'admin.contacts.index',
+            'label' => 'Danh sách Contacts',
+            'icon' => 'ph-briefcase',
+        ],
+        [
+            'route' => 'admin.configs.index',
+            'label' => 'Cấu hình',
+            'icon' => 'ph-gear',
+        ],
     ]
 ];

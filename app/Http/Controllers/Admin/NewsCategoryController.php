@@ -51,6 +51,6 @@ class NewsCategoryController extends Controller
     public function destroy(NewsCategory $newsCategory)
     {
         $newsCategory->delete();
-        return redirect()->route('admin.news-categories.index')->with('success', 'Category deleted successfully.');
+        return back()->with('success', 'Category deleted successfully.');
     }
 }

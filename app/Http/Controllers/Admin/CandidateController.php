@@ -97,6 +97,6 @@ class CandidateController extends Controller
         }
 
         $candidate->delete();
-        return redirect()->route('admin.candidates.index')->with('success', 'Ứng viên đã được xóa.');
+        return back()->with('success', 'Ứng viên đã được xóa.');
     }
 }

@@ -80,6 +80,6 @@ class ApplicationController extends Controller
     public function destroy(string $id)
     {
         Application::destroy($id);
-        return redirect()->route('admin.applications.index')->with('success', 'Đơn ứng tuyển đã được xóa.');
+        return back()->with('success', 'Đơn ứng tuyển đã được xóa.');
     }
 }

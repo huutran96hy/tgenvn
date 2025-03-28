@@ -7,6 +7,7 @@ use App\Models\Job;
 use App\Models\JobCategory;
 use App\Models\Employer;
 use Illuminate\Http\Request;
+use App\Models\Skill;
 
 class JobController extends Controller
 {
@@ -50,7 +51,9 @@ class JobController extends Controller
     {
         $categories = JobCategory::all();
         $employers = Employer::all();
-        return view('Admin.pages.jobs.add_edit', compact('categories', 'employers'));
+        $allSkills = Skill::all();
+
+        return view('Admin.pages.jobs.add_edit', compact('categories', 'employers', 'allSkills'));
     }
 
     public function store(Request $request)
@@ -66,11 +69,17 @@ class JobController extends Controller
             'posted_date' => 'required|date|date_format:Y-m-d',
             'expiry_date' => 'required|date|date_format:Y-m-d|after:posted_date',
             'approval_status' => 'nullable|in:approved,rejected,pending',
+            'skills' => 'nullable|array',
+            'skills.*' => 'exists:skills,skill_id',
         ]);
 
         $validated['approval_status'] = $validated['approval_status'] ?? 'pending';
 
-        Job::create($validated);
+        $job = Job::create($validated);
+
+        if ($request->has('skills')) {
+            $job->skills()->sync($request->skills);
+        }
 
         return redirect()->route('admin.jobs.index')->with('success', 'Công việc đã được tạo thành công.');
     }
@@ -79,7 +88,9 @@ class JobController extends Controller
     {
         $categories = JobCategory::all();
         $employers = Employer::all();
-        return view('Admin.pages.jobs.add_edit', compact('job', 'categories', 'employers'));
+        $allSkills = Skill::all();
+
+        return view('Admin.pages.jobs.add_edit', compact('job', 'categories', 'employers', 'allSkills'));
     }
 
     public function update(Request $request, Job $job)
@@ -95,9 +106,16 @@ class JobController extends Controller
             'posted_date' => 'required|date|date_format:Y-m-d',
             'expiry_date' => 'required|date|date_format:Y-m-d|after:posted_date',
             'approval_status' => 'nullable|in:approved,rejected,pending',
+            'skills' => 'nullable|array',
+            'skills.*' => 'exists:skills,skill_id',
         ]);
 
         $job->update($validated);
+
+        if ($request->has('skills')) {
+            $job->skills()->sync($request->skills);
+        }
+
         return back()->with('success', 'Công việc đã được cập nhật.');
     }
 
