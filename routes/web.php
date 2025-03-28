@@ -3,41 +3,90 @@
 use App\Http\Controllers\Api\JobController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\{
+    AuthController,
+    UserController,
+    CandidateController,
+    EmployerController,
+    JobController,
+    JobCategoryController,
+    ApplicationController,
+    SkillController,
+    NewsCategoryController,
+    NewsController,
+    ContactController,
+    ConfigController
+};
 
-Route::get('/', function () {
-    return view('admin.dashboard');
-});
-Route::get('/news', function () {
-    $news = collect([
-        (object)[
-            'id'                => 1,
-            'title'             => 'Tin tức mẫu 1',
-            'content'           => 'Đây là nội dung mẫu cho tin tức số 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
-            'author_id'         => 1,
-            'author'            => (object)['name' => 'Nguyễn Văn A'],
-            'news_category_id'  => 1,
-            'newsCategory'      => (object)['name' => 'Chuyên mục 1'],
-            'published_date'    => Carbon::parse('2025-03-25'),
-            'updated_date'      => Carbon::parse('2025-03-26'),
-            'status'            => true,
-        ],
-        (object)[
-            'id'                => 2,
-            'title'             => 'Tin tức mẫu 2',
-            'content'           => 'Đây là nội dung mẫu cho tin tức số 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
-            'author_id'         => 2,
-            'author'            => (object)['name' => 'Trần Thị B'],
-            'news_category_id'  => 2,
-            'newsCategory'      => (object)['name' => 'Chuyên mục 2'],
-            'published_date'    => Carbon::parse('2025-03-20'),
-            'updated_date'      => Carbon::parse('2025-03-22'),
-            'status'            => false,
-        ],
-        // Có thể thêm nhiều bản ghi khác
-    ]);
+require __DIR__ . '/admin.php';
 
-    return view('admin.news.index', compact('news'));
+// Trang chủ
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Đăng ký, đăng nhập
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Trang danh sách job & chi tiết job
+// Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
+// Route::get('/jobs/{job}', [JobController::class, 'show'])->name('jobs.show');
+
+// Trang danh mục công việc
+Route::get('/job-categories', [JobCategoryController::class, 'index'])->name('job-categories.index');
+
+// Tin tức & danh mục tin tức
+Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+Route::get('/news/{news}', [NewsController::class, 'show'])->name('news.show');
+Route::get('/news-categories', [NewsCategoryController::class, 'index'])->name('news-categories.index');
+
+// Form liên hệ
+Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+// Các route yêu cầu đăng nhập
+Route::middleware('auth')->group(function () {
+    // Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+
+    // // Nhà tuyển dụng
+    // Route::middleware('can:manage-employers')->group(function () {
+    //     Route::resource('employers', EmployerController::class)->except(['index']);
+    //     Route::resource('jobs', JobController::class)->except(['index', 'show']);
+    // });
+
+    // // Ứng viên
+    // Route::middleware('can:manage-candidates')->group(function () {
+    //     Route::resource('candidates', CandidateController::class)->except(['index']);
+    //     Route::resource('applications', ApplicationController::class);
+    // });
+
+    // // Quản lý tin tức (Chỉ Admin)
+    // Route::middleware('can:manage-news')->group(function () {
+    //     Route::resource('news', NewsController::class)->except(['index', 'show']);
+    //     Route::resource('news-categories', NewsCategoryController::class)->except(['index']);
+    // });
+
+    // // Quản lý liên hệ (Admin)
+    // Route::middleware('can:manage-contacts')->group(function () {
+    //     Route::resource('contacts', ContactController::class)->except(['create', 'store']);
+    // });
+
+    // // Cấu hình hệ thống (Admin)
+    // Route::middleware('can:manage-configs')->group(function () {
+    //     Route::resource('configs', ConfigController::class);
+    // });
 });
+
+// Route::get('/', function () {
+//     return view('admin.dashboard');
+// });
+// Route::get('/news', function () {
+//     return view('admin.news.index');
+// });
 Route::get('/news/create', function () {
     return view('admin.news.create');
 });
