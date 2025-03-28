@@ -40,6 +40,7 @@ class EmployerController extends Controller
             'website' => 'nullable|url',
             'contact_phone' => 'required|max:15',
             'address' => 'required|max:255',
+            'email' => 'nullable'
         ]);
 
         // Lưu logo
@@ -73,6 +74,7 @@ class EmployerController extends Controller
             'website' => 'nullable|url',
             'contact_phone' => 'required|max:15',
             'address' => 'required|max:255',
+            'email' => 'nullable'
         ]);
 
         if ($request->hasFile('logo')) {

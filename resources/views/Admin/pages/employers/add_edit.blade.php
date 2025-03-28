@@ -53,7 +53,8 @@
                     <div class="mb-3">
                         <label class="form-label">Ảnh nền</label>
                         <div class="input-group">
-                            <input type="file" name="background_img" class="form-control" id="bgrImgInput" accept="image/*">
+                            <input type="file" name="background_img" class="form-control" id="bgrImgInput"
+                                accept="image/*">
                         </div>
                         @if (isset($employer) && $employer->background_img)
                             <div class="mt-2">
@@ -96,6 +97,12 @@
                         <label class="form-label">Địa chỉ</label>
                         <input type="text" name="address" class="form-control"
                             value="{{ old('address', $employer->address ?? '') }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control"
+                            value="{{ old('email', $employer->email ?? '') }}">
                     </div>
 
                     <button type="submit"

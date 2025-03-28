@@ -13,15 +13,14 @@ use App\Http\Controllers\Frontend\{
     NewsCategoryController,
     NewsController,
     ContactController,
-    ConfigController
+    HomeController,
+    JobDetailController
 };
 
 require __DIR__ . '/admin.php';
 
-// Trang chủ
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/job-detail/{jobId}', [JobDetailController::class, 'index'])->name('job_detail');
 
 // Đăng ký, đăng nhập
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
@@ -79,18 +78,12 @@ Route::middleware('auth')->group(function () {
     // });
 });
 
-// Route::get('/', function () {
-//     return view('admin.dashboard');
+// Route::get('/news/create', function () {
+//     return view('admin.news.create');
 // });
-// Route::get('/news', function () {
-//     return view('admin.news.index');
-// });
-Route::get('/news/create', function () {
-    return view('admin.news.create');
-});
-Route::resource('jobs', JobController::class);
-Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
-    ->name('ckfinder_connector');
+// Route::resource('jobs', JobController::class);
+// Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
+//     ->name('ckfinder_connector');
 
-Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
-    ->name('ckfinder_browser');
+// Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
+//     ->name('ckfinder_browser');
