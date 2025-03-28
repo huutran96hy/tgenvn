@@ -36,6 +36,11 @@ class JobController extends Controller
             $query->where('location', 'like', "%{$request->location}%");
         }
 
+        // Lọc theo trạng thái phê duyệt
+        if ($request->filled('approval_status')) {
+            $query->where('approval_status', $request->approval_status);
+        }
+
         $jobs = $query->paginate(10);
 
         return view('Admin.pages.jobs.index', compact('jobs', 'categories', 'employers'));
@@ -58,9 +63,12 @@ class JobController extends Controller
             'location' => 'required|string',
             'category_id' => 'required|exists:job_categories,category_id',
             'employer_id' => 'required|exists:employers,employer_id',
-            'posted_date' => 'required|date',
-            'expiry_date' => 'required|date|after:posted_date',
+            'posted_date' => 'required|date|date_format:Y-m-d',
+            'expiry_date' => 'required|date|date_format:Y-m-d|after:posted_date',
+            'approval_status' => 'nullable|in:approved,rejected,pending',
         ]);
+
+        $validated['approval_status'] = $validated['approval_status'] ?? 'pending';
 
         Job::create($validated);
 
@@ -84,8 +92,9 @@ class JobController extends Controller
             'location' => 'required|string',
             'category_id' => 'required|exists:job_categories,category_id',
             'employer_id' => 'required|exists:employers,employer_id',
-            'posted_date' => 'required|date',
-            'expiry_date' => 'required|date|after:posted_date',
+            'posted_date' => 'required|date|date_format:Y-m-d',
+            'expiry_date' => 'required|date|date_format:Y-m-d|after:posted_date',
+            'approval_status' => 'nullable|in:approved,rejected,pending',
         ]);
 
         $job->update($validated);
@@ -96,5 +105,16 @@ class JobController extends Controller
     {
         $job->delete();
         return back()->with('success', 'Công việc đã bị xóa.');
+    }
+
+    public function updateStatus(Request $request, Job $job)
+    {
+        $request->validate([
+            'approval_status' => 'required|in:pending,approved,rejected'
+        ]);
+
+        $job->update(['approval_status' => $request->approval_status]);
+
+        return response()->json(['success' => true]);
     }
 }

@@ -25,7 +25,7 @@
                     </div>
                 </form>
 
-                <table class="table table-bordered table-hover">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>Tên danh mục</th>
@@ -39,15 +39,8 @@
                                 <td>{{ $category->category_name }}</td>
                                 <td>{{ $category->description ?? 'Không có mô tả' }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('admin.job-categories.edit', $category->category_id) }}"
-                                        class="btn btn-sm btn-info">Sửa</a>
-                                    <form action="{{ route('admin.job-categories.destroy', $category->category_id) }}"
-                                        method="POST" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger"
-                                            onclick="return confirm('Xác nhận xóa?')">Xóa</button>
-                                    </form>
+                                    <x-action-dropdown editRoute="admin.job-categories.edit"
+                                        deleteRoute="admin.job-categories.destroy" :id="$category->category_id" />
                                 </td>
                             </tr>
                         @endforeach

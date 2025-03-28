@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('employer_id');
             $table->date('posted_date');
             $table->date('expiry_date');
+            $table->string('approval_status')->default('pending'); // approved , rejected, pending
             $table->timestamps();
         });
     }

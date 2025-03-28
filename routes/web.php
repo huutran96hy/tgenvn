@@ -78,10 +78,3 @@ Route::middleware('auth')->group(function () {
     //     Route::resource('configs', ConfigController::class);
     // });
 });
-
-// Route::get('/', function () {
-//     return view('admin.dashboard');
-// });
-// Route::get('/news', function () {
-//     return view('admin.news.index');
-// });

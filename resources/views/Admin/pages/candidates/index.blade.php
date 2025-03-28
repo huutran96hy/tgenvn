@@ -1,6 +1,6 @@
 @extends('Admin.layouts.master')
 
-@section('pageTitle', 'Nhà tuyển dụng')
+@section('pageTitle', 'Ứng viên')
 
 @section('content')
     @include('Admin.snippets.page_header')
@@ -8,16 +8,16 @@
     <div class="content">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Danh sách công ty</h5>
-                <a href="{{ route('admin.employers.create') }}" class="btn btn-primary">+ Thêm</a>
+                <h5 class="mb-0">Danh sách ứng viên</h5>
+                <a href="{{ route('admin.candidates.create') }}" class="btn btn-primary">+ Thêm</a>
             </div>
 
             <div class="card-body">
-                <form action="{{ route('admin.employers.index') }}" method="GET" class="mb-3">
+                <form action="{{ route('admin.candidates.index') }}" method="GET" class="mb-3">
                     <div class="row">
                         <div class="col-md-4">
                             <input type="text" name="search" class="form-control"
-                                placeholder="Tìm kiếm theo tên công ty" value="{{ request('search') }}">
+                                placeholder="Tìm kiếm theo tên hoặc số điện thoại" value="{{ request('search') }}">
                         </div>
                         <div class="col-md-2">
                             <button type="submit" class="btn btn-primary w-100">Tìm kiếm</button>
@@ -28,23 +28,21 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Công ty</th>
-                            <th>Mô tả</th>
-                            <th>Website</th>
-                            <th>Liên hệ</th>
+                            <th>Họ và Tên</th>
+                            <th>Số điện thoại</th>
+                            <th>Địa chỉ</th>
                             <th class="text-center">Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($employers as $employer)
+                        @foreach ($candidates as $candidate)
                             <tr>
-                                <td>{{ $employer->company_name }}</td>
-                                <td>{!! Str::limit($employer->company_description, 50) !!}</td>
-                                <td>{{ $employer->website ?? 'N/A' }}</td>
-                                <td>{{ $employer->contact_phone }}</td>
+                                <td>{{ $candidate->full_name }}</td>
+                                <td>{{ $candidate->phone }}</td>
+                                <td>{{ $candidate->address ?? 'N/A' }}</td>
                                 <td class="text-center">
-                                    <x-action-dropdown editRoute="admin.employers.edit"
-                                        deleteRoute="admin.employers.destroy" :id="$employer->employer_id" />
+                                    <x-action-dropdown editRoute="admin.candidates.edit"
+                                        deleteRoute="admin.candidates.destroy" :id="$candidate->candidate_id" />
                                 </td>
                             </tr>
                         @endforeach
@@ -52,7 +50,7 @@
                 </table>
 
                 <div class="d-flex justify-content-center mt-3">
-                    {{ $employers->appends(request()->query())->links('Admin.pagination.custom') }}
+                    {{ $candidates->appends(request()->query())->links('Admin.pagination.custom') }}
                 </div>
             </div>
         </div>

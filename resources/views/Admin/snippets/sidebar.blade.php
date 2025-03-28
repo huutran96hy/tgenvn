@@ -45,42 +45,9 @@
                     <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Tables</div>
                     <i class="ph-dots-three sidebar-resize-show"></i>
                 </li>
-                @php
-                    function isActive($route)
-                    {
-                        return request()->routeIs($route) ? 'active' : '';
-                    }
-                @endphp
+                {{-- Menu --}}
+                @include('Admin.snippets.menu')
 
-                <li class="nav-item">
-                    <a href="{{ route('admin.users.index') }}" class="nav-link {{ isActive('admin.users.*') }}">
-                        <i class="ph-table"></i>
-                        <span>Danh sách User</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('admin.jobs.index') }}" class="nav-link {{ isActive('admin.jobs.*') }}">
-                        <i class="ph-table"></i>
-                        <span>Danh sách Job</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('admin.job-categories.index') }}"
-                        class="nav-link {{ isActive('admin.job-categories.*') }}">
-                        <i class="ph-table"></i>
-                        <span>Danh sách Job Categories</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('admin.employers.index') }}"
-                        class="nav-link {{ isActive('admin.employers.*') }}">
-                        <i class="ph-table"></i>
-                        <span>Danh sách Employers</span>
-                    </a>
-                </li>
             </ul>
         </div>
         <!-- /main navigation -->

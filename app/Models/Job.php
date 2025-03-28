@@ -4,12 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Job extends Model
 {
     use HasFactory;
 
     protected $primaryKey = 'job_id';
-    protected $fillable = ['employer_id', 'job_title', 'job_description', 'requirements', 'salary', 'location', 'category_id', 'posted_date', 'expiry_date'];
+    protected $fillable = [
+        'employer_id',
+        'job_title',
+        'job_description',
+        'requirements',
+        'salary',
+        'location',
+        'category_id',
+        'posted_date',
+        'expiry_date',
+        'approval_status'
+    ];
 
     public function employer()
     {
