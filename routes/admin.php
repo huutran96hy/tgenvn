@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\{
     ApplicationController,
     CandidateController,
     SkillController,
-    ContactController
+    ContactController,
 };
 use App\Http\Middleware\AdminAccess;
 use App\Http\Middleware\RedirectIfAdmin;
@@ -31,6 +31,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware([AdminAccess::class])->group(function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/get-theme', [ConfigController::class, 'getTheme'])->name('get.theme');
+        Route::post('/change-theme', [ConfigController::class, 'changeTheme'])->name('change.theme');
 
         Route::resource('users', UserController::class);
         Route::resource('jobs', JobController::class);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Config;
+use Illuminate\Support\Facades\Storage;
 
 class ConfigController extends Controller
 {
@@ -24,7 +25,6 @@ class ConfigController extends Controller
         return view('Admin.pages.configs.index', compact('configs'));
     }
 
-
     /**
      * Hiển thị form thêm mới cấu hình.
      */
@@ -42,7 +42,14 @@ class ConfigController extends Controller
             'config_key' => 'required|string|unique:config,config_key|max:255',
             'config_value' => 'required|string',
             'description' => 'nullable|string',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        // Xử lý tải lên logo
+        if ($request->hasFile('logo')) {
+            $logoPath = $request->file('logo')->store('logos', 'public');
+            $validated['logo'] = $logoPath;
+        }
 
         Config::create($validated);
 
@@ -65,7 +72,19 @@ class ConfigController extends Controller
         $validated = $request->validate([
             'config_value' => 'required|string',
             'description' => 'nullable|string',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        // Xử lý tải lên logo 
+        if ($request->hasFile('logo')) {
+            // Xóa logo cũ 
+            if ($config->logo) {
+                Storage::disk('public')->delete($config->logo);
+            }
+
+            $logoPath = $request->file('logo')->store('logos', 'public');
+            $validated['logo'] = $logoPath;
+        }
 
         $config->update($validated);
 
@@ -77,7 +96,33 @@ class ConfigController extends Controller
      */
     public function destroy(Config $config)
     {
+        // Xóa logo
+        if ($config->logo) {
+            Storage::disk('public')->delete($config->logo);
+        }
+
         $config->delete();
         return back()->with('success', 'Cấu hình đã được xóa.');
+    }
+
+    /**
+     * Lấy theme hiện tại.
+     */
+    public function getTheme()
+    {
+        $theme = Config::where('config_key', 'theme')->value('config_value');
+        return response()->json(['theme' => $theme]);
+    }
+
+    /**
+     * Cập nhật theme.
+     */
+    public function changeTheme(Request $request)
+    {
+        $request->validate(['theme' => 'required|in:light,dark']);
+
+        Config::where('config_key', 'theme')->update(['config_value' => $request->theme]);
+
+        return response()->json(['message' => 'Theme updated']);
     }
 }

@@ -15,7 +15,7 @@
             <div class="card-body">
                 <form
                     action="{{ isset($config) ? route('admin.configs.update', $config->config_id) : route('admin.configs.store') }}"
-                    method="POST">
+                    method="POST" enctype="multipart/form-data">
                     @csrf
                     @if (isset($config))
                         @method('PUT')
@@ -40,6 +40,18 @@
                                 <th>Mô tả</th>
                                 <td>
                                     <textarea name="description" class="form-control" rows="2">{{ old('description', $config->description ?? '') }}</textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Logo</th>
+                                <td>
+                                    <input type="file" name="logo" class="form-control">
+                                    @if (isset($config) && $config->logo)
+                                        <div class="mt-2">
+                                            <img src="{{ asset('storage/' . $config->logo) }}" alt="Logo"
+                                                class="img-fluid" style="max-width: 150px;">
+                                        </div>
+                                    @endif
                                 </td>
                             </tr>
                         </tbody>

@@ -15,7 +15,7 @@ class EmployerController extends Controller
         $query = Employer::query();
 
         if ($request->filled('search')) {
-            $query->where('company_name', 'like', "%" . $request->search . "%");
+            $query->where('company_name', 'like', '%' . $request->search . '%');
         }
 
         $employers = $query->paginate(10);
@@ -24,6 +24,7 @@ class EmployerController extends Controller
 
     public function create()
     {
+        // $users = User::where('role', 'employer')->get();
         $users = User::all();
         return view('Admin.pages.employers.add_edit', compact('users'));
     }
@@ -33,16 +34,23 @@ class EmployerController extends Controller
         $validated = $request->validate([
             'user_id' => 'required|exists:users,id',
             'company_name' => 'required|max:255',
-            'images' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'background_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'company_description' => 'nullable|max:500',
             'website' => 'nullable|url',
             'contact_phone' => 'required|max:15',
             'address' => 'required|max:255',
+            'email' => 'nullable'
         ]);
 
-        // Lưu ảnh
-        if ($request->hasFile('images')) {
-            $validated['images'] = $request->file('images')->store('employers', 'public');
+        // Lưu logo
+        if ($request->hasFile('logo')) {
+            $validated['logo'] = $request->file('logo')->store('employers/logos', 'public');
+        }
+
+        // Lưu bgr-img
+        if ($request->hasFile('background_img')) {
+            $validated['background_img'] = $request->file('background_img')->store('employers/images', 'public');
         }
 
         Employer::create($validated);
@@ -60,20 +68,31 @@ class EmployerController extends Controller
         $validated = $request->validate([
             'user_id' => 'required|exists:users,id',
             'company_name' => 'required|max:255',
-            'images' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'background_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'company_description' => 'nullable|max:500',
             'website' => 'nullable|url',
             'contact_phone' => 'required|max:15',
             'address' => 'required|max:255',
+            'email' => 'nullable'
         ]);
 
-        if ($request->hasFile('images')) {
-            // Xóa ảnh cũ 
-            if ($employer->images) {
-                Storage::disk('public')->delete($employer->images);
+        if ($request->hasFile('logo')) {
+            // Xóa logo
+            if ($employer->logo) {
+                Storage::disk('public')->delete($employer->logo);
             }
-            // Lưu ảnh mới
-            $validated['images'] = $request->file('images')->store('employers', 'public');
+            // Lưu logo
+            $validated['logo'] = $request->file('logo')->store('employers/logos', 'public');
+        }
+
+        if ($request->hasFile('background_img')) {
+            // Xóa bgr-img
+            if ($employer->background_img) {
+                Storage::disk('public')->delete($employer->background_img);
+            }
+            // Lưu bgr-img
+            $validated['background_img'] = $request->file('background_img')->store('employers/images', 'public');
         }
 
         $employer->update($validated);
@@ -82,9 +101,14 @@ class EmployerController extends Controller
 
     public function destroy(Employer $employer)
     {
-        // Xóa ảnh 
-        if ($employer->images) {
-            Storage::disk('public')->delete($employer->images);
+        // Xóa logo
+        if ($employer->logo) {
+            Storage::disk('public')->delete($employer->logo);
+        }
+
+        // Xóa bgr-img
+        if ($employer->background_img) {
+            Storage::disk('public')->delete($employer->background_img);
         }
 
         $employer->delete();

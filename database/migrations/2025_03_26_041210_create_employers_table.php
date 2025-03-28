@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id('employer_id');
             $table->unsignedBigInteger('user_id');
             $table->string('company_name');
-            $table->string('images')->nullable();
+            $table->string('logo')->nullable();
+            $table->string('background_img')->nullable();
             $table->text('company_description')->nullable();
             $table->string('website')->nullable();
             $table->string('contact_phone');
             $table->text('address');
+            $table->string('email', 50)->nullable();
             $table->timestamps();
         });
     }

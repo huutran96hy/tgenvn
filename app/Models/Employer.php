@@ -10,7 +10,17 @@ class Employer extends Model
     use HasFactory;
     protected $table = 'employers';
     protected $primaryKey = 'employer_id';
-    protected $fillable = ['user_id', 'company_name', 'images', 'company_description', 'website', 'contact_phone', 'address'];
+    protected $fillable = [
+        'user_id',
+        'company_name',
+        'logo',
+        'background_img',
+        'company_description',
+        'website',
+        'contact_phone',
+        'address',
+        'email'
+    ];
 
     public function user()
     {
