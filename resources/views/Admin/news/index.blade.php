@@ -22,356 +22,72 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header">
-        <h5 class="mb-0">Danh sách tin tức</h5>
+    <div class="card-header d-flex align-items-center py-0">
+        <h5 class="py-3 mb-0">Danh sách tin tức</h5>
+        <div class="ms-auto my-auto">
+            <button type="button" class="btn btn-primary">Thêm mới</button>
+        </div>
     </div>
     <!-- Bảng tin tức sử dụng DataTables (lấy cảm hứng từ bảng được cắt từ file datatable mẫu) -->
     <table class="table datatable-basic">
-        <thead>
+    <thead>
             <tr>
+                <th>STT</th>
                 <th>Tiêu đề</th>
+                <th>Nội dung</th>
                 <th>Tác giả</th>
                 <th>Chuyên mục</th>
                 <th>Ngày đăng</th>
+                <th>Ngày cập nhật</th>
                 <th>Trạng thái</th>
-                <th class="text-center">Hành động</th>
+                <th>Hành động</th>
             </tr>
         </thead>
         <tbody>
+            @forelse($news as $item)
             <tr>
-                <td>Thị trường chứng khoán đạt mức cao kỷ lục</td>
-                <td>Nguyễn Văn A</td>
-                <td>Tài chính</td>
-                <td>26 Mar 2025</td>
-                <td><span class="badge bg-success bg-opacity-10 text-success">Đã đăng</span></td>
-                <td class="text-center">
-                    <div class="d-inline-flex">
-                        <div class="dropdown">
-                            <a href="#" class="text-body" data-bs-toggle="dropdown">
-                                <i class="ph-list"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item"><i class="ph-eye me-2"></i> Xem</a>
-                                <a href="#" class="dropdown-item"><i class="ph-pencil me-2"></i> Sửa</a>
-                                <a href="#" class="dropdown-item"><i class="ph-trash me-2"></i> Xóa</a>
-                            </div>
-                        </div>
-                    </div>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $item->title }}</td>
+                <td>{!! Str::limit($item->content, 100) !!}</td>
+                <td>
+                    {{-- Giả sử có relationship author --}}
+                    {{ $item->author->name ?? 'N/A' }}
+                </td>
+                <td>
+                    {{-- Giả sử có relationship newsCategory --}}
+                    {{ $item->newsCategory->name ?? 'N/A' }}
+                </td>
+                <td>{{ $item->published_date ? $item->published_date->format('d M Y') : 'Chưa đăng' }}</td>
+                <td>{{ $item->updated_date ? $item->updated_date->format('d M Y') : 'Chưa cập nhật' }}</td>
+                <td>
+                    @if($item->status)
+                        <span class="badge bg-success">Active</span>
+                    @else
+                        <span class="badge bg-secondary">Inactive</span>
+                    @endif
+                </td>
+                <td>
+                    <!-- Ví dụ: nút sửa và xóa -->
+                    <a href="" class="btn btn-outline-primary p-1"><i class="far fa-edit"></i></a>
+                    <form action="" method="POST" class="d-inline-block" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-outline-danger p-1"><i class="fas fa-trash-alt"></i></button>
+                    </form>
                 </td>
             </tr>
+            @empty
             <tr>
-                <td>Các đột phá trong công nghệ AI</td>
-                <td>Trần Thị B</td>
-                <td>Công nghệ</td>
-                <td>25 Mar 2025</td>
-                <td><span class="badge bg-info bg-opacity-10 text-info">Nháp</span></td>
-                <td class="text-center">
-                    <div class="d-inline-flex">
-                        <div class="dropdown">
-                            <a href="#" class="text-body" data-bs-toggle="dropdown">
-                                <i class="ph-list"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item"><i class="ph-eye me-2"></i> Xem</a>
-                                <a href="#" class="dropdown-item"><i class="ph-pencil me-2"></i> Sửa</a>
-                                <a href="#" class="dropdown-item"><i class="ph-trash me-2"></i> Xóa</a>
-                            </div>
-                        </div>
-                    </div>
-                </td>
+                <td colspan="8" class="text-center">Không có tin tức nào.</td>
             </tr>
-            <tr>
-                <td>Các đột phá trong công nghệ AI</td>
-                <td>Trần Thị B</td>
-                <td>Công nghệ</td>
-                <td>25 Mar 2025</td>
-                <td><span class="badge bg-info bg-opacity-10 text-info">Nháp</span></td>
-                <td class="text-center">
-                    <div class="d-inline-flex">
-                        <div class="dropdown">
-                            <a href="#" class="text-body" data-bs-toggle="dropdown">
-                                <i class="ph-list"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item"><i class="ph-eye me-2"></i> Xem</a>
-                                <a href="#" class="dropdown-item"><i class="ph-pencil me-2"></i> Sửa</a>
-                                <a href="#" class="dropdown-item"><i class="ph-trash me-2"></i> Xóa</a>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Các đột phá trong công nghệ AI</td>
-                <td>Trần Thị B</td>
-                <td>Công nghệ</td>
-                <td>25 Mar 2025</td>
-                <td><span class="badge bg-info bg-opacity-10 text-info">Nháp</span></td>
-                <td class="text-center">
-                    <div class="d-inline-flex">
-                        <div class="dropdown">
-                            <a href="#" class="text-body" data-bs-toggle="dropdown">
-                                <i class="ph-list"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item"><i class="ph-eye me-2"></i> Xem</a>
-                                <a href="#" class="dropdown-item"><i class="ph-pencil me-2"></i> Sửa</a>
-                                <a href="#" class="dropdown-item"><i class="ph-trash me-2"></i> Xóa</a>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Các đột phá trong công nghệ AI</td>
-                <td>Trần Thị B</td>
-                <td>Công nghệ</td>
-                <td>25 Mar 2025</td>
-                <td><span class="badge bg-info bg-opacity-10 text-info">Nháp</span></td>
-                <td class="text-center">
-                    <div class="d-inline-flex">
-                        <div class="dropdown">
-                            <a href="#" class="text-body" data-bs-toggle="dropdown">
-                                <i class="ph-list"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item"><i class="ph-eye me-2"></i> Xem</a>
-                                <a href="#" class="dropdown-item"><i class="ph-pencil me-2"></i> Sửa</a>
-                                <a href="#" class="dropdown-item"><i class="ph-trash me-2"></i> Xóa</a>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Các đột phá trong công nghệ AI</td>
-                <td>Trần Thị B</td>
-                <td>Công nghệ</td>
-                <td>25 Mar 2025</td>
-                <td><span class="badge bg-info bg-opacity-10 text-info">Nháp</span></td>
-                <td class="text-center">
-                    <div class="d-inline-flex">
-                        <div class="dropdown">
-                            <a href="#" class="text-body" data-bs-toggle="dropdown">
-                                <i class="ph-list"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item"><i class="ph-eye me-2"></i> Xem</a>
-                                <a href="#" class="dropdown-item"><i class="ph-pencil me-2"></i> Sửa</a>
-                                <a href="#" class="dropdown-item"><i class="ph-trash me-2"></i> Xóa</a>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Các đột phá trong công nghệ AI</td>
-                <td>Trần Thị B</td>
-                <td>Công nghệ</td>
-                <td>25 Mar 2025</td>
-                <td><span class="badge bg-info bg-opacity-10 text-info">Nháp</span></td>
-                <td class="text-center">
-                    <div class="d-inline-flex">
-                        <div class="dropdown">
-                            <a href="#" class="text-body" data-bs-toggle="dropdown">
-                                <i class="ph-list"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item"><i class="ph-eye me-2"></i> Xem</a>
-                                <a href="#" class="dropdown-item"><i class="ph-pencil me-2"></i> Sửa</a>
-                                <a href="#" class="dropdown-item"><i class="ph-trash me-2"></i> Xóa</a>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Các đột phá trong công nghệ AI</td>
-                <td>Trần Thị B</td>
-                <td>Công nghệ</td>
-                <td>25 Mar 2025</td>
-                <td><span class="badge bg-info bg-opacity-10 text-info">Nháp</span></td>
-                <td class="text-center">
-                    <div class="d-inline-flex">
-                        <div class="dropdown">
-                            <a href="#" class="text-body" data-bs-toggle="dropdown">
-                                <i class="ph-list"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item"><i class="ph-eye me-2"></i> Xem</a>
-                                <a href="#" class="dropdown-item"><i class="ph-pencil me-2"></i> Sửa</a>
-                                <a href="#" class="dropdown-item"><i class="ph-trash me-2"></i> Xóa</a>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Các đột phá trong công nghệ AI</td>
-                <td>Trần Thị B</td>
-                <td>Công nghệ</td>
-                <td>25 Mar 2025</td>
-                <td><span class="badge bg-info bg-opacity-10 text-info">Nháp</span></td>
-                <td class="text-center">
-                    <div class="d-inline-flex">
-                        <div class="dropdown">
-                            <a href="#" class="text-body" data-bs-toggle="dropdown">
-                                <i class="ph-list"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item"><i class="ph-eye me-2"></i> Xem</a>
-                                <a href="#" class="dropdown-item"><i class="ph-pencil me-2"></i> Sửa</a>
-                                <a href="#" class="dropdown-item"><i class="ph-trash me-2"></i> Xóa</a>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Các đột phá trong công nghệ AI</td>
-                <td>Trần Thị B</td>
-                <td>Công nghệ</td>
-                <td>25 Mar 2025</td>
-                <td><span class="badge bg-info bg-opacity-10 text-info">Nháp</span></td>
-                <td class="text-center">
-                    <div class="d-inline-flex">
-                        <div class="dropdown">
-                            <a href="#" class="text-body" data-bs-toggle="dropdown">
-                                <i class="ph-list"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item"><i class="ph-eye me-2"></i> Xem</a>
-                                <a href="#" class="dropdown-item"><i class="ph-pencil me-2"></i> Sửa</a>
-                                <a href="#" class="dropdown-item"><i class="ph-trash me-2"></i> Xóa</a>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Các đột phá trong công nghệ AI</td>
-                <td>Trần Thị B</td>
-                <td>Công nghệ</td>
-                <td>25 Mar 2025</td>
-                <td><span class="badge bg-info bg-opacity-10 text-info">Nháp</span></td>
-                <td class="text-center">
-                    <div class="d-inline-flex">
-                        <div class="dropdown">
-                            <a href="#" class="text-body" data-bs-toggle="dropdown">
-                                <i class="ph-list"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item"><i class="ph-eye me-2"></i> Xem</a>
-                                <a href="#" class="dropdown-item"><i class="ph-pencil me-2"></i> Sửa</a>
-                                <a href="#" class="dropdown-item"><i class="ph-trash me-2"></i> Xóa</a>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Các đột phá trong công nghệ AI</td>
-                <td>Trần Thị B</td>
-                <td>Công nghệ</td>
-                <td>25 Mar 2025</td>
-                <td><span class="badge bg-info bg-opacity-10 text-info">Nháp</span></td>
-                <td class="text-center">
-                    <div class="d-inline-flex">
-                        <div class="dropdown">
-                            <a href="#" class="text-body" data-bs-toggle="dropdown">
-                                <i class="ph-list"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item"><i class="ph-eye me-2"></i> Xem</a>
-                                <a href="#" class="dropdown-item"><i class="ph-pencil me-2"></i> Sửa</a>
-                                <a href="#" class="dropdown-item"><i class="ph-trash me-2"></i> Xóa</a>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Các đột phá trong công nghệ AI</td>
-                <td>Trần Thị B</td>
-                <td>Công nghệ</td>
-                <td>25 Mar 2025</td>
-                <td><span class="badge bg-info bg-opacity-10 text-info">Nháp</span></td>
-                <td class="text-center">
-                    <div class="d-inline-flex">
-                        <div class="dropdown">
-                            <a href="#" class="text-body" data-bs-toggle="dropdown">
-                                <i class="ph-list"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item"><i class="ph-eye me-2"></i> Xem</a>
-                                <a href="#" class="dropdown-item"><i class="ph-pencil me-2"></i> Sửa</a>
-                                <a href="#" class="dropdown-item"><i class="ph-trash me-2"></i> Xóa</a>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Các đột phá trong công nghệ AI</td>
-                <td>Trần Thị B</td>
-                <td>Công nghệ</td>
-                <td>25 Mar 2025</td>
-                <td><span class="badge bg-info bg-opacity-10 text-info">Nháp</span></td>
-                <td class="text-center">
-                    <div class="d-inline-flex">
-                        <div class="dropdown">
-                            <a href="#" class="text-body" data-bs-toggle="dropdown">
-                                <i class="ph-list"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item"><i class="ph-eye me-2"></i> Xem</a>
-                                <a href="#" class="dropdown-item"><i class="ph-pencil me-2"></i> Sửa</a>
-                                <a href="#" class="dropdown-item"><i class="ph-trash me-2"></i> Xóa</a>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Các đột phá trong công nghệ AI</td>
-                <td>Trần Thị B</td>
-                <td>Công nghệ</td>
-                <td>25 Mar 2025</td>
-                <td><span class="badge bg-info bg-opacity-10 text-info">Nháp</span></td>
-                <td class="text-center">
-                    <div class="d-inline-flex">
-                        <div class="dropdown">
-                            <a href="#" class="text-body" data-bs-toggle="dropdown">
-                                <i class="ph-list"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item"><i class="ph-eye me-2"></i> Xem</a>
-                                <a href="#" class="dropdown-item"><i class="ph-pencil me-2"></i> Sửa</a>
-                                <a href="#" class="dropdown-item"><i class="ph-trash me-2"></i> Xóa</a>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <!-- Thêm các hàng dữ liệu tin tức khác -->
+            @endforelse
         </tbody>
     </table>
 </div>
 @endsection
 @section('scripts')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ asset('assets/js/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/vendor/tables/datatables/datatables.min.js') }}"></script>
-<script>
-    $(document).ready(function() {
-        $('.datatable-basic').DataTable({
-            // Cấu hình bổ sung nếu cần, ví dụ:
-            paging: true,
-            ordering: true,
-            info: true,
-            // language: { /* tùy chỉnh ngôn ngữ nếu cần */ }
-        });
-    });
-</script>
-
+<script src="{{ asset('assets/demo/pages/datatables_basic.js') }}"></script>
 <!-- Nếu cần, bạn có thể thêm các script bổ sung riêng cho trang này -->
 @endsection

@@ -27,11 +27,19 @@
                     <i class="ph-dots-three sidebar-resize-show"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('admin') }}" class="nav-link active">
+                    <a href="{{ url('admin') }}" class="nav-link @if(request()->routeIs('admin')) active @endif">
                         <i class="ph-house"></i>
                         <span>
                             Dashboard
                             <span class="d-block fw-normal opacity-50">No pending orders</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('jobs.index') }}" class="nav-link @if(request()->routeIs('jobs.*')) active @endif">
+                        <i class="ph-briefcase"></i>
+                        <span>
+                            Quản lý tin tuyển dụng
                         </span>
                     </a>
                 </li>
