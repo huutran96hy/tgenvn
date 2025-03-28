@@ -4,62 +4,80 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Config;
 
 class ConfigController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Hiển thị danh sách cấu hình.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $configs = Config::query();
+
+        if ($request->has('search')) {
+            $configs->where('config_key', 'like', '%' . $request->search . '%');
+        }
+
+        $configs = $configs->paginate(10);
+
+        return view('Admin.pages.configs.index', compact('configs'));
     }
 
+
     /**
-     * Show the form for creating a new resource.
+     * Hiển thị form thêm mới cấu hình.
      */
     public function create()
     {
-        //
+        return view('Admin.pages.configs.add_edit');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Lưu cấu hình mới vào database.
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'config_key' => 'required|string|unique:config,config_key|max:255',
+            'config_value' => 'required|string',
+            'description' => 'nullable|string',
+        ]);
+
+        Config::create($validated);
+
+        return redirect()->route('admin.configs.index')->with('success', 'Cấu hình đã được thêm.');
     }
 
     /**
-     * Display the specified resource.
+     * Hiển thị form chỉnh sửa cấu hình.
      */
-    public function show(string $id)
+    public function edit(Config $config)
     {
-        //
+        return view('Admin.pages.configs.add_edit', compact('config'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Cập nhật cấu hình.
      */
-    public function edit(string $id)
+    public function update(Request $request, Config $config)
     {
-        //
+        $validated = $request->validate([
+            'config_value' => 'required|string',
+            'description' => 'nullable|string',
+        ]);
+
+        $config->update($validated);
+
+        return back()->with('success', 'Cấu hình đã được cập nhật.');
     }
 
     /**
-     * Update the specified resource in storage.
+     * Xóa cấu hình.
      */
-    public function update(Request $request, string $id)
+    public function destroy(Config $config)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $config->delete();
+        return back()->with('success', 'Cấu hình đã được xóa.');
     }
 }

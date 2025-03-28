@@ -78,6 +78,18 @@
                     </div>
 
                     <div class="mb-3">
+                        <label class="form-label">Kỹ năng</label>
+                        <select name="skills[]" class="form-control select2" multiple="multiple">
+                            @foreach ($allSkills as $skill)
+                                <option value="{{ $skill->skill_id }}"
+                                    {{ isset($job) && in_array($skill->skill_id, $job->skills->pluck('skill_id')->toArray() ?? []) ? 'selected' : '' }}>
+                                    {{ $skill->skill_name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
                         <label class="form-label">Trạng thái phê duyệt</label>
                         <select name="approval_status" class="form-control" required>
                             <option value="pending"

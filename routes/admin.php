@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\{
     NewsCategoryController,
     ApplicationController,
     CandidateController,
+    SkillController,
+    ContactController
 };
 use App\Http\Middleware\AdminAccess;
 use App\Http\Middleware\RedirectIfAdmin;
@@ -40,6 +42,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('news-categories', NewsCategoryController::class);
         Route::resource('applications', ApplicationController::class);
         Route::resource('candidates', CandidateController::class);
+        Route::resource('skills', SkillController::class);
+        Route::resource('contacts', ContactController::class)->only(['index', 'destroy']);
         Route::resource('configs', ConfigController::class);
     });
 });
