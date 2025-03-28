@@ -34,18 +34,35 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Ảnh đại diện</label>
+                        <label class="form-label">Logo</label>
                         <div class="input-group">
-                            <input type="file" name="images" class="form-control" id="imageInput" accept="image/*">
+                            <input type="file" name="logo" class="form-control" id="logoInput" accept="image/*">
                         </div>
-                        @if (isset($employer) && $employer->images)
+                        @if (isset($employer) && $employer->logo)
                             <div class="mt-2">
-                                <img id="previewImage" src="{{ asset('storage/' . $employer->images) }}"
+                                <img id="logoPreview" src="{{ asset('storage/' . $employer->logo) }}" class="img-thumbnail"
+                                    width="150">
+                            </div>
+                        @else
+                            <div class="mt-2">
+                                <img id="logoPreview" src="" class="img-thumbnail d-none" width="150">
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Ảnh nền</label>
+                        <div class="input-group">
+                            <input type="file" name="background_img" class="form-control" id="bgrImgInput" accept="image/*">
+                        </div>
+                        @if (isset($employer) && $employer->background_img)
+                            <div class="mt-2">
+                                <img id="bgrImgPreview" src="{{ asset('storage/' . $employer->background_img) }}"
                                     class="img-thumbnail" width="150">
                             </div>
                         @else
                             <div class="mt-2">
-                                <img id="previewImage" src="" class="img-thumbnail d-none" width="150">
+                                <img id="bgrImgPreview" src="" class="img-thumbnail d-none" width="150">
                             </div>
                         @endif
                     </div>
@@ -96,19 +113,19 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // tạo CKEditor
+            // Tạo CKEditor
             document.querySelectorAll(".ckeditor").forEach(editorElement => {
                 ClassicEditor
                     .create(editorElement)
                     .catch(error => console.error(error));
             });
 
-            // Hiển thị ảnh preview
-            const imageInput = document.getElementById("imageInput");
-            if (imageInput) {
-                imageInput.addEventListener("change", function(event) {
+            // Hiển thị ảnh preview cho logo
+            const logoInput = document.getElementById("logoInput");
+            if (logoInput) {
+                logoInput.addEventListener("change", function(event) {
                     let file = event.target.files[0];
-                    let preview = document.getElementById("previewImage");
+                    let preview = document.getElementById("logoPreview");
 
                     if (file) {
                         let reader = new FileReader();
@@ -121,7 +138,25 @@
                 });
             }
 
-            // tạo Select2
+            // Hiển thị ảnh preview cho ảnh nền
+            const bgrImgInput = document.getElementById("bgrImgInput");
+            if (bgrImgInput) {
+                bgrImgInput.addEventListener("change", function(event) {
+                    let file = event.target.files[0];
+                    let preview = document.getElementById("bgrImgPreview");
+
+                    if (file) {
+                        let reader = new FileReader();
+                        reader.onload = function(e) {
+                            preview.src = e.target.result;
+                            preview.classList.remove("d-none");
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+
+            // Tạo Select2
             $('.select2').select2({
                 placeholder: "Chọn một mục",
                 allowClear: true

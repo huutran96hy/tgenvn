@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('config_key')->unique();
             $table->text('config_value');
             $table->text('description')->nullable();
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }

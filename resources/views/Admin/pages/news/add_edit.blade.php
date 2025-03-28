@@ -13,7 +13,7 @@
 
             <div class="card-body">
                 <form action="{{ isset($news) ? route('admin.news.update', $news->news_id) : route('admin.news.store') }}"
-                    method="POST">
+                    method="POST" enctype="multipart/form-data">
                     @csrf
                     @if (isset($news))
                         @method('PUT')
@@ -23,6 +23,23 @@
                         <label class="form-label">Tiêu đề</label>
                         <input type="text" name="title" class="form-control"
                             value="{{ old('title', $news->title ?? '') }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Ảnh</label>
+                        <div class="input-group">
+                            <input type="file" name="images" class="form-control" id="images" accept="image/*">
+                        </div>
+                        @if (isset($news) && $news->images)
+                            <div class="mt-2">
+                                <img id="bgrImgPreview" src="{{ asset('storage/' . $news->images) }}" class="img-thumbnail"
+                                    width="150">
+                            </div>
+                        @else
+                            <div class="mt-2">
+                                <img id="bgrImgPreview" src="" class="img-thumbnail d-none" width="150">
+                            </div>
+                        @endif
                     </div>
 
                     <div class="mb-3">
@@ -114,6 +131,23 @@
                 placeholder: "Chọn một mục",
                 allowClear: true
             });
+
+            const images = document.getElementById("images");
+            if (images) {
+                images.addEventListener("change", function(event) {
+                    let file = event.target.files[0];
+                    let preview = document.getElementById("bgrImgPreview");
+
+                    if (file) {
+                        let reader = new FileReader();
+                        reader.onload = function(e) {
+                            preview.src = e.target.result;
+                            preview.classList.remove("d-none");
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
         });
     </script>
 @endpush
