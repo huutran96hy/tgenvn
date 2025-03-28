@@ -80,4 +80,19 @@ class ConfigController extends Controller
         $config->delete();
         return back()->with('success', 'Cấu hình đã được xóa.');
     }
+
+    public function getTheme()
+    {
+        $theme = Config::where('config_key', 'theme')->value('config_value');
+        return response()->json(['theme' => $theme]);
+    }
+
+    public function changeTheme(Request $request)
+    {
+        $request->validate(['theme' => 'required|in:light,dark']);
+
+        Config::where('config_key', 'theme')->update(['config_value' => $request->theme]);
+
+        return response()->json(['message' => 'Theme updated']);
+    }
 }

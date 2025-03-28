@@ -12,9 +12,9 @@
                                 <!-- Login form -->
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
-                                        <ul>
+                                        <ul style="margin: 0">
                                             @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
+                                                <li style="list-style: none">{{ $error }}</li>
                                             @endforeach
                                         </ul>
                                     </div>

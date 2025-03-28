@@ -10,16 +10,44 @@
 
 <script>
     $(document).ready(function() {
-        // Đổi theme
         let body = $("body");
+        let themeIcon = $("#theme-icon");
 
-        let currentTheme = localStorage.getItem("theme") || "dark";
-        body.attr("data-color-theme", currentTheme);
+        // Lấy URL từ Laravel
+        let getThemeUrl = "{{ route('admin.get.theme') }}";
+        let changeThemeUrl = "{{ route('admin.change.theme') }}";
 
-        $("#toggle-theme").click(function() {
+        // Lấy theme từ database
+        $.get(getThemeUrl, function(response) {
+            let currentTheme = response.theme || "light";
+            body.attr("data-color-theme", currentTheme);
+            themeIcon.toggleClass("fa-sun", currentTheme === "dark");
+            themeIcon.toggleClass("fa-moon", currentTheme === "light");
+        });
+
+        // Khi nhấn vào nút đổi theme
+        $("#toggle-theme").click(function(e) {
+            e.preventDefault();
             let newTheme = body.attr("data-color-theme") === "dark" ? "light" : "dark";
+
             body.attr("data-color-theme", newTheme);
-            localStorage.setItem("theme", newTheme);
+            themeIcon.toggleClass("fa-sun", newTheme === "dark");
+            themeIcon.toggleClass("fa-moon", newTheme === "light");
+
+            // Gửi request lưu theme vào database
+            $.ajax({
+                url: changeThemeUrl,
+                type: "POST",
+                data: {
+                    theme: newTheme
+                },
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                success: function(response) {
+                    console.log("Theme updated:", response);
+                }
+            });
         });
     });
 </script>
