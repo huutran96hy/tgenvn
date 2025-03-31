@@ -30,7 +30,7 @@
                             </p>
                         </div>
                         <div class="col-lg-4 col-md-12 text-lg-end">
-                            <a class="btn btn-call-icon btn-apply btn-apply-bigs" href="">
+                            <a class="btn btn-call-icon btn-apply btn-apply-bigs" href="{{ route('contact.index') }}">
                                 Liên hệ với chúng tôi
                             </a>
                         </div>
@@ -108,8 +108,9 @@
                                                         <div class="row">
                                                             <div class="col-7">
                                                                 <span class="card-text-price">Lương:</span>
-                                                                <span
-                                                                    class="text-muted">{{ $job->salary ?? 'Thoả thuận' }}</span>
+                                                                <span class="text-muted">
+                                                                    {{ \App\Helpers\NumberHelper::formatSalary($job->salary) }}
+                                                                </span>
                                                             </div>
                                                             <div class="col-5 text-end">
                                                                 <a class="btn btn-apply-now"
@@ -170,10 +171,14 @@
                                     </li> --}}
                                     <li>
                                         <div class="sidebar-icon-item"><i class="fi-rr-clock"></i></div>
-                                        <div class="sidebar-text-info"><span class="text-description">Ngày thành lập
-                                            </span><strong class="small-heading">
-                                                {{-- {{ $employer->founded_at->format('d/m/Y') }} --}}
-                                            </strong></div>
+                                        <div class="sidebar-text-info">
+                                            <span class="text-description">
+                                                Ngày thành lập
+                                            </span>
+                                            <strong class="small-heading">
+                                                {{ $employer->founded_at ? \Carbon\Carbon::parse($employer->founded_at)->format('d/m/Y') : '' }}
+                                            </strong>
+                                        </div>
                                     </li>
                                     {{-- <li>
                                         <div class="sidebar-icon-item"><i class="fi-rr-time-fast"></i></div>
@@ -188,7 +193,8 @@
                                     <li>SĐT: {{ $employer->contact_phone }}</li>
                                     <li>Email: {{ $employer->email }}</li>
                                 </ul>
-                                <div class="mt-30"><a class="btn btn-send-message" href="{{ route('contact.index') }}">Gửi
+                                <div class="mt-30"><a class="btn btn-send-message"
+                                        href="{{ route('contact.index') }}">Gửi
                                         tin nhắn</a>
                                 </div>
                             </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Job;
 use App\Models\Employer;
 use Illuminate\Http\Request;
+
 class JobDetailController extends Controller
 {
     public function index($jobId)
@@ -14,6 +15,13 @@ class JobDetailController extends Controller
 
         $employer = Employer::withCount('jobs')->find($job->employer_id);
 
-        return view('Frontend.pages.job_detail', compact('job', 'employer'));
+        $randomJobs = Job::with('employer', 'category', 'skills')
+            // ->where('job_id', '!=', $jobId)
+            ->inRandomOrder()
+            ->take(8)
+            ->get();
+
+
+        return view('Frontend.pages.job_detail', compact('job', 'employer', 'randomJobs'));
     }
 }

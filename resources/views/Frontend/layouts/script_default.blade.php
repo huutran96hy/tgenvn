@@ -41,18 +41,18 @@
 
 <script>
     $(document).ready(function() {
-        let userId = {{ auth()->check() ? auth()->id() : 'null' }};
+        // let userId = {{ auth()->check() ? auth()->id() : 'null' }};
 
         $("#applyJobForm").on("submit", function(e) {
             e.preventDefault();
 
-            if (!userId) {
-                alert("Bạn cần đăng nhập trước khi ứng tuyển!");
-                return;
-            }
+            // if (!userId) {
+            //     alert("Bạn cần đăng nhập trước khi ứng tuyển!");
+            //     return;
+            // }
 
             let formData = new FormData(this);
-            formData.append("user_id", userId);
+            // formData.append("user_id", userId);
 
             $.ajax({
                 url: "{{ route('candidate.store') }}",

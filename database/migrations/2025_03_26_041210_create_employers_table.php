@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('employers', function (Blueprint $table) {
             $table->id('employer_id');
-            $table->unsignedBigInteger('user_id');
+            // $table->unsignedBigInteger('user_id');
             $table->string('company_name');
             $table->string('logo')->nullable();
             $table->string('background_img')->nullable();
@@ -23,8 +23,8 @@ return new class extends Migration
             $table->text('address');
             $table->string('email', 50)->nullable();
             $table->date('founded_at')->nullable();
-            $table->string('about', 30)->nullable();
-            $table->string('company_type', 50)->nullable();
+            $table->string('about', 1000)->nullable();
+            $table->string('company_type', 100)->nullable();
             $table->timestamps();
         });
     }

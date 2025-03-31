@@ -31,8 +31,8 @@ class AppServiceProvider extends ServiceProvider
         //     return $user->role === 'admin';
         // });
 
-        $theme = DB::table('config')->where('config_key', 'theme')
-            ->value('config_value') ?? 'light';
-        View::share('theme', $theme);
+        // $theme = DB::table('config')->where('config_key', 'theme')
+        //     ->value('config_value') ?? 'light';
+        // View::share('theme', $theme);
     }
 }

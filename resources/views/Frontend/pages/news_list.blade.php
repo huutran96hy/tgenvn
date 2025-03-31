@@ -18,7 +18,7 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <ul class="breadcrumbs mt-40">
-                                <li><a class="home-icon" href="index.html">Trang chủ</a></li>
+                                <li><a class="home-icon" href="{{route('index')}}">Trang chủ</a></li>
                                 <li>Tin tức</li>
                             </ul>
                         </div>
@@ -73,7 +73,7 @@
                                             </div>
                                             <div class="card-block-info">
                                                 <div class="tags mb-15">
-                                                    <a class="btn btn-tag" href="">
+                                                    <a class="btn btn-tag" href="#">
                                                         {{ $item->category->category_name }}
                                                     </a>
                                                 </div>

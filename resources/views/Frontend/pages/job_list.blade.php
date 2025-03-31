@@ -138,7 +138,8 @@
                                                 </p>
                                                 <div class="mt-30">
                                                     @foreach ($job->skills as $skill)
-                                                        <a class="btn btn-grey-small mr-5" href="">
+                                                        <a class="btn btn-grey-small mr-5"
+                                                            href="{{ route('jobs.index') }}">
                                                             {{ $skill->skill_name }}
                                                         </a>
                                                     @endforeach
@@ -147,8 +148,9 @@
                                                     <div class="row">
                                                         <div class="col-lg-7 col-7">
                                                             <span class="card-text-price">Lương: </span>
-                                                            <span
-                                                                class="text-muted">{{ $job->salary ?? 'Thoả thuận' }}</span>
+                                                            <span class="text-muted">
+                                                                {{ \App\Helpers\NumberHelper::formatSalary($job->salary) }}
+                                                            </span>
                                                         </div>
                                                         <div class="col-lg-5 col-5 text-end">
                                                             <div class="btn btn-apply-now" data-bs-toggle="modal"
@@ -175,7 +177,7 @@
                                 <div class="filter-block head-border mb-30">
                                     <h5>Bộ Lọc <a class="link-reset" href="#">Làm mới</a></h5>
                                 </div>
-                                <div class="filter-block mb-30">
+                                {{-- <div class="filter-block mb-30">
                                     <div class="form-group select-style select-style-icon">
                                         <select class="form-control form-icons">
                                             <option>Hải Phòng , Việt Nam</option>
@@ -184,8 +186,8 @@
                                             <option>Berlin</option>
                                         </select><i class="fi-rr-marker"></i>
                                     </div>
-                                </div>
-                                <div class="filter-block mb-20">
+                                </div> --}}
+                                {{-- <div class="filter-block mb-20">
                                     <h5 class="medium-heading mb-15">Vị trí</h5>
                                     <div class="form-group">
                                         <ul class="list-checkbox">
@@ -227,7 +229,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="filter-block mb-20">
                                     <h5 class="medium-heading mb-25">Salary Range</h5>
                                     <div class="form-group mb-20">

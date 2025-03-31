@@ -9,7 +9,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Danh sách Cấu Hình</h5>
-                <a href="{{ route('admin.configs.create') }}" class="btn btn-primary">+ Thêm</a>
+                {{-- <a href="{{ route('admin.configs.create') }}" class="btn btn-primary">+ Thêm</a> --}}
             </div>
 
             <div class="card-body">
@@ -30,8 +30,7 @@
                         <tr>
                             {{-- <th>ID</th> --}}
                             <th>Key</th>
-                            <th>Value</th>
-                            <th>Mô tả</th>
+                            {{-- <th>Value</th> --}}
                             <th class="text-center">Hành động</th>
                         </tr>
                     </thead>
@@ -39,12 +38,14 @@
                         @foreach ($configs as $config)
                             <tr>
                                 {{-- <td>{{ $config->config_id }}</td> --}}
-                                <td>{{ $config->config_key }}</td>
-                                <td>{{ $config->config_value }}</td>
-                                <td>{{ $config->description }}</td>
+                                <td>{{ $config->key }}</td>
+                                {{-- <td>{{ $config->value }}</td> --}}
                                 <td class="text-center">
-                                    <x-action-dropdown editRoute="admin.configs.edit" deleteRoute="admin.configs.destroy"
-                                        :id="$config->config_id" />
+                                    <div class="d-flex">
+                                        <a href="{{ route('admin.configs.edit', $config->id) }}" class="me-3">
+                                            <i class="ph-pencil"></i>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

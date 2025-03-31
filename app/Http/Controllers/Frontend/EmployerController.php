@@ -52,7 +52,7 @@ class EmployerController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'user_id' => 'required|exists:users,id',
+            // 'user_id' => 'required|exists:users,id',
             'company_name' => 'required|string',
             'company_description' => 'nullable|string',
             'website' => 'nullable|string',

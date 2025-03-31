@@ -16,7 +16,6 @@ class CandidateResource extends JsonResource
     {
         return [
             'candidate_id' => $this->candidate_id,
-            'user_id' => $this->user_id,
             'full_name' => $this->full_name,
             'phone' => $this->phone,
             'address' => $this->address,

@@ -30,7 +30,7 @@
     @stack('head')
 </head>
 
-<body data-color-theme="{{ $theme }}">
+<body>
     @if (Route::currentRouteName() !== 'admin.login')
         <!-- Header -->
         @include('Admin.layouts.header')

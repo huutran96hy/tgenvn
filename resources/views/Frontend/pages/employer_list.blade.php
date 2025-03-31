@@ -105,7 +105,8 @@
                                                         </a>
                                                     </div>
                                                     <h5 class="font-bold mt-2">
-                                                        <a href="company-details">{{ $employer->company_name }}</a>
+                                                        <a href="{{ route('employers.show', $employer->employer_id) }}">
+                                                            {{ $employer->company_name }}</a>
                                                     </h5>
                                                     <span class="card-location d-block">{{ $employer->address }}</span>
                                                     <div class="mt-2">

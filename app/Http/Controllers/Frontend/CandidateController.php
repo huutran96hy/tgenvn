@@ -22,12 +22,12 @@ class CandidateController extends Controller
 
     public function store(Request $request)
     {
-        if (!auth()->check()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Bạn cần đăng nhập để ứng tuyển!',
-            ], 401);
-        }
+        // if (!auth()->check()) {
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => 'Bạn cần đăng nhập để ứng tuyển!',
+        //     ], 401);
+        // }
 
         $validated = $request->validate([
             'full_name' => 'required|string',
@@ -37,7 +37,7 @@ class CandidateController extends Controller
             'education' => 'nullable|string',
         ]);
 
-        $validated['user_id'] = auth()->id();
+        // $validated['user_id'] = auth()->id();
 
         // Lưu file CV 
         if ($request->hasFile('resume')) {

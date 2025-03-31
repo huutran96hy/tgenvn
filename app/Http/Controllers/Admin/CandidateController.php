@@ -45,7 +45,8 @@ class CandidateController extends Controller
             $validated['resume'] = $request->file('resume')->store('resumes', 'public');
         }
 
-        Candidate::create($validated + ['user_id' => Auth::id()]);
+        // Candidate::create($validated + ['user_id' => Auth::id()]);
+        Candidate::create($validated);
 
         return redirect()->route('admin.candidates.index')->with('success', 'Ứng viên đã được thêm thành công.');
     }

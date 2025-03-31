@@ -20,7 +20,7 @@
                         @method('PUT')
                     @endif
 
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label class="form-label">Người dùng</label>
                         <select name="user_id" class="form-control select2" required>
                             <option value="">Chọn người dùng</option>
@@ -31,7 +31,7 @@
                                 </option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
 
                     <div class="mb-3">
                         <label class="form-label">Logo</label>
@@ -105,6 +105,29 @@
                             value="{{ old('email', $employer->email ?? '') }}">
                     </div>
 
+                    <div class="mb-3">
+                        <label class="form-label">Ngày thành lập</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="ph-calendar"></i>
+                            </span>
+                            <input type="text" name="founded_at" class="form-control datepicker-autohide"
+                                value="{{ old('founded_at', $news->founded_at ?? '') }}" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Về chúng tôi</label>
+                        <input type="text" name="about" class="form-control"
+                            value="{{ old('about', $employer->about ?? '') }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Lĩnh vực công ty</label>
+                        <input type="text" name="company_type" class="form-control"
+                            value="{{ old('company_type', $employer->company_type ?? '') }}">
+                    </div>
+
                     <button type="submit"
                         class="btn btn-success">{{ isset($employer) ? 'Cập nhật nhà tuyển dụng' : 'Thêm nhà tuyển dụng' }}</button>
                     <a href="{{ route('admin.employers.index') }}" class="btn btn-secondary">Quay lại</a>
@@ -125,6 +148,16 @@
                 ClassicEditor
                     .create(editorElement)
                     .catch(error => console.error(error));
+            });
+
+            // Khởi tạo Datepicker
+            const options = {
+                autohide: true,
+                format: "yyyy-mm-dd",
+                todayHighlight: true
+            };
+            document.querySelectorAll(".datepicker-autohide").forEach(function(el) {
+                new Datepicker(el, options);
             });
 
             // Hiển thị ảnh preview cho logo

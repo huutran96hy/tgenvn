@@ -47,5 +47,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('skills', SkillController::class);
         Route::resource('contacts', ContactController::class)->only(['index', 'destroy']);
         Route::resource('configs', ConfigController::class);
+        Route::delete('/delete-banner', [ConfigController::class, 'deleteBanner'])->name('configs.deleteBanner');
     });
 });

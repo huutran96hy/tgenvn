@@ -12,11 +12,18 @@ class ConfigSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('config')->insert([
-            'config_key' => 'theme',
-            'config_value' => 'light',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        $configs = [
+            ['key' => 'banners', 'value' => null],
+            ['key' => 'logo', 'value' => null],
+        ];
+
+        foreach ($configs as $config) {
+            DB::table('config')->insert([
+                'key' => $config['key'],
+                'value' => $config['value'],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }

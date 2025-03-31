@@ -62,7 +62,7 @@
                             <tr>
                                 <td>{{ $job->job_title }}</td>
                                 <td>{!! Str::limit($job->job_description, 50) !!}</td>
-                                <td>{{ $job->salary ?? 'Thỏa thuận' }}</td>
+                                <td>{{ \App\Helpers\NumberHelper::formatSalary($job->salary) }}</td>
                                 <td class="text-center">
                                     <div class="dropdown">
                                         <button

@@ -16,8 +16,9 @@
                             <div class="sidebar-heading">
                                 <div class="avatar-sidebar">
                                     <figure>
-                                        <img alt="jobBox" src="{{ asset('assets/imgs/template/logo.svg') }}">
+                                        <img alt="jobBox" src="{{ $job->employer->getLogoUrl() }}">
                                     </figure>
+
                                     <div class="sidebar-info">
                                         <span class="sidebar-company">{{ $job->employer->company_name }}</span>
                                         <span class="card-location">{{ $job->employer->address }}</span>
@@ -46,63 +47,62 @@
                             <h6 class="f-18">Các vị trí khác </h6>
                             <div class="sidebar-list-job">
                                 <ul>
-                                    <li>
-                                        <div class="card-list-4 wow animate__animated animate__fadeIn hover-up">
-                                            <div class="image"><a href="job-details"><img
-                                                        src="assets/imgs/brands/brand-1.png" alt="jobBox"></a></div>
-                                            <div class="info-text">
-                                                <h5 class="font-md font-bold color-brand-1"><a href="job-details">Thiết kế
-                                                        UI/UX</a></h5>
-                                                <div class="mt-0"><span class="card-briefcase">Fulltime</span><span
-                                                        class="card-time"><span>5</span><span> phút trước</span></span>
+                                    @foreach ($randomJobs as $randomJob)
+                                        <li>
+                                            <div class="card-list-4 wow animate__animated animate__fadeIn hover-up">
+                                                <div class="image">
+                                                    <a
+                                                        href="{{ route('job_detail.show', ['jobId' => $randomJob->job_id]) }}">
+                                                        <img src="{{ $job->employer->getLogoUrl() }}"
+                                                            alt="{{ $randomJob->job_title }}" style="width: 50px">
+                                                    </a>
                                                 </div>
-                                                <div class="mt-5">
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <h6 class="card-price">10.000.000đ<span>/Tháng</span></h6>
+                                                <div class="info-text">
+                                                    <h5 class="font-md font-bold color-brand-1">
+                                                        <a
+                                                            href="{{ route('job_detail.show', ['jobId' => $randomJob->job_id]) }}">
+                                                            {{ $randomJob->job_title }}
+                                                        </a>
+                                                    </h5>
+                                                    <div class="mt-0">
+                                                        <span class="card-briefcase">{{ $randomJob->job_type }}</span>
+                                                        <span class="card-time">
+                                                            <span>{{ $randomJob->created_at->diffForHumans() }}</span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="mt-5">
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <h6 class="card-price">
+                                                                    {{ \App\Helpers\NumberHelper::formatSalary($randomJob->salary) }}
+                                                                    <span>/Tháng</span>
+                                                                </h6>
+                                                            </div>
+                                                            <div class="col-6 text-end">
+                                                                <span
+                                                                    class="card-briefcase">{{ $randomJob->location }}</span>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-6 text-end"><span class="card-briefcase">Hải
-                                                                Phòng,Việt Nam</span></div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="card-list-4 wow animate__animated animate__fadeIn hover-up">
-                                            <div class="image"><a href="job-details"><img
-                                                        src="assets/imgs/brands/brand-2.png" alt="jobBox"></a></div>
-                                            <div class="info-text">
-                                                <h5 class="font-md font-bold color-brand-1"><a href="job-details">Lập trình
-                                                        viên Java</a></h5>
-                                                <div class="mt-0"><span class="card-briefcase">Fulltime</span><span
-                                                        class="card-time"><span>5</span><span> Ngày trước</span></span>
-                                                </div>
-                                                <div class="mt-5">
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <h6 class="card-price">12.000.00đ<span>/Tháng</span></h6>
-                                                        </div>
-                                                        <div class="col-6 text-end"><span class="card-briefcase">Hà Nội,
-                                                                Việt Nam</span></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
-                        <div class="sidebar-border">
-                            <h6 class="f-18">Thẻ</h6>
-                            <div class="sidebar-list-job">
-                                @foreach ($job->skills as $skill)
-                                    <a class="btn btn-grey-small bg-14 mb-10 mr-5" href="jobs-grid">
-                                        {{ $skill->skill_name }}
-                                    </a>
-                                @endforeach
+                        @if ($job->skills->isNotEmpty())
+                            <div class="sidebar-border">
+                                <h6 class="f-18">Thẻ</h6>
+                                <div class="sidebar-list-job">
+                                    @foreach ($job->skills as $skill)
+                                        <a class="btn btn-grey-small bg-14 mb-10 mr-5" href="{{ route('jobs.index') }}">
+                                            {{ $skill->skill_name }}
+                                        </a>
+                                    @endforeach
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                     <div class="col-lg-8 col-md-12 col-sm-12 col-12">
                         <div class="box-border-single">
@@ -164,7 +164,8 @@
                                         </div>
                                         <div class="sidebar-text-info ml-10">
                                             <span class="text-description salary-icon mb-10">Lương</span>
-                                            <strong class="small-heading">{{ $job->salary ?? 'Thoả thuận' }}</strong>
+                                            <strong
+                                                class="small-heading">{{ \App\Helpers\NumberHelper::formatSalary($job->salary) }}</strong>
                                         </div>
                                     </div>
                                     <div class="col-md-6 d-flex">
