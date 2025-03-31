@@ -12,15 +12,19 @@ class NewsController extends Controller
     /**
      * Lấy danh sách tin tức.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $news = News::with(['category', 'author'])->get();
-        return response()->json([
-            'success' => true,
-            'message' => 'News list retrieved successfully',
-            'data' => NewsResource::collection($news),
-        ]);
+        $query = News::with(['category', 'author'])->where('status', 'published');
+
+        if ($request->has('search') && !empty($request->search)) {
+            $query->where('title', 'like', '%' . $request->search . '%');
+        }
+
+        $news = $query->paginate(6);
+
+        return view('Frontend.pages.news_list', compact('news'));
     }
+
 
     /**
      * Thêm tin tức mới.
@@ -52,13 +56,15 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        $news->load(['category', 'author']);
-        return response()->json([
-            'success' => true,
-            'message' => 'News retrieved successfully',
-            'data' => new NewsResource($news),
-        ]);
+        $relatedNews = News::where('news_category_id', $news->news_category_id)
+            ->where('news_id', '!=', $news->news_id)
+            ->where('status', 'published')
+            ->limit(3)
+            ->get();
+
+        return view('Frontend.pages.news_detail', compact('news', 'relatedNews'));
     }
+
 
     /**
      * Cập nhật tin tức.

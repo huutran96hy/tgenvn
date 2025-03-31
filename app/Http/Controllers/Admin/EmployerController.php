@@ -32,7 +32,7 @@ class EmployerController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'user_id' => 'required|exists:users,id',
+            // 'user_id' => 'required|exists:users,id',
             'company_name' => 'required|max:255',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'background_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -40,7 +40,10 @@ class EmployerController extends Controller
             'website' => 'nullable|url',
             'contact_phone' => 'required|max:15',
             'address' => 'required|max:255',
-            'email' => 'nullable'
+            'email' => 'nullable',
+            'founded_at' => 'nullable',
+            'about' => 'nullable',
+            'company_type' => 'nullable',
         ]);
 
         // Lưu logo
@@ -66,7 +69,7 @@ class EmployerController extends Controller
     public function update(Request $request, Employer $employer)
     {
         $validated = $request->validate([
-            'user_id' => 'required|exists:users,id',
+            // 'user_id' => 'required|exists:users,id',
             'company_name' => 'required|max:255',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'background_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -74,7 +77,10 @@ class EmployerController extends Controller
             'website' => 'nullable|url',
             'contact_phone' => 'required|max:15',
             'address' => 'required|max:255',
-            'email' => 'nullable'
+            'email' => 'nullable',
+            'founded_at' => 'nullable',
+            'about' => 'nullable',
+            'company_type' => 'nullable',
         ]);
 
         if ($request->hasFile('logo')) {

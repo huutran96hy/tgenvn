@@ -16,9 +16,6 @@ class ConfigResource extends JsonResource
     {
         return [
             'config_id' => $this->config_id,
-            'config_key' => $this->config_key,
-            'config_value' => $this->config_value,
-            'description' => $this->description,
             // 'created_at' => $this->created_at,
             // 'updated_at' => $this->updated_at,
         ];

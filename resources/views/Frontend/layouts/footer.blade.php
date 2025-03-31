@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="footer-col-1 col-md-3 col-sm-12">
-                <a href="index.html"><img alt="ORSCorp" src="{{ asset('assets/imgs/template/logo-black.png') }}"
+                <a href="{{ route('index') }}"><img alt="ORSCorp" src="{{ asset('assets/imgs/template/logo-black.png') }}"
                         width="50%" /></a>
 
                 <div class="mt-20 mb-20 font-xs color-text-paragraph-2">
@@ -77,7 +77,6 @@
     </div>
 </footer>
 
-
 <div class="modal fade" id="ModalApplyJobForm" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content apply-job-form">
@@ -86,21 +85,24 @@
                 <div class="text-center">
                     <p class="font-sm text-brand-2">Nộp CV ứng tuyển </p>
                     <h2 class="mt-10 mb-5 text-brand-1 text-capitalize">Kết nối với chúng tôi </h2>
-                    <p class="font-sm text-muted mb-30">Vui lòng điền đầy đủ thông tin giúp chúng tôi liên lạc sớm nhất
-                        . </p>
+                    <p class="font-sm text-muted mb-30">
+                        Vui lòng điền đầy đủ thông tin giúp chúng tôi liên lạc sớm nhất.
+                    </p>
                 </div>
-                <form class="login-register text-start mt-20 pb-30" action="#">
+                <form id="applyJobForm" class="login-register text-start mt-20 pb-30" action="#"
+                    enctype="multipart/form-data">
                     <div class="form-group">
                         <label class="form-label" for="input-1"> <strong class="text-danger">*</strong> Họ và
                             Tên</label>
-                        <input class="form-control" id="input-1" type="text" required="" name="fullname"
+                        <input class="form-control" id="input-1" type="text" required="" name="full_name"
                             placeholder="Nhập họ và tên">
                     </div>
-                    <div class="form-group">
-                        <label class="form-label" for="input-2"><strong class="text-danger">*</strong> Email</label>
-                        <input class="form-control" id="input-2" type="email" required="" name="emailaddress"
-                            placeholder="Nhập email">
-                    </div>
+                    {{-- <div class="form-group">
+                        <label class="form-label" for="input-2"><strong class="text-danger">*</strong>
+                            Email</label>
+                        <input class="form-control" id="input-2" type="email" required=""
+                            name="emailaddress" placeholder="Nhập email">
+                    </div> --}}
                     <div class="form-group">
                         <label class="form-label" for="number"><strong class="text-danger">*</strong> Số điện
                             thoại</label>
@@ -108,25 +110,33 @@
                             placeholder="Nhập số điện thoại">
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="des">Ghi chú</label>
-                        <input class="form-control" id="des" type="text" required="" name="Description"
-                            placeholder="Ghi chú">
+                        <label class="form-label" for="address"><strong class="text-danger">*</strong>Địa
+                            chỉ</label>
+                        <input class="form-control" id="add" type="text" required="" name="address"
+                            placeholder="Địa chỉ">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="education">Học vấn</label>
+                        <input class="form-control" id="education" type="text" required="" name="education"
+                            placeholder="Học vấn">
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="file">Gửi CV lên</label>
-                        <input class="form-control" id="file" name="resume" type="file" accept=".pdf">
+                        <input class="form-control" id="file" name="resume" type="file">
                     </div>
                     <div class="login_footer form-group d-flex justify-content-between">
                         <label class="cb-container">
-                            <input type="checkbox"><span class="text-small">Đồng ý với các điều khoản của chúng
-                                tôi</span><span class="checkmark"></span>
-                        </label><a class="text-muted" href="page-contact">Tìm hiểu thêm</a>
+                            <input type="checkbox">
+                            <span class="text-small">Đồng ý với các điều khoản của chúng tôi</span>
+                            <span class="checkmark"></span>
+                        </label><a class="text-muted" href="{{ route('contact.index') }}">Tìm hiểu thêm</a>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-default hover-up w-100" type="submit" name="login">Ứng
+                        <button class="btn btn-default hover-up w-100" type="submit" name="">Ứng
                             tuyển</button>
                     </div>
-                    <div class="text-muted text-center">Bạn cần hỗ trợ? <a href="page-contact">Liên hệ </a></div>
+                    <div class="text-muted text-center">Bạn cần hỗ trợ? <a href="{{ route('contact.index') }}">Liên hệ
+                        </a></div>
                 </form>
             </div>
         </div>

@@ -53,6 +53,26 @@
                         <label class="form-label">Lương</label>
                         <input type="text" name="salary" class="form-control"
                             value="{{ old('salary', $job->salary ?? '') }}">
+                        <small class="text-muted">Vui lòng điền số tiền lương (ví dụ: 10.000.000 VNĐ).</small>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label class="form-label">Học vấn yêu cầu</label>
+                        <input type="text" name="required_education" class="form-control"
+                            value="{{ old('required_education', $job->required_education ?? '') }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Kinh nghiệm yêu cầu</label>
+                        <input type="text" name="required_exp" class="form-control"
+                            value="{{ old('required_exp', $job->required_exp ?? '') }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Loại công việc ( Full-time, Part-time, Remote, ...)</label>
+                        <input type="text" name="job_type" class="form-control"
+                            value="{{ old('job_type', $job->job_type ?? '') }}">
                     </div>
 
                     <div class="mb-3">

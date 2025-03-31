@@ -19,7 +19,10 @@ class Employer extends Model
         'website',
         'contact_phone',
         'address',
-        'email'
+        'email',
+        'founded_at',
+        'about',
+        'company_type'
     ];
 
     public function user()
@@ -30,5 +33,15 @@ class Employer extends Model
     public function jobs()
     {
         return $this->hasMany(Job::class, 'employer_id');
+    }
+
+    public function getLogoUrl()
+    {
+        if ($this->logo && file_exists(public_path('storage/' . $this->logo))) {
+            return asset('storage/' . $this->logo);
+        }
+
+        // Trả về logo mặc định nếu không có logo
+        return asset('assets/imgs/template/logo.svg');
     }
 }

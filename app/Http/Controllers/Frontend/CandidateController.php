@@ -22,8 +22,14 @@ class CandidateController extends Controller
 
     public function store(Request $request)
     {
+        // if (!auth()->check()) {
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => 'Bạn cần đăng nhập để ứng tuyển!',
+        //     ], 401);
+        // }
+
         $validated = $request->validate([
-            'user_id' => 'required|exists:users,id',
             'full_name' => 'required|string',
             'phone' => 'required|string',
             'address' => 'required|string',
@@ -31,7 +37,9 @@ class CandidateController extends Controller
             'education' => 'nullable|string',
         ]);
 
-        // Lưu CV
+        // $validated['user_id'] = auth()->id();
+
+        // Lưu file CV 
         if ($request->hasFile('resume')) {
             $validated['resume'] = $request->file('resume')->store('resumes', 'public');
         }
@@ -40,14 +48,13 @@ class CandidateController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Candidate created successfully',
-            'data' => new CandidateResource($candidate),
+            'message' => 'Ứng tuyển thành công!',
+            // 'data' => new CandidateResource($candidate),
         ], 201);
     }
-
-    public function show(Candidate $candidate) 
+    public function show(Candidate $candidate)
     {
-        $candidate->load(['user', 'applications']); 
+        $candidate->load(['user', 'applications']);
 
         return response()->json([
             'success' => true,
@@ -56,7 +63,7 @@ class CandidateController extends Controller
         ]);
     }
 
-    public function update(Request $request, Candidate $candidate) 
+    public function update(Request $request, Candidate $candidate)
     {
         $validated = $request->validate([
             'full_name' => 'sometimes|string',
@@ -85,7 +92,7 @@ class CandidateController extends Controller
         ]);
     }
 
-    public function destroy(Candidate $candidate) 
+    public function destroy(Candidate $candidate)
     {
         // Xóa CV
         if ($candidate->resume) {

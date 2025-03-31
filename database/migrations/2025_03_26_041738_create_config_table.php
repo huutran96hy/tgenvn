@@ -12,11 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('config', function (Blueprint $table) {
-            $table->id('config_id');
-            $table->string('config_key')->unique();
-            $table->text('config_value');
-            $table->text('description')->nullable();
-            $table->string('logo')->nullable();
+            $table->id();
+            $table->string('key')->unique();
+            $table->text('value')->nullable();
             $table->timestamps();
         });
     }

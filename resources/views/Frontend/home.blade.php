@@ -5,16 +5,16 @@
 @section('content')
     <main class="main">
         <section class="section-box">
-            <div class="banner-main">
-                <div class="banner-main banner-slider">
-                    <div class="swiper-wrapper">
+            @php
+                $banners = json_decode(\App\Models\Config::where('key', 'banners')->value('value') ?? '[]', true);
+            @endphp
+            <div class="banner-main banner-slider">
+                <div class="swiper-wrapper">
+                    @foreach ($banners as $banner)
                         <div class="swiper-slide banner-slide">
-                            <img src="./assets/imgs/page/homepage1/test.webp" alt="Slide 1" />
+                            <img src="{{ asset('storage/' . $banner) }}" alt="Banner">
                         </div>
-                        <div class="swiper-slide banner-slide">
-                            <img src="./assets/imgs/page/homepage1/test1.png" alt="Slide 2" />
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </section>
@@ -35,7 +35,7 @@
                             <div class="swiper-wrapper pb-70 pt-5">
                                 @foreach ($employers as $employer)
                                     <div class="swiper-slide hover-up">
-                                        <a href="jobs-list">
+                                        <a href="{{ route('jobs.index') }}">
                                             <div class="item-logo">
                                                 <img alt="{{ $employer->company_name }}" class="img-fluid d-block mx-auto"
                                                     style="max-height: 25px; min-height: 20px; object-fit: contain;"
