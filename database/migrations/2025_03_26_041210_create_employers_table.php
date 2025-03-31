@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string('contact_phone');
             $table->text('address');
             $table->string('email', 50)->nullable();
+            $table->date('founded_at')->nullable();
+            $table->string('about', 30)->nullable();
+            $table->string('company_type', 50)->nullable();
             $table->timestamps();
         });
     }

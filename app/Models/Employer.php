@@ -19,7 +19,10 @@ class Employer extends Model
         'website',
         'contact_phone',
         'address',
-        'email'
+        'email',
+        'founded_at',
+        'about',
+        'company_type'
     ];
 
     public function user()

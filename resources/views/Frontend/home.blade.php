@@ -35,7 +35,7 @@
                             <div class="swiper-wrapper pb-70 pt-5">
                                 @foreach ($employers as $employer)
                                     <div class="swiper-slide hover-up">
-                                        <a href="jobs-list">
+                                        <a href="{{ route('jobs.index') }}">
                                             <div class="item-logo">
                                                 <img alt="{{ $employer->company_name }}" class="img-fluid d-block mx-auto"
                                                     style="max-height: 25px; min-height: 20px; object-fit: contain;"

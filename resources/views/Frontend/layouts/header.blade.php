@@ -3,7 +3,7 @@
         <div class="main-header">
             <div class="header-left">
                 <div class="header-logo">
-                    <a class="d-flex" href="index.html">
+                    <a class="d-flex" href="{{ route('index') }}">
                         <img alt="ORSCorp" src="{{ asset('assets/imgs/template/logo-black.png') }}" width="25%" /></a>
                 </div>
             </div>
@@ -11,14 +11,9 @@
                 <nav class="nav-main-menu">
                     <ul class="main-menu">
                         <li class="has-children">
-                            <a class="active" href="index.html">Trang chủ</a>
+                            <a class="active" href="{{ route('index') }}">Trang chủ</a>
                             <ul class="sub-menu">
-                                <li><a href="index.html">Trang chủ</a></li>
-                                {{-- <li><a href="index-2">Home 2</a></li>
-                                <li><a href="index-3">Home 3</a></li>
-                                <li><a href="index-4">Home 4</a></li>
-                                <li><a href="index-5">Home 5</a></li>
-                                <li><a href="index-6">Home 6</a></li> --}}
+                                <li><a href="{{ route('index') }}">Trang chủ</a></li>
                             </ul>
                         </li>
                         <li class="has-children">
@@ -30,10 +25,10 @@
                             </ul>
                         </li>
                         <li class="has-children">
-                            <a href="companies-grid">Tuyển dụng</a>
+                            <a href="{{ route('jobs.index') }}">Tuyển dụng</a>
                             <ul class="sub-menu">
-                                <li><a href="companies-grid">Thông tin tuyển dụng</a></li>
-                                <li><a href="company-details">Danh sách công ty</a></li>
+                                <li><a href="{{ route('jobs.index') }}">Danh sách tuyển dụng</a></li>
+                                <li><a href="{{ route('employers.index') }}">Danh sách công ty</a></li>
                             </ul>
                         </li>
                         {{-- <li class="has-children"><a href="candidates-grid">Candidates</a>
@@ -94,14 +89,9 @@
                     <!-- mobile menu start-->
                     <nav>
                         <ul class="mobile-menu font-heading">
-                            <li class="has-children"><a class="active" href="index.html">Home</a>
+                            <li class="has-children"><a class="active" href="{{ route('index') }}">Home</a>
                                 <ul class="sub-menu">
-                                    <li><a href="index.html">Home 1</a></li>
-                                    <li><a href="index-2">Home 2</a></li>
-                                    <li><a href="index-3">Home 3</a></li>
-                                    <li><a href="index-4">Home 4</a></li>
-                                    <li><a href="index-5">Home 5</a></li>
-                                    <li><a href="index-6">Home 6</a></li>
+                                    <li><a href="{{ route('index') }}">Home 1</a></li>
                                 </ul>
                             </li>
                             <li class="has-children"><a href="jobs-grid">Find a Job</a>
@@ -128,7 +118,7 @@
                                 <ul class="sub-menu">
                                     <li><a href="page-about">About Us</a></li>
                                     <li><a href="page-pricing">Pricing Plan</a></li>
-                                    <li><a href="page-contact">Contact Us</a></li>
+                                    <li><a href="{{ route('contact.index') }}">Contact Us</a></li>
                                     <li><a href="page-register">Register</a></li>
                                     <li><a href="page-signin">Signin</a></li>
                                     <li><a href="page-reset-password">Reset Password</a></li>

@@ -12,15 +12,38 @@ class EmployerController extends Controller
     /**
      * Display a listing of the employers.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $employers = Employer::with('user', 'jobs')->get();
+        $query = Employer::query()->withCount('jobs');
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Employer list retrieved successfully',
-            'data' => EmployerResource::collection($employers),
-        ]);
+        // Tìm kiếm theo từ khóa
+        if ($request->has('keyword') && !empty($request->keyword)) {
+            $query->where('company_name', 'like', '%' . $request->keyword . '%');
+        }
+
+        // // Lọc theo ngành nghề
+        // if ($request->has('industry') && $request->industry != 0) {
+        //     $query->where('industry_id', $request->industry);
+        // }
+
+        // // Lọc theo tỉnh/thành phố
+        // if ($request->has('province') && !empty($request->province)) {
+        //     $query->where('province', $request->province);
+        // }
+
+        // Sắp xếp
+        $sortOptions = [
+            'newest' => ['created_at', 'desc'],
+            'oldest' => ['created_at', 'asc'],
+            'rating' => ['rating', 'desc'],
+        ];
+        $sort = $request->get('sort', 'newest');
+        $query->orderBy(...$sortOptions[$sort] ?? $sortOptions['newest']);
+
+        // Phân trang
+        $employers = $query->paginate($request->get('per_page', 12));
+
+        return view('Frontend.pages.employer_list', compact('employers'));
     }
 
     /**
@@ -51,12 +74,11 @@ class EmployerController extends Controller
      */
     public function show(Employer $employer)
     {
-        return response()->json([
-            'success' => true,
-            'message' => 'Employer retrieved successfully',
-            'data' => new EmployerResource($employer),
-        ]);
+        $latestJobs = $employer->jobs()->latest()->paginate(2);
+
+        return view('Frontend.pages.employer_detail', compact('employer', 'latestJobs'));
     }
+
 
     /**
      * Update the specified employer in storage.

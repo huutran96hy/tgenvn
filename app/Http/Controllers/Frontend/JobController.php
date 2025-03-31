@@ -4,18 +4,50 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\JobResource;
-use App\Models\Job;
 use Illuminate\Http\Request;
+use App\Models\Job;
+use App\Models\JobCategory;
 
 class JobController extends Controller
 {
     /**
      * Display a listing of the jobs.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $records = Job::all();
-        return view('admin.jobs.index', compact('records'));
+        $categories = JobCategory::all();
+
+        $query = Job::with('employer', 'skills', 'category')->orderByDesc('created_at');
+
+        // if ($request->has('industry') && $request->industry != 0) {
+        //     $query->where('category_id', $request->industry);
+        // }
+
+        // if ($request->has('province') && !empty($request->province)) {
+        //     $query->where('location', 'like', '%' . $request->province . '%');
+        // }
+
+        if ($request->has('salary_range') && !empty($request->salary_range)) {
+            $range = $request->salary_range;
+        
+            if ($range == '>100000000') {
+                $query->where('salary', '>', 100000000);
+            } else {
+                [$min, $max] = explode('-', $range);
+                $query->whereBetween('salary', [(int) $min, (int) $max]);
+            }
+        }
+
+        if ($request->has('keyword') && !empty($request->keyword)) {
+            $query->where(function ($q) use ($request) {
+                $q->where('job_title', 'like', '%' . $request->keyword . '%');
+            });
+        }
+
+        $perPage = $request->input('show', 12);
+        $jobs = $query->paginate($perPage);
+
+        return view('Frontend.pages.job_list', compact('jobs', 'categories'));
     }
 
     public function create()

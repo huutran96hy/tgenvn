@@ -14,12 +14,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::all();
-        return response()->json([
-            'success' => true,
-            'message' => 'Contact list retrieved successfully',
-            'data' => ContactResource::collection($contacts),
-        ]);
+        return view('Frontend.pages.contact');
     }
 
     /**
@@ -35,14 +30,11 @@ class ContactController extends Controller
             'message' => 'required|string',
         ]);
 
-        $contact = Contact::create($validated);
+        Contact::create($validated);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Contact submitted successfully',
-            'data' => new ContactResource($contact),
-        ], 201);
+        return redirect()->back()->with('success', 'Gửi liên hệ thành công! Chúng tôi sẽ phản hồi sớm.');
     }
+
 
     /**
      * Hiển thị chi tiết liên hệ.

@@ -22,6 +22,9 @@ return new class extends Migration
             $table->unsignedBigInteger('employer_id');
             $table->date('posted_date');
             $table->date('expiry_date');
+            $table->string('required_education', 50)->nullable();
+            $table->string('required_exp', 30)->nullable();
+            $table->string('job_type', 20)->default('fulltime'); // Full-time, Part-time, Freelance, ...
             $table->string('approval_status')->default('pending'); // approved , rejected, pending
             $table->timestamps();
         });

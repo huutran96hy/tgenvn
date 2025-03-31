@@ -56,6 +56,18 @@
                     </div>
 
                     <div class="mb-3">
+                        <label class="form-label">Học vấn yêu cầu</label>
+                        <input type="text" name="required_education" class="form-control"
+                            value="{{ old('required_education', $job->required_education ?? '') }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Kinh nghiệm yêu cầu</label>
+                        <input type="text" name="required_exp" class="form-control"
+                            value="{{ old('required_exp', $job->required_exp ?? '') }}">
+                    </div>
+
+                    <div class="mb-3">
                         <label class="form-label">Ngày đăng</label>
                         <div class="input-group">
                             <span class="input-group-text">

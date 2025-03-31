@@ -20,6 +20,9 @@ class Job extends Model
         'category_id',
         'posted_date',
         'expiry_date',
+        'required_education',
+        'required_exp',
+        'job_type',
         'approval_status'
     ];
 

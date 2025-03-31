@@ -1,6 +1,10 @@
 @extends('Frontend.layouts.app')
 
-@section('pageTitle', 'Dashboard')
+@section('pageTitle', 'Chi tiết công việc - ' . $job->job_title)
+
+@push('meta')
+    <meta name="description" content="Trang chi tiết công việc">
+@endpush
 
 @section('content')
     <main class="main">
@@ -146,7 +150,9 @@
                                         </div>
                                         <div class="sidebar-text-info ml-10">
                                             <span class="text-description joblevel-icon mb-10">Học vấn</span>
-                                            <strong class="small-heading">Cao đẳng / Đại học</strong>
+                                            <strong class="small-heading">
+                                                {{ $job->required_education ?? 'Không yêu cầu' }}
+                                            </strong>
                                         </div>
                                     </div>
                                 </div>
@@ -168,8 +174,9 @@
                                         </div>
                                         <div class="sidebar-text-info ml-10">
                                             <span class="text-description experience-icon mb-10">Kinh nghiệm</span>
-                                            <strong
-                                                class="small-heading">{{ $job->experience ?? 'Chưa xác định' }}</strong>
+                                            <strong class="small-heading">
+                                                {{ $job->required_exp ?? 'Chưa xác định' }}
+                                            </strong>
                                         </div>
                                     </div>
                                 </div>
@@ -181,7 +188,13 @@
                                         </div>
                                         <div class="sidebar-text-info ml-10">
                                             <span class="text-description jobtype-icon mb-10">Loại công việc</span>
-                                            <strong class="small-heading">{{ $job->job_type ?? 'Chưa xác định' }}</strong>
+                                            <strong class="small-heading">
+                                                @if ($job->category)
+                                                    {{ $job->category->category_name ?? 'Chưa có chuyên ngành' }}
+                                                @else
+                                                    Chưa có chuyên ngành
+                                                @endif
+                                            </strong>
                                         </div>
                                     </div>
                                     <div class="col-md-6 d-flex mt-sm-15">
