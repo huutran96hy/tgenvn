@@ -60,6 +60,7 @@ class JobController extends Controller
     {
         $validated = $request->validate([
             'job_title' => 'required|string|max:255',
+            'slug' => 'required',
             'job_description' => 'required|string',
             'requirements' => 'required|string',
             'salary' => 'nullable|string',
@@ -105,6 +106,7 @@ class JobController extends Controller
     {
         $validated = $request->validate([
             'job_title' => 'required|string|max:255',
+            'slug' => 'required',
             'job_description' => 'required|string',
             'requirements' => 'required|string',
             'salary' => 'nullable|string',

@@ -70,13 +70,13 @@
 
                     <div class="mb-3">
                         <label class="form-label">Tên nhà tuyển dụng</label>
-                        <input type="text" name="company_name" class="form-control"
+                        <input type="text" name="company_name" class="form-control text-to-slug"
                             value="{{ old('company_name', $employer->company_name ?? '') }}" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Slug</label>
-                        <input type="text" name="slug" class="form-control"
+                        <input type="text" name="slug" class="form-control text-to-slug"
                             value="{{ old('slug', $employer->slug ?? '') }}" readonly>
                     </div>
 

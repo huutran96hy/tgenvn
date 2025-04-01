@@ -30,6 +30,7 @@ class NewsController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'slug' => 'required',
             'images' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'content' => 'required',
             'published_date' => 'required|date|date_format:Y-m-d',
@@ -65,6 +66,7 @@ class NewsController extends Controller
     {
         $validated =  $request->validate([
             'title' => 'required|string|max:255',
+            'slug' => 'required',
             'images' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'content' => 'required',
             'published_date' => 'required|date|date_format:Y-m-d',

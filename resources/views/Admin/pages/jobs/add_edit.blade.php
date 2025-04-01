@@ -27,7 +27,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Slug</label>
-                        <input type="text" name="slug" class="form-control"
+                        <input type="text" name="slug" class="form-control text-to-slug"
                             value="{{ old('slug', $job->slug ?? '') }}" readonly>
                     </div>
 

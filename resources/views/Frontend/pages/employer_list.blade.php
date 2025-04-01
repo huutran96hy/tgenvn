@@ -121,7 +121,7 @@
                                                 <div class="text-start">
                                                     <div class="image-box d-inline-block">
                                                         <a href="{{ route('employers.show', $employer->slug) }}">
-                                                            <img src="{{ asset($employer->logo) }}"
+                                                            <img src="{{ \App\Helpers\CustomHelper::logoSrc($employer->logo) }}"
                                                                 alt="{{ $employer->company_name }}">
                                                         </a>
                                                     </div>

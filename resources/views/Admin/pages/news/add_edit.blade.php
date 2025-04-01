@@ -21,13 +21,13 @@
 
                     <div class="mb-3">
                         <label class="form-label">Tiêu đề</label>
-                        <input type="text" name="title" class="form-control"
+                        <input type="text" name="title" class="form-control text-to-slug"
                             value="{{ old('title', $news->title ?? '') }}" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Slug</label>
-                        <input type="text" name="slug" class="form-control"
+                        <input type="text" name="slug" class="form-control text-to-slug"
                             value="{{ old('slug', $employer->slug ?? '') }}" readonly>
                     </div>
 

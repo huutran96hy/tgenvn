@@ -11,11 +11,12 @@
         <section class="section-box-2">
             <div class="container">
                 <div class="banner-hero banner-image-single">
-                    <img src="{{ asset('storage/' . $employer->background_img) }}" alt="{{ $employer->name }}">
+                    <img src="{{ \App\Helpers\CustomHelper::logoSrc($employer->background_img) }}"
+                        alt="{{ $employer->name }}">
                 </div>
                 <div class="box-company-profile">
                     <div class="image-compay">
-                        <img src="{{ asset('storage/' . $employer->logo) }}" alt="{{ $employer->name }}"
+                        <img src="{{ \App\Helpers\CustomHelper::logoSrc($employer->logo) }}" alt="{{ $employer->name }}"
                             class="img-fluid d-block mx-auto bg-white p-1"
                             style="width: 85px; height: 85px; object-fit: contain;">
                     </div>
@@ -80,7 +81,7 @@
                                                     <div class="col-12">
                                                         <div class="card-grid-2-image-left">
                                                             <div class="image-box">
-                                                                <img src="{{ asset('storage/' . $job->logo) }}"
+                                                                <img src="{{ \App\Helpers\CustomHelper::logoSrc($job->logo) }}"
                                                                     alt="{{ $job->job_title }}">
                                                             </div>
                                                             <div class="right-info">

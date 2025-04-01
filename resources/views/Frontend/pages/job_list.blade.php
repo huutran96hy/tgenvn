@@ -140,8 +140,8 @@
                                             <div class="card-grid-2-image-left">
                                                 <span class="flash"></span>
                                                 <div class="image-box">
-                                                    <img src="{{ asset('assets/imgs/brands/brand-3.png') }}"
-                                                        alt="jobBox">
+                                                    <img src="{{ \App\Helpers\CustomHelper::logoSrc($job->employer->logo) }}"
+                                                        alt="{{ $job->employer->name }}" style="width: 85px; height: 85px; object-fit: contain;">
                                                 </div>
                                                 <div class="right-info">
                                                     <a class="name-job"
@@ -488,8 +488,8 @@
                     },
                     success: function(data) {
                         let newContent = $(data).find('.content-page').html();
-                        $('.content-page').html(newContent); 
-                        window.history.pushState({}, '', url); 
+                        $('.content-page').html(newContent);
+                        window.history.pushState({}, '', url);
                     },
                     error: function(xhr, status, error) {
                         console.error('Lỗi khi tải dữ liệu:', error);

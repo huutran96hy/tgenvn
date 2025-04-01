@@ -53,7 +53,7 @@
                                                 <div class="image">
                                                     <a
                                                         href="{{ route('job_detail.show', ['slug' => $randomJob->slug]) }}">
-                                                        <img src="{{ $job->employer->getLogoUrl() }}"
+                                                        <img src="{{ \App\Helpers\CustomHelper::logoSrc($randomJob->employer->logo) }}"
                                                             alt="{{ $randomJob->job_title }}" style="width: 50px">
                                                     </a>
                                                 </div>

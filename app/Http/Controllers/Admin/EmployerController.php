@@ -34,6 +34,7 @@ class EmployerController extends Controller
         $validated = $request->validate([
             // 'user_id' => 'required|exists:users,id',
             'company_name' => 'required|max:255',
+            'slug' => 'required',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'background_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'company_description' => 'nullable|max:500',
@@ -76,6 +77,7 @@ class EmployerController extends Controller
         $validated = $request->validate([
             // 'user_id' => 'required|exists:users,id',
             'company_name' => 'required|max:255',
+            'slug' => 'required',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'background_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'company_description' => 'nullable|max:500',
