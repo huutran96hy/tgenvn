@@ -70,7 +70,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @else
+                            @elseif($config->key === 'logo')
                                 <tr>
                                     <th>Logo</th>
                                     <td>
@@ -81,6 +81,23 @@
                                             @if (!empty($config->value))
                                                 <div class="mt-3">
                                                     <label>Logo hiện tại:</label>
+                                                    <img src="{{ asset('storage/' . $config->value) }}" class="img-fluid" />
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </td>
+                                </tr>
+                            @else
+                                <tr>
+                                    <th>Icon</th>
+                                    <td>
+                                        <div class="mb-3">
+                                            <input type="file" name="icon" class="form-control" accept="image/*"
+                                                id="iconInput">
+
+                                            @if (!empty($config->value))
+                                                <div class="mt-3">
+                                                    <label>Icon hiện tại:</label>
                                                     <img src="{{ asset('storage/' . $config->value) }}" class="img-fluid" />
                                                 </div>
                                             @endif

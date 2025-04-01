@@ -4,7 +4,7 @@
             <div class="header-left">
                 <div class="header-logo">
                     <a class="d-flex" href="{{ route('index') }}">
-                        <img alt="ORSCorp" src="{{ asset('assets/imgs/template/logo-black.png') }}" width="25%" /></a>
+                        <img alt="logo" src="{{ \App\Models\Config::getLogo() }}" width="25%" /></a>
                 </div>
             </div>
             <div class="header-nav">
