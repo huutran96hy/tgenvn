@@ -141,7 +141,8 @@
                                                 <span class="flash"></span>
                                                 <div class="image-box">
                                                     <img src="{{ \App\Helpers\CustomHelper::logoSrc($job->employer->logo) }}"
-                                                        alt="{{ $job->employer->name }}" style="width: 85px; height: 85px; object-fit: contain;">
+                                                        alt="{{ $job->employer->name }}"
+                                                        style="width: 85px; height: 85px; object-fit: contain;">
                                                 </div>
                                                 <div class="right-info">
                                                     <a class="name-job"
@@ -162,7 +163,7 @@
                                                     <span class="card-time">{{ $job->created_at->diffForHumans() }}</span>
                                                 </div>
                                                 <p class="font-sm color-text-paragraph mt-15">
-                                                    {!! Str::words($job->job_description, 10, '...') !!}
+                                                    {!! Str::words(preg_replace('/<img[^>]+>/i', '', $job->job_description), 10, '...') !!}
                                                 </p>
                                                 <div class="mt-30">
                                                     @foreach ($job->skills as $skill)

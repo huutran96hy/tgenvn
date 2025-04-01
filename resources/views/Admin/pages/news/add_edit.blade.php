@@ -50,7 +50,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Nội dung</label>
-                        <textarea name="content" class="form-control ckeditor" required>
+                        <textarea name="content" class="form-control ckeditor1" required>
                             {{ old('content', $news->content ?? '') }}
                         </textarea>
                     </div>
@@ -110,16 +110,13 @@
 @endsection
 
 @push('scripts')
-    <!-- CKEditor 5 CDN -->
-    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+    <script src="{{ asset('/ckeditor/ckeditor.js') }}"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Khởi tạo CKEditor
-            document.querySelectorAll(".ckeditor").forEach(editorElement => {
-                ClassicEditor
-                    .create(editorElement)
-                    .catch(error => console.error(error));
+            // Tạo CKEditor
+            document.querySelectorAll('.ckeditor1').forEach(editorElement => {
+                CKEDITOR.replace(editorElement);
             });
 
             // Khởi tạo Datepicker
@@ -157,7 +154,7 @@
         });
     </script>
 
-     <script>
+    <script>
         $(document).ready(function() {
             // bỏ dấu tiếng Việt
             function removeVietnameseTones(str) {

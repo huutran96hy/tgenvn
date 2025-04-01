@@ -82,7 +82,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Mô tả nhà tuyển dụng</label>
-                        <textarea name="company_description" class="form-control ckeditor">
+                        <textarea name="company_description" class="form-control ckeditor1">
                             {{ old('company_description', $employer->company_description ?? '') }}
                         </textarea>
                     </div>
@@ -144,16 +144,13 @@
 @endsection
 
 @push('scripts')
-    <!-- CKEditor 5 CDN -->
-    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+    <script src="{{ asset('/ckeditor/ckeditor.js') }}"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Tạo CKEditor
-            document.querySelectorAll(".ckeditor").forEach(editorElement => {
-                ClassicEditor
-                    .create(editorElement)
-                    .catch(error => console.error(error));
+            document.querySelectorAll('.ckeditor1').forEach(editorElement => {
+                CKEDITOR.replace(editorElement);
             });
 
             // Khởi tạo Datepicker

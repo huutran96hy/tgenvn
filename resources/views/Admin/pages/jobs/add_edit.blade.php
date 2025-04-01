@@ -33,14 +33,14 @@
 
                     <div class="mb-3">
                         <label class="form-label">Mô tả công việc</label>
-                        <textarea name="job_description" class="form-control ckeditor" required>
+                        <textarea name="job_description" class="form-control ckeditor1" required>
                             {{ old('job_description', $job->job_description ?? '') }}
                         </textarea>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Yêu cầu công việc</label>
-                        <textarea name="requirements" class="form-control ckeditor" required>
+                        <textarea name="requirements" class="form-control ckeditor1" required>
                             {{ old('requirements', $job->requirements ?? '') }}
                         </textarea>
                     </div>
@@ -55,7 +55,8 @@
                         <label class="form-label">Lương</label>
                         <input type="text" name="salary" class="form-control"
                             value="{{ old('salary', $job->salary ?? '') }}">
-                        <small class="text-muted">Vui lòng điền số tiền lương (ví dụ: 10.000.000 VNĐ) hoặc ghi là thỏa thuận.</small>
+                        <small class="text-muted">Vui lòng điền số tiền lương (ví dụ: 10.000.000 VNĐ) hoặc ghi là thỏa
+                            thuận.</small>
                     </div>
 
 
@@ -160,8 +161,7 @@
 @endsection
 
 @push('scripts')
-    <!-- CKEditor 5 CDN -->
-    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+    <script src="{{ asset('/ckeditor/ckeditor.js') }}"></script>
 
     <script>
         $(document).ready(function() {
@@ -202,7 +202,7 @@
             @endif
         });
     </script>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // tạo Datepicker
@@ -215,11 +215,8 @@
                 new Datepicker(el, options);
             });
 
-            // tạo CKEditor
-            document.querySelectorAll(".ckeditor").forEach(editorElement => {
-                ClassicEditor
-                    .create(editorElement)
-                    .catch(error => console.error(error));
+            document.querySelectorAll('.ckeditor1').forEach(editorElement => {
+                CKEDITOR.replace(editorElement);
             });
 
             // tạo Select2

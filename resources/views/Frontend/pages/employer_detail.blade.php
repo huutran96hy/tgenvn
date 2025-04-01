@@ -52,7 +52,7 @@
                                     <p>{!! $employer->company_description !!}</p>
 
                                 </div>
-                                <div class="tab-pane fade" id="tab-recruitments" role="tabpanel"
+                                {{-- <div class="tab-pane fade" id="tab-recruitments" role="tabpanel"
                                     aria-labelledby="tab-recruitments">
                                     <h4>Tuyển dụng</h4>
                                     <p>ORS hướng đến các giải pháp phần mềm cho phép các doanh nghiệp năng suất và lành mạnh
@@ -67,7 +67,7 @@
                                     <h4>Nhân sự</h4>
                                     <p> Ứng viên sẽ có kinh nghiệm làm việc với nhiều nền tảng thiết kế khác nhau như các
                                         hình thức kỹ thuật số</p>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="box-related-job content-page">
@@ -104,7 +104,7 @@
                                                             class="card-time">{{ $job->created_at->diffForHumans() }}</span>
                                                     </div>
                                                     <p class="font-sm color-text-paragraph mt-10">
-                                                        {!! Str::limit($job->job_description, 50) !!}</p>
+                                                        {!! Str::words(preg_replace('/<img[^>]+>/i', '', $job->job_description), 10, '...') !!}
                                                     <div class="card-2-bottom mt-20">
                                                         <div class="row">
                                                             <div class="col-7">
@@ -130,8 +130,8 @@
                                 {{ $latestJobs->appends(request()->query())->links('Frontend.pagination.custom') }}
                             </div>
                         </div>
-
                     </div>
+
                     <div class="col-lg-4 col-md-12 col-sm-12 col-12 pl-40 pl-lg-15 mt-lg-30">
                         <div class="sidebar-border">
                             <div class="sidebar-heading">
@@ -154,22 +154,19 @@
                                 <ul>
                                     <li>
                                         <div class="sidebar-icon-item"><i class="fi-rr-briefcase"></i></div>
-                                        <div class="sidebar-text-info"><span class="text-description">Lĩnh vực công
-                                                ty</span><strong class="small-heading">{{ $employer->company_type }}
+                                        <div class="sidebar-text-info">
+                                            <span class="text-description">Lĩnh vực công ty</span>
+                                            <strong class="small-heading">{{ $employer->company_type }}
                                             </strong>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="sidebar-icon-item"><i class="fi-rr-marker"></i></div>
-                                        <div class="sidebar-text-info"><span class="text-description">Địa
-                                                chỉ</span><strong class="small-heading">{{ $employer->address }}</strong>
+                                        <div class="sidebar-text-info">
+                                            <span class="text-description">Địa chỉ</span>
+                                            <strong class="small-heading">{{ $employer->address }}</strong>
                                         </div>
                                     </li>
-                                    {{-- <li>
-                                        <div class="sidebar-icon-item"><i class="fi-rr-dollar"></i></div>
-                                        <div class="sidebar-text-info"><span class="text-description">Lương</span><strong
-                                                class="small-heading">Thoả thuận</strong></div>
-                                    </li> --}}
                                     <li>
                                         <div class="sidebar-icon-item"><i class="fi-rr-clock"></i></div>
                                         <div class="sidebar-text-info">
@@ -181,11 +178,6 @@
                                             </strong>
                                         </div>
                                     </li>
-                                    {{-- <li>
-                                        <div class="sidebar-icon-item"><i class="fi-rr-time-fast"></i></div>
-                                        <div class="sidebar-text-info"><span class="text-description">Tuyển
-                                                dụng</span><strong class="small-heading">1 ngày trước</strong></div>
-                                    </li> --}}
                                 </ul>
                             </div>
                             <div class="sidebar-list-job">
@@ -194,14 +186,12 @@
                                     <li>SĐT: {{ $employer->contact_phone }}</li>
                                     <li>Email: {{ $employer->email }}</li>
                                 </ul>
-                                <div class="mt-30"><a class="btn btn-send-message"
-                                        href="{{ route('contact.index') }}">Gửi
-                                        tin nhắn</a>
+                                <div class="mt-30">
+                                    <a class="btn btn-send-message" href="{{ route('contact.index') }}">Gửi tin nhắn</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
