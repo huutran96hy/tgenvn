@@ -187,7 +187,7 @@
                 $('.text-to-slug[name="slug"]').val(slug);
             });
 
-            @if (isset($job))
+            @if (isset($news))
                 var initialName = $('.text-to-slug[name="title"]').val();
                 if (initialName) {
                     var initialSlug = slugify(initialName);

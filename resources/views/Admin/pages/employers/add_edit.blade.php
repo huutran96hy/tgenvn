@@ -118,7 +118,7 @@
                                 <i class="ph-calendar"></i>
                             </span>
                             <input type="text" name="founded_at" class="form-control datepicker-autohide"
-                                value="{{ old('founded_at', $news->founded_at ?? '') }}" required>
+                                value="{{ old('founded_at', $employer->founded_at ?? '') }}" required>
                         </div>
                     </div>
 

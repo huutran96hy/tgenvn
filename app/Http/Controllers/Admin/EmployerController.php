@@ -7,9 +7,11 @@ use App\Models\Employer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Traits\SlugCheck;
 
 class EmployerController extends Controller
 {
+    use SlugCheck;
     public function index(Request $request)
     {
         $query = Employer::query();
@@ -49,7 +51,7 @@ class EmployerController extends Controller
 
         $slug = $request->input('slug');
 
-        $slug = $this->getStorySlugExist($slug);
+        $slug = $this->getStorySlugExist($slug, Employer::class, 'slug', 'employer_id');
         $validated['slug'] = $slug;
 
         // Lưu logo
@@ -92,7 +94,7 @@ class EmployerController extends Controller
 
         $slug = $request->input('slug');
 
-        $slug = $this->getStorySlugExist($slug);
+        $slug = $this->getStorySlugExist($slug, Employer::class, 'slug', 'employer_id', $employer->employer_id);
         $validated['slug'] = $slug;
 
         if ($request->hasFile('logo')) {
@@ -131,17 +133,5 @@ class EmployerController extends Controller
 
         $employer->delete();
         return back()->with('success', 'Xóa công ty thành công');
-    }
-
-    protected function getStorySlugExist($slug)
-    {
-        $existSlug = Employer::query()->where('slug', '=', $slug)->first();
-
-        if ($existSlug) {
-            $slug = $slug . rand(1, 20);
-            $this->getStorySlugExist($slug);
-        }
-
-        return $slug;
     }
 }
