@@ -52,19 +52,22 @@
                                     <div class="col-xl-6 col-lg-7 text-lg-end mt-sm-15">
                                         <div class="display-flex2">
                                             <div class="box-border mr-10">
-                                                <span class="text-sortby">Hiển thị:</span>
+                                                <span class="text-sortby">Show:</span>
                                                 <div class="dropdown dropdown-sort">
                                                     <button class="btn dropdown-toggle" id="dropdownSort" type="button"
-                                                        data-bs-toggle="dropdown" aria-expanded="false"
-                                                        data-bs-display="static">
+                                                        data-bs-toggle="dropdown">
                                                         <span>{{ request('per_page', 12) }}</span><i
                                                             class="fi-rr-angle-small-down"></i>
                                                     </button>
-                                                    <ul class="dropdown-menu dropdown-menu-light"
-                                                        aria-labelledby="dropdownSort">
-                                                        <li><a class="dropdown-item" href="?per_page=10">10</a></li>
-                                                        <li><a class="dropdown-item" href="?per_page=12">12</a></li>
-                                                        <li><a class="dropdown-item" href="?per_page=20">20</a></li>
+                                                    <ul class="dropdown-menu dropdown-menu-light">
+                                                        @foreach ([10, 12, 20] as $size)
+                                                            <li>
+                                                                <a class="dropdown-item"
+                                                                    href="{{ url()->current() }}?{{ http_build_query(array_merge(request()->query(), ['per_page' => $size])) }}">
+                                                                    {{ $size }}
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
                                                     </ul>
                                                 </div>
                                             </div>
@@ -72,19 +75,37 @@
                                                 <span class="text-sortby">Sắp xếp theo:</span>
                                                 <div class="dropdown dropdown-sort">
                                                     <button class="btn dropdown-toggle" id="dropdownSort2" type="button"
-                                                        data-bs-toggle="dropdown" aria-expanded="false"
-                                                        data-bs-display="static">
-                                                        <span>{{ request('sort', 'newest') == 'newest' ? 'Mới nhất' : (request('sort') == 'oldest' ? 'Cũ nhất' : 'Đánh giá cao') }}</span><i
-                                                            class="fi-rr-angle-small-down"></i>
+                                                        data-bs-toggle="dropdown">
+                                                        <span>
+                                                            @if (request('sort', 'newest') == 'newest')
+                                                                Mới nhất
+                                                            @elseif(request('sort') == 'oldest')
+                                                                Cũ nhất
+                                                            @else
+                                                                Đánh giá cao
+                                                            @endif
+                                                        </span>
+                                                        <i class="fi-rr-angle-small-down"></i>
                                                     </button>
-                                                    <ul class="dropdown-menu dropdown-menu-light"
-                                                        aria-labelledby="dropdownSort2">
-                                                        <li><a class="dropdown-item" href="?sort=newest">Newest Post</a>
+                                                    <ul class="dropdown-menu dropdown-menu-light">
+                                                        <li>
+                                                            <a class="dropdown-item"
+                                                                href="{{ url()->current() }}?{{ http_build_query(array_merge(request()->query(), ['sort' => 'newest'])) }}">
+                                                                Mới nhất
+                                                            </a>
                                                         </li>
-                                                        <li><a class="dropdown-item" href="?sort=oldest">Oldest Post</a>
+                                                        <li>
+                                                            <a class="dropdown-item"
+                                                                href="{{ url()->current() }}?{{ http_build_query(array_merge(request()->query(), ['sort' => 'oldest'])) }}">
+                                                                Cũ nhất
+                                                            </a>
                                                         </li>
-                                                        <li><a class="dropdown-item" href="?sort=rating">Rating Post</a>
-                                                        </li>
+                                                        {{-- <li>
+                                                            <a class="dropdown-item"
+                                                                href="{{ url()->current() }}?{{ http_build_query(array_merge(request()->query(), ['sort' => 'rating'])) }}">
+                                                                Đánh giá cao
+                                                            </a>
+                                                        </li> --}}
                                                     </ul>
                                                 </div>
                                             </div>
@@ -139,3 +160,30 @@
         </section>
     </main>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.dropdown-item').on('click', function(event) {
+                event.preventDefault(); // Ngăn chặn load trang
+                let url = $(this).attr('href');
+
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    success: function(data) {
+                        let newContent = $(data).find('.content-page').html();
+                        $('.content-page').html(newContent);
+                        window.history.pushState({}, '', url);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Lỗi khi tải dữ liệu:', error);
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

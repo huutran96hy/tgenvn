@@ -16,36 +16,36 @@ class JobController extends Controller
     public function index(Request $request)
     {
         $categories = JobCategory::all();
+        $query = Job::with('employer', 'skills', 'category');
 
-        $query = Job::with('employer', 'skills', 'category')->orderByDesc('created_at');
+        $sort = $request->input('sort', 'newest');
+        if ($sort === 'oldest') {
+            $query->orderBy('created_at', 'asc');
+        } elseif ($sort === 'rating') {
+            $query->orderByDesc('rating');
+        } else {
+            $query->orderByDesc('created_at');
+        }
 
-        // if ($request->has('industry') && $request->industry != 0) {
-        //     $query->where('category_id', $request->industry);
-        // }
+        $perPage = $request->input('per_page', 12);
 
-        // if ($request->has('province') && !empty($request->province)) {
-        //     $query->where('location', 'like', '%' . $request->province . '%');
-        // }
-
-        if ($request->has('salary_range') && !empty($request->salary_range)) {
-            $range = $request->salary_range;
-        
-            if ($range == '>100000000') {
+        // Lọc theo mức lương
+        if ($request->filled('salary_range')) {
+            $range = $request->input('salary_range');
+            if ($range === '>100000000') {
                 $query->where('salary', '>', 100000000);
             } else {
                 [$min, $max] = explode('-', $range);
-                $query->whereBetween('salary', [(int) $min, (int) $max]);
+                $query->whereBetween('salary', [(int)$min, (int)$max]);
             }
         }
 
-        if ($request->has('keyword') && !empty($request->keyword)) {
-            $query->where(function ($q) use ($request) {
-                $q->where('job_title', 'like', '%' . $request->keyword . '%');
-            });
+        // Lọc theo từ khóa
+        if ($request->filled('keyword')) {
+            $query->where('job_title', 'like', '%' . $request->input('keyword') . '%');
         }
 
-        $perPage = $request->input('show', 12);
-        $jobs = $query->paginate($perPage);
+        $jobs = $query->paginate($perPage)->appends($request->query());
 
         return view('Frontend.pages.job_list', compact('jobs', 'categories'));
     }
