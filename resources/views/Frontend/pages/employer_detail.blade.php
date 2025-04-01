@@ -1,6 +1,6 @@
 @extends('Frontend.layouts.app')
 
-@section('pageTitle', $employer->name)
+@section('pageTitle', 'Chi tiết công ty - ' . $employer->company_name)
 
 @push('meta')
     <meta name="description" content="{{ $employer->description }}">

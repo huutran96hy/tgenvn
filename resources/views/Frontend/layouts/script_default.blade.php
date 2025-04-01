@@ -1,23 +1,20 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer></script>
 
 <script src="{{ asset('assets/frontend/js/vendor/modernizr-3.6.0.min.js') }}" defer></script>
 <script src="{{ asset('assets/frontend/js/vendor/bootstrap.bundle.min.js') }}" defer></script>
-
 <script src="{{ asset('assets/frontend/js/plugins/waypoints.js') }}" defer></script>
 <script src="{{ asset('assets/frontend/js/plugins/wow.js') }}" defer></script>
 <script src="{{ asset('assets/frontend/js/plugins/magnific-popup.js') }}" defer></script>
 <script src="{{ asset('assets/frontend/js/plugins/perfect-scrollbar.min.js') }}" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer></script>
 <script src="{{ asset('assets/frontend/js/plugins/isotope.js') }}" defer></script>
 <script src="{{ asset('assets/frontend/js/plugins/scrollup.js') }}" defer></script>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.1/nouislider.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.2.0/wNumb.min.js" defer></script>
 
 <script src="{{ asset('assets/frontend/js/plugins/counterup.js') }}" defer></script>
-
 <script src="{{ asset('assets/frontend/js/main8c94.js') }}" defer></script>
 <script src="{{ asset('assets/frontend/js/slider.js') }}" defer></script>
 

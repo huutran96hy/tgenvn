@@ -15,15 +15,15 @@ class JobSeeder extends Seeder
             'slug' => 'senior-developer',
             'job_description' => 'Responsible for coding and software development.',
             'requirements' => 'Experience with Laravel and Vue.js.',
-            'salary' => '5000 USD',
+            'salary' => '5000000',
             'location' => 'Hanoi, Vietnam',
             'category_id' => 1,
             'employer_id' => 1,
             'posted_date' => now(),
             'expiry_date' => now()->addDays(30),
-            'required_education' => 'Bachelor',
+            'required_education' => 'Cử nhân',
             'required_exp' => '5 years',
-            'job_type' => 'fulltime',
+            'job_type' => 'Remote',
             'approval_status' => 'pending',
         ]);
 
@@ -37,11 +37,13 @@ class JobSeeder extends Seeder
             'category_id' => 1,
             'employer_id' => 2,
             'posted_date' => now(),
-            'expiry_date' => now()->addDays(30),
+            'expiry_date' => now()->addDays(50),
             'required_education' => 'Đại học',
             'required_exp' => '2 years',
-            'job_type' => 'fulltime',
+            'job_type' => 'Fulltime',
             'approval_status' => 'pending',
+            'created_at' => now()->subDays(10),
+            'updated_at' => now()->subDays(10),
         ]);
     }
 }

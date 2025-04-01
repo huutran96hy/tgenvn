@@ -1,6 +1,6 @@
 @extends('Frontend.layouts.app')
 
-@section('pageTitle', 'Danh sách blog')
+@section('pageTitle', 'Danh sách tin tức')
 
 @push('meta')
     <meta name="description" content="Trang danh sách về blog">

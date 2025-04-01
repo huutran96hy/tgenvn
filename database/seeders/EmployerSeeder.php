@@ -34,9 +34,11 @@ class EmployerSeeder extends Seeder
             'contact_phone' => '0241234567',
             'address' => 'Hanoi, Vietnam',
             'email' => 'contact@techsolutions.com',
-            'founded_at' => '2010-05-01',
+            'founded_at' => '2018-08-12',
             'about' => 'Innovative technology solutions.',
             'company_type' => 'Software',
+            'created_at' => now()->subDays(10),
+            'updated_at' => now()->subDays(10),
         ]);
     }
 }
