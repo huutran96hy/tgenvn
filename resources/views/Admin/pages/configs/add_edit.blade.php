@@ -52,7 +52,7 @@
                                                                         <a href="#"
                                                                             class="btn btn-danger btn-sm delete-banner"
                                                                             data-url="{{ route('admin.configs.deleteBanner', ['banner' => $banner]) }}">
-                                                                            <i class="fas fa-trash-alt"></i> Xóa
+                                                                            <i class="fas fa-trash-alt"></i>
                                                                         </a>
                                                                     </div>
                                                                 </div>

@@ -74,17 +74,16 @@
                                                 <span class="text-sortby">Show:</span>
                                                 <div class="dropdown dropdown-sort">
                                                     <button class="btn dropdown-toggle" id="dropdownSort" type="button"
-                                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <span>{{ request('show', 12) }}</span>
-                                                        <i class="fi-rr-angle-small-down"></i>
+                                                        data-bs-toggle="dropdown">
+                                                        <span>{{ request('per_page', 12) }}</span><i
+                                                            class="fi-rr-angle-small-down"></i>
                                                     </button>
-                                                    <ul class="dropdown-menu dropdown-menu-light"
-                                                        aria-labelledby="dropdownSort">
-                                                        @foreach ([10, 12, 20] as $num)
+                                                    <ul class="dropdown-menu dropdown-menu-light">
+                                                        @foreach ([10, 12, 20] as $size)
                                                             <li>
-                                                                <a class="dropdown-item {{ request('show', 12) == $num ? 'active' : '' }}"
-                                                                    href="{{ request()->fullUrlWithQuery(['show' => $num]) }}">
-                                                                    {{ $num }}
+                                                                <a class="dropdown-item"
+                                                                    href="{{ url()->current() }}?{{ http_build_query(array_merge(request()->query(), ['per_page' => $size])) }}">
+                                                                    {{ $size }}
                                                                 </a>
                                                             </li>
                                                         @endforeach
@@ -92,13 +91,41 @@
                                                 </div>
                                             </div>
                                             <div class="box-border">
-                                                <span class="text-sortby">Sort by:</span>
+                                                <span class="text-sortby">Sắp xếp theo:</span>
                                                 <div class="dropdown dropdown-sort">
                                                     <button class="btn dropdown-toggle" id="dropdownSort2" type="button"
-                                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <span>Newest Post</span>
+                                                        data-bs-toggle="dropdown">
+                                                        <span>
+                                                            @if (request('sort', 'newest') == 'newest')
+                                                                Mới nhất
+                                                            @elseif(request('sort') == 'oldest')
+                                                                Cũ nhất
+                                                            @else
+                                                                Đánh giá cao
+                                                            @endif
+                                                        </span>
                                                         <i class="fi-rr-angle-small-down"></i>
                                                     </button>
+                                                    <ul class="dropdown-menu dropdown-menu-light">
+                                                        <li>
+                                                            <a class="dropdown-item"
+                                                                href="{{ url()->current() }}?{{ http_build_query(array_merge(request()->query(), ['sort' => 'newest'])) }}">
+                                                                Mới nhất
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item"
+                                                                href="{{ url()->current() }}?{{ http_build_query(array_merge(request()->query(), ['sort' => 'oldest'])) }}">
+                                                                Cũ nhất
+                                                            </a>
+                                                        </li>
+                                                        {{-- <li>
+                                                            <a class="dropdown-item"
+                                                                href="{{ url()->current() }}?{{ http_build_query(array_merge(request()->query(), ['sort' => 'rating'])) }}">
+                                                                Đánh giá cao
+                                                            </a>
+                                                        </li> --}}
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
@@ -113,7 +140,8 @@
                                             <div class="card-grid-2-image-left">
                                                 <span class="flash"></span>
                                                 <div class="image-box">
-                                                    <img src="{{ asset('assets/imgs/brands/brand-3.png') }}" alt="jobBox">
+                                                    <img src="{{ asset('assets/imgs/brands/brand-3.png') }}"
+                                                        alt="jobBox">
                                                 </div>
                                                 <div class="right-info">
                                                     <a class="name-job"
@@ -442,6 +470,31 @@
                 }
 
                 window.location.href = url.toString(); // Chuyển trang ngay khi chọn
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.dropdown-item').on('click', function(event) {
+                event.preventDefault(); // Ngăn chặn load trang
+                let url = $(this).attr('href');
+
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    success: function(data) {
+                        let newContent = $(data).find('.content-page').html();
+                        $('.content-page').html(newContent); 
+                        window.history.pushState({}, '', url); 
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Lỗi khi tải dữ liệu:', error);
+                    }
+                });
             });
         });
     </script>

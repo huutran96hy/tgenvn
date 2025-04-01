@@ -31,17 +31,17 @@ class EmployerController extends Controller
         //     $query->where('province', $request->province);
         // }
 
-        // Sắp xếp
-        $sortOptions = [
-            'newest' => ['created_at', 'desc'],
-            'oldest' => ['created_at', 'asc'],
-            'rating' => ['rating', 'desc'],
-        ];
-        $sort = $request->get('sort', 'newest');
-        $query->orderBy(...$sortOptions[$sort] ?? $sortOptions['newest']);
+        $sort = $request->input('sort', 'newest');
+        if ($sort === 'oldest') {
+            $query->orderBy('created_at', 'asc');
+        } elseif ($sort === 'rating') {
+            $query->orderByDesc('rating');
+        } else {
+            $query->orderByDesc('created_at');
+        }
+        $perPage = $request->input('per_page', 12);
 
-        // Phân trang
-        $employers = $query->paginate($request->get('per_page', 12));
+        $employers = $query->paginate($perPage)->appends($request->query());
 
         return view('Frontend.pages.employer_list', compact('employers'));
     }
