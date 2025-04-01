@@ -31,7 +31,7 @@
                             <th>Họ và Tên</th>
                             <th>Số điện thoại</th>
                             <th>Địa chỉ</th>
-                            <th class="text-center">Hành động</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>

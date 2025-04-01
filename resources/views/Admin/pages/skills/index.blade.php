@@ -30,7 +30,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Tên Kỹ Năng</th>
-                            <th class="text-center">Hành động</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>

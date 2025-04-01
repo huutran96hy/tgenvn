@@ -51,17 +51,17 @@
                     <thead>
                         <tr>
                             <th>Tiêu đề</th>
-                            <th>Mô tả</th>
+                            <th>Loại công việc</th>
                             <th>Mức lương</th>
                             <th class="text-center">Trạng thái</th>
-                            <th class="text-center">Hành động</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($jobs as $job)
                             <tr>
                                 <td>{{ $job->job_title }}</td>
-                                <td>{!! Str::limit($job->job_description, 50) !!}</td>
+                                <td>{{ $job->job_type }}</td>
                                 <td>{{ \App\Helpers\NumberHelper::formatSalary($job->salary) }}</td>
                                 <td class="text-center">
                                     <div class="dropdown">

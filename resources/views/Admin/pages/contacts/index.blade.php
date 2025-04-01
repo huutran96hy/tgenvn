@@ -32,7 +32,7 @@
                             <th>Email</th>
                             <th>Điện thoại</th>
                             <th>Chủ đề</th>
-                            <th class="text-center">Hành động</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>

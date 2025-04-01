@@ -32,7 +32,7 @@
                             <th>Mô tả</th>
                             <th>Website</th>
                             <th>Liên hệ</th>
-                            <th class="text-center">Hành động</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
