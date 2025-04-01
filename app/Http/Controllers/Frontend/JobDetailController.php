@@ -9,18 +9,16 @@ use Illuminate\Http\Request;
 
 class JobDetailController extends Controller
 {
-    public function index($jobId)
+    public function index($slug)
     {
-        $job = Job::with('employer', 'category', 'skills')->find($jobId);
-
+        $job = Job::with('employer', 'category', 'skills')->where('slug', $slug)->firstOrFail();
         $employer = Employer::withCount('jobs')->find($job->employer_id);
 
         $randomJobs = Job::with('employer', 'category', 'skills')
-            // ->where('job_id', '!=', $jobId)
+            ->where('job_id', '!=', $job->job_id)
             ->inRandomOrder()
             ->take(8)
             ->get();
-
 
         return view('Frontend.pages.job_detail', compact('job', 'employer', 'randomJobs'));
     }

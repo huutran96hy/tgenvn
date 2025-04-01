@@ -38,6 +38,12 @@ class NewsController extends Controller
             'news_category_id' => 'required|exists:news_categories,news_category_id',
         ]);
 
+        $slug = $request->input('slug');
+
+        $slug = $this->getStorySlugExist($slug);
+        $validated['slug'] = $slug;
+
+
         // Lưu bgr-img
         if ($request->hasFile('images')) {
             $validated['images'] = $request->file('images')->store('news', 'public');
@@ -66,6 +72,11 @@ class NewsController extends Controller
             'news_category_id' => 'required|exists:news_categories,news_category_id',
         ]);
 
+        $slug = $request->input('slug');
+
+        $slug = $this->getStorySlugExist($slug);
+        $validated['slug'] = $slug;
+
         if ($request->hasFile('images')) {
             // Xóa images
             if ($news->images) {
@@ -89,5 +100,17 @@ class NewsController extends Controller
 
         $news->delete();
         return back()->with('success', 'News deleted successfully.');
+    }
+
+    protected function getStorySlugExist($slug)
+    {
+        $existSlug = News::query()->where('slug', '=', $slug)->first();
+
+        if ($existSlug) {
+            $slug = $slug . rand(1, 20);
+            $this->getStorySlugExist($slug);
+        }
+
+        return $slug;
     }
 }

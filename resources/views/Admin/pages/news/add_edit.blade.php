@@ -26,6 +26,12 @@
                     </div>
 
                     <div class="mb-3">
+                        <label class="form-label">Slug</label>
+                        <input type="text" name="slug" class="form-control"
+                            value="{{ old('slug', $employer->slug ?? '') }}" readonly>
+                    </div>
+
+                    <div class="mb-3">
                         <label class="form-label">Ảnh</label>
                         <div class="input-group">
                             <input type="file" name="images" class="form-control" id="images" accept="image/*">
@@ -148,6 +154,46 @@
                     }
                 });
             }
+        });
+    </script>
+
+     <script>
+        $(document).ready(function() {
+            // bỏ dấu tiếng Việt
+            function removeVietnameseTones(str) {
+                str = str.normalize('NFD');
+                str = str.replace(/[\u0300-\u036f]/g, "");
+                str = str.replace(/đ/g, "d");
+                str = str.replace(/Đ/g, "D");
+                str = str.replace(/([^0-9a-z-\s])/g, '');
+                return str;
+            }
+
+            // tạo slug từ tên
+            function slugify(text) {
+                text = text.toLowerCase();
+                text = removeVietnameseTones(text);
+                return text.toString()
+                    .replace(/\s+/g, '-')
+                    .replace(/[^\w\-]+/g, '')
+                    .replace(/\-\-+/g, '-')
+                    .replace(/^-+/, '')
+                    .replace(/-+$/, '');
+            }
+
+            $('.text-to-slug[name="title"]').on('input', function() {
+                var name = $(this).val();
+                var slug = slugify(name);
+                $('.text-to-slug[name="slug"]').val(slug);
+            });
+
+            @if (isset($job))
+                var initialName = $('.text-to-slug[name="title"]').val();
+                if (initialName) {
+                    var initialSlug = slugify(initialName);
+                    $('.text-to-slug[name="slug"]').val(initialSlug);
+                }
+            @endif
         });
     </script>
 @endpush

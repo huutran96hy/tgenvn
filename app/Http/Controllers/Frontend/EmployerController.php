@@ -72,13 +72,13 @@ class EmployerController extends Controller
     /**
      * Display the specified employer.
      */
-    public function show(Employer $employer)
+    public function show($slug)
     {
-        $latestJobs = $employer->jobs()->latest()->paginate(2);
+        $employer = Employer::where('slug', $slug)->firstOrFail();
+        $latestJobs = $employer->jobs()->latest()->paginate(1);
 
         return view('Frontend.pages.employer_detail', compact('employer', 'latestJobs'));
     }
-
 
     /**
      * Update the specified employer in storage.

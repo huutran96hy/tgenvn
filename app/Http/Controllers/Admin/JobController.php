@@ -78,6 +78,11 @@ class JobController extends Controller
 
         $validated['approval_status'] = $validated['approval_status'] ?? 'pending';
 
+        $slug = $request->input('slug');
+
+        $slug = $this->getStorySlugExist($slug);
+        $validated['slug'] = $slug;
+
         $job = Job::create($validated);
 
         if ($request->has('skills')) {
@@ -116,6 +121,11 @@ class JobController extends Controller
             'skills.*' => 'exists:skills,skill_id',
         ]);
 
+        $slug = $request->input('slug');
+
+        $slug = $this->getStorySlugExist($slug);
+        $validated['slug'] = $slug;
+
         $job->update($validated);
 
         if ($request->has('skills')) {
@@ -140,5 +150,17 @@ class JobController extends Controller
         $job->update(['approval_status' => $request->approval_status]);
 
         return response()->json(['success' => true]);
+    }
+
+    protected function getStorySlugExist($slug)
+    {
+        $existSlug = Job::query()->where('slug', '=', $slug)->first();
+
+        if ($existSlug) {
+            $slug = $slug . rand(1, 20);
+            $this->getStorySlugExist($slug);
+        }
+
+        return $slug;
     }
 }

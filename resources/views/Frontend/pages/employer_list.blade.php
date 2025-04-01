@@ -120,13 +120,13 @@
                                             <div class="d-flex justify-content-between align-items-start mt-3">
                                                 <div class="text-start">
                                                     <div class="image-box d-inline-block">
-                                                        <a href="{{ route('employers.show', $employer->employer_id) }}">
+                                                        <a href="{{ route('employers.show', $employer->slug) }}">
                                                             <img src="{{ asset($employer->logo) }}"
                                                                 alt="{{ $employer->company_name }}">
                                                         </a>
                                                     </div>
                                                     <h5 class="font-bold mt-2">
-                                                        <a href="{{ route('employers.show', $employer->employer_id) }}">
+                                                        <a href="{{ route('employers.show', $employer->slug) }}">
                                                             {{ $employer->company_name }}</a>
                                                     </h5>
                                                     <span class="card-location d-block">{{ $employer->address }}</span>

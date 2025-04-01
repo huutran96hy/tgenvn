@@ -12,6 +12,7 @@ class NewsSeeder extends Seeder
     {
         News::create([
             'title' => 'New Tech Innovations',
+            'slug' => 'new-tech-innovations',
             'images' => 'tech_innovations.png',
             'content' => 'This is a detailed article about new tech innovations.',
             'published_date' => now(),

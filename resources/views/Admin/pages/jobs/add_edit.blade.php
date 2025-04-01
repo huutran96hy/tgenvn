@@ -2,10 +2,6 @@
 
 @section('pageTitle', isset($job) ? 'Chỉnh sửa công việc' : 'Thêm công việc')
 
-@push('head')
-    <!-- JavaScript -->
-@endpush
-
 @section('content')
     @include('Admin.snippets.page_header')
 
@@ -25,8 +21,14 @@
 
                     <div class="mb-3">
                         <label class="form-label">Tiêu đề công việc</label>
-                        <input type="text" name="job_title" class="form-control"
+                        <input type="text" name="job_title" class="form-control text-to-slug"
                             value="{{ old('job_title', $job->job_title ?? '') }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Slug</label>
+                        <input type="text" name="slug" class="form-control"
+                            value="{{ old('slug', $job->slug ?? '') }}" readonly>
                     </div>
 
                     <div class="mb-3">
@@ -51,7 +53,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Lương</label>
-                        <input type="text" name="salary" class="form-control"
+                        <input type="number" name="salary" class="form-control"
                             value="{{ old('salary', $job->salary ?? '') }}">
                         <small class="text-muted">Vui lòng điền số tiền lương (ví dụ: 10.000.000 VNĐ).</small>
                     </div>
@@ -161,6 +163,46 @@
     <!-- CKEditor 5 CDN -->
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 
+    <script>
+        $(document).ready(function() {
+            // bỏ dấu tiếng Việt
+            function removeVietnameseTones(str) {
+                str = str.normalize('NFD');
+                str = str.replace(/[\u0300-\u036f]/g, "");
+                str = str.replace(/đ/g, "d");
+                str = str.replace(/Đ/g, "D");
+                str = str.replace(/([^0-9a-z-\s])/g, '');
+                return str;
+            }
+
+            // tạo slug từ tên
+            function slugify(text) {
+                text = text.toLowerCase();
+                text = removeVietnameseTones(text);
+                return text.toString()
+                    .replace(/\s+/g, '-')
+                    .replace(/[^\w\-]+/g, '')
+                    .replace(/\-\-+/g, '-')
+                    .replace(/^-+/, '')
+                    .replace(/-+$/, '');
+            }
+
+            $('.text-to-slug[name="job_title"]').on('input', function() {
+                var name = $(this).val();
+                var slug = slugify(name);
+                $('.text-to-slug[name="slug"]').val(slug);
+            });
+
+            @if (isset($job))
+                var initialName = $('.text-to-slug[name="job_title"]').val();
+                if (initialName) {
+                    var initialSlug = slugify(initialName);
+                    $('.text-to-slug[name="slug"]').val(initialSlug);
+                }
+            @endif
+        });
+    </script>
+    
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // tạo Datepicker

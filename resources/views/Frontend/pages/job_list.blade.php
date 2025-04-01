@@ -145,7 +145,7 @@
                                                 </div>
                                                 <div class="right-info">
                                                     <a class="name-job"
-                                                        href="{{ route('employers.show', $job->employer->employer_id) }}">
+                                                        href="{{ route('employers.show', $job->employer->slug) }}">
                                                         {{ $job->employer->company_name }}
                                                     </a>
                                                     <span class="location-small">{{ $job->location }}</span>
@@ -153,7 +153,7 @@
                                             </div>
                                             <div class="card-block-info">
                                                 <h6>
-                                                    <a href="{{ route('job_detail.show', $job->job_id) }}">
+                                                    <a href="{{ route('job_detail.show', $job->slug) }}">
                                                         {{ $job->job_title }}
                                                     </a>
                                                 </h6>

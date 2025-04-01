@@ -19,7 +19,7 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 
 // Trang danh sách job & chi tiết job
 Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
-Route::get('/job-detail/{jobId}', [JobDetailController::class, 'index'])->name('job_detail.show');
+Route::get('/job-detail/{slug}', [JobDetailController::class, 'index'])->name('job_detail.show');
 
 // Trang danh sách công ty & chi tiết công ty
 Route::get('/employers', [EmployerController::class, 'index'])->name('employers.index');

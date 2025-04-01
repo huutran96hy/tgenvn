@@ -13,6 +13,7 @@ class Employer extends Model
     protected $fillable = [
         'user_id',
         'company_name',
+        'slug',
         'logo',
         'background_img',
         'company_description',

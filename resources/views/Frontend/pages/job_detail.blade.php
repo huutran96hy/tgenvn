@@ -52,7 +52,7 @@
                                             <div class="card-list-4 wow animate__animated animate__fadeIn hover-up">
                                                 <div class="image">
                                                     <a
-                                                        href="{{ route('job_detail.show', ['jobId' => $randomJob->job_id]) }}">
+                                                        href="{{ route('job_detail.show', ['slug' => $randomJob->slug]) }}">
                                                         <img src="{{ $job->employer->getLogoUrl() }}"
                                                             alt="{{ $randomJob->job_title }}" style="width: 50px">
                                                     </a>
@@ -60,7 +60,7 @@
                                                 <div class="info-text">
                                                     <h5 class="font-md font-bold color-brand-1">
                                                         <a
-                                                            href="{{ route('job_detail.show', ['jobId' => $randomJob->job_id]) }}">
+                                                            href="{{ route('job_detail.show', ['slug' => $randomJob->slug]) }}">
                                                             {{ $randomJob->job_title }}
                                                         </a>
                                                     </h5>

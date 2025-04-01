@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id('job_id');
             $table->string('job_title');
+            $table->string('slug')->unique();
             $table->text('job_description');
             $table->text('requirements');
             $table->string('salary')->nullable();
