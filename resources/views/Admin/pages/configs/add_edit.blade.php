@@ -40,19 +40,24 @@
                                                     $banners = json_decode($config->value, true);
                                                 @endphp
 
-                                                <div class="mt-3">
-                                                    <label class="font-weight-bold">Ảnh hiện tại:</label>
-                                                    <div class="row">
+                                                <div class="mt-4">
+                                                    <label class="font-weight-semibold fs-5">Ảnh hiện tại:</label>
+                                                    <div class="row row-cols-2 row-cols-md-4 g-4 mt-3">
                                                         @foreach ($banners as $banner)
-                                                            <div class="col-md-3 mb-4 banner_img">
-                                                                <div class="card shadow-sm border-0">
-                                                                    <img src="{{ asset('storage/' . $banner) }}"
-                                                                        class="img-fluid rounded" alt="Banner" />
-                                                                    <div class="card-body text-center">
+                                                            <div class="col banner_img">
+                                                                <div class="card shadow-sm border-0 position-relative">
+                                                                    <div class="d-flex justify-content-center align-items-center"
+                                                                        style="height: 200px; overflow: hidden;">
+                                                                        <img src="{{ asset('storage/' . $banner) }}"
+                                                                            class="img-fluid rounded" alt="Banner"
+                                                                            style="object-fit: none; width: 100%; height: 100%;" />
+                                                                    </div>
+                                                                    <div class="position-absolute top-0 end-0 p-1">
                                                                         <a href="#"
-                                                                            class="btn btn-danger btn-sm delete-banner"
+                                                                            class="btn btn-danger btn-sm rounded-circle shadow delete-banner"
                                                                             data-url="{{ route('admin.configs.deleteBanner', ['banner' => $banner]) }}">
-                                                                            <i class="fas fa-trash-alt"></i>
+                                                                            {{-- <i class="fas fa-trash-alt" style="font-size: 12px"></i> --}}
+                                                                            X
                                                                         </a>
                                                                     </div>
                                                                 </div>
@@ -60,11 +65,12 @@
                                                         @endforeach
                                                     </div>
                                                 </div>
+
                                             @endif
                                         </div>
                                     </td>
                                 </tr>
-                            @else
+                            @elseif($config->key === 'logo')
                                 <tr>
                                     <th>Logo</th>
                                     <td>
@@ -75,6 +81,23 @@
                                             @if (!empty($config->value))
                                                 <div class="mt-3">
                                                     <label>Logo hiện tại:</label>
+                                                    <img src="{{ asset('storage/' . $config->value) }}" class="img-fluid" />
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </td>
+                                </tr>
+                            @else
+                                <tr>
+                                    <th>Icon</th>
+                                    <td>
+                                        <div class="mb-3">
+                                            <input type="file" name="icon" class="form-control" accept="image/*"
+                                                id="iconInput">
+
+                                            @if (!empty($config->value))
+                                                <div class="mt-3">
+                                                    <label>Icon hiện tại:</label>
                                                     <img src="{{ asset('storage/' . $config->value) }}" class="img-fluid" />
                                                 </div>
                                             @endif

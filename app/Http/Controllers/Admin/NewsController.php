@@ -8,9 +8,11 @@ use App\Models\User;
 use App\Models\NewsCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Traits\SlugCheck;
 
 class NewsController extends Controller
 {
+    use SlugCheck;
     public function index()
     {
         $news = News::with('category', 'author')->latest()->paginate(10);
@@ -31,6 +33,7 @@ class NewsController extends Controller
         dd($request->all());
         $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'slug' => 'required',
             'images' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'content' => 'required',
             'published_date' => 'required|date|date_format:Y-m-d',
@@ -41,9 +44,8 @@ class NewsController extends Controller
 
         $slug = $request->input('slug');
 
-        $slug = $this->getStorySlugExist($slug);
+        $slug = $this->getStorySlugExist($slug, News::class, 'slug', 'news_id');
         $validated['slug'] = $slug;
-
 
         // Lưu bgr-img
         if ($request->hasFile('images')) {
@@ -66,6 +68,7 @@ class NewsController extends Controller
     {
         $validated =  $request->validate([
             'title' => 'required|string|max:255',
+            'slug' => 'required',
             'images' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'content' => 'required',
             'published_date' => 'required|date|date_format:Y-m-d',
@@ -75,7 +78,7 @@ class NewsController extends Controller
 
         $slug = $request->input('slug');
 
-        $slug = $this->getStorySlugExist($slug);
+        $slug = $this->getStorySlugExist($slug, News::class, 'slug', 'news_id', $news->news_id);
         $validated['slug'] = $slug;
 
         if ($request->hasFile('images')) {
@@ -101,17 +104,5 @@ class NewsController extends Controller
 
         $news->delete();
         return back()->with('success', 'News deleted successfully.');
-    }
-
-    protected function getStorySlugExist($slug)
-    {
-        $existSlug = News::query()->where('slug', '=', $slug)->first();
-
-        if ($existSlug) {
-            $slug = $slug . rand(1, 20);
-            $this->getStorySlugExist($slug);
-        }
-
-        return $slug;
     }
 }

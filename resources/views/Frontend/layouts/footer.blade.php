@@ -2,9 +2,9 @@
     <div class="container">
         <div class="row">
             <div class="footer-col-1 col-md-3 col-sm-12">
-                <a href="{{ route('index') }}"><img alt="ORSCorp" src="{{ asset('assets/imgs/template/logo-black.png') }}"
-                        width="50%" /></a>
-
+                <a href="{{ route('index') }}">
+                    <img alt="logo" src="{{ \App\Models\Config::getLogo() }}" width="50%" />
+                </a>
                 <div class="mt-20 mb-20 font-xs color-text-paragraph-2">
                     OCông ty cổ phần tập đoàn Ouransoft thành lập năm 2019. Với sự kết
                     hợp giữa các kỹ sư công nghệ và đội ngũ chuyên gia giàu kinh

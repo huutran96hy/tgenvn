@@ -24,7 +24,7 @@ class JobSeeder extends Seeder
             'required_education' => 'Cử nhân',
             'required_exp' => '5 years',
             'job_type' => 'Remote',
-            'approval_status' => 'pending',
+            'approval_status' => 'approved',
         ]);
 
         Job::create([
@@ -41,7 +41,7 @@ class JobSeeder extends Seeder
             'required_education' => 'Đại học',
             'required_exp' => '2 years',
             'job_type' => 'Fulltime',
-            'approval_status' => 'pending',
+            'approval_status' => 'approved',
             'created_at' => now()->subDays(10),
             'updated_at' => now()->subDays(10),
         ]);

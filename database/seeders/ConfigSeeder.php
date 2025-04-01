@@ -15,6 +15,7 @@ class ConfigSeeder extends Seeder
         $configs = [
             ['key' => 'banners', 'value' => null],
             ['key' => 'logo', 'value' => null],
+            ['key' => 'icon', 'value' => null],
         ];
 
         foreach ($configs as $config) {

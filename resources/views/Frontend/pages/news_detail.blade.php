@@ -66,7 +66,8 @@
                             <div class="col-md-4">
                                 <div class="related-item">
                                     <a href="{{ route('news.show', $related->slug) }}">
-                                        <img src="{{ asset('storage/' . $related->image) }}" alt="{{ $related->title }}">
+                                        <img src="{{ \App\Helpers\CustomHelper::logoSrc($related->image) }}"
+                                            alt="{{ $related->title }}">
                                     </a>
                                     <h4>
                                         <a href="{{ route('news.show', $related->slug) }}">{{ $related->title }}</a>

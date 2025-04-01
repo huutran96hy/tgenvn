@@ -44,16 +44,15 @@
                             </div>
                         </div>
                         <div class="sidebar-border">
-                            <h6 class="f-18">Các vị trí khác </h6>
+                            <h6 class="f-18">Các vị trí khác</h6>
                             <div class="sidebar-list-job">
                                 <ul>
                                     @foreach ($randomJobs as $randomJob)
                                         <li>
                                             <div class="card-list-4 wow animate__animated animate__fadeIn hover-up">
                                                 <div class="image">
-                                                    <a
-                                                        href="{{ route('job_detail.show', ['slug' => $randomJob->slug]) }}">
-                                                        <img src="{{ $job->employer->getLogoUrl() }}"
+                                                    <a href="{{ route('job_detail.show', ['slug' => $randomJob->slug]) }}">
+                                                        <img src="{{ \App\Helpers\CustomHelper::logoSrc($randomJob->employer->logo) }}"
                                                             alt="{{ $randomJob->job_title }}" style="width: 50px">
                                                     </a>
                                                 </div>
@@ -190,11 +189,7 @@
                                         <div class="sidebar-text-info ml-10">
                                             <span class="text-description jobtype-icon mb-10">Loại công việc</span>
                                             <strong class="small-heading">
-                                                @if ($job->category)
-                                                    {{ $job->category->category_name ?? 'Chưa có chuyên ngành' }}
-                                                @else
-                                                    Chưa có chuyên ngành
-                                                @endif
+                                                {{ $job->job_type ?? 'Chưa xác định' }}
                                             </strong>
                                         </div>
                                     </div>

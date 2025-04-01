@@ -29,35 +29,34 @@ class ConfigController extends Controller
     public function update(Request $request, Config $config)
     {
         $validated = $request->validate([
-            'value' => 'sometimes|string',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'value'   => 'sometimes|string',
+            'logo'    => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'icon'    => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'banners.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // Nếu là logo, cập nhật file vào value
-        if ($config->key === 'logo' && $request->hasFile('logo')) {
-            // Xóa logo cũ nếu có
+        $fileKeys = ['logo' => 'logos', 'icon' => 'icons'];
+
+        // Xử lý logo và icon
+        if (array_key_exists($config->key, $fileKeys) && $request->hasFile($config->key)) {
+            // Xóa file cũ
             if ($config->value) {
                 Storage::disk('public')->delete($config->value);
             }
 
-            // Lưu logo mới
-            $logoPath = $request->file('logo')->store('logos', 'public');
-            $config->update(['value' => $logoPath]);
+            // Lưu file mới
+            $filePath = $request->file($config->key)->store($fileKeys[$config->key], 'public');
+            $config->update(['value' => $filePath]);
         }
-
-        // Nếu là banners, cập nhật dưới dạng JSON
+        // Xử lý banners
         elseif ($config->key === 'banners' && $request->hasFile('banners')) {
-            $uploadedBanners = [];
-            foreach ($request->file('banners') as $file) {
-                $uploadedBanners[] = $file->store('banners', 'public');
-            }
+            $uploadedBanners = array_map(fn($file) => $file->store('banners', 'public'), $request->file('banners'));
 
             $existingBanners = json_decode($config->value ?? '[]', true);
-            $allBanners = array_merge($existingBanners, $uploadedBanners);
-
-            $config->update(['value' => json_encode($allBanners)]);
-        } elseif ($request->filled('value')) {
+            $config->update(['value' => json_encode(array_merge($existingBanners, $uploadedBanners))]);
+        }
+        // Xử lý giá trị thông thường
+        elseif ($request->filled('value')) {
             $config->update(['value' => $request->input('value')]);
         }
 
@@ -72,8 +71,10 @@ class ConfigController extends Controller
     public function destroy(Config $config)
     {
         if ($config) {
-            // Xóa file trong storage nếu là logo hoặc banners
+            // Xóa file trong storage nếu là logo,icon hoặc banners
             if ($config->key === 'logo') {
+                Storage::disk('public')->delete($config->value);
+            } elseif ($config->key === 'icon') {
                 Storage::disk('public')->delete($config->value);
             } elseif ($config->key === 'banners') {
                 $banners = json_decode($config->value ?? '[]', true);
@@ -95,7 +96,6 @@ class ConfigController extends Controller
             // Xóa ảnh khỏi storage
             Storage::disk('public')->delete($banner);
 
-            // Cập nhật cơ sở dữ liệu (giả sử bạn đang lưu đường dẫn ảnh trong bảng configs)
             $config = Config::where('key', 'banners')->first();
 
             if ($config) {
