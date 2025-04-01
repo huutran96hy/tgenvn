@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title')</title>
     @stack('meta')
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Limitless - Admin Dashboard')</title>
@@ -30,7 +29,7 @@
     @stack('head')
 </head>
 
-<body>
+<body data-color-theme="">
     @if (Route::currentRouteName() !== 'admin.login')
         <!-- Header -->
         @include('Admin.layouts.header')

@@ -8,24 +8,18 @@
 <!-- Select2 JS -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
+{{-- Đổi theme --}}
 <script>
     $(document).ready(function() {
         let body = $("body");
         let themeIcon = $("#theme-icon");
+        let storageKey = "theme";
 
-        // Lấy URL từ Laravel
-        let getThemeUrl = "{{ route('admin.get.theme') }}";
-        let changeThemeUrl = "{{ route('admin.change.theme') }}";
+        let currentTheme = localStorage.getItem(storageKey) || "light";
+        body.attr("data-color-theme", currentTheme);
+        themeIcon.toggleClass("fa-sun", currentTheme === "dark");
+        themeIcon.toggleClass("fa-moon", currentTheme === "light");
 
-        // Lấy theme từ database
-        $.get(getThemeUrl, function(response) {
-            let currentTheme = response.theme || "light";
-            body.attr("data-color-theme", currentTheme);
-            themeIcon.toggleClass("fa-sun", currentTheme === "dark");
-            themeIcon.toggleClass("fa-moon", currentTheme === "light");
-        });
-
-        // Khi nhấn vào nút đổi theme
         $("#toggle-theme").click(function(e) {
             e.preventDefault();
             let newTheme = body.attr("data-color-theme") === "dark" ? "light" : "dark";
@@ -34,20 +28,7 @@
             themeIcon.toggleClass("fa-sun", newTheme === "dark");
             themeIcon.toggleClass("fa-moon", newTheme === "light");
 
-            // Gửi request lưu theme vào database
-            $.ajax({
-                url: changeThemeUrl,
-                type: "POST",
-                data: {
-                    theme: newTheme
-                },
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-                },
-                success: function(response) {
-                    console.log("Theme updated:", response);
-                }
-            });
+            localStorage.setItem(storageKey, newTheme);
         });
     });
 </script>
