@@ -43,7 +43,7 @@
                             <th>Công việc</th>
                             <th>Ngày ứng tuyển</th>
                             <th>Trạng thái</th>
-                            <th class="text-center">Hành động</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>

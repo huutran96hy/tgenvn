@@ -31,7 +31,7 @@
                             {{-- <th>ID</th> --}}
                             <th>Key</th>
                             {{-- <th>Value</th> --}}
-                            <th class="text-center">Hành động</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,7 +40,7 @@
                                 {{-- <td>{{ $config->config_id }}</td> --}}
                                 <td>{{ $config->key }}</td>
                                 {{-- <td>{{ $config->value }}</td> --}}
-                                <td class="text-center">
+                                <td>
                                     <div class="d-flex">
                                         <a href="{{ route('admin.configs.edit', $config->id) }}" class="me-3">
                                             <i class="ph-pencil"></i>

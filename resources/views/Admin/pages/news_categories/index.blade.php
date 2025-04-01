@@ -30,7 +30,7 @@
                         <tr>
                             <th>Tên danh mục</th>
                             <th>Mô tả</th>
-                            <th class="text-center">Hành động</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>

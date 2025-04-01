@@ -43,7 +43,7 @@
                             <th>Tên</th>
                             <th>Email</th>
                             <th>Vai trò</th>
-                            <th class="text-center">Hành động</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>

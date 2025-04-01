@@ -44,7 +44,7 @@
                             <th>Tác giả</th>
                             <th>Ngày xuất bản</th>
                             <th>Trạng thái</th>
-                            <th class="text-center">Hành động</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
