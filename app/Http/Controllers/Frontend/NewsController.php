@@ -54,8 +54,10 @@ class NewsController extends Controller
     /**
      * Hiển thị chi tiết tin tức.
      */
-    public function show(News $news)
+    public function show($slug)
     {
+        $news = News::where('slug', $slug)->firstOrFail();
+
         $relatedNews = News::where('news_category_id', $news->news_category_id)
             ->where('news_id', '!=', $news->news_id)
             ->where('status', 'published')
@@ -64,7 +66,6 @@ class NewsController extends Controller
 
         return view('Frontend.pages.news_detail', compact('news', 'relatedNews'));
     }
-
 
     /**
      * Cập nhật tin tức.

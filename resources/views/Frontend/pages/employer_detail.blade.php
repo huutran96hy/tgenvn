@@ -85,7 +85,7 @@
                                                             </div>
                                                             <div class="right-info">
                                                                 <a class="name-job"
-                                                                    href="{{ route('job_detail.show', $job->job_id) }}">
+                                                                    href="{{ route('job_detail.show', $job->slug) }}">
                                                                     {{ $job->job_title }}
                                                                 </a>
                                                                 <span class="location-small">{{ $job->location }}</span>
@@ -95,7 +95,7 @@
                                                 </div>
                                                 <div class="card-block-info">
                                                     <h4><a
-                                                            href="{{ route('job_detail.show', $job->job_id) }}">{{ $job->job_title }}</a>
+                                                            href="{{ route('job_detail.show', $job->slug) }}">{{ $job->job_title }}</a>
                                                     </h4>
                                                     <div class="mt-5">
                                                         <span class="card-briefcase">{{ $job->job_type }}</span>
@@ -114,7 +114,7 @@
                                                             </div>
                                                             <div class="col-5 text-end">
                                                                 <a class="btn btn-apply-now"
-                                                                    href="{{ route('job_detail.show', $job->job_id) }}">Xem</a>
+                                                                    href="{{ route('job_detail.show', $job->slug) }}">Xem</a>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -46,6 +46,11 @@ class EmployerController extends Controller
             'company_type' => 'nullable',
         ]);
 
+        $slug = $request->input('slug');
+
+        $slug = $this->getStorySlugExist($slug);
+        $validated['slug'] = $slug;
+
         // Lưu logo
         if ($request->hasFile('logo')) {
             $validated['logo'] = $request->file('logo')->store('employers/logos', 'public');
@@ -83,6 +88,11 @@ class EmployerController extends Controller
             'company_type' => 'nullable',
         ]);
 
+        $slug = $request->input('slug');
+
+        $slug = $this->getStorySlugExist($slug);
+        $validated['slug'] = $slug;
+
         if ($request->hasFile('logo')) {
             // Xóa logo
             if ($employer->logo) {
@@ -119,5 +129,17 @@ class EmployerController extends Controller
 
         $employer->delete();
         return back()->with('success', 'Xóa công ty thành công');
+    }
+
+    protected function getStorySlugExist($slug)
+    {
+        $existSlug = Employer::query()->where('slug', '=', $slug)->first();
+
+        if ($existSlug) {
+            $slug = $slug . rand(1, 20);
+            $this->getStorySlugExist($slug);
+        }
+
+        return $slug;
     }
 }

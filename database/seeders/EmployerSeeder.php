@@ -11,6 +11,7 @@ class EmployerSeeder extends Seeder
     {
         Employer::create([
             'company_name' => 'Tech Solutions',
+            'slug' => 'tech-solutions',
             'logo' => 'logo.png',
             'background_img' => 'background.png',
             'company_description' => 'A leading tech company.',
@@ -24,7 +25,8 @@ class EmployerSeeder extends Seeder
         ]);
 
         Employer::create([
-            'company_name' => 'IT Desk',
+            'company_name' => 'Google',
+            'slug' => 'google',
             'logo' => 'logo.png',
             'background_img' => 'background.png',
             'company_description' => 'A leading tech company.',

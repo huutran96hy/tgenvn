@@ -10,7 +10,17 @@ class News extends Model
     use HasFactory;
 
     protected $primaryKey = 'news_id';
-    protected $fillable = ['title', 'images', 'content', 'author_id', 'news_category_id', 'published_date', 'updated_date', 'status'];
+    protected $fillable = [
+        'title',
+        'slug',
+        'images',
+        'content',
+        'author_id',
+        'news_category_id',
+        'published_date',
+        'updated_date',
+        'status'
+    ];
 
     public function category()
     {

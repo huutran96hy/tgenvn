@@ -65,11 +65,11 @@
                         @foreach ($relatedNews as $related)
                             <div class="col-md-4">
                                 <div class="related-item">
-                                    <a href="{{ route('news.show', $related->id) }}">
+                                    <a href="{{ route('news.show', $related->slug) }}">
                                         <img src="{{ asset('storage/' . $related->image) }}" alt="{{ $related->title }}">
                                     </a>
                                     <h4>
-                                        <a href="{{ route('news.show', $related->id) }}">{{ $related->title }}</a>
+                                        <a href="{{ route('news.show', $related->slug) }}">{{ $related->title }}</a>
                                     </h4>
                                 </div>
                             </div>

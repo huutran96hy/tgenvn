@@ -66,7 +66,7 @@
                                     <div class="col-lg-6 mb-30">
                                         <div class="card-grid-3 hover-up">
                                             <div class="text-center card-grid-3-image">
-                                                <a href="{{ route('news.show', $item->news_id) }}">
+                                                <a href="{{ route('news.show', $item->slug) }}">
                                                     <figure><img alt="{{ $item->title }}" src="{{ asset($item->images) }}">
                                                     </figure>
                                                 </a>
@@ -78,7 +78,7 @@
                                                     </a>
                                                 </div>
                                                 <h5>
-                                                    <a href="{{ route('news.show', $item->news_id) }}">
+                                                    <a href="{{ route('news.show', $item->slug) }}">
                                                         {{ $item->title }}
                                                     </a>
                                                 </h5>

@@ -12,6 +12,7 @@ class JobSeeder extends Seeder
     {
         Job::create([
             'job_title' => 'Senior Developer',
+            'slug' => 'senior-developer',
             'job_description' => 'Responsible for coding and software development.',
             'requirements' => 'Experience with Laravel and Vue.js.',
             'salary' => '5000 USD',
@@ -28,6 +29,7 @@ class JobSeeder extends Seeder
 
         Job::create([
             'job_title' => 'Backend Developer',
+            'slug' => 'backend-developer',
             'job_description' => 'Responsible for coding and software development.',
             'requirements' => 'Experience with Laravel.',
             'salary' => '10000000',
