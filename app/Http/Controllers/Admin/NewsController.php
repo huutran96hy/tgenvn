@@ -28,6 +28,7 @@ class NewsController extends Controller
 
     public function store(Request $request)
     {
+        dd($request->all());
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'images' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',

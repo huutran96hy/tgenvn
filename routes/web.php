@@ -11,6 +11,10 @@ use App\Http\Controllers\Frontend\{
     HomeController,
     JobDetailController
 };
+use UniSharp\LaravelFilemanager\Lfm;
+
+
+
 
 require __DIR__ . '/admin.php';
 
@@ -38,6 +42,15 @@ Route::post('/apply-job', [CandidateController::class, 'store'])->name('candidat
 // Các route yêu cầu đăng nhập
 Route::middleware('auth')->group(function () {
     // Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+});
+Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function () {
+    Route::get('/laravel-filemanager', '\UniSharp\LaravelFilemanager\controllers\LfmController@show');
+    Route::post('/laravel-filemanager/upload', '\UniSharp\LaravelFilemanager\controllers\UploadController@upload');
+    // list all lfm routes here...
+
+});
+Route::group(['prefix' => 'admin/laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 
 // Đăng ký, đăng nhập

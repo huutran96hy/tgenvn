@@ -10,11 +10,8 @@
             <div class="header-nav">
                 <nav class="nav-main-menu">
                     <ul class="main-menu">
-                        <li class="has-children">
+                        <li>
                             <a class="active" href="{{ route('index') }}">Trang chủ</a>
-                            <ul class="sub-menu">
-                                <li><a href="{{ route('index') }}">Trang chủ</a></li>
-                            </ul>
                         </li>
                         {{-- <li class="has-children">
                             <a href="jobs-grid">Tìm việc làm ?</a>

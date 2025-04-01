@@ -18,6 +18,7 @@
     <link href="{{ asset('assets/css/stylecd4e.css') }}" id="stylesheet" rel="stylesheet" type="text/css">
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" /> --}}
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uicons@2.0.0/css/uicons-regular-rounded.min.css" /> --}}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     {{-- <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/perfect-scrollbar/1.5.5/css/perfect-scrollbar.min.css" /> --}}
@@ -29,7 +30,7 @@
         }
 
         .banner-slider {
-            width: 100vw;
+            width: 100%;
             overflow: visible;
         }
 

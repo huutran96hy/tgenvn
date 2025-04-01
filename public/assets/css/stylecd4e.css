@@ -123,7 +123,6 @@ video {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
   vertical-align: baseline;
 }
 
@@ -866,7 +865,7 @@ h4 {
 /*TYPOGRAPHY*/
 body {
   color: #05264E;
-  /* font-family: "Plus Jakarta Sans", sans-serif; */
+  font-family: 'Inter', sans-serif!important;
   font-size: 14px;
   line-height: 24px;
   font-style: normal;
@@ -3139,7 +3138,6 @@ ul li:last-child .card-list-4 {
   margin: 5px 0;
 }
 .header .main-menu li a {
-  /* font-family: "Plus Jakarta Sans", sans-serif; */
   font-style: normal;
   font-weight: 500;
   font-size: 14px;

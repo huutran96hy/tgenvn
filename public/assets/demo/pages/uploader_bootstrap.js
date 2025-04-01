@@ -41,9 +41,9 @@ const FileUpload = function() {
         const previewZoomButtonIcons = {
             prev: document.dir == 'rtl' ? '<i class="ph-arrow-right"></i>' : '<i class="ph-arrow-left"></i>',
             next: document.dir == 'rtl' ? '<i class="ph-arrow-left"></i>' : '<i class="ph-arrow-right"></i>',
-            rotate: '<i class="ph-arrow-clockwise"></i>',
+          
             toggleheader: '<i class="ph-arrows-down-up"></i>',
-            fullscreen: '<i class="ph-corners-out"></i>',
+           
             borderless: '<i class="ph-frame-corners"></i>',
             close: '<i class="ph-x"></i>'
         };
@@ -168,31 +168,15 @@ const FileUpload = function() {
 
         $('.file-input-preview').fileinput({
             browseLabel: 'Browse',
-            browseIcon: '<i class="ph-file-plus me-2"></i>',
-            uploadIcon: '<i class="ph-file-arrow-up me-2"></i>',
-            removeIcon: '<i class="ph-x fs-base me-2"></i>',
-            layoutTemplates: {
-                icon: '<i class="ph-check"></i>'
-            },
+            showUpload: false,
+            maxFileSize: 100,
             uploadClass: 'btn btn-light',
             removeClass: 'btn btn-light',
-            initialPreview: [
-                '../../../assets/images/demo/images/1.png',
-                '../../../assets/images/demo/images/2.png',
-            ],
-            initialPreviewConfig: [
-                {caption: 'Jane.jpg', size: 930321, key: 1, url: '{$url}', showDrag: false},
-                {caption: 'Anna.jpg', size: 1218822, key: 2, url: '{$url}', showDrag: false}
-            ],
-            initialPreviewAsData: true,
-            overwriteInitial: false,
-            maxFileSize: 100,
             previewZoomButtonClasses: previewZoomButtonClasses,
             previewZoomButtonIcons: previewZoomButtonIcons,
             fileActionSettings: fileActionSettings
         });
-
-
+       
         //
         // Display preview on load
         //

@@ -19,7 +19,7 @@
             </div>
         </section>
         <section class="section-box">
-            <div class="section-box wow animate__animated animate__fadeIn">
+            <div class="section-box wow animate__animated animate__fadeIn mt-20">
                 <div class="container">
                     <div class="text-center">
                         <h2 class="section-title mb-10 wow animate__animated animate__fadeInUp">
