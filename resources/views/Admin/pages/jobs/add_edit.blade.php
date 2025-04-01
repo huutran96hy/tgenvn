@@ -53,9 +53,9 @@
 
                     <div class="mb-3">
                         <label class="form-label">Lương</label>
-                        <input type="number" name="salary" class="form-control"
+                        <input type="text" name="salary" class="form-control"
                             value="{{ old('salary', $job->salary ?? '') }}">
-                        <small class="text-muted">Vui lòng điền số tiền lương (ví dụ: 10.000.000 VNĐ).</small>
+                        <small class="text-muted">Vui lòng điền số tiền lương (ví dụ: 10.000.000 VNĐ) hoặc ghi là thỏa thuận.</small>
                     </div>
 
 

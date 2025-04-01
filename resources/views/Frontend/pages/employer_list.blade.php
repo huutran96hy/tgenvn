@@ -122,7 +122,7 @@
                                                     <div class="image-box d-inline-block">
                                                         <a href="{{ route('employers.show', $employer->slug) }}">
                                                             <img src="{{ \App\Helpers\CustomHelper::logoSrc($employer->logo) }}"
-                                                                alt="{{ $employer->company_name }}">
+                                                                alt="{{ $employer->company_name }}" style="width: 85px; height: 85px; object-fit: contain;">
                                                         </a>
                                                     </div>
                                                     <h5 class="font-bold mt-2">

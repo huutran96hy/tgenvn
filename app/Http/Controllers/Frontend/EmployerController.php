@@ -14,7 +14,9 @@ class EmployerController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Employer::query()->withCount('jobs');
+        $query = Employer::query()->withCount(['jobs' => function ($query) {
+            $query->where('approval_status', 'approved');
+        }]);
 
         // Tìm kiếm theo từ khóa
         if ($request->has('keyword') && !empty($request->keyword)) {
@@ -75,7 +77,7 @@ class EmployerController extends Controller
     public function show($slug)
     {
         $employer = Employer::where('slug', $slug)->firstOrFail();
-        $latestJobs = $employer->jobs()->latest()->paginate(1);
+        $latestJobs = $employer->jobs()->where('approval_status', 'approved')->latest('created_at')->paginate(2);
 
         return view('Frontend.pages.employer_detail', compact('employer', 'latestJobs'));
     }

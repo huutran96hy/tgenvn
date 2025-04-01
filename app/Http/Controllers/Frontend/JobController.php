@@ -16,7 +16,7 @@ class JobController extends Controller
     public function index(Request $request)
     {
         $categories = JobCategory::all();
-        $query = Job::with('employer', 'skills', 'category');
+        $query = Job::with('employer', 'skills', 'category')->where('approval_status', 'approved');
 
         $sort = $request->input('sort', 'newest');
         if ($sort === 'oldest') {

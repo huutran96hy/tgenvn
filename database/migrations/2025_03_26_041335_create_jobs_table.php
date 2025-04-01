@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('required_education', 50)->nullable();
             $table->string('required_exp', 100)->nullable();
             $table->string('job_type', 30)->default('fulltime'); // Full-time, Part-time, Freelance, ...
-            $table->string('approval_status')->default('pending'); // approved , rejected, pending
+            $table->string('approval_status', 30)->default('pending'); // approved , rejected, pending
             $table->timestamps();
         });
     }
