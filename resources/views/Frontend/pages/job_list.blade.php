@@ -156,8 +156,9 @@
                                                 </a>
                                             </h6>
                                             <span class="location-small">{{ $job->location }}</span>
-                                            <div class="text-muted">
-                                                {{ \App\Helpers\NumberHelper::formatSalary($job->salary) }} | <div class="tags">
+
+                                            <div class="tags">
+                                                {{ \App\Helpers\NumberHelper::formatSalary($job->salary) }} |
                                                 @foreach ($job->skills as $skill)
                                                 <a class="btn btn-grey-small mr-5"
                                                     href="{{ route('jobs.index') }}">
@@ -165,7 +166,7 @@
                                                 </a>
                                                 @endforeach
                                             </div>
-                                                    </div>
+
                                         </div>
                                     </div>
 
