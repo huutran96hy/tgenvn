@@ -3,9 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Gate;
-use App\Models\User;
-use Illuminate\Support\Facades\DB;
+use App\Models\News;
 use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
@@ -31,8 +29,8 @@ class AppServiceProvider extends ServiceProvider
         //     return $user->role === 'admin';
         // });
 
-        // $theme = DB::table('config')->where('config_key', 'theme')
-        //     ->value('config_value') ?? 'light';
-        // View::share('theme', $theme);
+        View::composer('Frontend.layouts.footer', function ($view) {
+            $view->with('latestNews', News::latest()->limit(3)->get());
+        });
     }
 }

@@ -3,7 +3,8 @@
 @section('pageTitle', 'Danh sách công việc')
 
 @push('meta')
-    <meta name="description" content="Trang danh sách các công việc">
+    <meta name="description"
+        content="Tìm kiếm việc làm mới nhất từ các công ty hàng đầu. Danh sách việc làm hấp dẫn với nhiều cơ hội nghề nghiệp phù hợp cho bạn. Ứng tuyển ngay!">
 @endpush
 
 @section('content')

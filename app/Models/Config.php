@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Storage;
+
 class Config extends Model
 {
     use HasFactory;
@@ -32,6 +33,7 @@ class Config extends Model
     }
     public static function getIcon()
     {
-        return self::where('key', 'icon')->value('value') ?? 'default-icon.png';
+        $icon = self::where('key', 'icon')->value('value') ?? 'default-icon.png';
+        return 'storage/' . ltrim($icon, '/');
     }
 }

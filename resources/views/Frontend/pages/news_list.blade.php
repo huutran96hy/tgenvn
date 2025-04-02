@@ -3,7 +3,8 @@
 @section('pageTitle', 'Danh sách tin tức')
 
 @push('meta')
-    <meta name="description" content="Trang danh sách về blog">
+    <meta name="description"
+        content="Cập nhật tin tức mới nhất với những bài viết chất lượng về nhiều chủ đề hấp dẫn. Khám phá thông tin nóng hổi, phân tích chuyên sâu và xu hướng mới nhất.">
 @endpush
 
 @section('content')
@@ -18,7 +19,7 @@
                         </div>
                         <div class="col-lg-6 text-end">
                             <ul class="breadcrumbs mt-40">
-                                <li><a class="home-icon" href="{{route('index')}}">Trang chủ</a></li>
+                                <li><a class="home-icon" href="{{ route('index') }}">Trang chủ</a></li>
                                 <li>Tin tức</li>
                             </ul>
                         </div>

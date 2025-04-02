@@ -4,26 +4,32 @@
             <div class="header-left">
                 <div class="header-logo">
                     <a class="d-flex" href="{{ route('index') }}">
-                        <img alt="logo" src="{{ \App\Models\Config::getLogo() }}" width="25%" style="width:70px" /></a>
+                        <img alt="logo" src="{{ asset(\App\Models\Config::getLogo()) }}" width="25%"
+                            style="width:70px" /></a>
                 </div>
             </div>
             <div class="header-nav">
                 <nav class="nav-main-menu">
                     <ul class="main-menu">
                         <li>
-                            <a href="{{ route('index') }}" class="{{ Request::routeIs('index') ? 'active' : '' }}">Trang chủ</a>
+                            <a href="{{ route('index') }}" class="{{ Request::routeIs('index') ? 'active' : '' }}">Trang
+                                chủ</a>
                         </li>
                         <li>
-                            <a href="{{ route('jobs.index') }}" class="{{ Request::routeIs('jobs.*') ? 'active' : '' }}">Tin tuyển dụng</a>
+                            <a href="{{ route('jobs.index') }}"
+                                class="{{ Request::routeIs('jobs.*') ? 'active' : '' }}">Tin tuyển dụng</a>
                         </li>
                         <li>
-                            <a href="{{ route('employers.index') }}" class="{{ Request::routeIs('employers.*') ? 'active' : '' }}">Nhà tuyển dụng</a>
+                            <a href="{{ route('employers.index') }}"
+                                class="{{ Request::routeIs('employers.*') ? 'active' : '' }}">Nhà tuyển dụng</a>
                         </li>
                         <li>
-                            <a href="{{ route('news.index') }}" class="{{ Request::routeIs('news.*') ? 'active' : '' }}">Tin tức</a>
+                            <a href="{{ route('news.index') }}"
+                                class="{{ Request::routeIs('news.*') ? 'active' : '' }}">Tin tức</a>
                         </li>
                         <li>
-                            <a href="{{ route('contact.index') }}" class="{{ Request::routeIs('contact.index') ? 'active' : '' }}">Liên hệ</a>
+                            <a href="{{ route('contact.index') }}"
+                                class="{{ Request::routeIs('contact.index') ? 'active' : '' }}">Liên hệ</a>
                         </li>
                     </ul>
                 </nav>
@@ -86,12 +92,12 @@
                             <li><a href="page-404">404 Error</a></li>
                         </ul>
                         </li> --}}
-                        <li class="has-children"><a href="blog-grid">Tin tức</a>
-                            <ul class="sub-menu">
-                                <li><a href="{{ route('news.index') }}">Tin tức</a></li>
-                            </ul>
-                        </li>
-                        {{-- <li><a href="http://wp.alithemes.com/html/jobbox/demos/dashboard"
+                            <li class="has-children"><a href="blog-grid">Tin tức</a>
+                                <ul class="sub-menu">
+                                    <li><a href="{{ route('news.index') }}">Tin tức</a></li>
+                                </ul>
+                            </li>
+                            {{-- <li><a href="http://wp.alithemes.com/html/jobbox/demos/dashboard"
                                     target="_blank">Dashboard</a></li> --}}
                         </ul>
                     </nav>

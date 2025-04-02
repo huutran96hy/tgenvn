@@ -3,7 +3,8 @@
 @section('pageTitle', 'Chi tiết công ty - ' . $employer->company_name)
 
 @push('meta')
-    <meta name="description" content="{{ $employer->description }}">
+    <meta name="description"
+        content="{{ 'Khám phá thông tin chi tiết về ' . $employer->company_name . ', cơ hội nghề nghiệp và môi trường làm việc chuyên nghiệp.' }}">
 @endpush
 
 @section('content')

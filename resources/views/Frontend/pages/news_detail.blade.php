@@ -3,14 +3,17 @@
 @section('pageTitle', 'Chi tiết tin tức - ' . $news->title)
 
 @push('meta')
-    <meta name="description" content="{{ $news->summary }}">
+    <meta name="description"
+        content="{{ 'Đọc tin tức mới nhất: ' . $news->title . ' - Cập nhật thông tin nóng hổi, phân tích chuyên sâu và góc nhìn mới nhất.' }}">
 @endpush
 
 @section('content')
     <main class="main">
         <section class="section-box">
             <div>
-                <img class="cover-image-post" src="{{ asset('storage/' . $news->images) }}" alt="{{ $news->title }}" />
+                <img class="cover-image-post"
+                    src="{{ asset($news->images ? 'storage/' . $news->images : 'uploads/banner_thumb01.jpg') }}"
+                    alt="{{ $news->title }}" />
             </div>
         </section>
         <section class="section-box">

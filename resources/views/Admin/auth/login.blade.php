@@ -29,10 +29,10 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Email</label>
+                                    <label class="form-label">Username</label>
                                     <div class="form-control-feedback form-control-feedback-start">
-                                        <input type="text" name="email" class="form-control"
-                                            placeholder="john@doe.com">
+                                        <input type="text" name="username" class="form-control"
+                                            placeholder="john">
                                         <div class="form-control-feedback-icon">
                                             <i class="ph-user-circle text-muted"></i>
                                         </div>
@@ -43,7 +43,7 @@
                                     <label class="form-label">Password</label>
                                     <div class="form-control-feedback form-control-feedback-start">
                                         <input type="password" name="password" class="form-control"
-                                            placeholder="•••••••••••">
+                                            placeholder="••••••">
                                         <div class="form-control-feedback-icon">
                                             <i class="ph-lock text-muted"></i>
                                         </div>

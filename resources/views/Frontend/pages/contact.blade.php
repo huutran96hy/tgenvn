@@ -3,8 +3,10 @@
 @section('pageTitle', 'Trang liên hệ')
 
 @push('meta')
-    <meta name="description" content="Trang liên hệ">
+    <meta name="description"
+        content="Liên hệ với chúng tôi để được tư vấn, hỗ trợ nhanh chóng và giải đáp mọi thắc mắc. Đội ngũ chuyên gia của chúng tôi luôn sẵn sàng phục vụ bạn 24/7.">
 @endpush
+
 
 @section('content')
     <main class="main">
