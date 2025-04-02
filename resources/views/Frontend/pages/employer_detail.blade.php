@@ -186,9 +186,6 @@
                                     <li>SĐT: {{ $employer->contact_phone }}</li>
                                     <li>Email: {{ $employer->email }}</li>
                                 </ul>
-                                <div class="mt-30">
-                                    <a class="btn btn-send-message" href="{{ route('contact.index') }}">Gửi tin nhắn</a>
-                                </div>
                             </div>
                         </div>
                     </div>
