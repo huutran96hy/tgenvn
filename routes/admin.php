@@ -29,8 +29,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // Cần đăng nhập admin
     Route::middleware([AdminAccess::class])->group(function () {
-        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/get-theme', [ConfigController::class, 'getTheme'])->name('get.theme');
         Route::post('/change-theme', [ConfigController::class, 'changeTheme'])->name('change.theme');
 
