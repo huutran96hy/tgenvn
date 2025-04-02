@@ -9,7 +9,8 @@
 
         <div class="navbar-brand flex-1 flex-lg-0">
             <a href="{{ url('admin') }}" class="d-inline-flex align-items-center">
-                <img src="{{ asset(\App\Models\Config::getLogo()) }}" alt="">
+
+                <span class="fw-bold fs-5 ms-2" style="color:#fff">Admin FDI Work</span>
             </a>
         </div>
 
