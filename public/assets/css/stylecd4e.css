@@ -578,7 +578,7 @@ h6 {
 
 .font-lg {
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 26px;
 }
 
@@ -3142,14 +3142,14 @@ ul li:last-child .card-list-4 {
   font-weight: 500;
   font-size: 14px;
   line-height: 18px;
-  color: #05264E;
+  color: #ffffff;
   display: block;
   padding: 0px;
   text-decoration: none;
   position: relative;
 }
 .header .main-menu li a:hover, .header .main-menu li a.active {
-  color: #3C65F5;
+  color: #ffffff;
 }
 .header .main-menu li a:hover::before, .header .main-menu li a.active::before {
   content: "";

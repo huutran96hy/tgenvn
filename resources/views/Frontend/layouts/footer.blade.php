@@ -1,15 +1,15 @@
-<footer class="footer mt-50">
+<footer class="footer pt-50" style="background: #265c77;">
     <div class="container">
-        <div class="row">
+        <div class="row" style="background: #ffff;border-radius: 8px;padding: 10px;">
             <div class="footer-col-8 col-md-4 col-sm-12 mr-20">
                 <a href="{{ route('index') }}">
-                    <img alt="logo" src="{{ \App\Models\Config::getLogo() }}" width="50%" />
+                    <img alt="logo" src="{{ \App\Models\Config::getLogo() }}" width="50%" style="width:90px" />
                 </a>
                 <div class="mt-20 mb-20 font-xs color-text-paragraph-2">
-                    OCông ty cổ phần tập đoàn Ouransoft thành lập năm 2019. Với sự kết
+                    Công ty cổ phần FDI Work thành lập năm 2025. Với sự kết
                     hợp giữa các kỹ sư công nghệ và đội ngũ chuyên gia giàu kinh
-                    nghiệm, chúng tôi tự hào mang đến cho khách hàng các sản phẩm và
-                    dịch vụ phần mềm chất lượng cao.
+                    nghiệm, chúng tôi tự hào mang đến cho khách hàng các
+                    dịch vụ chất lượng cao.
                 </div>
             </div>
             <div class="footer-col-6 col-md-4 col-xs-6">
@@ -50,7 +50,7 @@
         <div class="footer-bottom mt-20">
             <div class="row">
                 <div class="col-md-12 col-sm-12 text-center">
-                    <span class="font-xs color-text-paragraph">Bản quyền&copy; 2025. ORSCorp</span>
+                    <span class="font-xs color-text-paragraph" style="color:#ffff">Bản quyền&copy; 2025. FDIWork</span>
                 </div>
             </div>
         </div>
