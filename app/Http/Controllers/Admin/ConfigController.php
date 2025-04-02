@@ -30,9 +30,9 @@ class ConfigController extends Controller
     {
         $validated = $request->validate([
             'value'   => 'sometimes|string',
-            'logo'    => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'icon'    => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'banners.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'logo'    => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'icon'    => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'banners.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         $fileKeys = ['logo' => 'logos', 'icon' => 'icons'];

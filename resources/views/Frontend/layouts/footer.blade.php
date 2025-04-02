@@ -1,7 +1,7 @@
 <footer class="footer mt-50">
     <div class="container">
         <div class="row">
-            <div class="footer-col-1 col-md-3 col-sm-12">
+            <div class="footer-col-8 col-md-4 col-sm-12 mr-20">
                 <a href="{{ route('index') }}">
                     <img alt="logo" src="{{ \App\Models\Config::getLogo() }}" width="50%" />
                 </a>
@@ -11,21 +11,8 @@
                     nghiệm, chúng tôi tự hào mang đến cho khách hàng các sản phẩm và
                     dịch vụ phần mềm chất lượng cao.
                 </div>
-                <div class="footer-social">
-                    <a class="icon-socials icon-facebook" href="#"></a><a class="icon-socials icon-twitter"
-                        href="#"></a><a class="icon-socials icon-linkedin" href="#"></a>
-                </div>
             </div>
-            <div class="footer-col-2 col-md-2 col-xs-6">
-                <h6 class="mb-20">Về chúng tôi</h6>
-                <ul class="menu-footer">
-                    <li><a href="#">Giới thiệu </a></li>
-                    <li><a href="#">Đội ngũ</a></li>
-                    <li><a href="#">Dự án hoàn thành</a></li>
-                    <li><a href="#">Liên hệ</a></li>
-                </ul>
-            </div>
-            <div class="footer-col-3 col-md-2 col-xs-6">
+            <div class="footer-col-6 col-md-4 col-xs-6">
                 <h6 class="mb-20">Tin tức</h6>
                 <ul class="menu-footer">
                     <li><a href="#">ORSCORP tuyển dụng Frontend</a></li>
@@ -34,22 +21,22 @@
                     <!-- <li><a href="#">FAQ</a></li> -->
                 </ul>
             </div>
-            <!-- <div class="footer-col-4 col-md-2 col-xs-6">
-            <h6 class="mb-20">Quick links</h6>
-            <ul class="menu-footer">
-              <li><a href="#">iOS</a></li>
-              <li><a href="#">Android</a></li>
-              <li><a href="#">Microsoft</a></li>
-              <li><a href="#">Desktop</a></li>
-            </ul>
-          </div>-->
-            <div class="footer-col-5 col-md-2 col-xs-6">
-                <h6 class="mb-20">Tư vấn</h6>
+
+            <div class="footer-col-6 col-md-4 col-xs-6">
+                <h6 class="mb-20">Liên kết</h6>
                 <ul class="menu-footer">
-                    <li><a href="#">Điều khoản và dịch vụ</a></li>
-                    <li><a href="#">Hỗ trợ</a></li>
-                    <li><a href="#">Bảo mật</a></li>
-                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Trang chủ</a></li>
+                    <li><a href="#">Tuyển dụng</a></li>
+                    <li><a href="#">Tin Tức</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col-6 col-md-4 col-xs-6">
+                <h6 class="mb-20">Liên kết</h6>
+                <div class="footer-social">
+                    <a class="icon-socials icon-facebook" href="#"></a><a class="icon-socials icon-twitter"
+                        href="#"></a><a class="icon-socials icon-linkedin" href="#"></a>
+                </div>
                 </ul>
             </div>
             <!-- <div class="footer-col-6 col-md-3 col-sm-12 flex-left">
@@ -60,17 +47,10 @@
                 alt="joxBox"></a><a href="#"><img alt="ORSCorp" src="assets/imgs/template/icons/android.png"></a></div>
         </div> -->
         </div>
-        <div class="footer-bottom mt-50">
+        <div class="footer-bottom mt-20">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12 col-sm-12 text-center">
                     <span class="font-xs color-text-paragraph">Bản quyền&copy; 2025. ORSCorp</span>
-                </div>
-                <div class="col-md-6 text-md-end text-start">
-                    <div class="footer-social">
-                        <a class="font-xs color-text-paragraph" href="#">Chính sách bảo mật</a><a
-                            class="font-xs color-text-paragraph mr-30 ml-30" href="#">Điều khoản dịch vụ</a><a
-                            class="font-xs color-text-paragraph" href="#">Bảo mật</a>
-                    </div>
                 </div>
             </div>
         </div>
