@@ -156,7 +156,6 @@
                                                 </a>
                                             </h6>
                                             <span class="location-small">{{ $job->location }}</span>
-
                                             <div class="tags">
                                                 {{ \App\Helpers\NumberHelper::formatSalary($job->salary) }} |
                                                 @foreach ($job->skills as $skill)
