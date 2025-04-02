@@ -8,7 +8,7 @@
 
 @section('content')
     <main class="main">
-        <section class="section-box-2">
+        <section class="section-box-2 pt-10">
             <div class="container">
                 <div class="banner-hero banner-single banner-single-bg">
                     <div class="block-banner text-center">

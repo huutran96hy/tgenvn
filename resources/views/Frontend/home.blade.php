@@ -38,7 +38,7 @@
                                         <a href="{{ route('jobs.index') }}">
                                             <div class="item-logo">
                                                 <img alt="{{ $employer->company_name }}" class="img-fluid d-block mx-auto"
-                                                    style="max-height: 25px; min-height: 20px; object-fit: contain;"
+                                                    style="max-height: 100px; min-height: 92px; object-fit: contain;"
                                                     src="{{ asset('storage/' . $employer->logo) }}" width="100%" />
                                             </div>
                                         </a>

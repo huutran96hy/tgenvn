@@ -48,12 +48,12 @@
                                 <li><a href="page-404">404 Error</a></li>
                             </ul>
                         </li> --}}
-                        <li class="has-children">
-                            <a href="blog-grid">Tin tức</a>
-                            <ul class="sub-menu">
+                        <li>
+                            <a href="{{ route('news.index') }}">Tin tức</a>
+                            <!-- <ul class="sub-menu">
                                 <li><a href="{{ route('news.index') }}">Tin tức</a></li>
                                 {{-- <li><a href="blog-details">Thông tin tuyển dụng</a></li> --}}
-                            </ul>
+                            </ul> -->
                         </li>
                         {{-- <li class="dashboard"><a href="http://wp.alithemes.com/html/ORSCorp/demos/dashboard"
                                 target="_blank">Dashboard</a></li> --}}
