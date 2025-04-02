@@ -139,7 +139,6 @@
                             <div class="avatar-sidebar">
                                 <div class="sidebar-info pl-0">
                                     <span class="sidebar-company">{{ $employer->company_name }}</span>
-                                    <span class="card-location">{{ $employer->address }}</span>
                                 </div>
                             </div>
                         </div>
