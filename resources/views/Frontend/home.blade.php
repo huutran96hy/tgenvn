@@ -39,7 +39,7 @@
                                 <a href="{{ route('employers.show', $employer->slug) }}">
                                     <div class="item-logo">
                                         <img alt="{{ $employer->company_name }}" class="img-fluid d-block mx-auto"
-                                            style="max-height: 100px; min-height: 92px; object-fit: contain;"
+                                            style="height: 92px; object-fit: contain;"
                                             src="{{ asset('storage/' . $employer->logo) }}" width="100%" />
                                     </div>
                                 </a>
