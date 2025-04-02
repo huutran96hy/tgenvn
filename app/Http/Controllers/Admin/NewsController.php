@@ -39,13 +39,8 @@ class NewsController extends Controller
             'author_id' => 'required|exists:users,id',
             'news_category_id' => 'required|exists:news_categories,news_category_id',
         ]);
-
-        $slug = $request->input('slug');
-
-        $slug = $this->getStorySlugExist($slug, News::class, 'slug', 'news_id');
+        $slug = $this->getStorySlugExist($request->input('slug'), News::class, 'slug', 'news_id');
         $validated['slug'] = $slug ?? '123456';
-        // $validated['slug'] = $slug;
-        // Lưu bgr-img
         $validated['published_date'] = date('Y-m-d',strtotime($request->input('published_date')));
         News::create($validated);
 
@@ -64,7 +59,7 @@ class NewsController extends Controller
         $validated =  $request->validate([
             'title' => 'required|string|max:255',
             'slug' => 'required',
-            'images' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'images' => 'nullable',
             'content' => 'required',
             'published_date' => 'required|date|date_format:Y-m-d',
             'status' => 'required|in:draft,published',
@@ -75,16 +70,6 @@ class NewsController extends Controller
 
         $slug = $this->getStorySlugExist($slug, News::class, 'slug', 'news_id', $news->news_id);
         $validated['slug'] = $slug;
-
-        if ($request->hasFile('images')) {
-            // Xóa images
-            if ($news->images) {
-                Storage::disk('public')->delete($news->images);
-            }
-            // Lưu images
-            $validated['images'] = $request->file('images')->store('news', 'public');
-        }
-
         $news->update($validated);
 
         return back()->with('success', 'News updated successfully.');
