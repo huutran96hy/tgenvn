@@ -243,7 +243,7 @@
                             <div class="author-single">
                                 <span>{{ $job->employer->company_name }}</span>
                             </div>
-                            <div class="single-apply-jobs">
+                            <!-- <div class="single-apply-jobs">
                                 <div class="row align-items-center">
                                     <div class="col-md-6"></div>
                                     <div class="col-md-6 text-end social-share">
@@ -259,7 +259,7 @@
                                                 src="{{ asset('assets/imgs/template/icons/share-whatsapp.svg') }}"></a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
