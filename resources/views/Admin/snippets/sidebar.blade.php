@@ -5,7 +5,7 @@
         <!-- Sidebar header -->
         <div class="sidebar-section">
             <div class="sidebar-section-body d-flex justify-content-center">
-                <h5 class="sidebar-resize-hide flex-grow-1 my-auto">Navigation</h5>
+                <h5 class="sidebar-resize-hide flex-grow-1 my-auto">Điều hướng</h5>
 
                 <div>
                     <button type="button"
@@ -35,16 +35,12 @@
                         <i class="ph-house"></i>
                         <span>
                             Dashboard
-                            <span class="d-block fw-normal opacity-50">No pending orders</span>
                         </span>
                     </a>
                 </li>
 
                 <!-- Tables -->
-                <li class="nav-item-header">
-                    <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Tables</div>
-                    <i class="ph-dots-three sidebar-resize-show"></i>
-                </li>
+                
                 {{-- Menu --}}
                 @include('Admin.snippets.menu')
 
