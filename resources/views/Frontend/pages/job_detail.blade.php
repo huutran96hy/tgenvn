@@ -247,7 +247,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-6"><a class="btn btn-default mr-15" href="#">Gửi CV</a><a
                                             class="btn btn-border" href="#">Lưu</a></div>
-                                    <div class="col-md-6 text-lg-end social-share">
+                                    <div class="col-md-6 text-end social-share">
                                         <h6 class="color-text-paragraph-2 d-inline-block d-baseline mr-10">Chia sẻ qua:
                                         </h6>
                                         <a class="mr-5 d-inline-block d-middle" href="#"><img alt="jobBox"
