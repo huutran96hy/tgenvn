@@ -1,6 +1,6 @@
 <footer class="footer pt-50" style="background: #265c77;">
     <div class="container">
-        <div class="row" style="background: #ffff;border-radius: 8px;padding: 10px;">
+        <div class="row" style="background: #ffff;border-radius: 8px;padding: 10px;margin:0;">
             <div class="footer-col-8 col-md-4 col-sm-12 mr-20">
                 <a href="{{ route('index') }}">
                     <img alt="logo" src="{{ asset(\App\Models\Config::getLogo()) }}" width="50%"
