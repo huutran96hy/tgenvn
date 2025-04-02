@@ -91,7 +91,7 @@
                                                         <div class="col-lg-6 col-6">
                                                             <div class="d-flex">
                                                                 <img class="img-rounded"
-                                                                    src="{{ asset($item->author->avatar) }}">
+                                                                    src="{{ asset('assets/images/demo/users/face9.jpg') }}">
                                                                 <div class="info-right-img">
                                                                     <span class="font-sm font-bold color-brand-1 op-70">
                                                                         {{ $item->author->name }}
