@@ -122,7 +122,7 @@
                                     </div>
                                     <div class="box-company-profile" style="padding-top:8px">
                                         <div class="image-compay" style="top: -70px">
-                                            <img style="width:125px;height:65px;border-radius:8px" src="{{ \App\Helpers\CustomHelper::logoSrc($employer->logo) }}" alt="jobbox">
+                                            <img style="width:125px;height:65px;border-radius:8px;object-fit: cover;background: #fff;padding: 10px;" src="{{ \App\Helpers\CustomHelper::logoSrc($employer->logo) }}" alt="jobbox">
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 text-start">
