@@ -6,7 +6,6 @@
         <div class="sidebar-section">
             <div class="sidebar-section-body d-flex justify-content-center">
                 <h5 class="sidebar-resize-hide flex-grow-1 my-auto">Điều hướng</h5>
-
                 <div>
                     <button type="button"
                         class="btn btn-flat-white btn-icon btn-sm rounded-pill border-transparent sidebar-control sidebar-main-resize d-none d-lg-inline-flex">
@@ -31,17 +30,14 @@
                     <i class="ph-dots-three sidebar-resize-show"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('admin') }}" class="nav-link active">
+                    <a href="{{ url('admin') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                        {{-- <i class="ph-house"></i> --}}
                         <i class="ph-house"></i>
                         <span>
                             Dashboard
                         </span>
                     </a>
                 </li>
-
-                <!-- Tables -->
-                
-                {{-- Menu --}}
                 @include('Admin.snippets.menu')
 
             </ul>

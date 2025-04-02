@@ -15,11 +15,6 @@
         </div>
 
         <ul class="nav flex-row justify-content-end order-1 order-lg-2">
-            <li class="nav-item ms-lg-2">
-                <a href="#" id="toggle-theme" class="navbar-nav-link navbar-nav-link-icon rounded-pill">
-                    <i id="theme-icon" class="fas fa-moon"></i>
-                </a>
-            </li>
             {{-- <li class="nav-item ms-lg-2">
                 <a href="#" class="navbar-nav-link navbar-nav-link-icon rounded-pill" data-bs-toggle="offcanvas"
                     data-bs-target="#notifications">
@@ -31,7 +26,7 @@
             <li class="nav-item nav-item-dropdown-lg dropdown ms-lg-2">
                 <a href="#" class="navbar-nav-link align-items-center rounded-pill p-1" data-bs-toggle="dropdown">
                     <div class="status-indicator-container">
-                        <img src="{{ asset('assets/images/demo/users/face11.jpg') }}" class="w-32px h-32px rounded-pill"
+                        <img src="{{ asset('assets/images/demo/users/face9.jpg') }}" class="w-32px h-32px rounded-pill"
                             alt="">
                         <span class="status-indicator bg-success"></span>
                     </div>

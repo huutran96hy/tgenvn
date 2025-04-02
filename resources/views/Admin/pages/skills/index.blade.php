@@ -9,7 +9,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Danh sách Kỹ Năng</h5>
-                <a href="{{ route('admin.skills.create') }}" class="btn btn-primary">+ Thêm</a>
+                <a href="{{ route('admin.skills.create') }}" class="btn btn-primary">Thêm mới</a>
             </div>
 
             <div class="card-body">

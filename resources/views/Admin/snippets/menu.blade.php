@@ -1,24 +1,45 @@
 @php
-    function isActive($route)
-    {
-        return request()->routeIs($route) ? 'active' : '';
-    }
+function isActive($route)
+{
+return request()->routeIs($route) ? 'active' : '';
+}
 
-    $menuItems = config('menu.admin_menu', []);
+$menuItems = config('menu.admin_menu', []);
 @endphp
 
 @foreach ($menuItems as $item)
-    <li class="nav-item {{ isset($item['children']) ? 'nav-item-submenu' : '' }}">
-        <a href="{{ isset($item['children']) ? '#' : route($item['route']) }}" class="nav-link">
+    @php
+        $hasChildren = isset($item['children']) && is_array($item['children']);
+        $isActive = false;
+
+        if ($hasChildren) {
+            foreach ($item['children'] as $child) {
+                if (request()->routeIs($child['route']) || request()->routeIs($child['route'] . '.*')) {
+                    $isActive = true;
+                    break;
+                }
+            }
+        } else {
+            $isActive = request()->routeIs($item['route']) || request()->routeIs($item['route'] . '.*');
+        }
+    @endphp
+
+    <li class="nav-item {{ $hasChildren ? 'nav-item-submenu' : '' }}">
+        <a href="{{ $hasChildren ? '#' : route($item['route']) }}"
+           class="nav-link {{ $isActive ? 'active' : '' }}">
             <i class="{{ $item['icon'] ?? '' }}"></i>
             <span>{{ $item['label'] }}</span>
         </a>
 
-        @if (isset($item['children']) && is_array($item['children']))
-            <ul class="nav-group-sub collapse">
+        @if ($hasChildren)
+            <ul class="nav-group-sub collapse {{ $isActive ? 'show' : '' }}">
                 @foreach ($item['children'] as $child)
+                    @php
+                        $childActive = request()->routeIs($child['route']) || request()->routeIs($child['route'] . '.*');
+                    @endphp
                     <li class="nav-item">
-                        <a href="{{ route($child['route']) }}" class="nav-link {{ isActive($child['route'] . '.*') }}">
+                        <a href="{{ route($child['route']) }}"
+                           class="nav-link {{ $childActive ? 'active' : '' }}">
                             {{ $child['label'] }}
                         </a>
                     </li>
