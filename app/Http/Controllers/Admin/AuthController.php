@@ -19,7 +19,7 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('username', 'password');
 
         // Chỉ cho phép đăng nhập nếu role là admin
         if (Auth::attempt($credentials)) {

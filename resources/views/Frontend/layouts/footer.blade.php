@@ -3,7 +3,8 @@
         <div class="row" style="background: #ffff;border-radius: 8px;padding: 10px;">
             <div class="footer-col-8 col-md-4 col-sm-12 mr-20">
                 <a href="{{ route('index') }}">
-                    <img alt="logo" src="{{ \App\Models\Config::getLogo() }}" width="50%" style="width:90px" />
+                    <img alt="logo" src="{{ asset(\App\Models\Config::getLogo()) }}" width="50%"
+                        style="width:90px" />
                 </a>
                 <div class="mt-20 mb-20 font-xs color-text-paragraph-2">
                     Công ty cổ phần FDI Work thành lập năm 2025. Với sự kết
@@ -15,10 +16,13 @@
             <div class="footer-col-6 col-md-4 col-xs-6">
                 <h6 class="mb-20">Tin tức</h6>
                 <ul class="menu-footer">
-                    <li><a href="#">ORSCORP tuyển dụng Frontend</a></li>
-                    <li><a href="#">Viettel tuyển dụng kỹ sư lái UAV</a></li>
-                    <li><a href="#">Hợp tác chuyển đổi số </a></li>
-                    <!-- <li><a href="#">FAQ</a></li> -->
+                    @foreach ($latestNews as $news)
+                        <li>
+                            <a href="{{ route('news.show', $news->slug) }}">
+                                {{ $news->title }}
+                            </a>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
 
@@ -71,18 +75,12 @@
                 </div>
                 <form id="applyJobForm" class="login-register text-start mt-20 pb-30" action="#"
                     enctype="multipart/form-data">
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label class="form-label" for="input-1"> <strong class="text-danger">*</strong> Họ và
                             Tên</label>
                         <input class="form-control" id="input-1" type="text" required="" name="full_name"
                             placeholder="Nhập họ và tên">
                     </div>
-                    {{-- <div class="form-group">
-                        <label class="form-label" for="input-2"><strong class="text-danger">*</strong>
-                            Email</label>
-                        <input class="form-control" id="input-2" type="email" required=""
-                            name="emailaddress" placeholder="Nhập email">
-                    </div> --}}
                     <div class="form-group">
                         <label class="form-label" for="number"><strong class="text-danger">*</strong> Số điện
                             thoại</label>
@@ -99,7 +97,7 @@
                         <label class="form-label" for="education">Học vấn</label>
                         <input class="form-control" id="education" type="text" required="" name="education"
                             placeholder="Học vấn">
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label class="form-label" for="file">Gửi CV lên</label>
                         <input class="form-control" id="file" name="resume" type="file">
