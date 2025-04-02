@@ -21,13 +21,13 @@
 
                 <div class="mb-3">
                     <label class="form-label">Tiêu đề</label>
-                    <input type="text" name="title" class="form-control"
+                    <input type="text" name="title" class="form-control text-to-slug"
                         value="{{ old('title', $news->title ?? '') }}" required>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Slug</label>
-                    <input type="text" name="slug" class="form-control"
+                    <input type="text" name="slug" class="form-control text-to-slug"
                         value="{{ old('slug', $employer->slug ?? '') }}" readonly>
                 </div>
 
@@ -65,7 +65,7 @@
                     <label class="form-label">Ngày xuất bản</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="ph-calendar"></i></span>
-                        <input type="text" name="published_date" class="form-control datepicker-basic"
+                        <input type="text" name="published_date" class="form-control datepicker-autohide"
                             value="{{ old('published_date', $news->published_date ?? '') }}" required>
                     </div>
                 </div>
@@ -125,7 +125,7 @@
 <script src="../../../assets/js/vendor/ui/moment/moment.min.js"></script>
 <script src="../../../assets/js/vendor/pickers/daterangepicker.js"></script>
 <script src="../../../assets/js/vendor/pickers/datepicker.min.js"></script>
-<script src="../../../assets/demo/pages/picker_date.js"></script>
+{{-- <script src="../../../assets/demo/pages/picker_date.js"></script> --}}
 
 <script>
     $(document).ready(function() {
@@ -273,14 +273,8 @@
                             'insertImageFromLfm', '|',
                             'undo', 'redo', '|',
                             'bulletedList', 'numberedList', '|',
-                            'alignment', '|',
                             'blockQuote', 'insertTable', '|',
-                            'fontSize', 'fontColor', 'fontBackgroundColor', '|',
-                            'indent', 'outdent', '|',
-                            'horizontalLine', 'specialCharacters', '|',
-                            'codeBlock', 'code', '|',
-                            'sourceEditing', '|',
-                            'removeFormat', '|',
+                            'indent', 'outdent', '|'
                         ]
                     }
                 })
@@ -353,7 +347,7 @@
             $('.text-to-slug[name="slug"]').val(slug);
         });
 
-        @if(isset($job))
+        @if(isset($news))
         var initialName = $('.text-to-slug[name="title"]').val();
         if (initialName) {
             var initialSlug = slugify(initialName);

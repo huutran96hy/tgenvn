@@ -11,7 +11,6 @@ use App\Http\Controllers\Frontend\{
     HomeController,
     JobDetailController
 };
-use UniSharp\LaravelFilemanager\Lfm;
 
 require __DIR__ . '/admin.php';
 

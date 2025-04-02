@@ -81,12 +81,12 @@
                         if (xhr.responseJSON.message) {
                             errorMessage += "Thông báo: " + xhr.responseJSON.message + "\n";
                         }
-                        if (xhr.responseJSON.errors) {
-                            errorMessage += "Chi tiết:\n";
-                            $.each(xhr.responseJSON.errors, function(key, value) {
-                                errorMessage += "- " + value + "\n";
-                            });
-                        }
+                        // if (xhr.responseJSON.errors) {
+                        //     errorMessage += "Chi tiết:\n";
+                        //     $.each(xhr.responseJSON.errors, function(key, value) {
+                        //         errorMessage += "- " + value + "\n";
+                        //     });
+                        // }
                     } else {
                         errorMessage += "Lỗi không xác định!";
                     }
