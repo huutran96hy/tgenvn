@@ -1482,6 +1482,7 @@ label {
 }
 .box-swiper .swiper-container .item-logo img {
   max-width: 100%;
+  padding: 15px;
 }
 .box-swiper .swiper-container .item-logo:hover {
   border: 1px solid #B4C0E0;
