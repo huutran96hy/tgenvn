@@ -30,13 +30,11 @@ class NewsController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'slug' => 'required',
-            'images' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'images' => 'nullable',
             'content' => 'required',
-            'published_date' => 'required|date|date_format:Y-m-d',
+            'published_date' => 'required',
             'status' => 'required|in:draft,published',
             'author_id' => 'required|exists:users,id',
             'news_category_id' => 'required|exists:news_categories,news_category_id',
@@ -45,13 +43,10 @@ class NewsController extends Controller
         $slug = $request->input('slug');
 
         $slug = $this->getStorySlugExist($slug, News::class, 'slug', 'news_id');
-        $validated['slug'] = $slug;
-
+        $validated['slug'] = $slug ?? '123456';
+        // $validated['slug'] = $slug;
         // Lưu bgr-img
-        if ($request->hasFile('images')) {
-            $validated['images'] = $request->file('images')->store('news', 'public');
-        }
-
+        $validated['published_date'] = date('Y-m-d',strtotime($request->input('published_date')));
         News::create($validated);
 
         return redirect()->route('admin.news.index')->with('success', 'News created successfully.');

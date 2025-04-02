@@ -47,8 +47,9 @@
                     </div>
                     @endif
                 </div> -->
-                <div class="file-input-wrapper">
-                    <input type="hidden" name="images" class="all-images" value='@json($imageUrls ?? [])'>
+                <div class="file-input-wrapper mb-3">
+                    <label class="form-label">Hình ảnh</label>
+                    <input type="hidden" name="images" class="all-images" value="{{$news->images ?? ''}}">
 
                     <!-- Vẫn giữ input file nhưng dùng để trigger popup -->
                     <input type="file" class="file-input-preview" data-browse-on-zone-click="true">
@@ -137,15 +138,15 @@
 
             // Hàm khởi tạo lại fileinput preview
             function renderPreviews(images) {
-                $previewInput.fileinput('destroy'); // Xoá instance cũ
+                $previewInput.fileinput('destroy');
 
                 $previewInput.fileinput({
                     initialPreview: images,
-                    initialPreviewConfig: images.map(url => ({
-                        caption: url.split('/').pop(),
-                        key: url,
-                        downloadUrl: url
-                    })),
+                    initialPreviewConfig: {
+                        caption: images,
+                        key: images,
+                        downloadUrl: images
+                    },
                     showRemove: false,
                     showUpload: false,
                     showCancel: false,
@@ -153,8 +154,7 @@
                     showZoom: true,
                     showBrowse: false,
                     initialPreviewAsData: true,
-                    overwriteInitial: false,
-                    showUpload: false,
+                    overwriteInitial: true, // ❗ Quan trọng: Ghi đè ảnh cũ
                     browseOnZoneClick: true,
                     dropZoneEnabled: false,
                     showBrowse: true,
@@ -178,7 +178,7 @@
                 e.preventDefault();
             });
 
-            // ✅ 2. Mở popup Laravel Filemanager khi click Browse
+            // ✅ Mở popup Laravel Filemanager khi click Browse
             $wrapper.on('click', '.btn-file input[type=file]', function(e) {
                 e.preventDefault();
 
@@ -186,28 +186,20 @@
 
                 window.SetUrl = function(files) {
                     const items = Array.isArray(files) ? files : [files];
+                    const url = items[0]?.url;
+                    console.log(url);
+                    if (!url) return;
 
-                    items.forEach(file => {
-                        const url = file.url;
-                        if (allImages.includes(url)) return;
-
-                        allImages.push(url);
-                    });
-
-                    // Cập nhật input hidden và trigger sự kiện change
+                    allImages = url; // ❗ Chỉ lấy 1 ảnh
                     $hiddenInput.val(JSON.stringify(allImages)).trigger('change');
                 };
             });
 
-            // ✅ 3. Khi xoá ảnh từ preview
+            // ✅ Khi xoá ảnh
             $wrapper.on('click', '.kv-file-remove', function(e) {
                 e.preventDefault();
-                const $frame = $(this).closest('.file-preview-frame');
-                const src = $frame.find('img').attr('src');
-
-                allImages = allImages.filter(url => url !== src);
+                allImages = [];
                 $hiddenInput.val(JSON.stringify(allImages)).trigger('change');
-                $frame.remove();
             });
 
             $hiddenInput.on('change', function() {
