@@ -1834,6 +1834,9 @@ label {
   padding: 0px 0px 0px 20px;
   background: url(https://jobbox.archielite.com/themes/jobbox/imgs/template/icons/location.svg) no-repeat 0px 6px;
   line-height: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card-grid-2 {
