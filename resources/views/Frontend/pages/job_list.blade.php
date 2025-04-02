@@ -65,14 +65,14 @@
                                 <div class="row">
                                     <div class="col-xl-6 col-lg-5">
                                         <span class="text-small text-showing">
-                                            Showing <strong>{{ $jobs->firstItem() }}-{{ $jobs->lastItem() }}</strong> of
-                                            <strong>{{ $jobs->total() }}</strong> jobs
+                                            Hiển thị <strong>{{ $jobs->firstItem() }}-{{ $jobs->lastItem() }}</strong> trên
+                                            <strong>{{ $jobs->total() }}</strong> công việc
                                         </span>
                                     </div>
                                     <div class="col-xl-6 col-lg-7 text-end mt-sm-15">
                                         <div class="display-flex2">
                                             <div class="box-border mr-10">
-                                                <span class="text-sortby">Show:</span>
+                                                <span class="text-sortby">Hiển thị:</span>
                                                 <div class="dropdown dropdown-sort">
                                                     <button class="btn dropdown-toggle" id="dropdownSort" type="button"
                                                         data-bs-toggle="dropdown">

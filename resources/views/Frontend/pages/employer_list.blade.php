@@ -48,7 +48,7 @@
                                     <div class="col-xl-6 col-lg-5">
                                         <span class="text-small text-showing">Hiển thị
                                             <strong>{{ $employers->firstItem() }}-{{ $employers->lastItem() }} </strong>trên
-                                            <strong>{{ $employers->total() }} </strong>công việc</span>
+                                            <strong>{{ $employers->total() }} </strong>nhà tuyển dụng</span>
                                     </div>
                                     <div class="col-xl-6 col-lg-7 text-end mt-sm-15">
                                         <div class="display-flex2">
