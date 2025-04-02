@@ -121,9 +121,9 @@
                                 </div>
                             </div>
                             <div class="border-bottom pt-10 pb-10"></div>
-                            <div class="banner-hero banner-image-single mt-10 mb-20">
+                            <!-- <div class="banner-hero banner-image-single mt-10 mb-20">
                                 <img src="{{ asset('assets/imgs/page/job-single-2/img.png') }}" alt="jobBox">
-                            </div>
+                            </div> -->
                             <div class="job-overview">
                                 <h5 class="border-bottom pb-15 mb-30">Giới thiệu</h5>
                                 <div class="row">
