@@ -30,11 +30,11 @@ class CandidateController extends Controller
         // }
 
         $validated = $request->validate([
-            'full_name' => 'required|string',
-            'phone' => 'required|string',
-            'address' => 'required|string',
-            'resume' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'education' => 'nullable|string',
+            // 'full_name' => 'required|string',
+            // 'phone' => 'required|string',
+            // 'address' => 'required|string',
+            // 'education' => 'nullable|string',
+            'resume' => 'required|file|mimes:pdf,doc,docx|max:2048',
         ]);
 
         // $validated['user_id'] = auth()->id();
@@ -44,7 +44,7 @@ class CandidateController extends Controller
             $validated['resume'] = $request->file('resume')->store('resumes', 'public');
         }
 
-        $candidate = Candidate::create($validated);
+        Candidate::create($validated);
 
         return response()->json([
             'success' => true,
@@ -66,11 +66,11 @@ class CandidateController extends Controller
     public function update(Request $request, Candidate $candidate)
     {
         $validated = $request->validate([
-            'full_name' => 'sometimes|string',
-            'phone' => 'sometimes|string',
-            'address' => 'sometimes|string',
-            'resume' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'education' => 'sometimes|string',
+            // 'full_name' => 'sometimes|string',
+            // 'phone' => 'sometimes|string',
+            // 'address' => 'sometimes|string',
+            // 'education' => 'sometimes|string',
+            'resume' => 'required|file|mimes:pdf,doc,docx|max:2048',
         ]);
 
         if ($request->hasFile('resume')) {
