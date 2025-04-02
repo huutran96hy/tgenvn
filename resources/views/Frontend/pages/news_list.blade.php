@@ -83,9 +83,9 @@
                                                         {{ $item->title }}
                                                     </a>
                                                 </h5>
-                                                <p class="mt-10 color-text-paragraph font-sm">
+                                                <!-- <span class="mt-10 color-text-paragraph font-sm">
                                                     {!! Str::limit($item->content, 50) !!}
-                                                </p>
+                                                </span> -->
                                                 <div class="card-2-bottom mt-20">
                                                     <div class="row">
                                                         <div class="col-lg-6 col-6">
