@@ -261,7 +261,7 @@
                                     </div>
                                 </div> --}}
                                 <div class="filter-block mb-20">
-                                    <h5 class="medium-heading mb-25">Salary Range</h5>
+                                    <h5 class="medium-heading mb-25">Mức lương</h5>
                                     <div class="form-group mb-20">
                                         <select id="salary_range">
                                             <option value="">Chọn mức lương</option>
