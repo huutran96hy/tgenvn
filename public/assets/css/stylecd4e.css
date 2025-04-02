@@ -1471,7 +1471,7 @@ label {
 }
 .box-swiper .swiper-container .item-logo {
   border: 1px solid rgba(6, 18, 36, 0.1);
-  padding: 0;
+  padding: 10px;
   display: flex;
   width: 100%;
   text-align: left;
@@ -3402,7 +3402,9 @@ ul li:last-child .card-list-4 {
 .mobile-header-wrapper-style .mobile-header-wrapper-inner .mobile-header-content-area .mobile-menu-wrap nav .mobile-menu li {
   display: block;
   position: relative;
-  padding: 13px 0;
+  padding: 8px 8px;
+  margin-bottom: 8px;
+  background: #efefef;
 }
 .mobile-header-wrapper-style .mobile-header-wrapper-inner .mobile-header-content-area .mobile-menu-wrap nav .mobile-menu li.hr {
   display: none;
@@ -3595,6 +3597,9 @@ ul li:last-child .card-list-4 {
   top: 21px !important;
   right: 15px;
 }
+.burger-icon.burger-close > span::before,.burger-icon.burger-close > span::after  {
+  background-color: #05264E!important;
+}
 .burger-icon.burger-close > span.burger-icon-top {
   display: none;
   opacity: 0;
@@ -3621,7 +3626,7 @@ ul li:last-child .card-list-4 {
 
 .burger-icon.burger-icon-white > span::before,
 .burger-icon.burger-icon-white > span::after {
-  background-color: #4F5E64;
+  background-color: #ffffff;
 }
 
 .mobile-search form {
@@ -7977,6 +7982,9 @@ ul li:last-child .card-list-4 {
   .swiper-style-2 .item-5 {
     width: 50%;
   }
+  .header-logo a img {
+    width: 38px!important;
+  }
   .footer .footer-col-1,
   .footer .footer-col-2,
   .footer .footer-col-3,
@@ -8129,6 +8137,9 @@ ul li:last-child .card-list-4 {
   .footer .footer-col-5,
   .footer .footer-col-6 {
     width: 100%;
+  }
+  .header-logo a img {
+    width: 38px!important;
   }
   .box-we-hiring .text-2 {
     text-align: center;
@@ -8308,6 +8319,9 @@ ul li:last-child .card-list-4 {
 @media (max-width: 484.98px) {
   .swiper-style-2 .item-5 {
     width: 100%;
+  }
+  .header-logo a img {
+    width: 38px!important;
   }
   .text-sortby {
     display: none;

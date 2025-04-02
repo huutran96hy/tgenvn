@@ -69,7 +69,7 @@
                                             <strong>{{ $jobs->total() }}</strong> jobs
                                         </span>
                                     </div>
-                                    <div class="col-xl-6 col-lg-7 text-lg-end mt-sm-15">
+                                    <div class="col-xl-6 col-lg-7 text-end mt-sm-15">
                                         <div class="display-flex2">
                                             <div class="box-border mr-10">
                                                 <span class="text-sortby">Show:</span>

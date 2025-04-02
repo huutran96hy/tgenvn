@@ -46,73 +46,22 @@
     <div class="mobile-header-wrapper-inner">
         <div class="mobile-header-content-area">
             <div class="perfect-scroll">
-                <div class="mobile-search mobile-header-border mb-30">
-                    <form action="#">
-                        <input type="text" placeholder="Search…"><i class="fi-rr-search"></i>
-                    </form>
-                </div>
                 <div class="mobile-menu-wrap mobile-header-border">
                     <!-- mobile menu start-->
                     <nav>
                         <ul class="mobile-menu font-heading">
-                            <li class="has-children"><a class="active" href="{{ route('index') }}">Home</a>
-                                <ul class="sub-menu">
-                                    <li><a href="{{ route('index') }}">Home 1</a></li>
-                                </ul>
+                            <li><a class="active" href="{{ route('index') }}">Trang chủ</a>
                             </li>
-                            {{-- <li class="has-children"><a href="jobs-grid">Find a Job</a>
-                                <ul class="sub-menu">
-                                    <li><a href="jobs-grid">Jobs Grid</a></li>
-                                    <li><a href="jobs-list">Jobs List</a></li>
-                                    <li><a href="job-details">Jobs Details</a></li>
-                                    <li><a href="job-details-2">Jobs Details 2</a></li>
-                                </ul>
-                            </li> --}}
-                            <li class="has-children"><a href="companies-grid">Tuyển dụng</a>
-                                <ul class="sub-menu">
-                                    <li><a href="{{ route('jobs.index') }}">Danh sách công việc</a></li>
-                                    <li><a href="{{ route('employers.index') }}">Danh sách công ty</a></li>
-                                </ul>
+                            <li><a href="{{ route('jobs.index') }}">Tin tuyển dụng</a>
                             </li>
-                            {{-- <li class="has-children"><a href="candidates-grid">Candidates</a>
-                                <ul class="sub-menu">
-                                    <li><a href="candidates-grid">Candidates Grid</a></li>
-                                    <li><a href="candidate-details">Candidate Details</a></li>
-                                </ul>
-                            </li> --}}
-                            {{-- <li class="has-children"><a href="blog-grid">Pages</a>
-                                <ul class="sub-menu">
-                                    <li><a href="page-about">About Us</a></li>
-                                    <li><a href="page-pricing">Pricing Plan</a></li>
-                                    <li><a href="{{ route('contact.index') }}">Contact Us</a></li>
-                            <li><a href="page-register">Register</a></li>
-                            <li><a href="page-signin">Signin</a></li>
-                            <li><a href="page-reset-password">Reset Password</a></li>
-                            <li><a href="page-content-protected">Content Protected</a></li>
-                            <li><a href="page-404">404 Error</a></li>
-                        </ul>
-                        </li> --}}
-                            <li class="has-children"><a href="blog-grid">Tin tức</a>
-                                <ul class="sub-menu">
-                                    <li><a href="{{ route('news.index') }}">Tin tức</a></li>
-                                </ul>
+                            <li><a href="{{ route('employers.index') }}" class="{{ Request::routeIs('employers.*') ? 'active' : '' }}">Nhà tuyển dụng</a>
                             </li>
-                            {{-- <li><a href="http://wp.alithemes.com/html/jobbox/demos/dashboard"
-                                    target="_blank">Dashboard</a></li> --}}
+                            <li><a href="{{ route('news.index') }}">Tin tức</a>
+                            </li>
+                            <li><a href="{{ route('contact.index') }}">Liên hệ</a>
                         </ul>
                     </nav>
                 </div>
-                {{-- <div class="mobile-account">
-                    <h6 class="mb-10">Your Account</h6>
-                    <ul class="mobile-menu font-heading">
-                        <li><a href="#">Profile</a></li>
-                        <li><a href="#">Work Preferences</a></li>
-                        <li><a href="#">Account Settings</a></li>
-                        <li><a href="#">Go Pro</a></li>
-                        <li><a href="page-signin">Sign Out</a></li>
-                    </ul>
-                </div> --}}
-                <div class="site-copyright">Copyright 2022 &copy; JobBox.<br>Designed by OuranSoft.</div>
             </div>
         </div>
     </div>

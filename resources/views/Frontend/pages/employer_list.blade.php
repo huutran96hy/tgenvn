@@ -50,7 +50,7 @@
                                             <strong>{{ $employers->firstItem() }}-{{ $employers->lastItem() }} </strong>trên
                                             <strong>{{ $employers->total() }} </strong>công việc</span>
                                     </div>
-                                    <div class="col-xl-6 col-lg-7 text-lg-end mt-sm-15">
+                                    <div class="col-xl-6 col-lg-7 text-end mt-sm-15">
                                         <div class="display-flex2">
                                             <div class="box-border mr-10">
                                                 <span class="text-sortby">Hiển thị:</span>
@@ -141,7 +141,7 @@
                                                                 class="card-location d-block">{{ $employer->address }}</span>
                                                         </p>
                                                     </div>
-                                                    <div class="col-lg-12 col-md-12 text-lg-end p-0 mb-2"><a
+                                                    <div class="col-lg-12 col-md-12 text-end p-0 mb-2"><a
                                                             class="btn btn-apply btn-apply-big"
                                                             href="{{ route('employers.show', $employer->slug) }}"
                                                             style="padding: 15px 25px">{{ $employer->jobs_count }} Công
