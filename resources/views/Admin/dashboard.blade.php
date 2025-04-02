@@ -8,7 +8,7 @@
     <div class="content">
 
         <!-- Main charts -->
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-xl-7">
 
                 <!-- Traffic sources -->
@@ -121,7 +121,7 @@
                 </div>
                 <!-- /sales stats -->
             </div>
-        </div>
+        </div> --}}
         <!-- /main charts -->
     </div>
 @endsection

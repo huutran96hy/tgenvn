@@ -9,12 +9,11 @@
 
         <div class="navbar-brand flex-1 flex-lg-0">
             <a href="{{ url('admin') }}" class="d-inline-flex align-items-center">
-                <img src="https://themes.kopyov.com/limitless/demo/template/assets/images/logo_icon.svg" alt="">
-                <img src="https://themes.kopyov.com/limitless/demo/template/assets/images/logo_text_light.svg"
-                    class="d-none d-sm-inline-block h-16px ms-3" alt="">
+                <img src="{{ asset(\App\Models\Config::getLogo()) }}" alt="">
+                {{-- <img src="https://themes.kopyov.com/limitless/demo/template/assets/images/logo_text_light.svg"
+                    class="d-none d-sm-inline-block h-16px ms-3" alt=""> --}}
             </a>
         </div>
-
 
         <ul class="nav flex-row justify-content-end order-1 order-lg-2">
             <li class="nav-item ms-lg-2">
@@ -61,7 +60,7 @@
                     <a href="#" class="dropdown-item"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="ph-sign-out me-2"></i>
-                        Logout
+                        Đăng xuất
                     </a>
                 </div>
             </li>

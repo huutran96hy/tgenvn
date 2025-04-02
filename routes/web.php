@@ -13,9 +13,6 @@ use App\Http\Controllers\Frontend\{
 };
 use UniSharp\LaravelFilemanager\Lfm;
 
-
-
-
 require __DIR__ . '/admin.php';
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
@@ -49,6 +46,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function ()
     // list all lfm routes here...
 
 });
+
 Route::group(['prefix' => 'admin/laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });

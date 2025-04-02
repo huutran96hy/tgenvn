@@ -31,7 +31,7 @@ class JobCategoryController extends Controller
     {
         $validated = $request->validate([
             'category_name' => 'required|unique:job_categories,category_name|max:255',
-            'description' => 'nullable|max:500',
+            'description' => 'nullable',
         ]);
 
         JobCategory::create($validated);
@@ -48,7 +48,7 @@ class JobCategoryController extends Controller
     {
         $validated = $request->validate([
             'category_name' => 'required|unique:job_categories,category_name,' . $jobCategory->category_id . ',category_id|max:255',
-            'description' => 'nullable|max:500',
+            'description' => 'nullable',
         ]);
 
         $jobCategory->update($validated);

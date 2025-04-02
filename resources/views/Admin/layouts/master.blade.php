@@ -54,7 +54,7 @@
     @include('Admin.layouts.notifications')
 
     <!-- Demo config (nếu cần) -->
-    @include('Admin.layouts.demo_config')
+    {{-- @include('Admin.layouts.demo_config') --}}
 
     <!-- Footer -->
     {{-- @include('Admin.layouts.footer') --}}
