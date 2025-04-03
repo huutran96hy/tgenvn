@@ -9,6 +9,7 @@ use App\Models\NewsCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Traits\SlugCheck;
+use Carbon\Carbon;
 
 class NewsController extends Controller
 {
@@ -44,30 +45,19 @@ class NewsController extends Controller
 
         $slug = $this->getStorySlugExist($slug, News::class, 'slug', 'news_id');
         $validated['slug'] = $slug;
-
-        $validated['published_date'] = date('Y-m-d', strtotime($request->input('published_date')));
-
-        if ($request->has('images') && !empty($request->input('images'))) {
-            $imagePaths = json_decode($request->input('images')); // Giải mã mảng JSON
-
-            // Nếu mảng không rỗng, lấy ảnh đầu tiên
-            $imagePath = isset($imagePaths[0]) ? $imagePaths[0] : null;
-
-            // Kiểm tra nếu có ảnh, lưu vào cơ sở dữ liệu
-            if ($imagePath) {
-                $validated['images'] = $imagePath; // Lưu đường dẫn ảnh đầu tiên vào cơ sở dữ liệu
-            }
-        }
-
+        $validated['published_date'] = Carbon::createFromFormat('d/m/Y', $request->input('published_date'))->format('Y-m-d');
+        $validated['images'] = str_replace(env('APP_URL') . '/', '', $validated['images']);
         News::create($validated);
 
-        return redirect()->route('admin.news.index')->with('success', 'News created successfully.');
+        return redirect()->route('admin.news.index')->with('success', 'Thêm mới thành công.');
     }
 
     public function edit(News $news)
     {
         $categories = NewsCategory::all();
         $users = User::all();
+        $news->images = env('APP_URL') . '/' . $news->images;
+        $news->published_date = Carbon::createFromFormat('Y-m-d', $news->published_date)->format('d/m/Y');
         return view('Admin.pages.news.add_edit', compact('news', 'categories', 'users'));
     }
 
@@ -78,29 +68,25 @@ class NewsController extends Controller
             'slug' => 'required',
             'images' => 'nullable',
             'content' => 'required',
-            'published_date' => 'required|date|date_format:Y-m-d',
             'status' => 'required|in:draft,published',
             'news_category_id' => 'required|exists:news_categories,news_category_id',
         ]);
 
         $slug = $request->input('slug');
-
         $slug = $this->getStorySlugExist($slug, News::class, 'slug', 'news_id', $news->news_id);
         $validated['slug'] = $slug;
-
+        $validated['images'] = str_replace(env('APP_URL') . '/', '', $validated['images']);
+        $validated['published_date'] = Carbon::createFromFormat('d/m/Y', $request->input('published_date'))->format('Y-m-d');
         $news->update($validated);
-
-        return back()->with('success', 'News updated successfully.');
+        return back()->with('success', 'Cập nhật thành công.');
     }
 
     public function destroy(News $news)
     {
-        // Xóa iamges
         if ($news->images) {
             Storage::disk('public')->delete($news->images);
         }
-
         $news->delete();
-        return back()->with('success', 'News deleted successfully.');
+        return back()->with('success', 'Xoá thành công.');
     }
 }
