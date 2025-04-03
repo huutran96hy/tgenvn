@@ -47,17 +47,17 @@ class NewsController extends Controller
 
         $validated['published_date'] = date('Y-m-d', strtotime($request->input('published_date')));
 
-        if ($request->has('images') && !empty($request->input('images'))) {
-            $imagePaths = json_decode($request->input('images')); // Giải mã mảng JSON
+        // if ($request->has('images') && !empty($request->input('images'))) {
+        //     $imagePaths = json_decode($request->input('images')); // Giải mã mảng JSON
 
-            // Nếu mảng không rỗng, lấy ảnh đầu tiên
-            $imagePath = isset($imagePaths[0]) ? $imagePaths[0] : null;
+        //     // Nếu mảng không rỗng, lấy ảnh đầu tiên
+        //     $imagePath = isset($imagePaths[0]) ? $imagePaths[0] : null;
 
-            // Kiểm tra nếu có ảnh, lưu vào cơ sở dữ liệu
-            if ($imagePath) {
-                $validated['images'] = $imagePath; // Lưu đường dẫn ảnh đầu tiên vào cơ sở dữ liệu
-            }
-        }
+        //     // Kiểm tra nếu có ảnh, lưu vào cơ sở dữ liệu
+        //     if ($imagePath) {
+        //         $validated['images'] = $imagePath; // Lưu đường dẫn ảnh đầu tiên vào cơ sở dữ liệu
+        //     }
+        // }
 
         News::create($validated);
 
@@ -87,6 +87,9 @@ class NewsController extends Controller
 
         $slug = $this->getStorySlugExist($slug, News::class, 'slug', 'news_id', $news->news_id);
         $validated['slug'] = $slug;
+
+        // Xử lý ngày
+        $validated['published_date'] = date('Y-m-d', strtotime($request->input('published_date')));
 
         $news->update($validated);
 

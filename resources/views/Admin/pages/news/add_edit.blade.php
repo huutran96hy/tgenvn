@@ -50,7 +50,10 @@
 
                     <div class="file-input-wrapper mb-3">
                         <label class="form-label">Hình ảnh</label>
-                        <input type="hidden" name="images" class="all-images" value="{{ $news->images ?? '' }}">
+                        {{-- <input type="hidden" name="images" class="all-images" value="{{ $news->images ?? '' }}"> --}}
+                        <input type="hidden" name="images" class="all-images"
+                            value="{{ isset($news) && $news->images ? $news->images : '' }}">
+
 
                         <!-- Vẫn giữ input file nhưng dùng để trigger popup -->
                         <input type="file" class="file-input-preview" data-browse-on-zone-click="true">
@@ -59,8 +62,8 @@
                     <div class="mb-3">
                         <label class="form-label">Nội dung</label>
                         <textarea name="content" class="form-control ckeditor" required>
-                    {{ old('content', $news->content ?? '') }}
-                    </textarea>
+                            {{ old('content', $news->content ?? '') }}
+                        </textarea>
                     </div>
 
                     <div class="mb-3">
@@ -136,24 +139,25 @@
                 const $previewInput = $wrapper.find('.file-input-preview');
                 const $hiddenInput = $wrapper.find('.all-images');
 
-                let allImages = JSON.parse($hiddenInput.val() || '[]');
+                // let allImages = JSON.parse($hiddenInput.val() || '[]');
+                let allImages = $hiddenInput.val() ? [$hiddenInput.val()] : [];
 
                 // Hàm khởi tạo lại fileinput preview
                 function renderPreviews(images) {
                     $previewInput.fileinput('destroy');
 
                     const previewImages = images.map(image => {
-                        return '{{ asset('/') }}' +
-                            image; // Kết hợp URL asset của Laravel
+                        return '{{ asset('/') }}' + image; // Thêm asset Laravel vào ảnh
                     });
 
                     $previewInput.fileinput({
                         initialPreview: previewImages,
-                        initialPreviewConfig: {
-                            caption: images,
-                            key: images,
-                            downloadUrl: images
-                        },
+                        initialPreviewConfig: images.map(image => ({
+                            caption: image.split('/').pop(),
+                            key: image,
+                            downloadUrl: '{{ asset('/') }}' +
+                                image
+                        })),
                         showRemove: false,
                         showUpload: false,
                         showCancel: false,
@@ -161,7 +165,7 @@
                         showZoom: true,
                         showBrowse: false,
                         initialPreviewAsData: true,
-                        overwriteInitial: true, // ❗ Quan trọng: Ghi đè ảnh cũ
+                        overwriteInitial: true, // Ghi đè ảnh cũ
                         browseOnZoneClick: true,
                         dropZoneEnabled: false,
                         showBrowse: true,
@@ -196,14 +200,15 @@
                         const url = Array.isArray(files) ? files[0]?.url : files?.url;
                         if (!url) return;
 
-                        // Tạo URL đối tượng để lấy đường dẫn tương đối
+                        // Tạo URL để lấy đường dẫn tương đối
                         const relativeUrl = new URL(url).pathname.replace(/^\/storage\//,
                             'storage/');
+                        // // console.log(relativeUrl);                     
 
-                        allImages = [relativeUrl]; // Chỉ lấy 1 ảnh
-                        // console.log(relativeUrl);                     
-                        // $hiddenInput.val(allImages[0]).trigger('change');
-                        $hiddenInput.val(JSON.stringify(allImages)).trigger('change');
+                        // $hiddenInput.val(JSON.stringify(allImages)).trigger('change');
+
+                        allImages = relativeUrl;
+                        $hiddenInput.val(allImages).trigger('change');
                     };
 
                 });
@@ -211,13 +216,22 @@
                 // ✅ Khi xoá ảnh
                 $wrapper.on('click', '.kv-file-remove', function(e) {
                     e.preventDefault();
-                    allImages = [];
-                    $hiddenInput.val(JSON.stringify(allImages)).trigger('change');
+                    // allImages = [];
+                    // $hiddenInput.val(JSON.stringify(allImages)).trigger('change');
+
+                    allImages = ''; // ❗ Đặt thành chuỗi rỗng thay vì []
+                    $hiddenInput.val(allImages).trigger('change');
                 });
 
+                // $hiddenInput.on('change', function() {
+                //     const updated = JSON.parse($hiddenInput.val() || '[]');
+                //     allImages = updated;
+                //     renderPreviews(allImages);
+                // });
+
                 $hiddenInput.on('change', function() {
-                    const updated = JSON.parse($hiddenInput.val() || '[]');
-                    allImages = updated;
+                    const updated = $hiddenInput.val() || ''; // Đọc chuỗi
+                    allImages = updated ? [updated] : []; // Chuyển thành mảng nếu có ảnh
                     renderPreviews(allImages);
                 });
             });
