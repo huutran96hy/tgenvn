@@ -7,15 +7,21 @@ use Illuminate\Http\Request;
 use App\Models\Application;
 use App\Models\Candidate;
 use App\Models\Job;
-
 class ApplicationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $applications = Application::with('candidate', 'job')->latest()->paginate(10);
+        $applications = Application::with('candidate', 'job')->latest();
+
+        if ($request->has('status') && $request->status != '') {
+            $applications->where('status', $request->status);
+        }
+
+        $applications = $applications->paginate(10);
+
         return view('Admin.pages.applications.index', compact('applications'));
     }
 

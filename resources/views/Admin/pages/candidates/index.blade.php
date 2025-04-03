@@ -28,18 +28,24 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Họ và Tên</th>
+                            {{-- <th>Họ và Tên</th>
                             <th>Số điện thoại</th>
-                            <th>Địa chỉ</th>
+                            <th>Địa chỉ</th> --}}
+                            <th>Tệp hồ sơ (CV)</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($candidates as $candidate)
                             <tr>
-                                <td>{{ $candidate->full_name }}</td>
+                                {{-- <td>{{ $candidate->full_name }}</td>
                                 <td>{{ $candidate->phone }}</td>
-                                <td>{{ $candidate->address ?? 'N/A' }}</td>
+                                <td>{{ $candidate->address ?? 'N/A' }}</td> --}}
+                                <td>
+                                    <a href="{{ asset('storage/' . $candidate->resume) }}" target="_blank">
+                                        Xem CV
+                                    </a>
+                                </td>
                                 <td class="text-center">
                                     <x-action-dropdown editRoute="admin.candidates.edit"
                                         deleteRoute="admin.candidates.destroy" :id="$candidate->candidate_id" />

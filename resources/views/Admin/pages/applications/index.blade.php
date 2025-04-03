@@ -24,7 +24,8 @@
                                 <option value="">Tất cả trạng thái</option>
                                 <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Chờ duyệt
                                 </option>
-                                <option value="accepted" {{ request('status') == 'accepted' ? 'selected' : '' }}>Chấp nhận
+                                <option value="accepted" {{ request('status') == 'accepted' ? 'selected' : '' }}>Chấp
+                                    nhận
                                 </option>
                                 <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>Từ chối
                                 </option>
@@ -49,7 +50,14 @@
                     <tbody>
                         @foreach ($applications as $application)
                             <tr>
-                                <td>{{ $application->candidate->name ?? 'Không xác định' }}</td>
+                                {{-- <td>{{ $application->candidate->name ?? 'Không xác định' }}</td> --}}
+                                <td>
+                                    @if ($cv = optional($application->candidate)->resume)
+                                        <a href="{{ asset('storage/' . $cv) }}" target="_blank">Xem CV</a>
+                                    @else
+                                        <span>Không có CV</span>
+                                    @endif
+                                </td>
                                 <td>{{ $application->job->job_title ?? 'Không có' }}</td>
                                 <td>{{ $application->application_date }}</td>
                                 <td>

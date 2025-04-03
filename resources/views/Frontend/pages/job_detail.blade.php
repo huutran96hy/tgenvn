@@ -79,8 +79,9 @@
                                                                 </h6>
                                                             </div>
                                                             <div class="col-6 text-end">
-                                                                <span
-                                                                    class="card-briefcase">{{ $randomJob->location }}</span>
+                                                                <span class="card-briefcase">
+                                                                    {{ $randomJob->location }}
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -122,8 +123,8 @@
                             </div>
                             <div class="border-bottom pt-10 pb-10"></div>
                             <!-- <div class="banner-hero banner-image-single mt-10 mb-20">
-                                <img src="{{ asset('assets/imgs/page/job-single-2/img.png') }}" alt="jobBox">
-                            </div> -->
+                                                        <img src="{{ asset('assets/imgs/page/job-single-2/img.png') }}" alt="jobBox">
+                                                    </div> -->
                             <div class="job-overview">
                                 <h5 class="border-bottom pb-15 mb-30">Giới thiệu</h5>
                                 <div class="row">
@@ -244,26 +245,155 @@
                                 <span>{{ $job->employer->company_name }}</span>
                             </div>
                             <!-- <div class="single-apply-jobs">
-                                <div class="row align-items-center">
-                                    <div class="col-md-6"></div>
-                                    <div class="col-md-6 text-end social-share">
-                                        <h6 class="color-text-paragraph-2 d-inline-block d-baseline mr-10">Chia sẻ qua:
-                                        </h6>
-                                        <a class="mr-5 d-inline-block d-middle" href="#"><img alt="jobBox"
-                                                src="{{ asset('assets/imgs/template/icons/share-fb.svg') }}"></a>
-                                        <a class="mr-5 d-inline-block d-middle" href="#"><img alt="jobBox"
-                                                src="{{ asset('assets/imgs/template/icons/share-tw.svg') }}"></a>
-                                        <a class="mr-5 d-inline-block d-middle" href="#"><img alt="jobBox"
-                                                src="{{ asset('assets/imgs/template/icons/share-red.svg') }}"></a>
-                                        <a class="d-inline-block d-middle" href="#"><img alt="jobBox"
-                                                src="{{ asset('assets/imgs/template/icons/share-whatsapp.svg') }}"></a>
-                                    </div>
-                                </div>
-                            </div> -->
+                                                        <div class="row align-items-center">
+                                                            <div class="col-md-6"></div>
+                                                            <div class="col-md-6 text-end social-share">
+                                                                <h6 class="color-text-paragraph-2 d-inline-block d-baseline mr-10">Chia sẻ qua:
+                                                                </h6>
+                                                                <a class="mr-5 d-inline-block d-middle" href="#"><img alt="jobBox"
+                                                                        src="{{ asset('assets/imgs/template/icons/share-fb.svg') }}"></a>
+                                                                <a class="mr-5 d-inline-block d-middle" href="#"><img alt="jobBox"
+                                                                        src="{{ asset('assets/imgs/template/icons/share-tw.svg') }}"></a>
+                                                                <a class="mr-5 d-inline-block d-middle" href="#"><img alt="jobBox"
+                                                                        src="{{ asset('assets/imgs/template/icons/share-red.svg') }}"></a>
+                                                                <a class="d-inline-block d-middle" href="#"><img alt="jobBox"
+                                                                        src="{{ asset('assets/imgs/template/icons/share-whatsapp.svg') }}"></a>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
+    <div class="modal fade" id="ModalApplyJobForm" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content apply-job-form">
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body pl-30 pr-30 pt-50">
+                    <div class="text-center">
+                        <p class="font-sm text-brand-2">Nộp CV ứng tuyển </p>
+                        <h2 class="mt-10 mb-5 text-brand-1 text-capitalize">Kết nối với chúng tôi </h2>
+                        <p class="font-sm text-muted mb-30">
+                            Vui lòng điền đầy đủ thông tin giúp chúng tôi liên lạc sớm nhất.
+                        </p>
+                    </div>
+                    <form id="applyJobForm" class="login-register text-start mt-20 pb-30" action="#"
+                        enctype="multipart/form-data">
+                        {{-- <div class="form-group">
+                        <label class="form-label" for="input-1"> <strong class="text-danger">*</strong> Họ và
+                            Tên</label>
+                        <input class="form-control" id="input-1" type="text" required="" name="full_name"
+                            placeholder="Nhập họ và tên">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="number"><strong class="text-danger">*</strong> Số điện
+                            thoại</label>
+                        <input class="form-control" id="number" type="text" required="" name="phone"
+                            placeholder="Nhập số điện thoại">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="address"><strong class="text-danger">*</strong>Địa
+                            chỉ</label>
+                        <input class="form-control" id="add" type="text" required="" name="address"
+                            placeholder="Địa chỉ">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="education">Học vấn</label>
+                        <input class="form-control" id="education" type="text" required="" name="education"
+                            placeholder="Học vấn">
+                    </div> --}}
+                        <input type="hidden" name="job_id" value="{{ $job->job_id }}">
+                        <div class="form-group">
+                            <label class="form-label" for="file">Gửi CV lên</label>
+                            <input class="form-control" id="file" name="resume" type="file">
+                        </div>
+                        <div class="login_footer form-group d-flex justify-content-between">
+                            <label class="cb-container">
+                                <input type="checkbox">
+                                <span class="text-small">Đồng ý với các điều khoản của chúng tôi</span>
+                                <span class="checkmark"></span>
+                            </label><a class="text-muted" href="{{ route('contact.index') }}">Tìm hiểu thêm</a>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-default hover-up w-100" type="submit" name="">Ứng
+                                tuyển</button>
+                        </div>
+                        <div class="text-muted text-center">Bạn cần hỗ trợ? <a href="{{ route('contact.index') }}">Liên
+                                hệ
+                            </a></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            // let userId = {{ auth()->check() ? auth()->id() : 'null' }};
+
+            $("#applyJobForm").on("submit", function(e) {
+                e.preventDefault();
+
+                // if (!userId) {
+                //     alert("Bạn cần đăng nhập trước khi ứng tuyển!");
+                //     return;
+                // }
+
+                let formData = new FormData(this);
+                // formData.append("user_id", userId);
+
+                $.ajax({
+                    url: "{{ route('candidate.store') }}",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    beforeSend: function() {
+                        $("#applyJobForm button[type=submit]").prop("disabled", true).text(
+                            "Đang gửi...");
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            alert("Ứng tuyển thành công!");
+                            $("#applyJobForm")[0].reset();
+                            $("#ModalApplyJobForm").modal("hide");
+                        } else {
+                            alert("Đã có lỗi xảy ra: " + response.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        console.error("Lỗi từ server:", xhr); // Log lỗi chi tiết lên console
+                        let errorMessage = "Đã có lỗi xảy ra!\n";
+
+                        if (xhr.responseJSON) {
+                            if (xhr.responseJSON.message) {
+                                errorMessage += "Thông báo: " + xhr.responseJSON.message + "\n";
+                            }
+                            // if (xhr.responseJSON.errors) {
+                            //     errorMessage += "Chi tiết:\n";
+                            //     $.each(xhr.responseJSON.errors, function(key, value) {
+                            //         errorMessage += "- " + value + "\n";
+                            //     });
+                            // }
+                        } else {
+                            errorMessage += "Lỗi không xác định!";
+                        }
+
+                        alert(errorMessage);
+                    },
+                    complete: function() {
+                        $("#applyJobForm button[type=submit]").prop("disabled", false).text(
+                            "Ứng tuyển");
+                    },
+                });
+            });
+        });
+    </script>
+@endpush
