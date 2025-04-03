@@ -8,19 +8,32 @@
 @endpush
 
 @section('content')
+    <style>
+        .form-find .form-input {
+            height: 30px;
+        }
+
+        .form-find .btn-find {
+            padding: 6px 12px;
+        }
+
+        .banner-hero .block-banner .form-find .btn-find {
+            background-position: left 20px top 10px;
+        }
+    </style>
     <main class="main">
         <section class="section-box-2 pt-10">
             <div class="container">
                 <div class="banner-hero banner-single banner-single-bg">
                     <div class="block-banner text-center">
                         <h3 class="wow animate__animated animate__fadeInUp">
-                            <span class="color-brand-2">44+ Deal </span>
-                            tuyển dụng ngay
+                            {{-- <span class="color-brand-2">44+ Deal </span> --}}
+                            {{ \App\Models\Config::getConfigValue('title_for_job_list', '44+ Deal tuyển dụng ngay') }}
                         </h3>
                         <div class="font-sm color-text-paragraph-2 mt-10 wow animate__animated animate__fadeInUp"
-                            data-wow-delay=".1s">Kết nối với nhiều doanh nghiệp toàn quốc
-                            <br class="d-none d-xl-block">Giúp
-                            ứng viên chọn công việc phù hợp
+                            data-wow-delay=".1s">
+                            {{ \App\Models\Config::getConfigValue('des_for_job_list', 'Giúp ứng viên chọn công việc phù hợp') }}
+                            <br class="d-none d-xl-block">
                         </div>
                         <div class="form-find text-start mt-40 wow animate__animated animate__fadeInUp">
                             <form method="GET" action="{{ route('jobs.index') }}">

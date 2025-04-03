@@ -45,8 +45,12 @@ class NewsController extends Controller
 
         $slug = $this->getStorySlugExist($slug, News::class, 'slug', 'news_id');
         $validated['slug'] = $slug;
-        $validated['published_date'] = Carbon::createFromFormat('d/m/Y', $request->input('published_date'))->format('Y-m-d');
-        $validated['images'] = str_replace(env('APP_URL') . '/', '', $validated['images']);
+
+        $validated['published_date'] = Carbon::createFromFormat(
+            'd-m-Y',
+            $request->input('published_date')
+        )->format('Y-m-d');
+
         News::create($validated);
 
         return redirect()->route('admin.news.index')->with('success', 'Thêm mới thành công.');
@@ -56,8 +60,6 @@ class NewsController extends Controller
     {
         $categories = NewsCategory::all();
         $users = User::all();
-        $news->images = env('APP_URL') . '/' . $news->images;
-        $news->published_date = Carbon::createFromFormat('Y-m-d', $news->published_date)->format('d/m/Y');
         return view('Admin.pages.news.add_edit', compact('news', 'categories', 'users'));
     }
 
@@ -68,25 +70,35 @@ class NewsController extends Controller
             'slug' => 'required',
             'images' => 'nullable',
             'content' => 'required',
+            'published_date' => 'required',
             'status' => 'required|in:draft,published',
             'news_category_id' => 'required|exists:news_categories,news_category_id',
         ]);
 
         $slug = $request->input('slug');
+
         $slug = $this->getStorySlugExist($slug, News::class, 'slug', 'news_id', $news->news_id);
         $validated['slug'] = $slug;
-        $validated['images'] = str_replace(env('APP_URL') . '/', '', $validated['images']);
-        $validated['published_date'] = Carbon::createFromFormat('d/m/Y', $request->input('published_date'))->format('Y-m-d');
+
+        // Xử lý ngày
+        $validated['published_date'] = Carbon::createFromFormat(
+            'd-m-Y',
+            $request->input('published_date')
+        )->format('Y-m-d');
+
         $news->update($validated);
+
         return back()->with('success', 'Cập nhật thành công.');
     }
 
     public function destroy(News $news)
     {
+        // Xóa iamges
         if ($news->images) {
             Storage::disk('public')->delete($news->images);
         }
+
         $news->delete();
-        return back()->with('success', 'Xoá thành công.');
+        return back()->with('success', 'Xóa thành công.');
     }
 }

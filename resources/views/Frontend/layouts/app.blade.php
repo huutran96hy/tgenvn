@@ -46,8 +46,10 @@
 </head>
 
 <body>
-    <!-- Header -->
-    @include('Frontend.layouts.header')
+    @if (!Route::is('index'))
+        <!-- Header -->
+        @include('Frontend.layouts.header')
+    @endif
 
     <!-- Main -->
     @yield('content')

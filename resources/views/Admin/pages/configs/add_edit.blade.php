@@ -87,7 +87,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @else
+                            @elseif($config->key === 'icon')
                                 <tr>
                                     <th>Icon</th>
                                     <td>
@@ -101,6 +101,16 @@
                                                     <img src="{{ asset('storage/' . $config->value) }}" class="img-fluid" />
                                                 </div>
                                             @endif
+                                        </div>
+                                    </td>
+                                </tr>
+                            @else
+                                <tr>
+                                    <th>Giá trị</th>
+                                    <td>
+                                        <div class="mb-3">
+                                            <input type="text" name="value" class="form-control"
+                                                value="{{ $config->value }}">
                                         </div>
                                     </td>
                                 </tr>

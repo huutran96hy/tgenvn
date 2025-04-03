@@ -36,4 +36,8 @@ class Config extends Model
         $icon = self::where('key', 'icon')->value('value') ?? 'default-icon.png';
         return 'storage/' . ltrim($icon, '/');
     }
+    public static function getConfigValue($key, $default = null)
+    {
+        return self::where('key', $key)->value('value') ?? $default;
+    }
 }

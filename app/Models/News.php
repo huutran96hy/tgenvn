@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 
 class News extends Model
 {
@@ -30,5 +31,10 @@ class News extends Model
     public function author()
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+    public function getPublishedDateAttribute($value)
+    {
+        return Carbon::parse($value)->format('d-m-Y');
     }
 }

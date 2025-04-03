@@ -1,11 +1,13 @@
-<header class="header sticky-bar" style="padding: 6px 0; background: #265c77;">
+<header class="header sticky-bar"
+    style="padding:6px; background: #265c77; @if (Route::is('index')) margin-top: -6px;padding:1px; @endif">
     <div class="container">
         <div class="main-header">
             <div class="header-left">
                 <div class="header-logo">
                     <a class="d-flex" href="{{ route('index') }}">
                         <img alt="logo" src="{{ asset(\App\Models\Config::getLogo()) }}" width="25%"
-                            style="width:70px" /></a>
+                            style="width:50px" />
+                    </a>
                 </div>
             </div>
             <div class="header-nav">
@@ -54,7 +56,9 @@
                             </li>
                             <li><a href="{{ route('jobs.index') }}">Tin tuyển dụng</a>
                             </li>
-                            <li><a href="{{ route('employers.index') }}" class="{{ Request::routeIs('employers.*') ? 'active' : '' }}">Nhà tuyển dụng</a>
+                            <li><a href="{{ route('employers.index') }}"
+                                    class="{{ Request::routeIs('employers.*') ? 'active' : '' }}">Nhà tuyển
+                                    dụng</a>
                             </li>
                             <li><a href="{{ route('news.index') }}">Tin tức</a>
                             </li>
@@ -66,11 +70,3 @@
         </div>
     </div>
 </div>
-
-{{-- <div id="preloader-active">
-    <div class="preloader d-flex align-items-center justify-content-center">
-        <div class="preloader-inner position-relative">
-            <div class="text-center"><img src="assets/imgs/template/loading.gif" alt="jobBox"></div>
-        </div>
-    </div>
-</div> --}}
