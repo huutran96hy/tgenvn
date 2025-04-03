@@ -3,190 +3,187 @@
 @section('pageTitle', 'Danh sách công việc')
 
 @push('meta')
-<meta name="description"
-    content="Tìm kiếm việc làm mới nhất từ các công ty hàng đầu. Danh sách việc làm hấp dẫn với nhiều cơ hội nghề nghiệp phù hợp cho bạn. Ứng tuyển ngay!">
+    <meta name="description"
+        content="Tìm kiếm việc làm mới nhất từ các công ty hàng đầu. Danh sách việc làm hấp dẫn với nhiều cơ hội nghề nghiệp phù hợp cho bạn. Ứng tuyển ngay!">
 @endpush
 
 @section('content')
-<main class="main">
-    <section class="section-box-2 pt-10">
-        <div class="container">
-            <div class="banner-hero banner-single banner-single-bg">
-                <div class="block-banner text-center">
-                    <h3 class="wow animate__animated animate__fadeInUp">
-                        <span class="color-brand-2">44+ Deal </span>
-                        tuyển dụng ngay
-                    </h3>
-                    <div class="font-sm color-text-paragraph-2 mt-10 wow animate__animated animate__fadeInUp"
-                        data-wow-delay=".1s">Kết nối với nhiều doanh nghiệp toàn quốc
-                        <br class="d-none d-xl-block">Giúp
-                        ứng viên chọn công việc phù hợp
-                    </div>
-                    <div class="form-find text-start mt-40 wow animate__animated animate__fadeInUp">
-                        <form method="GET" action="{{ route('jobs.index') }}">
-                            {{-- <div class="box-industry">
+    <main class="main">
+        <section class="section-box-2 pt-10">
+            <div class="container">
+                <div class="banner-hero banner-single banner-single-bg">
+                    <div class="block-banner text-center">
+                        <h3 class="wow animate__animated animate__fadeInUp">
+                            <span class="color-brand-2">44+ Deal </span>
+                            tuyển dụng ngay
+                        </h3>
+                        <div class="font-sm color-text-paragraph-2 mt-10 wow animate__animated animate__fadeInUp"
+                            data-wow-delay=".1s">Kết nối với nhiều doanh nghiệp toàn quốc
+                            <br class="d-none d-xl-block">Giúp
+                            ứng viên chọn công việc phù hợp
+                        </div>
+                        <div class="form-find text-start mt-40 wow animate__animated animate__fadeInUp">
+                            <form method="GET" action="{{ route('jobs.index') }}">
+                                {{-- <div class="box-industry">
                                     <select class="form-input mr-10 input-industry" name="industry">
                                         <option value="0" selected disabled>Công việc</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}"
-                            {{ request('industry') == $category->id ? 'selected' : '' }}>
-                            {{ $category->name }}
-                            </option>
-                            @endforeach
-                            </select>
+                                                {{ request('industry') == $category->id ? 'selected' : '' }}>
+                                                {{ $category->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <select class="form-input mr-10" name="province">
+                                    <option value="" selected disabled>Chọn tỉnh/TP</option>
+                                    @foreach ($provinces as $province)
+                                        <option value="{{ $province }}"
+                                            {{ request('province') == $province ? 'selected' : '' }}>
+                                            {{ $province }}
+                                        </option>
+                                    @endforeach
+                                </select> --}}
+
+                                <input class="form-input input-keysearch mr-10" type="text" name="keyword"
+                                    placeholder="Nhập từ khoá..." value="{{ request('keyword') }}">
+
+                                <button class="btn btn-default btn-find font-sm" type="submit">Tìm kiếm</button>
+                            </form>
+                        </div>
                     </div>
-
-                    <select class="form-input mr-10" name="province">
-                        <option value="" selected disabled>Chọn tỉnh/TP</option>
-                        @foreach ($provinces as $province)
-                        <option value="{{ $province }}"
-                            {{ request('province') == $province ? 'selected' : '' }}>
-                            {{ $province }}
-                        </option>
-                        @endforeach
-                    </select> --}}
-
-                    <input class="form-input input-keysearch mr-10" type="text" name="keyword"
-                        placeholder="Nhập từ khoá..." value="{{ request('keyword') }}">
-
-                    <button class="btn btn-default btn-find font-sm" type="submit">Tìm kiếm</button>
-                    </form>
                 </div>
             </div>
-        </div>
-        </div>
-    </section>
-    <section class="section-box mt-30">
-        <div class="container">
-            <div class="row flex-row-reverse">
-                <div class="col-lg-9 col-md-12 col-sm-12 col-12 float-right">
-                    <div class="content-page">
-                        <div class="box-filters-job">
-                            <div class="row">
-                                <div class="col-xl-6 col-lg-5">
-                                    <span class="text-small text-showing">
-                                        Hiển thị <strong>{{ $jobs->firstItem() }}-{{ $jobs->lastItem() }}</strong> trên
-                                        <strong>{{ $jobs->total() }}</strong> công việc
-                                    </span>
-                                </div>
-                                <div class="col-xl-6 col-lg-7 text-end mt-sm-15">
-                                    <div class="display-flex2">
-                                        <div class="box-border mr-10">
-                                            <span class="text-sortby">Hiển thị:</span>
-                                            <div class="dropdown dropdown-sort">
-                                                <button class="btn dropdown-toggle" id="dropdownSort" type="button"
-                                                    data-bs-toggle="dropdown">
-                                                    <span>{{ request('per_page', 12) }}</span><i
-                                                        class="fi-rr-angle-small-down"></i>
-                                                </button>
-                                                <ul class="dropdown-menu dropdown-menu-light">
-                                                    @foreach ([10, 12, 20] as $size)
-                                                    <li>
-                                                        <a class="dropdown-item"
-                                                            href="{{ url()->current() }}?{{ http_build_query(array_merge(request()->query(), ['per_page' => $size])) }}">
-                                                            {{ $size }}
-                                                        </a>
-                                                    </li>
-                                                    @endforeach
-                                                </ul>
+        </section>
+        <section class="section-box mt-30">
+            <div class="container">
+                <div class="row flex-row-reverse">
+                    <div class="col-lg-9 col-md-12 col-sm-12 col-12 float-right">
+                        <div class="content-page">
+                            <div class="box-filters-job">
+                                <div class="row">
+                                    <div class="col-xl-6 col-lg-5">
+                                        <span class="text-small text-showing">
+                                            Hiển thị <strong>{{ $jobs->firstItem() }}-{{ $jobs->lastItem() }}</strong> trên
+                                            <strong>{{ $jobs->total() }}</strong> công việc
+                                        </span>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-7 text-end mt-sm-15">
+                                        <div class="display-flex2">
+                                            <div class="box-border mr-10">
+                                                <span class="text-sortby">Hiển thị:</span>
+                                                <div class="dropdown dropdown-sort">
+                                                    <button class="btn dropdown-toggle" id="dropdownSort" type="button"
+                                                        data-bs-toggle="dropdown">
+                                                        <span>{{ request('per_page', 12) }}</span><i
+                                                            class="fi-rr-angle-small-down"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-light">
+                                                        @foreach ([10, 12, 20] as $size)
+                                                            <li>
+                                                                <a class="dropdown-item"
+                                                                    href="{{ url()->current() }}?{{ http_build_query(array_merge(request()->query(), ['per_page' => $size])) }}">
+                                                                    {{ $size }}
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="box-border">
-                                            <span class="text-sortby">Sắp xếp theo:</span>
-                                            <div class="dropdown dropdown-sort">
-                                                <button class="btn dropdown-toggle" id="dropdownSort2" type="button"
-                                                    data-bs-toggle="dropdown">
-                                                    <span>
-                                                        @if (request('sort', 'newest') == 'newest')
-                                                        Mới nhất
-                                                        @elseif(request('sort') == 'oldest')
-                                                        Cũ nhất
-                                                        @else
-                                                        Đánh giá cao
-                                                        @endif
-                                                    </span>
-                                                    <i class="fi-rr-angle-small-down"></i>
-                                                </button>
-                                                <ul class="dropdown-menu dropdown-menu-light">
-                                                    <li>
-                                                        <a class="dropdown-item"
-                                                            href="{{ url()->current() }}?{{ http_build_query(array_merge(request()->query(), ['sort' => 'newest'])) }}">
-                                                            Mới nhất
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item"
-                                                            href="{{ url()->current() }}?{{ http_build_query(array_merge(request()->query(), ['sort' => 'oldest'])) }}">
-                                                            Cũ nhất
-                                                        </a>
-                                                    </li>
-                                                    {{-- <li>
+                                            <div class="box-border">
+                                                <span class="text-sortby">Sắp xếp theo:</span>
+                                                <div class="dropdown dropdown-sort">
+                                                    <button class="btn dropdown-toggle" id="dropdownSort2" type="button"
+                                                        data-bs-toggle="dropdown">
+                                                        <span>
+                                                            @if (request('sort', 'newest') == 'newest')
+                                                                Mới nhất
+                                                            @elseif(request('sort') == 'oldest')
+                                                                Cũ nhất
+                                                            @else
+                                                                Đánh giá cao
+                                                            @endif
+                                                        </span>
+                                                        <i class="fi-rr-angle-small-down"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-light">
+                                                        <li>
+                                                            <a class="dropdown-item"
+                                                                href="{{ url()->current() }}?{{ http_build_query(array_merge(request()->query(), ['sort' => 'newest'])) }}">
+                                                                Mới nhất
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item"
+                                                                href="{{ url()->current() }}?{{ http_build_query(array_merge(request()->query(), ['sort' => 'oldest'])) }}">
+                                                                Cũ nhất
+                                                            </a>
+                                                        </li>
+                                                        {{-- <li>
                                                             <a class="dropdown-item"
                                                                 href="{{ url()->current() }}?{{ http_build_query(array_merge(request()->query(), ['sort' => 'rating'])) }}">
-                                                    Đánh giá cao
+                                                                Đánh giá cao
+                                                            </a>
+                                                        </li> --}}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                @foreach ($jobs as $job)
+                                    <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12">
+                                        <div class="card-grid-2 hover-up">
+                                            <div class="card-grid-2-image-left" style="padding:15px">
+                                                <span class="flash"></span>
+                                                <div class="image-box" style="padding-right: 20px;">
+                                                    <img src="{{ \App\Helpers\CustomHelper::logoSrc($job->employer->logo) }}"
+                                                        alt="{{ $job->employer->name }}"
+                                                        style="width: 100px; height: 100px;border-radius:8px; object-fit:contain;background:#ffff; ;box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;">
+                                                </div>
+                                                <div class="right-info">
+                                                    <a class="name-job" href="{{ route('job_detail.show', $job->slug) }}">
+                                                        {{ $job->job_title }}
                                                     </a>
-                                                    </li> --}}
-                                                </ul>
+                                                    <h6>
+                                                        <a href="{{ route('job_detail.show', $job->slug) }}">
+                                                            {{ $job->employer->company_name }}
+                                                        </a>
+                                                    </h6>
+                                                    <span class="location-small">{{ $job->location }}</span>
+                                                    <div class="tags">
+                                                        {{ \App\Helpers\NumberHelper::formatSalary($job->salary) }} |
+                                                        @foreach ($job->skills as $skill)
+                                                            <a class="btn btn-grey-small mr-5"
+                                                                href="{{ route('jobs.index') }}">
+                                                                {{ $skill->skill_name }}
+                                                            </a>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
-                        </div>
 
-                        <div class="row">
-                            @foreach ($jobs as $job)
-                            <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12">
-                                <div class="card-grid-2 hover-up">
-                                    <div class="card-grid-2-image-left" style="padding:15px">
-                                        <span class="flash"></span>
-                                        <div class="image-box" style="padding-right: 20px;">
-                                            <img src="{{ \App\Helpers\CustomHelper::logoSrc($job->employer->logo) }}"
-                                                alt="{{ $job->employer->name }}"
-                                                style="width: 100px; height: 100px;border-radius:8px; object-fit:contain;background:#ffff; ;box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;">
-                                        </div>
-                                        <div class="right-info">
-                                            <a class="name-job"
-                                                href="{{ route('job_detail.show', $job->slug) }}">
-                                                {{ $job->job_title }}
-                                            </a>
-                                            <h6>
-                                                <a href="{{ route('job_detail.show', $job->slug) }}">
-                                                    {{ $job->employer->company_name }}
-                                                </a>
-                                            </h6>
-                                            <span class="location-small">{{ $job->location }}</span>
-                                            <div class="tags">
-                                                {{ \App\Helpers\NumberHelper::formatSalary($job->salary) }} |
-                                                @foreach ($job->skills as $skill)
-                                                <a class="btn btn-grey-small mr-5"
-                                                    href="{{ route('jobs.index') }}">
-                                                    {{ $skill->skill_name }}
-                                                </a>
-                                                @endforeach
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                </div>
+                            <div class="paginations">
+                                {{ $jobs->appends(request()->query())->links('Frontend.pagination.custom') }}
                             </div>
-                            @endforeach
-                        </div>
-
-                        <div class="paginations">
-                            {{ $jobs->appends(request()->query())->links('Frontend.pagination.custom') }}
                         </div>
                     </div>
-                </div>
 
-                <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-                    <div class="sidebar-shadow none-shadow mb-30">
-                        <div class="sidebar-filters">
-                            <div class="filter-block head-border mb-30">
-                                <h5>Bộ Lọc <a class="link-reset" href="#">Làm mới</a></h5>
-                            </div>
-                            {{-- <div class="filter-block mb-30">
+                    <div class="col-lg-3 col-md-12 col-sm-12 col-12">
+                        <div class="sidebar-shadow none-shadow mb-30">
+                            <div class="sidebar-filters">
+                                <div class="filter-block head-border mb-30">
+                                    <h5>Bộ Lọc <a class="link-reset" href="#">Làm mới</a></h5>
+                                </div>
+                                {{-- <div class="filter-block mb-30">
                                     <div class="form-group select-style select-style-icon">
                                         <select class="form-control form-icons">
                                             <option>Hải Phòng , Việt Nam</option>
@@ -196,7 +193,7 @@
                                         </select><i class="fi-rr-marker"></i>
                                     </div>
                                 </div> --}}
-                            {{-- <div class="filter-block mb-20">
+                                {{-- <div class="filter-block mb-20">
                                     <h5 class="medium-heading mb-15">Vị trí</h5>
                                     <div class="form-group">
                                         <ul class="list-checkbox">
@@ -239,22 +236,22 @@
                                         </ul>
                                     </div>
                                 </div> --}}
-                            <div class="filter-block mb-20">
-                                <h5 class="medium-heading mb-25">Mức lương</h5>
-                                <div class="form-group mb-20">
-                                    <select id="salary_range">
-                                        <option value="">Chọn mức lương</option>
-                                        <option value="10000000-20000000">10-20.000.000đ</option>
-                                        <option value="20000000-40000000">20-40.000.000đ</option>
-                                        <option value="40000000-60000000">40-60.000.000đ</option>
-                                        <option value="60000000-80000000">60-80.000.000đ</option>
-                                        <option value="80000000-100000000">80-100.000.000đ</option>
-                                        <option value=">100000000">>100.000.000đ</option>
-                                    </select>
+                                <div class="filter-block mb-20">
+                                    <h5 class="medium-heading mb-25">Mức lương</h5>
+                                    <div class="form-group mb-20">
+                                        <select id="salary_range">
+                                            <option value="">Chọn mức lương</option>
+                                            <option value="10000000-20000000">10-20.000.000đ</option>
+                                            <option value="20000000-40000000">20-40.000.000đ</option>
+                                            <option value="40000000-60000000">40-60.000.000đ</option>
+                                            <option value="60000000-80000000">60-80.000.000đ</option>
+                                            <option value="80000000-100000000">80-100.000.000đ</option>
+                                            <option value=">100000000">>100.000.000đ</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
-                            {{-- <div class="filter-block mb-30">
+                                {{-- <div class="filter-block mb-30">
                                     <h5 class="medium-heading mb-10">Từ khoá nổi bật</h5>
                                     <div class="form-group">
                                         <ul class="list-checkbox">
@@ -428,55 +425,55 @@
                                         </ul>
                                     </div>
                                 </div> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-</main>
+        </section>
+    </main>
 @endsection
 
 @push('scripts')
-<script>
-    $(document).ready(function() {
-        $('#salary_range').change(function() {
-            var selectedValue = $(this).val();
-            var url = new URL(window.location.href);
+    <script>
+        $(document).ready(function() {
+            $('#salary_range').change(function() {
+                var selectedValue = $(this).val();
+                var url = new URL(window.location.href);
 
-            if (selectedValue) {
-                url.searchParams.set('salary_range', selectedValue);
-            } else {
-                url.searchParams.delete('salary_range');
-            }
-
-            window.location.href = url.toString(); // Chuyển trang ngay khi chọn
-        });
-    });
-</script>
-
-<script>
-    $(document).ready(function() {
-        $('.dropdown-item').on('click', function(event) {
-            event.preventDefault(); // Ngăn chặn load trang
-            let url = $(this).attr('href');
-
-            $.ajax({
-                url: url,
-                type: 'GET',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                },
-                success: function(data) {
-                    let newContent = $(data).find('.content-page').html();
-                    $('.content-page').html(newContent);
-                    window.history.pushState({}, '', url);
-                },
-                error: function(xhr, status, error) {
-                    console.error('Lỗi khi tải dữ liệu:', error);
+                if (selectedValue) {
+                    url.searchParams.set('salary_range', selectedValue);
+                } else {
+                    url.searchParams.delete('salary_range');
                 }
+
+                window.location.href = url.toString(); // Chuyển trang ngay khi chọn
             });
         });
-    });
-</script>
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.dropdown-item').on('click', function(event) {
+                event.preventDefault(); // Ngăn chặn load trang
+                let url = $(this).attr('href');
+
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    success: function(data) {
+                        let newContent = $(data).find('.content-page').html();
+                        $('.content-page').html(newContent);
+                        window.history.pushState({}, '', url);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Lỗi khi tải dữ liệu:', error);
+                    }
+                });
+            });
+        });
+    </script>
 @endpush

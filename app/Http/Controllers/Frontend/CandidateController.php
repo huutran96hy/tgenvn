@@ -35,6 +35,7 @@ class CandidateController extends Controller
             // 'address' => 'required|string',
             // 'education' => 'nullable|string',
             'resume' => 'required|file|mimes:pdf,doc,docx|max:2048',
+            'job_id' => 'required|exists:jobs,job_id',
         ]);
 
         // $validated['user_id'] = auth()->id();
@@ -44,12 +45,17 @@ class CandidateController extends Controller
             $validated['resume'] = $request->file('resume')->store('resumes', 'public');
         }
 
-        Candidate::create($validated);
+        $candidate = Candidate::create($validated);
+
+        $candidate->applications()->create([
+            'job_id' => $validated['job_id'],
+            'application_date' => now(),
+            'status' => 'pending',
+        ]);
 
         return response()->json([
             'success' => true,
             'message' => 'Ứng tuyển thành công!',
-            // 'data' => new CandidateResource($candidate),
         ], 201);
     }
     public function show(Candidate $candidate)
