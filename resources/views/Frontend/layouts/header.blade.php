@@ -1,5 +1,5 @@
 <header class="header sticky-bar"
-    style="padding:6px; background: #265c77; @if (Route::is('index')) margin-top: -6px;padding:1px; @endif">
+    style="padding:6px; background: #265c77;">
     <div class="container">
         <div class="main-header">
             <div class="header-left">

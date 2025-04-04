@@ -36,7 +36,7 @@
         }
 
         .banner-slide img {
-            max-height: 400px;
+            max-height: 150px;
             -o-object-fit: cover;
             object-fit: cover;
             width: 100%;

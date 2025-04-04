@@ -25,7 +25,7 @@
         }
     </style>
     <main class="main">
-        <section class="section-box">
+        <section class="section-box" style="display: block;line-height: 0px;">
             @php
                 $banners = json_decode(\App\Models\Config::where('key', 'banners')->value('value') ?? '[]', true);
             @endphp
@@ -34,7 +34,7 @@
                     @foreach ($banners as $banner)
                         <div class="swiper-slide banner-slide">
                             <img src="{{ \App\Helpers\CustomHelper::logoSrc($banner) }}" alt="Banner"
-                                style="max-height:150px">
+                                style="height:150px">
                         </div>
                     @endforeach
                 </div>
@@ -55,9 +55,9 @@
                             tin tuyển dụng mới hàng ngày
                         </p>
                     </div>
-                    <div class="box-swiper mt-50">
+                    <div class="box-swiper">
                         <div class="swiper-container swiper-group-5 swiper">
-                            <div class="swiper-wrapper pb-70 pt-5">
+                            <div class="swiper-wrapper pb-70 pt-20">
                                 @foreach ($employers->chunk(5) as $chunk)
                                     <div class="swiper-slide hover-up">
                                         @foreach ($chunk as $employer)
@@ -65,7 +65,7 @@
                                                 <div class="item-logo">
                                                     <img alt="{{ $employer->company_name }}"
                                                         class="img-fluid d-block mx-auto"
-                                                        style="height: 92px; object-fit: contain;"
+                                                        style="height: 82px; object-fit: contain;"
                                                         src="{{ asset('storage/' . $employer->logo) }}" width="100%" />
                                                 </div>
                                             </a>
