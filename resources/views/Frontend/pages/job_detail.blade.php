@@ -17,7 +17,7 @@
                             <div class="sidebar-heading">
                                 <div class="avatar-sidebar">
                                     <figure>
-                                        <img alt="jobBox" src="{{ $job->employer->getLogoUrl() }}">
+                                        <img alt="jobBox" src="{{ $job->employer->getLogoUrl() }}" >
                                     </figure>
 
                                     <div class="sidebar-info">
@@ -121,10 +121,6 @@
                                         data-bs-target="#ModalApplyJobForm">Gửi CV ngay</div>
                                 </div>
                             </div>
-                            <div class="border-bottom pt-10 pb-10"></div>
-                            <!-- <div class="banner-hero banner-image-single mt-10 mb-20">
-                                                        <img src="{{ asset('assets/imgs/page/job-single-2/img.png') }}" alt="jobBox">
-                                                    </div> -->
                             <div class="job-overview">
                                 <h5 class="border-bottom pb-15 mb-30">Giới thiệu</h5>
                                 <div class="row">
@@ -244,23 +240,6 @@
                             <div class="author-single">
                                 <span>{{ $job->employer->company_name }}</span>
                             </div>
-                            <!-- <div class="single-apply-jobs">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-md-6"></div>
-                                                            <div class="col-md-6 text-end social-share">
-                                                                <h6 class="color-text-paragraph-2 d-inline-block d-baseline mr-10">Chia sẻ qua:
-                                                                </h6>
-                                                                <a class="mr-5 d-inline-block d-middle" href="#"><img alt="jobBox"
-                                                                        src="{{ asset('assets/imgs/template/icons/share-fb.svg') }}"></a>
-                                                                <a class="mr-5 d-inline-block d-middle" href="#"><img alt="jobBox"
-                                                                        src="{{ asset('assets/imgs/template/icons/share-tw.svg') }}"></a>
-                                                                <a class="mr-5 d-inline-block d-middle" href="#"><img alt="jobBox"
-                                                                        src="{{ asset('assets/imgs/template/icons/share-red.svg') }}"></a>
-                                                                <a class="d-inline-block d-middle" href="#"><img alt="jobBox"
-                                                                        src="{{ asset('assets/imgs/template/icons/share-whatsapp.svg') }}"></a>
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
                         </div>
                     </div>
                 </div>
