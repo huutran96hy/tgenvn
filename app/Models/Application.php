@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 
 class Application extends Model
 {
@@ -20,5 +21,10 @@ class Application extends Model
     public function job()
     {
         return $this->belongsTo(Job::class, 'job_id');
+    }
+
+    public function getApplicationDateAttribute($value)
+    {
+        return Carbon::parse($value)->format('d-m-Y');
     }
 }

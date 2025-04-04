@@ -62,11 +62,14 @@
                             <option value="pending"
                                 {{ isset($application) && $application->status == 'pending' ? 'selected' : '' }}>Chờ duyệt
                             </option>
-                            <option value="accepted"
-                                {{ isset($application) && $application->status == 'accepted' ? 'selected' : '' }}>Đã chấp
-                                nhận</option>
+                            <option value="interviewed"
+                                {{ isset($application) && $application->status == 'interviewed' ? 'selected' : '' }}>Đã
+                                phỏng vấn</option>
                             <option value="rejected"
                                 {{ isset($application) && $application->status == 'rejected' ? 'selected' : '' }}>Từ chối
+                            </option>
+                            <option value="hired"
+                                {{ isset($application) && $application->status == 'hired' ? 'selected' : '' }}>Đã tuyển
                             </option>
                         </select>
                     </div>
@@ -85,7 +88,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             const options = {
                 autohide: true,
-                format: "yyyy-mm-dd",
+                format: "dd-mm-yyyy",
                 todayHighlight: true
             };
 

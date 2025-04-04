@@ -30,7 +30,8 @@
                     <i class="ph-dots-three sidebar-resize-show"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('admin') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                    <a href="{{ url('admin') }}"
+                        class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                         {{-- <i class="ph-house"></i> --}}
                         <i class="ph-house"></i>
                         <span>

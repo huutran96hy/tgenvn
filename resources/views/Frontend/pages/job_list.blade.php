@@ -199,10 +199,11 @@
                                 {{-- <div class="filter-block mb-30">
                                     <div class="form-group select-style select-style-icon">
                                         <select class="form-control form-icons">
-                                            <option>Hải Phòng , Việt Nam</option>
-                                            <option>London</option>
-                                            <option>Paris</option>
-                                            <option>Berlin</option>
+                                            <option>Hải Phòng</option>
+                                            <option>Hà Nội</option>
+                                            <option>Đà Nẵng</option>
+                                            <option>Hồ Chí Minh</option>
+                                            <option>Nha Trang</option>
                                         </select><i class="fi-rr-marker"></i>
                                     </div>
                                 </div> --}}
@@ -254,6 +255,7 @@
                                     <div class="form-group mb-20">
                                         <select id="salary_range">
                                             <option value="">Chọn mức lương</option>
+                                            <option value="all">Tất cả mức lương</option>
                                             <option value="10000000-20000000">10-20.000.000đ</option>
                                             <option value="20000000-40000000">20-40.000.000đ</option>
                                             <option value="40000000-60000000">40-60.000.000đ</option>
@@ -406,8 +408,8 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
-                                <div class="filter-block mb-20">
+                                </div> --}}
+                                {{-- <div class="filter-block mb-20">
                                     <h5 class="medium-heading mb-15">Loại công việc</h5>
                                     <div class="form-group">
                                         <ul class="list-checkbox">
@@ -454,10 +456,10 @@
                 var selectedValue = $(this).val();
                 var url = new URL(window.location.href);
 
-                if (selectedValue) {
-                    url.searchParams.set('salary_range', selectedValue);
-                } else {
+                if (selectedValue === "all") {
                     url.searchParams.delete('salary_range');
+                } else {
+                    url.searchParams.set('salary_range', selectedValue);
                 }
 
                 window.location.href = url.toString(); // Chuyển trang ngay khi chọn

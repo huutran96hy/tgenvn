@@ -104,7 +104,8 @@
                                                             class="card-time">{{ $job->created_at->diffForHumans() }}</span>
                                                     </div>
                                                     <p class="font-sm color-text-paragraph mt-10">
-                                                        {!! Str::words(preg_replace('/<img[^>]+>/i', '', $job->job_description), 10, '...') !!}
+                                                        {!! Str::words(preg_replace('/<img[^>]+>/i', '', $job->requirements), 10, '...') !!}
+                                                    </p>
                                                     <div class="card-2-bottom mt-20">
                                                         <div class="row">
                                                             <div class="col-7">

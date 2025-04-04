@@ -81,7 +81,7 @@
                                             @if (!empty($config->value))
                                                 <div class="mt-3">
                                                     <label>Logo hiện tại:</label>
-                                                    <img src="{{ asset('storage/' . $config->value) }}" class="img-fluid" />
+                                                    <img src="{{ asset('storage/' . $config->value) }}" class="img-fluid" style="width:100px"/>
                                                 </div>
                                             @endif
                                         </div>
@@ -98,7 +98,7 @@
                                             @if (!empty($config->value))
                                                 <div class="mt-3">
                                                     <label>Icon hiện tại:</label>
-                                                    <img src="{{ asset('storage/' . $config->value) }}" class="img-fluid" />
+                                                    <img src="{{ asset('storage/' . $config->value) }}" class="img-fluid" style="width:100px"/>
                                                 </div>
                                             @endif
                                         </div>

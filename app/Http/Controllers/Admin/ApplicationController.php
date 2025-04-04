@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Application;
 use App\Models\Candidate;
 use App\Models\Job;
+use Carbon\Carbon;
 class ApplicationController extends Controller
 {
     /**
@@ -40,17 +41,24 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'candidate_id' => 'required|exists:candidates,candidate_id',
             'job_id' => 'required|exists:jobs,job_id',
-            'application_date' => 'required|date|date_format:Y-m-d',
-            'status' => 'required|in:pending,accepted,rejected',
+            'application_date' => 'required',
+            'status' => 'required|in:pending,interviewed,rejected,hired',
         ]);
 
+        // Xử lý ngày
+        $validated['application_date'] = Carbon::createFromFormat(
+            'd-m-Y',
+            $request->input('application_date')
+        )->format('Y-m-d');
 
-        Application::create($request->all());
+        Application::create($validated);
+
         return redirect()->route('admin.applications.index')->with('success', 'Đơn ứng tuyển đã được thêm thành công.');
     }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -65,27 +73,33 @@ class ApplicationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Application $application)
     {
-        $application = Application::findOrFail($id);
-
-        $request->validate([
+        $validated = $request->validate([
             'candidate_id' => 'required|exists:candidates,candidate_id',
             'job_id' => 'required|exists:jobs,job_id',
-            'application_date' => 'required|date|date_format:Y-m-d',
-            'status' => 'required|in:pending,accepted,rejected',
+            'application_date' => 'required',
+            'status' => 'required|in:pending,interviewed,rejected,hired',
         ]);
 
-        $application->update($request->all());
+        // Xử lý ngày
+        $validated['application_date'] = Carbon::createFromFormat(
+            'd-m-Y',
+            $request->input('application_date')
+        )->format('Y-m-d');
+
+        $application->update($validated);
+
         return back()->with('success', 'Đơn ứng tuyển đã được cập nhật.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Application $application)
     {
-        Application::destroy($id);
+        $application->delete();
+
         return back()->with('success', 'Đơn ứng tuyển đã được xóa.');
     }
 }

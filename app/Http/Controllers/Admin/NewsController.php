@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Traits\SlugCheck;
 use Carbon\Carbon;
+
 class NewsController extends Controller
 {
     use SlugCheck;
@@ -99,5 +100,16 @@ class NewsController extends Controller
 
         $news->delete();
         return back()->with('success', 'Xóa thành công.');
+    }
+
+    public function updateStatus(Request $request, News $news)
+    {
+        $request->validate([
+            'status' => 'required|in:draft,published'
+        ]);
+
+        $news->update(['status' => $request->status]);
+
+        return response()->json(['success' => true]);
     }
 }

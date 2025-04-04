@@ -22,13 +22,21 @@
                         <div class="col-md-3">
                             <select name="status" class="form-control">
                                 <option value="">Tất cả trạng thái</option>
-                                <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Chờ duyệt
+                                <option value="pending"
+                                    {{ isset($application) && $application->status == 'pending' ? 'selected' : '' }}>Chờ
+                                    duyệt
                                 </option>
-                                <option value="accepted" {{ request('status') == 'accepted' ? 'selected' : '' }}>Chấp
-                                    nhận
+                                <option value="interviewed"
+                                    {{ isset($application) && $application->status == 'interviewed' ? 'selected' : '' }}>Đã
+                                    phỏng vấn</option>
+                                <option value="rejected"
+                                    {{ isset($application) && $application->status == 'rejected' ? 'selected' : '' }}>Từ
+                                    chối
                                 </option>
-                                <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>Từ chối
+                                <option value="hired"
+                                    {{ isset($application) && $application->status == 'hired' ? 'selected' : '' }}>Đã tuyển
                                 </option>
+                            </select>
                             </select>
                         </div>
                         <div class="col-md-2">
@@ -61,9 +69,36 @@
                                 <td>{{ $application->job->job_title ?? 'Không có' }}</td>
                                 <td>{{ $application->application_date }}</td>
                                 <td>
-                                    <span
-                                        class="badge bg-{{ $application->status == 'pending' ? 'warning' : ($application->status == 'accepted' ? 'success' : 'danger') }} bg-opacity-10 text-{{ $application->status == 'pending' ? 'warning' : ($application->status == 'accepted' ? 'success' : 'danger') }}">
-                                        {{ $application->status == 'pending' ? 'Chờ duyệt' : ($application->status == 'accepted' ? 'Chấp nhận' : 'Từ chối') }}
+                                    @php
+                                        $badgeClass = '';
+                                        $badgeText = '';
+
+                                        switch ($application->status) {
+                                            case 'pending':
+                                                $badgeClass = 'warning';
+                                                $badgeText = 'Chờ duyệt';
+                                                break;
+                                            case 'interviewed':
+                                                $badgeClass = 'primary';
+                                                $badgeText = 'Đã phỏng vấn';
+                                                break;
+                                            case 'rejected':
+                                                $badgeClass = 'danger';
+                                                $badgeText = 'Từ chối';
+                                                break;
+                                            case 'hired':
+                                                $badgeClass = 'success';
+                                                $badgeText = 'Đã tuyển';
+                                                break;
+                                            default:
+                                                $badgeClass = 'secondary';
+                                                $badgeText = 'Không xác định';
+                                                break;
+                                        }
+                                    @endphp
+
+                                    <span class="badge bg-{{ $badgeClass }} bg-opacity-10 text-{{ $badgeClass }}">
+                                        {{ $badgeText }}
                                     </span>
                                 </td>
                                 <td class="text-center">

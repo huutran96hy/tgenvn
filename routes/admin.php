@@ -41,6 +41,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('job-categories', JobCategoryController::class);
         Route::resource('employers', EmployerController::class);
         Route::resource('news', NewsController::class);
+        Route::post('/news/{news}/update-status', [NewsController::class, 'updateStatus'])->name('news.update-status');
         Route::resource('news-categories', NewsCategoryController::class);
         Route::resource('applications', ApplicationController::class);
         Route::resource('candidates', CandidateController::class);
