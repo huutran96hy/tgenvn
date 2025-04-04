@@ -25,7 +25,6 @@
                         <div class="col-lg-8 col-md-12">
                             <h5 class="f-18">
                                 {{ $employer->company_name }}
-                                <span class="card-location font-regular ml-20">{{ $employer->address }}</span>
                             </h5>
                             <p class="mt-5 font-md color-text-paragraph-2 mb-15">
                                 {{ $employer->about }}
