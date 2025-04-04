@@ -19,7 +19,6 @@
                                     <figure>
                                         <img alt="jobBox" src="{{ $job->employer->getLogoUrl() }}" >
                                     </figure>
-
                                     <div class="sidebar-info">
                                         <span class="sidebar-company">{{ $job->employer->company_name }}</span>
                                         <span class="card-location">{{ $job->employer->address }}</span>
