@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 
 class Employer extends Model
 {
@@ -44,5 +45,9 @@ class Employer extends Model
 
         // Trả về logo mặc định nếu không có logo
         return asset('assets/imgs/template/logo.svg');
+    }
+    public function getFoundedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('d-m-Y');
     }
 }

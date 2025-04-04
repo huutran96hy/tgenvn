@@ -33,39 +33,22 @@
                         </select>
                     </div> --}}
 
-                    <div class="mb-3">
+                    <div class="file-input-wrapper mb-3">
                         <label class="form-label">Logo</label>
-                        <div class="input-group">
-                            <input type="file" name="logo" class="form-control" id="logoInput" accept="image/*">
-                        </div>
-                        @if (isset($employer) && $employer->logo)
-                            <div class="mt-2">
-                                <img id="logoPreview" src="{{ asset('storage/' . $employer->logo) }}" class="img-thumbnail"
-                                    width="150">
-                            </div>
-                        @else
-                            <div class="mt-2">
-                                <img id="logoPreview" src="" class="img-thumbnail d-none" width="150">
-                            </div>
-                        @endif
+                        <input type="hidden" name="logo" class="all-images"
+                            value="{{ isset($employer) && $employer->logo ? $employer->logo : '' }}">
+
+                        <!-- Vẫn giữ input file nhưng dùng để trigger popup -->
+                        <input type="file" class="file-input-preview" data-browse-on-zone-click="true">
                     </div>
 
-                    <div class="mb-3">
+                    <div class="file-input-wrapper mb-3">
                         <label class="form-label">Ảnh nền</label>
-                        <div class="input-group">
-                            <input type="file" name="background_img" class="form-control" id="bgrImgInput"
-                                accept="image/*">
-                        </div>
-                        @if (isset($employer) && $employer->background_img)
-                            <div class="mt-2">
-                                <img id="bgrImgPreview" src="{{ asset('storage/' . $employer->background_img) }}"
-                                    class="img-thumbnail" width="150">
-                            </div>
-                        @else
-                            <div class="mt-2">
-                                <img id="bgrImgPreview" src="" class="img-thumbnail d-none" width="150">
-                            </div>
-                        @endif
+                        <input type="hidden" name="background_img" class="all-images"
+                            value="{{ isset($employer) && $employer->background_img ? $employer->background_img : '' }}">
+
+                        <!-- Vẫn giữ input file nhưng dùng để trigger popup -->
+                        <input type="file" class="file-input-preview" data-browse-on-zone-click="true">
                     </div>
 
                     <div class="mb-3">
@@ -82,7 +65,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Mô tả nhà tuyển dụng</label>
-                        <textarea name="company_description" class="form-control ckeditor1">
+                        <textarea name="company_description" class="form-control ckeditor">
                             {{ old('company_description', $employer->company_description ?? '') }}
                         </textarea>
                     </div>
@@ -114,9 +97,7 @@
                     <div class="mb-3">
                         <label class="form-label">Ngày thành lập</label>
                         <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="ph-calendar"></i>
-                            </span>
+                            <span class="input-group-text"><i class="ph-calendar"></i></span>
                             <input type="text" name="founded_at" class="form-control datepicker-autohide"
                                 value="{{ old('founded_at', $employer->founded_at ?? '') }}" required>
                         </div>
@@ -144,68 +125,7 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('/ckeditor/ckeditor.js') }}"></script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Tạo CKEditor
-            document.querySelectorAll('.ckeditor1').forEach(editorElement => {
-                CKEDITOR.replace(editorElement);
-            });
-
-            // Khởi tạo Datepicker
-            const options = {
-                autohide: true,
-                format: "yyyy-mm-dd",
-                todayHighlight: true
-            };
-            document.querySelectorAll(".datepicker-autohide").forEach(function(el) {
-                new Datepicker(el, options);
-            });
-
-            // Hiển thị ảnh preview cho logo
-            const logoInput = document.getElementById("logoInput");
-            if (logoInput) {
-                logoInput.addEventListener("change", function(event) {
-                    let file = event.target.files[0];
-                    let preview = document.getElementById("logoPreview");
-
-                    if (file) {
-                        let reader = new FileReader();
-                        reader.onload = function(e) {
-                            preview.src = e.target.result;
-                            preview.classList.remove("d-none");
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                });
-            }
-
-            // Hiển thị ảnh preview cho ảnh nền
-            const bgrImgInput = document.getElementById("bgrImgInput");
-            if (bgrImgInput) {
-                bgrImgInput.addEventListener("change", function(event) {
-                    let file = event.target.files[0];
-                    let preview = document.getElementById("bgrImgPreview");
-
-                    if (file) {
-                        let reader = new FileReader();
-                        reader.onload = function(e) {
-                            preview.src = e.target.result;
-                            preview.classList.remove("d-none");
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                });
-            }
-
-            // Tạo Select2
-            $('.select2').select2({
-                placeholder: "Chọn một mục",
-                allowClear: true
-            });
-        });
-    </script>
+    @include('Admin.snippets.ckeditor_file_management')
 
     <script>
         $(document).ready(function() {

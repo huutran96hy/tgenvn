@@ -33,14 +33,14 @@
 
                     <div class="mb-3">
                         <label class="form-label">Mô tả công việc</label>
-                        <textarea name="job_description" class="form-control ckeditor1" required>
+                        <textarea name="job_description" class="form-control ckeditor" required>
                             {{ old('job_description', $job->job_description ?? '') }}
                         </textarea>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Yêu cầu công việc</label>
-                        <textarea name="requirements" class="form-control ckeditor1" required>
+                        <textarea name="requirements" class="form-control ckeditor" required>
                             {{ old('requirements', $job->requirements ?? '') }}
                         </textarea>
                     </div>
@@ -161,7 +161,7 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('/ckeditor/ckeditor.js') }}"></script>
+    @include('Admin.snippets.ckeditor_file_management')
 
     <script>
         $(document).ready(function() {
@@ -200,30 +200,6 @@
                     $('.text-to-slug[name="slug"]').val(initialSlug);
                 }
             @endif
-        });
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // tạo Datepicker
-            const options = {
-                autohide: true,
-                format: "yyyy-mm-dd",
-                todayHighlight: true
-            };
-            document.querySelectorAll(".datepicker-autohide").forEach(function(el) {
-                new Datepicker(el, options);
-            });
-
-            document.querySelectorAll('.ckeditor1').forEach(editorElement => {
-                CKEDITOR.replace(editorElement);
-            });
-
-            // tạo Select2
-            $('.select2').select2({
-                placeholder: "Chọn một mục",
-                allowClear: true
-            });
         });
     </script>
 @endpush
