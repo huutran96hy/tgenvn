@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 
 class Job extends Model
 {
@@ -45,5 +46,14 @@ class Job extends Model
     public function skills()
     {
         return $this->belongsToMany(Skill::class, 'job_skills', 'job_id', 'skill_id');
+    }
+    public function getPostedDateAttribute($value)
+    {
+        return Carbon::parse($value)->format('d-m-Y');
+    }
+
+    public function getExpiryDateAttribute($value)
+    {
+        return Carbon::parse($value)->format('d-m-Y');
     }
 }

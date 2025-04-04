@@ -33,7 +33,7 @@
                 <div class="swiper-wrapper">
                     @foreach ($banners as $banner)
                         <div class="swiper-slide banner-slide">
-                            <img src="{{ \App\Helpers\CustomHelper::logoSrc($banner) }}" alt="Banner"
+                            <img src="{{ \App\Helpers\CustomHelper::logoSrc('storage/' . $banner) }}" alt="Banner"
                                 style="height:150px">
                         </div>
                     @endforeach

@@ -29,7 +29,6 @@
                     <thead>
                         <tr>
                             <th>Công ty</th>
-                            <th>Mô tả</th>
                             <th>Website</th>
                             <th>Liên hệ</th>
                             <th>Hành động</th>
@@ -39,7 +38,6 @@
                         @foreach ($employers as $employer)
                             <tr>
                                 <td>{{ $employer->company_name }}</td>
-                                <td>{!! Str::limit($employer->company_description, 50) !!}</td>
                                 <td>{{ $employer->website ?? 'N/A' }}</td>
                                 <td>{{ $employer->contact_phone }}</td>
                                 <td class="text-center">

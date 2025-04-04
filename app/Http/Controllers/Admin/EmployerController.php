@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Traits\SlugCheck;
+use Carbon\Carbon;
 
 class EmployerController extends Controller
 {
@@ -37,8 +38,8 @@ class EmployerController extends Controller
             // 'user_id' => 'required|exists:users,id',
             'company_name' => 'required|max:255',
             'slug' => 'required',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'background_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'logo' => 'nullable',
+            'background_img' => 'nullable',
             'company_description' => 'nullable',
             'website' => 'nullable|url',
             'contact_phone' => 'required|max:15',
@@ -54,15 +55,11 @@ class EmployerController extends Controller
         $slug = $this->getStorySlugExist($slug, Employer::class, 'slug', 'employer_id');
         $validated['slug'] = $slug;
 
-        // Lưu logo
-        if ($request->hasFile('logo')) {
-            $validated['logo'] = $request->file('logo')->store('employers/logos', 'public');
-        }
-
-        // Lưu bgr-img
-        if ($request->hasFile('background_img')) {
-            $validated['background_img'] = $request->file('background_img')->store('employers/images', 'public');
-        }
+        // Xử lý ngày
+        $validated['founded_at'] = Carbon::createFromFormat(
+            'd-m-Y',
+            $request->input('founded_at')
+        )->format('Y-m-d');
 
         Employer::create($validated);
         return redirect()->route('admin.employers.index')->with('success', 'Thêm công ty thành công');
@@ -80,8 +77,8 @@ class EmployerController extends Controller
             // 'user_id' => 'required|exists:users,id',
             'company_name' => 'required|max:255',
             'slug' => 'required',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'background_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'logo' => 'nullable',
+            'background_img' => 'nullable',
             'company_description' => 'nullable',
             'website' => 'nullable|url',
             'contact_phone' => 'required|max:15',
@@ -97,23 +94,11 @@ class EmployerController extends Controller
         $slug = $this->getStorySlugExist($slug, Employer::class, 'slug', 'employer_id', $employer->employer_id);
         $validated['slug'] = $slug;
 
-        if ($request->hasFile('logo')) {
-            // Xóa logo
-            if ($employer->logo) {
-                Storage::disk('public')->delete($employer->logo);
-            }
-            // Lưu logo
-            $validated['logo'] = $request->file('logo')->store('employers/logos', 'public');
-        }
-
-        if ($request->hasFile('background_img')) {
-            // Xóa bgr-img
-            if ($employer->background_img) {
-                Storage::disk('public')->delete($employer->background_img);
-            }
-            // Lưu bgr-img
-            $validated['background_img'] = $request->file('background_img')->store('employers/images', 'public');
-        }
+        // Xử lý ngày
+        $validated['founded_at'] = Carbon::createFromFormat(
+            'd-m-Y',
+            $request->input('founded_at')
+        )->format('Y-m-d');
 
         $employer->update($validated);
         return back()->with('success', 'Cập nhật công ty thành công');

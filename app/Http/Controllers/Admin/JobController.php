@@ -9,6 +9,7 @@ use App\Models\Employer;
 use Illuminate\Http\Request;
 use App\Models\Skill;
 use App\Traits\SlugCheck;
+use Carbon\Carbon;
 
 class JobController extends Controller
 {
@@ -69,8 +70,8 @@ class JobController extends Controller
             'location' => 'required|string',
             'category_id' => 'required|exists:job_categories,category_id',
             'employer_id' => 'required|exists:employers,employer_id',
-            'posted_date' => 'required|date|date_format:Y-m-d',
-            'expiry_date' => 'required|date|date_format:Y-m-d|after:posted_date',
+            'posted_date' => 'required',
+            'expiry_date' => 'required|after:posted_date',
             'required_education' => 'nullable|string|max:50',
             'required_exp' => 'nullable|string|max:30',
             'job_type' => 'nullable|string|max:20',
@@ -84,6 +85,11 @@ class JobController extends Controller
         $slug = $request->input('slug');
         $slug = $this->getStorySlugExist($slug, Job::class, 'slug', 'job_id');
         $validated['slug'] = $slug;
+
+        // Chuyển đổi ngày
+        foreach (['posted_date', 'expiry_date'] as $field) {
+            $validated[$field] = Carbon::createFromFormat('d-m-Y', $validated[$field])->format('Y-m-d');
+        }
 
         $job = Job::create($validated);
 
@@ -114,8 +120,8 @@ class JobController extends Controller
             'location' => 'required|string',
             'category_id' => 'required|exists:job_categories,category_id',
             'employer_id' => 'required|exists:employers,employer_id',
-            'posted_date' => 'required|date|date_format:Y-m-d',
-            'expiry_date' => 'required|date|date_format:Y-m-d|after:posted_date',
+            'posted_date' => 'required',
+            'expiry_date' => 'required|after:posted_date',
             'required_education' => 'nullable|string|max:50',
             'required_exp' => 'nullable|string|max:30',
             'job_type' => 'nullable|string|max:20',
@@ -128,6 +134,11 @@ class JobController extends Controller
 
         $slug = $this->getStorySlugExist($slug, Job::class, 'slug', 'job_id', $job->job_id);
         $validated['slug'] = $slug;
+
+        // Chuyển đổi ngày
+        foreach (['posted_date', 'expiry_date'] as $field) {
+            $validated[$field] = Carbon::createFromFormat('d-m-Y', $validated[$field])->format('Y-m-d');
+        }
 
         $job->update($validated);
 
