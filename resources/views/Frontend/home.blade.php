@@ -46,10 +46,10 @@
             <div class="section-box wow animate__animated animate__fadeIn mt-20">
                 <div class="container">
                     <div class="text-center">
-                        <h3 class="section-title mb-10 wow animate__animated animate__fadeInUp">
+                        <h4 class="section-title mb-10 wow animate__animated animate__fadeInUp">
                             Các công ty nổi bật
-                        </h3>
-                        <p class="font-lg color-text-paragraph-2 wow animate__animated animate__fadeInUp">
+                        </h4>
+                        <p class="color-text-paragraph-2 wow animate__animated animate__fadeInUp">
                             Chúng tôi luôn tìm kiếm công việc phù hợp cho bạn. Với hơn 1000+
                             tin tuyển dụng mới hàng ngày
                         </p>
