@@ -8,9 +8,15 @@ use App\Models\Skill;
 
 class SkillController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $skills = Skill::orderBy('skill_id', 'asc')->paginate(10);
+        $query = Skill::orderBy('skill_id', 'asc');
+
+        if ($request->filled('search')) {
+            $query->where('skill_name', 'like', "%{$request->search}%");
+        }
+
+        $skills = $query->paginate(10);
 
         return view('Admin.pages.skills.index', compact('skills'));
     }

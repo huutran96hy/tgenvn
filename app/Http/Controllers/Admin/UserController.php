@@ -15,8 +15,7 @@ class UserController extends Controller
         // Lọc theo tên hoặc email
         if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
-                $q->where('name', 'like', "%{$request->search}%")
-                    ->orWhere('email', 'like', "%{$request->search}%");
+                $q->where('username', 'like', "%{$request->search}%");
             });
         }
 

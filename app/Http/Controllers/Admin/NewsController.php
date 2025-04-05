@@ -14,9 +14,20 @@ use Carbon\Carbon;
 class NewsController extends Controller
 {
     use SlugCheck;
-    public function index()
+    public function index(Request $request)
     {
-        $news = News::with('category', 'author')->latest()->paginate(10);
+        $query = News::with('category', 'author')->latest();
+
+        if ($request->filled('search')) {
+            $query->where('title', 'like', "%{$request->search}%");
+        }
+
+        if ($request->filled('news_category_id')) {
+            $query->where('news_category_id', $request->news_category_id);
+        }
+
+        $news = $query->paginate(10);
+
         $categories = NewsCategory::all();
 
         return view('Admin.pages.news.index', compact('news', 'categories'));

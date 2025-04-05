@@ -15,7 +15,7 @@
                 <form action="{{ route('admin.contacts.index') }}" method="GET" class="mb-3">
                     <div class="row">
                         <div class="col-md-4">
-                            <input type="text" name="search" class="form-control" placeholder="Tìm kiếm liên hệ"
+                            <input type="text" name="search" class="form-control" placeholder="Tìm kiếm theo tên hoặc email"
                                 value="{{ request('search') }}">
                         </div>
                         <div class="col-md-2">

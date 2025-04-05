@@ -8,9 +8,16 @@ use App\Http\Controllers\Controller;
 
 class NewsCategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $categories = NewsCategory::latest()->paginate(10);
+        $query = NewsCategory::latest();
+
+        if ($request->filled('search')) {
+            $query->where('category_name', 'like', "%{$request->search}%");
+        }
+
+        $categories = $query->paginate(10);
+
         return view('Admin.pages.news_categories.index', compact('categories'));
     }
 

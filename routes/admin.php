@@ -31,8 +31,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware([AdminAccess::class])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-        Route::get('/get-theme', [ConfigController::class, 'getTheme'])->name('get.theme');
-        Route::post('/change-theme', [ConfigController::class, 'changeTheme'])->name('change.theme');
 
         Route::resource('users', UserController::class);
         Route::resource('jobs', JobController::class);

@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <input type="text" name="search" class="form-control"
-                                placeholder="Tìm kiếm theo tên hoặc email" value="{{ request('search') }}">
+                                placeholder="Tìm kiếm theo tên" value="{{ request('search') }}">
                         </div>
                         <div class="col-md-3">
                             <select name="role" class="form-control">
@@ -41,7 +41,7 @@
                     <thead>
                         <tr>
                             <th>Tên</th>
-                            <th>Email</th>
+                            {{-- <th>Email</th> --}}
                             <th>Vai trò</th>
                             <th>Hành động</th>
                         </tr>
@@ -49,8 +49,8 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->username }}</td>
+                                {{-- <td>{{ $user->email }}</td> --}}
                                 <td>{{ ucwords(str_replace('_', ' ', $user->role)) }}</td>
                                 <td class="text-center">
                                     <x-action-dropdown editRoute="admin.users.edit" deleteRoute="admin.users.destroy"

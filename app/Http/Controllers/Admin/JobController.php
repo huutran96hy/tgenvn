@@ -35,11 +35,6 @@ class JobController extends Controller
             $query->where('employer_id', $request->employer_id);
         }
 
-        // Lọc theo vị trí
-        if ($request->filled('location')) {
-            $query->where('location', 'like', "%{$request->location}%");
-        }
-
         // Lọc theo trạng thái phê duyệt
         if ($request->filled('approval_status')) {
             $query->where('approval_status', $request->approval_status);

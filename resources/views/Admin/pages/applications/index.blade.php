@@ -22,21 +22,17 @@
                         <div class="col-md-3">
                             <select name="status" class="form-control">
                                 <option value="">Tất cả trạng thái</option>
-                                <option value="pending"
-                                    {{ isset($application) && $application->status == 'pending' ? 'selected' : '' }}>Chờ
+                                <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Chờ
                                     duyệt
                                 </option>
-                                <option value="interviewed"
-                                    {{ isset($application) && $application->status == 'interviewed' ? 'selected' : '' }}>Đã
+                                <option value="interviewed" {{ request('status') == 'interviewed' ? 'selected' : '' }}>Đã
                                     phỏng vấn</option>
-                                <option value="rejected"
-                                    {{ isset($application) && $application->status == 'rejected' ? 'selected' : '' }}>Từ
+                                <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>Từ
                                     chối
                                 </option>
-                                <option value="hired"
-                                    {{ isset($application) && $application->status == 'hired' ? 'selected' : '' }}>Đã tuyển
+                                <option value="hired" {{ request('status') == 'hired' ? 'selected' : '' }}>Đã
+                                    tuyển
                                 </option>
-                            </select>
                             </select>
                         </div>
                         <div class="col-md-2">

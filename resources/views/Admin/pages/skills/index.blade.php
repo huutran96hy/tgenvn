@@ -16,7 +16,7 @@
                 <form action="{{ route('admin.skills.index') }}" method="GET" class="mb-3">
                     <div class="row">
                         <div class="col-md-4">
-                            <input type="text" name="search" class="form-control" placeholder="Tìm kiếm kỹ năng"
+                            <input type="text" name="search" class="form-control" placeholder="Tìm kiếm tên kỹ năng"
                                 value="{{ request('search') }}">
                         </div>
                         <div class="col-md-2">
