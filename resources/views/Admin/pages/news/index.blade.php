@@ -20,7 +20,7 @@
                                 value="{{ request('search') }}">
                         </div>
                         <div class="col-md-3">
-                            <select name="category" class="form-control">
+                            <select name="category" class="form-control select2">
                                 <option value="">Tất cả danh mục</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->news_category_id }}"
@@ -100,6 +100,12 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
+            // tạo Select2
+            $('.select2').select2({
+                placeholder: "Chọn một mục",
+                allowClear: true
+            });
+
             $(".change-status").click(function(e) {
                 e.preventDefault();
 
