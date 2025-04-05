@@ -17,7 +17,7 @@
                             <div class="sidebar-heading">
                                 <div class="avatar-sidebar">
                                     <figure>
-                                        <img alt="jobBox" src="{{ $job->employer->getLogoUrl() }}" >
+                                        <img alt="jobBox" src="{{ $job->employer->getLogoUrl() }}">
                                     </figure>
                                     <div class="sidebar-info">
                                         <span class="sidebar-company">{{ $job->employer->company_name }}</span>
@@ -120,7 +120,7 @@
                                         data-bs-target="#ModalApplyJobForm">Gửi CV ngay</div>
                                 </div>
                             </div>
-                            <div class="job-overview">
+                            {{-- <div class="job-overview">
                                 <h5 class="border-bottom pb-15 mb-30">Giới thiệu</h5>
                                 <div class="row">
                                     <div class="col-md-6 d-flex">
@@ -225,16 +225,14 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="content-single">
                                 <h4>Chào mừng đến với {{ $job->employer->company_name }}</h4>
                                 <p>{!! $job->job_description ?? 'Chưa có mô tả công việc' !!}</p>
-                                <h4>Yêu cầu kinh nghiệm</h4>
-                                <ul>
-                                    @foreach (explode(',', $job->requirements ?? '') as $requirement)
-                                        <li>{!! $requirement ?? 'Không có yêu cầu cụ thể' !!}</li>
-                                    @endforeach
-                                </ul>
+                                <h4>Yêu cầu công việc</h4>
+                                <p>{!! $job->requirements ?? 'Không có yêu cầu cụ thể' !!}</p>
+                                <h4>Phúc lợi công ty</h4>
+                                <p>{!! $job->job_benefit ?? 'Không có phúc lợi cụ thể' !!}</p>
                             </div>
                             <div class="author-single">
                                 <span>{{ $job->employer->company_name }}</span>

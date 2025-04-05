@@ -25,35 +25,13 @@
         }
     </style>
     <main class="main">
-        <section class="section-box" style="display: block;line-height: 0px;">
-            @php
-                $banners = json_decode(\App\Models\Config::where('key', 'banners')->value('value') ?? '[]', true);
-            @endphp
-            <div class="banner-main banner-slider">
-                <div class="swiper-wrapper">
-                    @foreach ($banners as $banner)
-                        <div class="swiper-slide banner-slide">
-                            <img src="{{ \App\Helpers\CustomHelper::logoSrc($banner) }}" alt="Banner" style="height:150px">
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
+        @include('Frontend.snippets.banner')
 
         @include('Frontend.layouts.header')
 
         <section class="section-box">
             <div class="section-box wow animate__animated animate__fadeIn mt-20">
                 <div class="container">
-                    <div class="text-center">
-                        <h4 class="section-title mb-10 wow animate__animated animate__fadeInUp">
-                            Các công ty nổi bật
-                        </h4>
-                        <p class="color-text-paragraph-2 wow animate__animated animate__fadeInUp">
-                            Chúng tôi luôn tìm kiếm công việc phù hợp cho bạn. Với hơn 1000+
-                            tin tuyển dụng mới hàng ngày
-                        </p>
-                    </div>
                     <div class="box-swiper">
                         <div class="swiper-container swiper-group-5 swiper">
                             <div class="swiper-wrapper pb-70 pt-20">

@@ -1,0 +1,171 @@
+.dropdown-container {
+    position: relative;
+}
+
+.form-select {
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #555;
+    outline: none;
+    transition: all 0.3s ease;
+    min-width: 160px;
+}
+
+.form-select:focus {
+    border-color: #265c77;
+    box-shadow: 0 0 5px rgba(38, 92, 119, 0.4);
+}
+
+.mobile-search .form-select {
+    width: auto;
+    font-size: 14px;
+    padding: 8px;
+}
+
+.mobile-search input {
+    flex: 1;
+    font-size: 14px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.mobile-search button {
+    background-color: #265c77;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.header .main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.form-input {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    flex: 1;
+}
+
+.form-input:focus {
+    border-color: #265c77;
+    box-shadow: 0 0 5px rgba(38, 92, 119, 0.4);
+}
+
+.btn-find {
+    background-color: #265c77;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-find:hover {
+    background-color: #1c4359;
+}
+
+@media (max-width: 768px) {
+    .header-right form {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .header-right form input {
+        margin-bottom: 10px;
+    }
+
+    .height-header {
+        height: 50px;
+    }
+}
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 0 10px;
+}
+
+.form-input.input-keysearch {
+    border: none;
+    padding: 8px 10px;
+    flex: 1;
+    font-size: 14px;
+    outline: none;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #555;
+}
+
+.form-input.input-keysearch:focus {
+    box-shadow: 0 0 5px rgba(38, 92, 119, 0.4);
+    border-color: #265c77;
+}
+
+.search-select-wrapper {
+    margin-left: 10px;
+    position: relative;
+}
+
+.form-select {
+    padding: 8px 10px;
+    font-size: 14px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    width: 120px;
+}
+
+.form-select:focus {
+    box-shadow: 0 0 5px rgba(38, 92, 119, 0.4);
+    border-color: #265c77;
+}
+
+.btn-find {
+    background-color: #265c77;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.btn-find:hover {
+    background-color: #1c4359;
+}
+
+@media (max-width: 991px) {
+    .search-wrapper {
+        width: 100%;
+    }
+
+    .form-input.input-keysearch,
+    .form-select {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .btn-find {
+        padding: 8px 16px;
+    }
+}

@@ -8,6 +8,41 @@
 @endpush
 
 @section('content')
+    <style>
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease, filter 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        @media (max-width: 600px) {
+            .gallery-item img {
+                height: 150px;
+            }
+        }
+    </style>
+
     <main class="main">
         <section class="section-box-2">
             <div class="container">
@@ -37,6 +72,28 @@
                         </div>
                     </div>
                 </div>
+                <div class="box-nav-tabs mt-40 mb-5">
+                    <ul class="nav" role="tablist">
+                        <li>
+                            <a class="btn btn-border aboutus-icon mr-15 mb-5 active" href="#tab-about" data-bs-toggle="tab"
+                                role="tab" aria-controls="tab-about" aria-selected="true">Về chúng tôi
+                            </a>
+                        </li>
+                        <li>
+                            <a class="btn btn-border recruitment-icon mr-15 mb-5" href="#employer_benefit"
+                                data-bs-toggle="tab" role="tab" aria-controls="employer_benefit"
+                                aria-selected="false">Quyền lợi
+                            </a>
+                        </li>
+                        <li>
+                            <a class="btn btn-border people-icon mb-5" href="#images" data-bs-toggle="tab" role="tab"
+                                aria-controls="images" aria-selected="false">
+                                Hình ảnh về chúng tôi
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="border-bottom pt-10 pb-10"></div>
             </div>
         </section>
 
@@ -52,22 +109,22 @@
                                     <p>{!! $employer->company_description !!}</p>
 
                                 </div>
-                                {{-- <div class="tab-pane fade" id="tab-recruitments" role="tabpanel"
-                                    aria-labelledby="tab-recruitments">
-                                    <h4>Tuyển dụng</h4>
-                                    <p>ORS hướng đến các giải pháp phần mềm cho phép các doanh nghiệp năng suất và lành mạnh
-                                        trong thế giới công nghệ hiện đại, liên tục thay đổi các mô hình và chuẩn mực công
-                                        việc, và nhu cầu về khả năng phục hồi của tổ chức.p>
-                                    <p>The ideal candidate will have strong creative skills and a portfolio of work which
-                                        demonstrates their passion for illustrative design and typography. This candidate
-                                        will have experiences in working with numerous different design platforms such as
-                                        digital and print forms.</p>
+                                <div class="tab-pane fade" id="employer_benefit" role="tabpanel"
+                                    aria-labelledby="employer_benefit">
+                                    <h4>Quyền lợi</h4>
+                                    <p>{!! $employer->employer_benefit !!}</p>
                                 </div>
-                                <div class="tab-pane fade" id="tab-people" role="tabpanel" aria-labelledby="tab-people">
-                                    <h4>Nhân sự</h4>
-                                    <p> Ứng viên sẽ có kinh nghiệm làm việc với nhiều nền tảng thiết kế khác nhau như các
-                                        hình thức kỹ thuật số</p>
-                                </div> --}}
+                                <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images">
+                                    <h4 style="font-size: 24px; font-weight: bold; margin-bottom: 20px;">Hình ảnh về chúng
+                                        tôi</h4>
+                                    <div class="gallery-container">
+                                        @foreach (json_decode($employer->images, true) as $image)
+                                            <div class="gallery-item">
+                                                <img src="{{ asset($image) }}" alt="Ảnh về chúng tôi">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="box-related-job content-page">
@@ -146,8 +203,8 @@
                                 <div class="box-map">
                                     <iframe
                                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3728.8339089556225!2d106.71297808844172!3d20.838412383817857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a7bef0610ffd9%3A0x4d6da8ffdf078c43!2sGarage%20Nam%20Kh%C3%A1nh!5e0!3m2!1svi!2s!4v1742976293412!5m2!1svi!2s"
-                                        width="200" height="200" style="border:0;" allowfullscreen="" loading="lazy"
-                                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                        width="200" height="200" style="border:0;" allowfullscreen=""
+                                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                 </div>
                             </div>
                             <div class="sidebar-list-job">

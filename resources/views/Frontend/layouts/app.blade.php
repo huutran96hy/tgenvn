@@ -23,6 +23,7 @@
 
     {{-- <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/perfect-scrollbar/1.5.5/css/perfect-scrollbar.min.css" /> --}}
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" type="text/css">
 
     <style>
         .banner-main {
@@ -46,7 +47,7 @@
 </head>
 
 <body>
-    @if (!Route::is('index'))
+    @if (!Route::is('index', 'jobs.index', 'employers.index'))
         <!-- Header -->
         @include('Frontend.layouts.header')
     @endif

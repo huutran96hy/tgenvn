@@ -16,10 +16,6 @@ class ConfigSeeder extends Seeder
             ['key' => 'banners', 'value' => null],
             ['key' => 'logo', 'value' => null],
             ['key' => 'icon', 'value' => null],
-            ['key' => 'title_for_job_list', 'value' => null],
-            ['key' => 'des_for_job_list', 'value' => null],
-            ['key' => 'title_for_employer_list', 'value' => null],
-            ['key' => 'des_for_employer_list', 'value' => null],
         ];
 
         foreach ($configs as $config) {

@@ -34,7 +34,7 @@ class CandidateController extends Controller
             // 'phone' => 'required|string',
             // 'address' => 'required|string',
             // 'education' => 'nullable|string',
-            'resume' => 'required|file|mimes:pdf,doc,docx|max:2048',
+            'resume' => 'required|file|mimes:pdf,doc,docx,xls,xlsx|max:2048',
             'job_id' => 'required|exists:jobs,job_id',
         ]);
 
@@ -76,7 +76,7 @@ class CandidateController extends Controller
             // 'phone' => 'sometimes|string',
             // 'address' => 'sometimes|string',
             // 'education' => 'sometimes|string',
-            'resume' => 'required|file|mimes:pdf,doc,docx|max:2048',
+            'resume' => 'required|file|mimes:pdf,doc,docx,xls,xlsx|max:2048',
         ]);
 
         if ($request->hasFile('resume')) {

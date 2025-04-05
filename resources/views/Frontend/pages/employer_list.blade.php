@@ -22,40 +22,10 @@
         }
     </style>
     <main class="main">
-        <div class="container pt-10">
-            <div class="banner-hero banner-single banner-single-bg">
-                <div class="block-banner text-center">
-                    <h3>
-                        {{-- <span class="color-brand-2">600+ Deal </span> --}}
-                        {{ \App\Models\Config::getConfigValue('title_for_employer_list', '600+ Deal tuyển dụng ngay') }}
-                    </h3>
-                    <div class="font-sm color-text-paragraph-2 mt-10">
-                        {{ \App\Models\Config::getConfigValue('des_for_employer_list', 'Kết nối với nhiều doanh nghiệp toàn quốc') }}
-                    </div>
-                    <div class="form-find text-start mt-40">
-                        <form method="GET" action="{{ route('employers.index') }}">
-                            {{-- <select name="industry" class="form-input">
-                                <option value="">Ngành nghề</option>
-                                @foreach ($industries as $id => $name)
-                                    <option value="{{ $id }}" {{ request('industry') == $id ? 'selected' : '' }}>
-                                        {{ $name }}</option>
-                                @endforeach
-                            </select>
-                            <select name="province" class="form-input">
-                                <option value="">Chọn tỉnh/TP</option>
-                                @foreach ($provinces as $code => $name)
-                                    <option value="{{ $code }}"
-                                        {{ request('province') == $code ? 'selected' : '' }}>{{ $name }}</option>
-                                @endforeach
-                            </select> --}}
-                            <input name="keyword" type="text" class="form-input input-keysearch mr-10"
-                                placeholder="Nhập từ khoá..." value="{{ request('search') }}">
-                            <button class="btn btn-default btn-find font-sm" type="submit">Tìm kiếm</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('Frontend.snippets.banner')
+
+        @include('Frontend.layouts.header')
+
         <section class="section-box mt-30">
             <div class="container">
                 <div class="row flex-row-reverse">

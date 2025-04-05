@@ -47,8 +47,22 @@
                         <input type="hidden" name="background_img" class="all-images"
                             value="{{ isset($employer) && $employer->background_img ? $employer->background_img : '' }}">
 
-                        <!-- Vẫn giữ input file nhưng dùng để trigger popup -->
                         <input type="file" class="file-input-preview" data-browse-on-zone-click="true">
+                    </div>
+
+                    <div class="file-input-wrapper-array mb-3">
+                        <label class="form-label">Ảnh về công ty</label>
+
+                        @if (!isset($employer))
+                            {{-- Khi create, images là mảng JSON --}}
+                            <input type="hidden" name="images" class="all-images-array"
+                                value='@json($imageUrls ?? [])'>
+                        @else
+                            {{-- Khi edit --}}
+                            <input type="hidden" name="images" class="all-images-array" value="{{ $employer->images }}">
+                        @endif
+
+                        <input type="file" class="file-input-preview-array" data-browse-on-zone-click="true">
                     </div>
 
                     <div class="mb-3">
@@ -67,6 +81,13 @@
                         <label class="form-label">Mô tả nhà tuyển dụng</label>
                         <textarea name="company_description" class="form-control ckeditor">
                             {{ old('company_description', $employer->company_description ?? '') }}
+                        </textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Quyền lợi</label>
+                        <textarea name="employer_benefit" class="form-control ckeditor">
+                            {{ old('employer_benefit', $employer->employer_benefit ?? '') }}
                         </textarea>
                     </div>
 
@@ -126,6 +147,117 @@
 
 @push('scripts')
     @include('Admin.snippets.ckeditor_file_management')
+
+    <script>
+        $(document).ready(function() {
+            $('.file-input-wrapper-array').each(function() {
+                const $wrapper = $(this);
+                const $previewInput = $wrapper.find('.file-input-preview-array');
+                const $hiddenInput = $wrapper.find('.all-images-array');
+
+                console.log($hiddenInput.val());
+                let allImages = JSON.parse($hiddenInput.val() || '[]');
+                console.log(allImages);
+
+                // khởi tạo lại fileinput preview
+                function renderPreviews(images) {
+                    $previewInput.fileinput('destroy'); // Xoá instance cũ
+
+                    const baseUrl = "{{ asset('') }}";
+                    // full URL để preview
+                    const previewImages = images.map(image => baseUrl + image);
+
+                    $previewInput.fileinput({
+                        initialPreview: previewImages,
+                        initialPreviewConfig: images.map(image => ({
+                            caption: image.split('/').pop(),
+                            key: image,
+                            downloadUrl: baseUrl + image
+                        })),
+                        showRemove: false,
+                        showUpload: false,
+                        showCancel: false,
+                        showClose: false,
+                        showZoom: true,
+                        showBrowse: false,
+                        initialPreviewAsData: true,
+                        overwriteInitial: false,
+                        browseOnZoneClick: true,
+                        dropZoneEnabled: false,
+                        showBrowse: true,
+                        browseLabel: 'Chọn ảnh',
+                        allowedPreviewTypes: ['image'],
+                        fileActionSettings: {
+                            showRemove: true,
+                            removeIcon: '<i class="ph-x text-danger"></i>',
+                            removeClass: 'btn btn-sm btn-light-danger rounded-pill',
+                            showDownload: false,
+                            showBrowse: false,
+                            showZoom: false,
+                        }
+                    });
+                }
+
+                renderPreviews(allImages);
+
+                // ❌ Ngăn người dùng chọn ảnh từ máy
+                $previewInput.on('click', function(e) {
+                    e.preventDefault();
+                });
+
+                // ✅ Mở popup Laravel Filemanager khi click Browse
+                $wrapper.on('click', '.btn-file input[type=file]', function(e) {
+                    e.preventDefault();
+
+                    window.open('/admin/laravel-filemanager?type=image', 'lfm',
+                        'width=900,height=600');
+
+                    window.SetUrl = function(files) {
+                        const items = Array.isArray(files) ? files : [files];
+                        const baseUrl = "{{ asset('') }}";
+
+                        items.forEach(file => {
+                            const url = file.url;
+
+                            // Tạo đường dẫn tương đối từ URL trả về
+                            const relativeUrl = new URL(url).pathname.replace(
+                                /^\/storage\//, 'storage/');
+
+                            const fullUrl = baseUrl + relativeUrl;
+
+                            // Kiểm tra xem ảnh đã có trong allImages chưa, nếu chưa thì thêm vào
+                            if (!allImages.includes(relativeUrl)) {
+                                allImages.push(relativeUrl);
+                            }
+                        });
+
+                        // Cập nhật input hidden với relativeUrl và trigger sự kiện change
+                        $hiddenInput.val(JSON.stringify(allImages)).trigger('change');
+                    };
+
+                });
+
+                // ✅ Khi xoá ảnh từ preview
+                $wrapper.on('click', '.kv-file-remove', function(e) {
+                    e.preventDefault();
+                    const $frame = $(this).closest('.file-preview-frame');
+                    const src = $frame.find('img').attr('src');
+
+                    // Loại bỏ ảnh khỏi allImages bằng relativeUrl
+                    allImages = allImages.filter(url => url !== src.replace("{{ asset('') }}",
+                        ""));
+                    $hiddenInput.val(JSON.stringify(allImages)).trigger('change');
+                    $frame.remove();
+                });
+
+                $hiddenInput.on('change', function() {
+                    const updated = JSON.parse($hiddenInput.val() || '[]');
+                    allImages = updated;
+                    renderPreviews(allImages);
+                });
+            });
+        });
+    </script>
 
     <script>
         $(document).ready(function() {

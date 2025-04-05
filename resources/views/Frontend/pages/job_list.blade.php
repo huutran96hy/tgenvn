@@ -22,53 +22,10 @@
         }
     </style>
     <main class="main">
-        <section class="section-box-2 pt-10">
-            <div class="container">
-                <div class="banner-hero banner-single banner-single-bg">
-                    <div class="block-banner text-center">
-                        <h3 class="wow animate__animated animate__fadeInUp">
-                            {{-- <span class="color-brand-2">44+ Deal </span> --}}
-                            {{ \App\Models\Config::getConfigValue('title_for_job_list', '44+ Deal tuyển dụng ngay') }}
-                        </h3>
-                        <div class="font-sm color-text-paragraph-2 mt-10 wow animate__animated animate__fadeInUp"
-                            data-wow-delay=".1s">
-                            {{ \App\Models\Config::getConfigValue('des_for_job_list', 'Giúp ứng viên chọn công việc phù hợp') }}
-                            <br class="d-none d-xl-block">
-                        </div>
-                        <div class="form-find text-start mt-40 wow animate__animated animate__fadeInUp">
-                            <form method="GET" action="{{ route('jobs.index') }}">
-                                {{-- <div class="box-industry">
-                                    <select class="form-input mr-10 input-industry" name="industry">
-                                        <option value="0" selected disabled>Công việc</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}"
-                                                {{ request('industry') == $category->id ? 'selected' : '' }}>
-                                                {{ $category->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+        @include('Frontend.snippets.banner')
 
-                                <select class="form-input mr-10" name="province">
-                                    <option value="" selected disabled>Chọn tỉnh/TP</option>
-                                    @foreach ($provinces as $province)
-                                        <option value="{{ $province }}"
-                                            {{ request('province') == $province ? 'selected' : '' }}>
-                                            {{ $province }}
-                                        </option>
-                                    @endforeach
-                                </select> --}}
+        @include('Frontend.layouts.header')
 
-                                <input class="form-input input-keysearch mr-10" type="text" name="keyword"
-                                    placeholder="Nhập từ khoá..." value="{{ request('keyword') }}">
-
-                                <button class="btn btn-default btn-find font-sm" type="submit">Tìm kiếm</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
         <section class="section-box mt-30">
             <div class="container">
                 <div class="row flex-row-reverse">
@@ -149,7 +106,7 @@
 
                             <div class="row">
                                 @foreach ($jobs as $job)
-                                    <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12">
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                                         <div class="card-grid-2 hover-up">
                                             <div class="card-grid-2-image-left" style="padding:15px">
                                                 <span class="flash"></span>
@@ -196,75 +153,127 @@
                                 <div class="filter-block head-border mb-30">
                                     <h5>Bộ Lọc <a class="link-reset" href="#">Làm mới</a></h5>
                                 </div>
-                                {{-- <div class="filter-block mb-30">
-                                    <div class="form-group select-style select-style-icon">
-                                        <select class="form-control form-icons">
-                                            <option>Hải Phòng</option>
-                                            <option>Hà Nội</option>
-                                            <option>Đà Nẵng</option>
-                                            <option>Hồ Chí Minh</option>
-                                            <option>Nha Trang</option>
-                                        </select><i class="fi-rr-marker"></i>
-                                    </div>
+
+                                {{-- <div class="form-group select-style select-style-icon">
+                                    <select class="form-control form-icons" id="location_filter">
+                                        <option value="">Tất cả địa điểm</option>
+                                        <option value="Hải Phòng">Hải Phòng</option>
+                                        <option value="Hà Nội">Hà Nội</option>
+                                        <option value="Đà Nẵng">Đà Nẵng</option>
+                                        <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                        <option value="Nha Trang">Nha Trang</option>
+                                    </select>
+                                    <i class="fi-rr-marker"></i>
                                 </div> --}}
-                                {{-- <div class="filter-block mb-20">
+
+                                <div class="filter-block mb-20">
                                     <h5 class="medium-heading mb-15">Vị trí</h5>
                                     <div class="form-group">
-                                        <ul class="list-checkbox">
+                                        <ul class="list-checkbox" id="job-category-checkbox-group">
                                             <li>
                                                 <label class="cb-container">
-                                                    <input type="checkbox" checked="checked"><span class="text-small">Tất
-                                                        cả</span><span class="checkmark"></span>
-                                                </label><span class="number-item">180</span>
+                                                    <input type="checkbox" value="all" checked>
+                                                    <span class="text-small">Tất cả</span>
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </li>
+                                            @foreach ($categories as $category)
+                                                <li>
+                                                    <label class="cb-container">
+                                                        <input type="checkbox" value="{{ $category->category_id }}">
+                                                        <span class="text-small">{{ $category->category_name }}</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group mb-20">
+                                    <h5 class="medium-heading mb-25">Mức lương</h5>
+                                    <ul class="list-checkbox" id="salary-checkbox-group">
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox" value="all" checked>
+                                                <span class="text-small">Tất cả</span>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox" value="10000000-20000000">
+                                                <span class="text-small">10-20.000.000đ</span>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox" value="20000000-40000000">
+                                                <span class="text-small">20-40.000.000đ</span>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox" value="40000000-60000000">
+                                                <span class="text-small">40-60.000.000đ</span>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox" value="60000000-80000000">
+                                                <span class="text-small">60-80.000.000đ</span>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox" value="80000000-100000000">
+                                                <span class="text-small">80-100.000.000đ</span>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="cb-container">
+                                                <input type="checkbox" value=">100000000">
+                                                <span class="text-small">>100.000.000đ</span>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                {{-- <div class="filter-block mb-30">
+                                    <h5 class="medium-heading mb-10">Vị trí tuyển dụng</h5>
+                                    <div class="form-group">
+                                        <ul class="list-checkbox" id="position-checkbox-group">
+                                            <li>
+                                                <label class="cb-container">
+                                                    <input type="checkbox" value="Senior">
+                                                    <span class="text-small">Senior</span>
+                                                    <span class="checkmark"></span>
+                                                </label>
                                             </li>
                                             <li>
                                                 <label class="cb-container">
-                                                    <input type="checkbox"><span class="text-small">Kỹ sư phần
-                                                        mềm</span><span class="checkmark"></span>
-                                                </label><span class="number-item">12</span>
+                                                    <input type="checkbox" value="Junior">
+                                                    <span class="text-small">Junior</span>
+                                                    <span class="checkmark"></span>
+                                                </label>
                                             </li>
                                             <li>
                                                 <label class="cb-container">
-                                                    <input type="checkbox"><span class="text-small">Tài chính</span><span
-                                                        class="checkmark"></span>
-                                                </label><span class="number-item">23</span>
-                                            </li>
-                                            <li>
-                                                <label class="cb-container">
-                                                    <input type="checkbox"><span class="text-small">Nhân sự</span><span
-                                                        class="checkmark"></span>
-                                                </label><span class="number-item">43</span>
-                                            </li>
-                                            <li>
-                                                <label class="cb-container">
-                                                    <input type="checkbox"><span class="text-small">Quản trị</span><span
-                                                        class="checkmark"></span>
-                                                </label><span class="number-item">65</span>
-                                            </li>
-                                            <li>
-                                                <label class="cb-container">
-                                                    <input type="checkbox"><span class="text-small">Kỹ sư </span><span
-                                                        class="checkmark"></span>
-                                                </label><span class="number-item">76</span>
+                                                    <input type="checkbox" value="Fresher">
+                                                    <span class="text-small">Fresher</span>
+                                                    <span class="checkmark"></span>
+                                                </label>
                                             </li>
                                         </ul>
                                     </div>
                                 </div> --}}
-                                <div class="filter-block mb-20">
-                                    <h5 class="medium-heading mb-25">Mức lương</h5>
-                                    <div class="form-group mb-20">
-                                        <select id="salary_range">
-                                            <option value="">Chọn mức lương</option>
-                                            <option value="all">Tất cả mức lương</option>
-                                            <option value="10000000-20000000">10-20.000.000đ</option>
-                                            <option value="20000000-40000000">20-40.000.000đ</option>
-                                            <option value="40000000-60000000">40-60.000.000đ</option>
-                                            <option value="60000000-80000000">60-80.000.000đ</option>
-                                            <option value="80000000-100000000">80-100.000.000đ</option>
-                                            <option value=">100000000">>100.000.000đ</option>
-                                        </select>
-                                    </div>
-                                </div>
 
                                 {{-- <div class="filter-block mb-30">
                                     <h5 class="medium-heading mb-10">Từ khoá nổi bật</h5>
@@ -284,32 +293,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
-                                <div class="filter-block mb-30">
-                                    <h5 class="medium-heading mb-10">Vị trí tuyển dụng</h5>
-                                    <div class="form-group">
-                                        <ul class="list-checkbox">
-                                            <li>
-                                                <label class="cb-container">
-                                                    <input type="checkbox"><span class="text-small">Senior</span><span
-                                                        class="checkmark"></span>
-                                                </label><span class="number-item">12</span>
-                                            </li>
-                                            <li>
-                                                <label class="cb-container">
-                                                    <input type="checkbox" checked="checked"><span
-                                                        class="text-small">Junior</span><span class="checkmark"></span>
-                                                </label><span class="number-item">35</span>
-                                            </li>
-                                            <li>
-                                                <label class="cb-container">
-                                                    <input type="checkbox"><span class="text-small">Fresher</span><span
-                                                        class="checkmark"></span>
-                                                </label><span class="number-item">56</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                </div>                            
                                 <div class="filter-block mb-30">
                                     <h5 class="medium-heading mb-10">Kinh nghiệm</h5>
                                     <div class="form-group">
@@ -452,17 +436,91 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            $('#salary_range').change(function() {
-                var selectedValue = $(this).val();
-                var url = new URL(window.location.href);
+            const url = new URL(window.location.href);
+            const urlParams = url.searchParams;
 
-                if (selectedValue === "all") {
-                    url.searchParams.delete('salary_range');
+            // Helper function to update URL params
+            function updateURLParam(param, value) {
+                if (value.length === 0) {
+                    urlParams.delete(param); // Xóa tham số nếu không có giá trị
                 } else {
-                    url.searchParams.set('salary_range', selectedValue);
+                    urlParams.set(param, value.join(',')); // Set tham số với giá trị mới
                 }
+                window.location.href = url.toString(); // Tải lại trang với URL mới
+            }
 
-                window.location.href = url.toString(); // Chuyển trang ngay khi chọn
+            // --- Handle Job Categories ---
+            const jobCategoryParam = urlParams.get('job_category');
+            if (jobCategoryParam) {
+                const selectedCategory = jobCategoryParam.split(',')[0];
+                $('#job-category-checkbox-group input[type="checkbox"]').each(function() {
+                    const val = $(this).val();
+                    $(this).prop('checked', val === selectedCategory);
+                });
+            }
+
+            $('#job-category-checkbox-group input[type="checkbox"]').change(function() {
+                const clickedValue = $(this).val();
+
+                // Nếu "Tất cả" được chọn, xóa tham số job_category
+                if (clickedValue === 'all') {
+                    $('#job-category-checkbox-group input[type="checkbox"]').prop('checked', false);
+                    $(this).prop('checked', true);
+                    updateURLParam('job_category', []);
+                } else {
+                    $('#job-category-checkbox-group input[value="all"]').prop('checked', false);
+                    $('#job-category-checkbox-group input[type="checkbox"]').not(this).prop('checked',
+                        false);
+                    $(this).prop('checked', true);
+
+                    let selectedCategories = [];
+                    $('#job-category-checkbox-group input[type="checkbox"]:checked').each(function() {
+                        selectedCategories.push($(this).val());
+                    });
+                    updateURLParam('job_category', selectedCategories);
+                }
+            });
+
+            // --- Handle Salary Range ---
+            const salaryParam = urlParams.get('salary_range');
+            if (salaryParam) {
+                const selectedSalary = salaryParam.split(',')[0];
+                $('#salary-checkbox-group input[type="checkbox"]').each(function() {
+                    const val = $(this).val();
+                    $(this).prop('checked', val === selectedSalary);
+                });
+            }
+
+            $('#salary-checkbox-group input[type="checkbox"]').change(function() {
+                const clickedValue = $(this).val();
+
+                // Nếu "Tất cả" được chọn, xóa tham số salary_range
+                if (clickedValue === 'all') {
+                    $('#salary-checkbox-group input[type="checkbox"]').prop('checked', false);
+                    $(this).prop('checked', true);
+                    updateURLParam('salary_range', []);
+                } else {
+                    $('#salary-checkbox-group input[value="all"]').prop('checked', false);
+                    $('#salary-checkbox-group input[type="checkbox"]').not(this).prop('checked', false);
+                    $(this).prop('checked', true);
+
+                    let selectedSalaries = [];
+                    $('#salary-checkbox-group input[type="checkbox"]:checked').each(function() {
+                        selectedSalaries.push($(this).val());
+                    });
+                    updateURLParam('salary_range', selectedSalaries);
+                }
+            });
+
+            // --- Handle Location Filter ---
+            const locationParam = urlParams.get('location');
+            if (locationParam) {
+                $('#location_filter').val(locationParam);
+            }
+
+            $('#location_filter').change(function() {
+                const selectedLocation = $(this).val();
+                updateURLParam('location', [selectedLocation]); // Cập nhật tham số location
             });
         });
     </script>

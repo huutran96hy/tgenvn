@@ -46,6 +46,13 @@
                     </div>
 
                     <div class="mb-3">
+                        <label class="form-label">Phúc lợi của công việc</label>
+                        <textarea name="job_benefit" class="form-control ckeditor" required>
+                            {{ old('job_benefit', $job->job_benefit ?? '') }}
+                        </textarea>
+                    </div>
+
+                    <div class="mb-3">
                         <label class="form-label">Địa điểm</label>
                         <input type="text" name="location" class="form-control"
                             value="{{ old('location', $job->location ?? '') }}" required>
@@ -80,6 +87,27 @@
                         <small class="text-muted">
                             Full-time, Part-time, Remote, ...
                         </small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Loại công việc (Is Hot)</label>
+                        <div style="display:flex;align-items: center">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="is_hot" id="is_hot_yes" value="yes"
+                                    {{ old('is_hot', $job->is_hot ?? '') === 'yes' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="is_hot_yes">
+                                    Yes
+                                </label>
+                            </div>
+                            <div class="form-check" style="margin-left:20px">
+                                <input class="form-check-input" type="radio" name="is_hot" id="is_hot_no" value="no"
+                                    {{ old('is_hot', $job->is_hot ?? '') === 'no' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="is_hot_no">
+                                    No
+                                </label>
+                            </div>
+                        </div>
+                        <small class="text-muted">Chọn "Yes" nếu công việc hot, "No" nếu không hot.</small>
                     </div>
 
                     <div class="mb-3">

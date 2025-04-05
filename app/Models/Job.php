@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Carbon\Carbon;
+
 class Job extends Model
 {
     use HasFactory;
@@ -16,6 +17,7 @@ class Job extends Model
         'slug',
         'job_description',
         'requirements',
+        'job_benefit',
         'salary',
         'location',
         'category_id',
@@ -24,7 +26,8 @@ class Job extends Model
         'required_education',
         'required_exp',
         'job_type',
-        'approval_status'
+        'is_hot',
+        'approval_status',
     ];
 
     public function employer()

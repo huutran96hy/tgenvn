@@ -18,32 +18,10 @@ class JobController extends Controller
         $categories = JobCategory::all();
         $query = Job::with('employer', 'skills', 'category')->where('approval_status', 'approved');
 
-        $sort = $request->input('sort', 'newest');
-        if ($sort === 'oldest') {
-            $query->orderBy('created_at', 'asc');
-        } elseif ($sort === 'rating') {
-            $query->orderByDesc('rating');
-        } else {
-            $query->orderByDesc('created_at');
-        }
+        // Sử dụng hàm searchJobs để xử lý các điều kiện lọc
+        $query = $this->searchJobs($request, $query);
 
         $perPage = $request->input('per_page', 12);
-
-        // Lọc theo mức lương
-        if ($request->filled('salary_range')) {
-            $range = $request->input('salary_range');
-            if ($range === '>100000000') {
-                $query->where('salary', '>', 100000000);
-            } else {
-                [$min, $max] = explode('-', $range);
-                $query->whereBetween('salary', [(int)$min, (int)$max]);
-            }
-        }
-
-        // Lọc theo từ khóa
-        if ($request->filled('keyword')) {
-            $query->where('job_title', 'like', '%' . $request->input('keyword') . '%');
-        }
 
         $jobs = $query->paginate($perPage)->appends($request->query());
 
@@ -52,12 +30,7 @@ class JobController extends Controller
 
     public function create()
     {
-        // Nếu cần load dữ liệu cho dropdown (employers, categories) thì thực hiện tại đây
-        // Ví dụ:
-        // $employers = Employer::all();
-        // $categories = Category::all();
-
-        return view('admin.jobs.create'); // compact('employers', 'categories') nếu cần
+        return view('admin.jobs.create');
     }
 
     /**
@@ -138,5 +111,47 @@ class JobController extends Controller
         $job->delete();
 
         return redirect()->route('jobs.index')->with('success', 'Job deleted successfully.');
+    }
+    public function searchJobs(Request $request, $query)
+    {
+        // Phân biệt việc làm tốt nhất và việc làm gợi ý
+        if ($request->get('type') === 'best') {
+            $query->where('is_hot', 'yes');
+        } elseif ($request->get('type') === 'suggested') {
+            $query->where('is_hot', 'no');
+        }
+
+        // Sắp xếp
+        $sort = $request->input('sort', 'newest');
+        if ($sort === 'oldest') {
+            $query->orderBy('created_at', 'asc');
+        } elseif ($sort === 'rating') {
+            $query->orderByDesc('rating');
+        } else {
+            $query->orderByDesc('created_at');
+        }
+
+        // Lọc theo mức lương
+        if ($request->filled('salary_range')) {
+            $range = $request->input('salary_range');
+            if ($range === '>100000000') {
+                $query->where('salary', '>', 100000000);
+            } else {
+                [$min, $max] = explode('-', $range);
+                $query->whereBetween('salary', [(int)$min, (int)$max]);
+            }
+        }
+
+        // Lọc theo từ khóa
+        if ($request->filled('keyword')) {
+            $query->where('job_title', 'like', '%' . $request->input('keyword') . '%');
+        }
+
+        // Lọc theo category
+        if ($request->filled('job_category')) {
+            $query->where('category_id', $request->input('job_category'));
+        }
+
+        return $query;
     }
 }

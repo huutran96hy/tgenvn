@@ -7,7 +7,6 @@
         content="Liên hệ với chúng tôi để được tư vấn, hỗ trợ nhanh chóng và giải đáp mọi thắc mắc. Đội ngũ chuyên gia của chúng tôi luôn sẵn sàng phục vụ bạn 24/7.">
 @endpush
 
-
 @section('content')
     <main class="main">
         @include('Frontend.snippets.notify_block')

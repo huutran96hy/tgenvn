@@ -36,3 +36,31 @@
         }
     });
 </script>
+
+<script>
+    $(document).ready(function() {
+        // Change form action based on dropdown selection
+        $('#search_type').on('change', function() {
+            var searchType = $(this).val();
+            var form = $('#searchForm');
+
+            if (searchType === 'jobs') {
+                form.attr('action', '{{ route('jobs.index') }}');
+            } else if (searchType === 'employers') {
+                form.attr('action', '{{ route('employers.index') }}');
+            }
+        });
+
+        // Mobile version
+        $('#mobile_search_type').on('change', function() {
+            var searchType = $(this).val();
+            var form = $('#mobileSearchForm');
+
+            if (searchType === 'jobs') {
+                form.attr('action', '{{ route('jobs.index') }}');
+            } else if (searchType === 'employers') {
+                form.attr('action', '{{ route('employers.index') }}');
+            }
+        });
+    });
+</script>
