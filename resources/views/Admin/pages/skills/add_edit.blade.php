@@ -21,7 +21,7 @@
                     @endif
 
                     <div class="mb-3">
-                        <label class="form-label">Tên kỹ năng</label>
+                        <label class="form-label">Tên kỹ năng <span class="text-danger">*</span></label>
                         <input type="text" name="skill_name" class="form-control"
                             value="{{ old('skill_name', $skill->skill_name ?? '') }}" required>
                     </div>

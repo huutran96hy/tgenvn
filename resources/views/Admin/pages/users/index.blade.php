@@ -16,19 +16,21 @@
                 <form action="{{ route('admin.users.index') }}" method="GET" class="mb-3">
                     <div class="row">
                         <div class="col-md-4">
-                            <input type="text" name="search" class="form-control"
-                                placeholder="Tìm kiếm theo tên" value="{{ request('search') }}">
+                            <x-clearable-input name="search" placeholder="Tìm kiếm theo tên" :value="request('search')" />
                         </div>
                         <div class="col-md-3">
                             <select name="role" class="form-control">
                                 <option value="">Tất cả vai trò</option>
                                 <option value="admin" {{ request('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                                <option value="candidate" {{ request('role') == 'candidate' ? 'selected' : '' }}>Candidate
+                                <option value="candidate" {{ request('role') == 'candidate' ? 'selected' : '' }}>Ứng viên
                                 </option>
-                                <option value="employer" {{ request('role') == 'employer' ? 'selected' : '' }}>Employer
+                                <option value="employer" {{ request('role') == 'employer' ? 'selected' : '' }}>Nhà tuyển
+                                    dụng
                                 </option>
                                 <option value="content_manager"
-                                    {{ request('role') == 'content_manager' ? 'selected' : '' }}>Content Manager</option>
+                                    {{ request('role') == 'content_manager' ? 'selected' : '' }}>
+                                    Người quản lý nội dung
+                                </option>
                             </select>
                         </div>
                         <div class="col-md-2">

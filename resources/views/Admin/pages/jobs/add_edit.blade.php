@@ -20,7 +20,7 @@
                     @endif
 
                     <div class="mb-3">
-                        <label class="form-label">Tiêu đề công việc</label>
+                        <label class="form-label">Tiêu đề công việc <span class="text-danger">*</span></label>
                         <input type="text" name="job_title" class="form-control text-to-slug"
                             value="{{ old('job_title', $job->job_title ?? '') }}" required>
                     </div>
@@ -32,34 +32,34 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Mô tả công việc</label>
+                        <label class="form-label">Mô tả công việc <span class="text-danger">*</span></label>
                         <textarea name="job_description" class="form-control ckeditor" required>
                             {{ old('job_description', $job->job_description ?? '') }}
                         </textarea>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Yêu cầu công việc</label>
+                        <label class="form-label">Yêu cầu công việc <span class="text-danger">*</span></label>
                         <textarea name="requirements" class="form-control ckeditor" required>
                             {{ old('requirements', $job->requirements ?? '') }}
                         </textarea>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Phúc lợi của công việc</label>
+                        <label class="form-label">Phúc lợi của công việc <span class="text-danger">*</span></label>
                         <textarea name="job_benefit" class="form-control ckeditor" required>
                             {{ old('job_benefit', $job->job_benefit ?? '') }}
                         </textarea>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Địa chỉ cụ thể (số nhà, ngõ...)</label>
+                        <label class="form-label">Địa chỉ cụ thể (số nhà, ngõ...) <span class="text-danger">*</span></label>
                         <input type="text" name="location" class="form-control"
                             value="{{ old('location', $job->location ?? '') }}" required>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Tỉnh / Thành phố</label>
+                        <label class="form-label">Tỉnh / Thành phố <span class="text-danger">*</span></label>
                         <select name="province_id" class="form-select select2" required>
                             <option value="">-- Chọn tỉnh/thành phố --</option>
                             @foreach ($provinces as $province)
@@ -79,7 +79,6 @@
                             Vui lòng nhập mức lương (ví dụ: 10.000.000 VNĐ) hoặc ghi 'Thỏa thuận' nếu không cố định.
                         </small>
                     </div>
-
 
                     <div class="mb-3">
                         <label class="form-label">Học vấn yêu cầu</label>
@@ -124,7 +123,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Ngày đăng</label>
+                        <label class="form-label">Ngày đăng <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <span class="input-group-text">
                                 <i class="ph-calendar"></i>
@@ -135,7 +134,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Ngày hết hạn</label>
+                        <label class="form-label">Ngày hết hạn <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <span class="input-group-text">
                                 <i class="ph-calendar"></i>
@@ -158,7 +157,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Trạng thái phê duyệt</label>
+                        <label class="form-label">Trạng thái phê duyệt <span class="text-danger">*</span></label>
                         <select name="approval_status" class="form-control" required>
                             <option value="pending"
                                 {{ old('approval_status', $job->approval_status ?? 'pending') == 'pending' ? 'selected' : '' }}>
@@ -173,7 +172,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Danh mục</label>
+                        <label class="form-label">Danh mục <span class="text-danger">*</span></label>
                         <select name="category_id" class="form-control select2" required>
                             <option value="">Chọn danh mục</option>
                             @foreach ($categories as $category)
@@ -185,7 +184,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Nhà tuyển dụng</label>
+                        <label class="form-label">Nhà tuyển dụng <span class="text-danger">*</span></label>
                         <select name="employer_id" class="form-control select2" required>
                             <option value="">Chọn nhà tuyển dụng</option>
                             @foreach ($employers as $employer)
@@ -197,7 +196,8 @@
                     </div>
 
                     <button type="submit"
-                        class="btn btn-success">{{ isset($job) ? 'Cập nhật công việc' : 'Thêm công việc' }}</button>
+                        class="btn btn-success">{{ isset($job) ? 'Cập nhật công việc' : 'Thêm công việc' }}
+                    </button>
                     <a href="{{ route('admin.jobs.index') }}" class="btn btn-secondary">Quay lại</a>
                 </form>
             </div>

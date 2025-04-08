@@ -66,7 +66,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Tên nhà tuyển dụng</label>
+                        <label class="form-label">Tên nhà tuyển dụng <span class="text-danger">*</span></label>
                         <input type="text" name="company_name" class="form-control text-to-slug"
                             value="{{ old('company_name', $employer->company_name ?? '') }}" required>
                     </div>
@@ -98,13 +98,13 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Số điện thoại</label>
+                        <label class="form-label">Số điện thoại <span class="text-danger">*</span></label>
                         <input type="text" name="contact_phone" class="form-control"
                             value="{{ old('contact_phone', $employer->contact_phone ?? '') }}" required>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Địa chỉ</label>
+                        <label class="form-label">Địa chỉ <span class="text-danger">*</span></label>
                         <input type="text" name="address" class="form-control"
                             value="{{ old('address', $employer->address ?? '') }}" required>
                     </div>
@@ -116,7 +116,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Ngày thành lập</label>
+                        <label class="form-label">Ngày thành lập <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="ph-calendar"></i></span>
                             <input type="text" name="founded_at" class="form-control datepicker-autohide"

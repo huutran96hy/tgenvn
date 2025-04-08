@@ -16,8 +16,7 @@
                 <form action="{{ route('admin.configs.index') }}" method="GET" class="mb-3">
                     <div class="row">
                         <div class="col-md-4">
-                            <input type="text" name="search" class="form-control" placeholder="Tìm kiếm cấu hình"
-                                value="{{ request('search') }}">
+                            <x-clearable-input name="search" placeholder="Tìm kiếm theo tên cấu hình" :value="request('search')" />
                         </div>
                         <div class="col-md-2">
                             <button type="submit" class="btn btn-primary w-100">Tìm kiếm</button>

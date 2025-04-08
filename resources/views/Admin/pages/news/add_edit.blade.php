@@ -20,7 +20,7 @@
                     @endif
 
                     <div class="mb-3">
-                        <label class="form-label">Tiêu đề</label>
+                        <label class="form-label">Tiêu đề <span class="text-danger">*</span></label>
                         <input type="text" name="title" class="form-control text-to-slug"
                             value="{{ old('title', $news->title ?? '') }}" required>
                     </div>
@@ -59,14 +59,14 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Nội dung</label>
+                        <label class="form-label">Nội dung <span class="text-danger">*</span></label>
                         <textarea name="content" class="form-control ckeditor" required>
                             {{ old('content', $news->content ?? '') }}
                         </textarea>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Ngày xuất bản</label>
+                        <label class="form-label">Ngày xuất bản <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="ph-calendar"></i></span>
                             <input type="text" name="published_date" class="form-control datepicker-autohide"
@@ -75,7 +75,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Danh mục</label>
+                        <label class="form-label">Danh mục <span class="text-danger">*</span></label>
                         <select name="news_category_id" class="form-control select2" required>
                             <option value="">Chọn danh mục</option>
                             @foreach ($categories as $category)
@@ -88,7 +88,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Tác giả</label>
+                        <label class="form-label">Tác giả <span class="text-danger">*</span></label>
                         <select name="author_id" class="form-control select2" required>
                             <option value="">Chọn tác giả</option>
                             @foreach ($users as $user)
@@ -101,7 +101,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Trạng thái</label>
+                        <label class="form-label">Trạng thái <span class="text-danger">*</span></label>
                         <select name="status" class="form-control" required>
                             <option value="draft" {{ isset($news) && $news->status == 'draft' ? 'selected' : '' }}>Nháp
                             </option>

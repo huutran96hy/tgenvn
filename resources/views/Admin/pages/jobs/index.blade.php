@@ -16,8 +16,8 @@
                 <form action="{{ route('admin.jobs.index') }}" method="GET" class="mb-3">
                     <div class="row">
                         <div class="col-md-3">
-                            <input type="text" name="search" class="form-control"
-                                placeholder="Tìm kiếm theo tiêu đề công việc" value="{{ request('search') }}">
+                            <x-clearable-input name="search" placeholder="Tìm kiếm theo tiêu đề công việc"
+                                :value="request('search')" />
                         </div>
                         <div class="col-md-3">
                             <select name="category_id" class="form-control select2">

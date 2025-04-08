@@ -22,7 +22,7 @@
                     @endif
 
                     <div class="mb-3">
-                        <label class="form-label">Tên danh mục</label>
+                        <label class="form-label">Tên danh mục <span class="text-danger">*</span></label>
                         <input type="text" name="category_name" class="form-control"
                             value="{{ old('category_name', $newsCategory->category_name ?? '') }}" required>
                     </div>

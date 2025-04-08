@@ -16,8 +16,8 @@
                 <form action="{{ route('admin.news-categories.index') }}" method="GET" class="mb-3">
                     <div class="row">
                         <div class="col-md-4">
-                            <input type="text" name="search" class="form-control"
-                                placeholder="Tìm kiếm theo tên danh mục" value="{{ request('search') }}">
+                            <x-clearable-input name="search" placeholder="Tìm kiếm theo tên danh mục"
+                                :value="request('search')" />
                         </div>
                         <div class="col-md-3">
                             <button type="submit" class="btn btn-primary w-100">Tìm kiếm</button>
