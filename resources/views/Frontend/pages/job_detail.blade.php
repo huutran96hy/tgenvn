@@ -258,47 +258,49 @@
                     <form id="applyJobForm" class="login-register text-start mt-20 pb-30" action="#"
                         enctype="multipart/form-data">
                         {{-- <div class="form-group">
-                        <label class="form-label" for="input-1"> <strong class="text-danger">*</strong> Họ và
-                            Tên</label>
-                        <input class="form-control" id="input-1" type="text" required="" name="full_name"
-                            placeholder="Nhập họ và tên">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="number"><strong class="text-danger">*</strong> Số điện
-                            thoại</label>
-                        <input class="form-control" id="number" type="text" required="" name="phone"
-                            placeholder="Nhập số điện thoại">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="address"><strong class="text-danger">*</strong>Địa
-                            chỉ</label>
-                        <input class="form-control" id="add" type="text" required="" name="address"
-                            placeholder="Địa chỉ">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="education">Học vấn</label>
-                        <input class="form-control" id="education" type="text" required="" name="education"
-                            placeholder="Học vấn">
-                    </div> --}}
-                        <input type="hidden" name="job_id" value="{{ $job->job_id }}">
-                        <div class="form-group">
-                            <label class="form-label" for="file">Gửi CV lên</label>
-                            <input class="form-control" id="file" name="resume" type="file">
+                            <label class="form-label" for="input-1"> <strong class="text-danger">*</strong> Họ và
+                                Tên</label>
+                            <input class="form-control" id="input-1" type="text" required="" name="full_name"
+                                placeholder="Nhập họ và tên">
                         </div>
-                        <div class="login_footer form-group d-flex justify-content-between">
+                        <div class="form-group">
+                            <label class="form-label" for="education">Học vấn</label>
+                            <input class="form-control" id="education" type="text" required="" name="education"
+                                placeholder="Học vấn">
+                        </div> --}}
+                        <input type="hidden" name="job_id" value="{{ $job->job_id }}">
+
+                        <div class="form-group mb-4">
+                            <label for="file" class="form-label fw-bold mb-2">
+                                <i class="fa fa-upload me-2 text-primary"></i> Tải lên CV của bạn
+                            </label>
+
+                            <div class="border border-dashed rounded-3 p-4 text-center position-relative"
+                                style="cursor: pointer;" onclick="document.getElementById('file').click();">
+                                <i class="fa fa-cloud-upload fa-2x text-muted mb-2"></i>
+                                <p class="text-muted m-0" id="fileName">Kéo thả hoặc nhấn để chọn tệp PDF, DOCX...</p>
+                                <input type="file" class="d-none" id="file" name="resume"
+                                    onchange="updateFileName()" accept=".pdf,.doc,.docx">
+                            </div>
+                        </div>
+
+                        {{-- <div class="login_footer form-group d-flex justify-content-between">
                             <label class="cb-container">
                                 <input type="checkbox">
                                 <span class="text-small">Đồng ý với các điều khoản của chúng tôi</span>
                                 <span class="checkmark"></span>
                             </label><a class="text-muted" href="{{ route('contact.index') }}">Tìm hiểu thêm</a>
-                        </div>
+                        </div> --}}
                         <div class="form-group">
-                            <button class="btn btn-default hover-up w-100" type="submit" name="">Ứng
-                                tuyển</button>
+                            <button class="btn btn-default hover-up w-100" type="submit" name="">
+                                Ứng tuyển
+                            </button>
                         </div>
-                        <div class="text-muted text-center">Bạn cần hỗ trợ? <a href="{{ route('contact.index') }}">Liên
-                                hệ
-                            </a></div>
+                        <div class="text-muted text-center">Bạn cần hỗ trợ?
+                            <a href="{{ route('contact.index') }}">
+                                Liên hệ
+                            </a>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -307,6 +309,18 @@
 @endsection
 
 @push('scripts')
+    <script>
+        function updateFileName() {
+            const fileInput = document.getElementById('file');
+            const fileNameDisplay = document.getElementById('fileName');
+            if (fileInput.files.length > 0) {
+                fileNameDisplay.textContent = fileInput.files[0].name;
+            } else {
+                fileNameDisplay.textContent = "Kéo thả hoặc nhấn để chọn tệp PDF, DOCX...";
+            }
+        }
+    </script>
+
     <script>
         $(document).ready(function() {
             // let userId = {{ auth()->check() ? auth()->id() : 'null' }};

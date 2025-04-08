@@ -103,24 +103,24 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Loại công việc (Is Hot)</label>
+                        <label class="form-label">Công việc nổi bật</label>
                         <div style="display:flex;align-items: center">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="is_hot" id="is_hot_yes" value="yes"
                                     {{ old('is_hot', $job->is_hot ?? '') === 'yes' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="is_hot_yes">
-                                    Yes
+                                    Có nổi bật
                                 </label>
                             </div>
                             <div class="form-check" style="margin-left:20px">
                                 <input class="form-check-input" type="radio" name="is_hot" id="is_hot_no" value="no"
                                     {{ old('is_hot', $job->is_hot ?? '') === 'no' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="is_hot_no">
-                                    No
+                                    Không nổi bật
                                 </label>
                             </div>
                         </div>
-                        <small class="text-muted">Chọn "Yes" nếu công việc hot, "No" nếu không hot.</small>
+                        <small class="text-muted">Chọn "Có" nếu bạn muốn làm nổi bật tin tuyển dụng này.</small>
                     </div>
 
                     <div class="mb-3">

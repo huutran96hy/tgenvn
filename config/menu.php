@@ -45,11 +45,11 @@ return [
             'label' => 'Danh sách kỹ năng',
             'icon' => 'ph-briefcase',
         ],
-        [
-            'route' => 'admin.contacts.index',
-            'label' => 'Danh sách liên hệ',
-            'icon' => 'ph-briefcase',
-        ],
+        // [
+        //     'route' => 'admin.contacts.index',
+        //     'label' => 'Danh sách liên hệ',
+        //     'icon' => 'ph-briefcase',
+        // ],
         [
             'route' => 'admin.configs.index',
             'label' => 'Cấu hình',

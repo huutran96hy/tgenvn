@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreJobRequest;
 use App\Models\Job;
 use App\Models\JobCategory;
 use App\Models\Employer;
@@ -61,35 +62,18 @@ class JobController extends Controller
         ));
     }
 
-    public function store(Request $request)
+    public function store(StoreJobRequest $request)
     {
-        $validated = $request->validate([
-            'job_title' => 'required|string|max:255',
-            'slug' => 'required',
-            'job_description' => 'required|string',
-            'requirements' => 'required|string',
-            'job_benefit' => 'required|string',
-            'salary' => 'nullable|string',
-            'location' => 'required|string',
-            'province_id' => 'required|exists:provinces,id',
-            'category_id' => 'required|exists:job_categories,category_id',
-            'employer_id' => 'required|exists:employers,employer_id',
-            'posted_date' => 'required',
-            'expiry_date' => 'required|after:posted_date',
-            'required_education' => 'nullable|string|max:50',
-            'required_exp' => 'nullable|string|max:30',
-            'job_type' => 'nullable|string|max:20',
-            'is_hot' => 'nullable|in:yes,no',
-            'approval_status' => 'nullable|in:approved,rejected,pending',
-            'skills' => 'nullable|array',
-            'skills.*' => 'exists:skills,skill_id',
-        ]);
+        $validated = $request->validated();
 
         $validated['approval_status'] = $validated['approval_status'] ?? 'pending';
 
-        $slug = $request->input('slug');
-        $slug = $this->getStorySlugExist($slug, Job::class, 'slug', 'job_id');
-        $validated['slug'] = $slug;
+        $validated['slug'] = $this->getStorySlugExist(
+            $validated['slug'],
+            Job::class,
+            'slug',
+            'job_id'
+        );
 
         // Chuyển đổi ngày
         foreach (['posted_date', 'expiry_date'] as $field) {
@@ -120,35 +104,17 @@ class JobController extends Controller
             'provinces'
         ));
     }
-
-    public function update(Request $request, Job $job)
+    public function update(StoreJobRequest $request, Job $job)
     {
-        $validated = $request->validate([
-            'job_title' => 'required|string|max:255',
-            'slug' => 'required',
-            'job_description' => 'required|string',
-            'requirements' => 'required|string',
-            'job_benefit' => 'required|string',
-            'salary' => 'nullable|string',
-            'location' => 'required|string',
-            'province_id' => 'required|exists:provinces,id',
-            'category_id' => 'required|exists:job_categories,category_id',
-            'employer_id' => 'required|exists:employers,employer_id',
-            'posted_date' => 'required',
-            'expiry_date' => 'required|after:posted_date',
-            'required_education' => 'nullable|string|max:50',
-            'required_exp' => 'nullable|string|max:30',
-            'job_type' => 'nullable|string|max:20',
-            'is_hot' => 'nullable|in:yes,no',
-            'approval_status' => 'nullable|in:approved,rejected,pending',
-            'skills' => 'nullable|array',
-            'skills.*' => 'exists:skills,skill_id',
-        ]);
+        $validated = $request->validated();
 
-        $slug = $request->input('slug');
-
-        $slug = $this->getStorySlugExist($slug, Job::class, 'slug', 'job_id', $job->job_id);
-        $validated['slug'] = $slug;
+        $validated['slug'] = $this->getStorySlugExist(
+            $validated['slug'],
+            Job::class,
+            'slug',
+            'job_id',
+            $job->job_id // tránh trùng slug chính nó
+        );
 
         // Chuyển đổi ngày
         foreach (['posted_date', 'expiry_date'] as $field) {
