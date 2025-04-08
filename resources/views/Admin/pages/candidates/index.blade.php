@@ -46,8 +46,7 @@
                                     </a>
                                 </td>
                                 <td class="text-center">
-                                    <x-action-dropdown editRoute="admin.candidates.edit"
-                                        deleteRoute="admin.candidates.destroy" :id="$candidate->candidate_id" />
+                                    <x-action-dropdown deleteRoute="admin.candidates.destroy" :id="$candidate->candidate_id" />
                                 </td>
                             </tr>
                         @endforeach

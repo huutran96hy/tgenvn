@@ -11,11 +11,11 @@ class ActionDropdown extends Component
     /**
      * Create a new component instance.
      */
-    public string $editRoute;
+    public ?string $editRoute;
     public string $deleteRoute;
     public int|string $id;
 
-    public function __construct(string $editRoute, string $deleteRoute, int|string $id)
+    public function __construct(string $deleteRoute, int|string $id, ?string $editRoute = null)
     {
         $this->editRoute = $editRoute;
         $this->deleteRoute = $deleteRoute;
