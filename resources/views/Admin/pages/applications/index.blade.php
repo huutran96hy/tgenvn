@@ -64,38 +64,41 @@
                                 </td>
                                 <td>{{ $application->job->job_title ?? 'Không có' }}</td>
                                 <td>{{ $application->application_date }}</td>
-                                <td>
+                                <td class="text-center">
                                     @php
-                                        $badgeClass = '';
-                                        $badgeText = '';
+                                        $statusLabels = [
+                                            'pending' => 'Chờ duyệt',
+                                            'rejected' => 'Bị từ chối',
+                                            'interviewed' => 'Đã phỏng vấn',
+                                            'hired' => 'Đã tuyển',
+                                        ];
 
-                                        switch ($application->status) {
-                                            case 'pending':
-                                                $badgeClass = 'warning';
-                                                $badgeText = 'Chờ duyệt';
-                                                break;
-                                            case 'interviewed':
-                                                $badgeClass = 'primary';
-                                                $badgeText = 'Đã phỏng vấn';
-                                                break;
-                                            case 'rejected':
-                                                $badgeClass = 'danger';
-                                                $badgeText = 'Từ chối';
-                                                break;
-                                            case 'hired':
-                                                $badgeClass = 'success';
-                                                $badgeText = 'Đã tuyển';
-                                                break;
-                                            default:
-                                                $badgeClass = 'secondary';
-                                                $badgeText = 'Không xác định';
-                                                break;
-                                        }
+                                        $statusClasses = [
+                                            'pending' => 'btn-warning',
+                                            'rejected' => 'btn-danger',
+                                            'interviewed' => 'btn-primary',
+                                            'hired' => 'btn-success',
+                                        ];
+
+                                        $currentStatus = $application->status;
                                     @endphp
 
-                                    <span class="badge bg-{{ $badgeClass }} bg-opacity-10 text-{{ $badgeClass }}">
-                                        {{ $badgeText }}
-                                    </span>
+                                    <div class="dropdown">
+                                        <button
+                                            class="btn btn-sm dropdown-toggle {{ $statusClasses[$currentStatus] ?? 'btn-secondary' }}"
+                                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            {{ $statusLabels[$currentStatus] ?? 'Không xác định' }}
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            @foreach ($statusLabels as $key => $label)
+                                                <li>
+                                                    <a class="dropdown-item change-status"
+                                                        data-url="{{ route('admin.applications.update-status', $application->application_id) }}"
+                                                        data-status="{{ $key }}">{{ $label }}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                 </td>
                                 <td class="text-center">
                                     <x-action-dropdown editRoute="admin.applications.edit"
@@ -113,3 +116,55 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $(".change-status").click(function(e) {
+                e.preventDefault();
+
+                let newStatus = $(this).data("status");
+                let updateUrl = $(this).data("url");
+                let button = $(this).closest(".dropdown").find("button");
+
+                $.ajax({
+                    url: updateUrl,
+                    type: "POST",
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr("content"),
+                        status: newStatus
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            const statusLabels = {
+                                pending: "Chờ duyệt",
+                                rejected: "Bị từ chối",
+                                interviewed: "Đã phỏng vấn",
+                                hired: "Đã tuyển"
+                            };
+
+                            const statusClasses = {
+                                pending: "btn-warning",
+                                rejected: "btn-danger",
+                                interviewed: "btn-primary",
+                                hired: "btn-success"
+                            };
+
+                            button
+                                .text(statusLabels[newStatus])
+                                .removeClass(
+                                    "btn-warning btn-success btn-danger btn-primary btn-success"
+                                    )
+                                .addClass(statusClasses[newStatus]);
+                        } else {
+                            alert("Có lỗi xảy ra!");
+                        }
+                    },
+                    error: function() {
+                        alert("Có lỗi xảy ra khi cập nhật trạng thái.");
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

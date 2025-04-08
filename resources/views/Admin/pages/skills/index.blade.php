@@ -27,15 +27,15 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>STT</th>
                             <th>Tên Kỹ Năng</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($skills as $skill)
+                        @foreach ($skills as $index => $skill)
                             <tr>
-                                <td>{{ $skill->skill_id }}</td>
+                                <td>{{ $skills->firstItem() + $index }}</td>
                                 <td>{{ $skill->skill_name }}</td>
                                 <td class="text-center">
                                     <x-action-dropdown editRoute="admin.skills.edit" deleteRoute="admin.skills.destroy"

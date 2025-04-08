@@ -40,8 +40,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('employers', EmployerController::class);
         Route::resource('news', NewsController::class);
         Route::post('/news/{news}/update-status', [NewsController::class, 'updateStatus'])->name('news.update-status');
+       
         Route::resource('news-categories', NewsCategoryController::class);
         Route::resource('applications', ApplicationController::class);
+        Route::post('/applications/{application}/update-status', [ApplicationController::class, 'updateStatus'])->name('applications.update-status');
+
         Route::resource('candidates', CandidateController::class);
         Route::resource('skills', SkillController::class);
         Route::resource('contacts', ContactController::class)->only(['index', 'destroy']);

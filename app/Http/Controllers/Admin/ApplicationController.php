@@ -8,6 +8,7 @@ use App\Models\Application;
 use App\Models\Candidate;
 use App\Models\Job;
 use Carbon\Carbon;
+
 class ApplicationController extends Controller
 {
     /**
@@ -101,5 +102,16 @@ class ApplicationController extends Controller
         $application->delete();
 
         return back()->with('success', 'Đơn ứng tuyển đã được xóa.');
+    }
+
+    public function updateStatus(Request $request, Application $application)
+    {
+        $request->validate([
+            'status' => 'required|in:pending,interviewed,rejected,hired'
+        ]);
+
+        $application->update(['status' => $request->status]);
+
+        return response()->json(['success' => true]);
     }
 }

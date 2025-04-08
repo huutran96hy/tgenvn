@@ -21,7 +21,7 @@
                         <div class="col-md-3">
                             <select name="role" class="form-control">
                                 <option value="">Tất cả vai trò</option>
-                                <option value="admin" {{ request('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="admin" {{ request('role') == 'admin' ? 'selected' : '' }}>Quản trị viên</option>
                                 <option value="candidate" {{ request('role') == 'candidate' ? 'selected' : '' }}>Ứng viên
                                 </option>
                                 <option value="employer" {{ request('role') == 'employer' ? 'selected' : '' }}>Nhà tuyển
@@ -53,7 +53,15 @@
                             <tr>
                                 <td>{{ $user->username }}</td>
                                 {{-- <td>{{ $user->email }}</td> --}}
-                                <td>{{ ucwords(str_replace('_', ' ', $user->role)) }}</td>
+                                @php
+                                    $roleLabels = [
+                                        'admin' => 'Quản trị viên',
+                                        'candidate' => 'Ứng viên',
+                                        'employer' => 'Nhà tuyển dụng',
+                                        'content_manager' => 'Quản lý nội dung',
+                                    ];
+                                @endphp
+                                <td>{{ $roleLabels[$user->role] ?? 'Không xác định' }}</td>
                                 <td class="text-center">
                                     <x-action-dropdown editRoute="admin.users.edit" deleteRoute="admin.users.destroy"
                                         :id="$user->id" />

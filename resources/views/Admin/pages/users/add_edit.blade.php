@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Emai <span class="text-danger">*</span></label>
+                        <label class="form-label">Email <span class="text-danger">*</span></label>
                         <input type="email" name="email" class="form-control"
                             value="{{ old('email', $user->email ?? '') }}" required>
                     </div>
@@ -42,14 +42,17 @@
                     <div class="mb-3">
                         <label class="form-label">Vai trò <span class="text-danger">*</span></label>
                         <select name="role" class="form-control">
-                            <option value="admin" {{ isset($user) && $user->role == 'admin' ? 'selected' : '' }}>Admin
+                            <option value="" disabled {{ !isset($user) || !$user->role ? 'selected' : '' }}>-- Chọn
+                                vai trò --</option>
+                            <option value="admin" {{ isset($user) && $user->role == 'admin' ? 'selected' : '' }}>Quản trị viên
                             </option>
                             <option value="candidate" {{ isset($user) && $user->role == 'candidate' ? 'selected' : '' }}>
                                 Ứng viên</option>
                             <option value="employer" {{ isset($user) && $user->role == 'employer' ? 'selected' : '' }}>
                                 Nhà tuyển dụng</option>
                             <option value="content_manager"
-                                {{ isset($user) && $user->role == 'content_manager' ? 'selected' : '' }}>Người quản lý nội dung
+                                {{ isset($user) && $user->role == 'content_manager' ? 'selected' : '' }}>Người quản lý nội
+                                dung
                             </option>
                         </select>
                     </div>

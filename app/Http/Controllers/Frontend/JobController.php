@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Job;
 use App\Models\JobCategory;
 use App\Models\Province;
+use Carbon\Carbon;
 
 class JobController extends Controller
 {
@@ -18,7 +19,9 @@ class JobController extends Controller
         $categories = JobCategory::all();
         $provinces = Province::all();
 
-        $query = Job::with('employer', 'skills', 'category')->where('approval_status', 'approved');
+        $query = Job::with('employer', 'skills', 'category')
+            ->where('approval_status', 'approved')
+            ->whereDate('expiry_date', '>=', Carbon::today());
 
         // Sử dụng hàm searchJobs để xử lý các điều kiện lọc
         $query = $this->searchJobs($request, $query);
