@@ -99,7 +99,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Số điện thoại <span class="text-danger">*</span></label>
-                        <input type="text" name="contact_phone" class="form-control"
+                        <input type="tel" name="contact_phone" class="form-control" maxlength="11"
                             value="{{ old('contact_phone', $employer->contact_phone ?? '') }}" required>
                     </div>
 

@@ -44,12 +44,14 @@ class EmployerController extends Controller
             'company_description' => 'nullable',
             'employer_benefit' => 'nullable',
             'website' => 'nullable|url',
-            'contact_phone' => 'required|max:15',
+            'contact_phone' => 'required|regex:/^[0-9]{10,11}$/',
             'address' => 'required|max:255',
             'email' => 'nullable',
             'founded_at' => 'nullable',
             'about' => 'nullable',
             'company_type' => 'nullable',
+        ], [
+            'contact_phone.regex' => 'Số điện thoại không hợp lệ. Vui lòng nhập từ 10 đến 11 chữ số.',
         ]);
 
         $slug = $request->input('slug');
@@ -85,12 +87,14 @@ class EmployerController extends Controller
             'company_description' => 'nullable',
             'employer_benefit' => 'nullable',
             'website' => 'nullable|url',
-            'contact_phone' => 'required|max:15',
+            'contact_phone' => 'required|regex:/^[0-9]{10,11}$/',
             'address' => 'required|max:255',
             'email' => 'nullable',
             'founded_at' => 'nullable',
             'about' => 'nullable',
             'company_type' => 'nullable',
+        ], [
+            'contact_phone.regex' => 'Số điện thoại không hợp lệ. Vui lòng nhập từ 10 đến 11 chữ số.',
         ]);
 
         $slug = $request->input('slug');

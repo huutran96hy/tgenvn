@@ -83,6 +83,7 @@ class NewsController extends Controller
             'content' => 'required',
             'published_date' => 'required',
             'status' => 'required|in:draft,published',
+            'author_id' => 'required|exists:users,id',
             'news_category_id' => 'required|exists:news_categories,news_category_id',
         ]);
 
