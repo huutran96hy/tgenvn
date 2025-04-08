@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\JobResource;
 use Illuminate\Http\Request;
 use App\Models\Job;
 use App\Models\JobCategory;
+use App\Models\Province;
 
 class JobController extends Controller
 {
@@ -16,6 +16,8 @@ class JobController extends Controller
     public function index(Request $request)
     {
         $categories = JobCategory::all();
+        $provinces = Province::all();
+
         $query = Job::with('employer', 'skills', 'category')->where('approval_status', 'approved');
 
         // Sử dụng hàm searchJobs để xử lý các điều kiện lọc
@@ -25,7 +27,7 @@ class JobController extends Controller
 
         $jobs = $query->paginate($perPage)->appends($request->query());
 
-        return view('Frontend.pages.job_list', compact('jobs', 'categories'));
+        return view('Frontend.pages.job_list', compact('jobs', 'categories', 'provinces'));
     }
 
     public function create()
@@ -150,6 +152,11 @@ class JobController extends Controller
         // Lọc theo category
         if ($request->filled('job_category')) {
             $query->where('category_id', $request->input('job_category'));
+        }
+
+        // Lọc theo location
+        if ($request->filled('location')) {
+            $query->where('province_id', $request->input('location'));
         }
 
         return $query;

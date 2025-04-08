@@ -4,7 +4,7 @@
             <div class="footer-col-8 col-md-4 col-sm-12 mr-20">
                 <a href="{{ route('index') }}">
                     <img alt="logo" src="{{ asset(\App\Models\Config::getLogo()) }}" width="50%"
-                        style="width:90px" />
+                        style="width:80px" />
                 </a>
                 <div class="mt-20 mb-20 font-xs color-text-paragraph-2">
                     Công ty cổ phần FDI Work thành lập năm 2025. Với sự kết

@@ -20,6 +20,7 @@ class Job extends Model
         'job_benefit',
         'salary',
         'location',
+        'province_id',
         'category_id',
         'posted_date',
         'expiry_date',
@@ -49,6 +50,12 @@ class Job extends Model
     {
         return $this->belongsToMany(Skill::class, 'job_skills', 'job_id', 'skill_id');
     }
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class, 'province_id');
+    }
+
     public function getPostedDateAttribute($value)
     {
         return Carbon::parse($value)->format('d-m-Y');

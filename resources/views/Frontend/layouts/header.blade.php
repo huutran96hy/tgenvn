@@ -4,22 +4,25 @@
             <div class="header-left d-flex align-items-center">
                 <nav class="nav-main-menu">
                     <ul class="main-menu d-flex flex-wrap mb-0">
-                        <li><a href="{{ route('index') }}" class="{{ Request::routeIs('index') ? 'active' : '' }}">Trang
+                        <li><a href="{{ route('index') }}"
+                                class="{{ Request::routeIs('index') ? 'tab-link-fix' : '' }}">Trang
                                 chủ</a></li>
                         <li>
                             <a href="{{ route('jobs.index', ['type' => 'best']) }}"
-                                class="{{ Request::routeIs('jobs.index') && Request::get('type') == 'best' ? 'active' : '' }}">Việc
+                                class="{{ Request::routeIs('jobs.index') && Request::get('type') == 'best' ? 'tab-link-fix' : '' }}">Việc
                                 làm tốt nhất</a>
                         </li>
                         <li>
                             <a href="{{ route('jobs.index', ['type' => 'suggested']) }}"
-                                class="{{ Request::routeIs('jobs.index') && Request::get('type') == 'suggested' ? 'active' : '' }}">Việc
+                                class="{{ Request::routeIs('jobs.index') && Request::get('type') == 'suggested' ? 'tab-link-fix' : '' }}">Việc
                                 làm gợi ý</a>
                         </li>
                         <li><a href="{{ route('employers.index') }}"
-                                class="{{ Request::routeIs('employers.*') ? 'active' : '' }}">Công ty hàng đầu</a></li>
+                                class="{{ Request::routeIs('employers.*') ? 'tab-link-fix' : '' }}">Công ty hàng đầu</a>
+                        </li>
                         <li><a href="{{ route('news.index') }}"
-                                class="{{ Request::routeIs('news.*') ? 'active' : '' }}">Thông tin chia sẻ</a></li>
+                                class="{{ Request::routeIs('news.*') ? 'tab-link-fix' : '' }}">Thông tin chia sẻ</a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -43,7 +46,8 @@
                                     Việc làm
                                 </option>
                                 <option value="employers"
-                                    {{ request('search_type') == 'employers' ? 'selected' : '' }}>Công ty</option>
+                                    {{ request('search_type') == 'employers' ? 'selected' : '' }}>Công ty
+                                </option>
                             </select>
                         </div>
                         <button class="btn btn-default btn-find font-sm" type="submit"
@@ -71,8 +75,13 @@
                         <ul class="mobile-menu font-heading">
                             <li><a class="{{ Request::routeIs('index') ? 'active' : '' }}"
                                     href="{{ route('index') }}">Trang chủ</a></li>
-                            <li><a class="{{ Request::routeIs('jobs.*') ? 'active' : '' }}"
-                                    href="{{ route('jobs.index') }}">Việc làm tốt nhất</a></li>
+                            <li><a class="{{ Request::routeIs('jobs.index') && Request::get('type') == 'best' ? 'active' : '' }}"
+                                    href="{{ route('jobs.index', ['type' => 'best']) }}">Việc làm tốt nhất</a></li>
+                            <li>
+                                <a href="{{ route('jobs.index', ['type' => 'suggested']) }}"
+                                    class="{{ Request::routeIs('jobs.index') && Request::get('type') == 'suggested' ? 'active' : '' }}">Việc
+                                    làm gợi ý</a>
+                            </li>
                             <li><a class="{{ Request::routeIs('employers.*') ? 'active' : '' }}"
                                     href="{{ route('employers.index') }}">Công ty hàng đầu</a></li>
                             <li><a class="{{ Request::routeIs('news.*') ? 'active' : '' }}"
@@ -82,18 +91,19 @@
                 </div>
 
                 <div class="mobile-search mt-3 px-3">
-                    <form method="GET" id="mobileSearchForm" class="d-flex">
-                        <div class="dropdown-container mr-2">
-                            <select class="form-select" name="search_type" id="mobile_search_type">
+                    <form method="GET" id="mobileSearchForm" class="d-grid gap-2">
+                        <div class="d-flex gap-2">
+                            <input class="form-control flex-grow-1" type="text" name="keyword"
+                                placeholder="Nhập từ khoá..." value="{{ request('keyword') }}">
+                            <select class="form-select" name="search_type" id="mobile_search_type"
+                                style="max-width: 120px;">
                                 <option value="jobs" {{ request('search_type') == 'jobs' ? 'selected' : '' }}>Việc
                                     làm</option>
                                 <option value="employers"
                                     {{ request('search_type') == 'employers' ? 'selected' : '' }}>Công ty</option>
                             </select>
                         </div>
-                        <input class="form-control mr-2" type="text" name="keyword" placeholder="Nhập từ khoá..."
-                            value="{{ request('keyword') }}">
-                        <button class="btn btn-primary" type="submit">Tìm</button>
+                        <button class="btn btn-primary w-100" type="submit">Tìm</button>
                     </form>
                 </div>
             </div>

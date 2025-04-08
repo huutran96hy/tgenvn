@@ -4,8 +4,8 @@
     @endphp
 
     <div class="banner-main banner-slider" style="position: relative;">
-        <a href="{{ route('index') }}" style="position: absolute; top: 10px; left: 30px; z-index: 10;">
-            <img alt="logo" src="{{ asset(\App\Models\Config::getLogo()) }}" style="height: 70px; width: auto;">
+        <a href="{{ route('index') }}" style="position: absolute; top: 20px; left: 50px; z-index: 100;">
+            <img alt="logo" src="{{ asset(\App\Models\Config::getLogo()) }}" style="height: 60px; width: auto;">
         </a>
 
         <div class="swiper-wrapper">

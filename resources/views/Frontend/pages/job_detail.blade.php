@@ -79,7 +79,7 @@
                                                             </div>
                                                             <div class="col-6 text-end">
                                                                 <span class="card-briefcase">
-                                                                    {{ $randomJob->location }}
+                                                                    {{ $randomJob->province->name ?? $randomJob->location }}
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -221,7 +221,7 @@
                                         </div>
                                         <div class="sidebar-text-info ml-10">
                                             <span class="text-description mb-10">Địa chỉ</span>
-                                            <strong class="small-heading">{{ $job->location ?? 'Chưa xác định' }}</strong>
+                                            <strong class="small-heading">{{ $job->province->name ?? 'Chưa xác định' }}</strong>
                                         </div>
                                     </div>
                                 </div>

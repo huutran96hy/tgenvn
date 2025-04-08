@@ -3,6 +3,8 @@
 @section('pageTitle', 'Danh sách công việc')
 
 @push('meta')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <meta name="description"
         content="Tìm kiếm việc làm mới nhất từ các công ty hàng đầu. Danh sách việc làm hấp dẫn với nhiều cơ hội nghề nghiệp phù hợp cho bạn. Ứng tuyển ngay!">
 @endpush
@@ -19,6 +21,26 @@
 
         .banner-hero .block-banner .form-find .btn-find {
             background-position: left 20px top 10px;
+        }
+
+        .select2-container .select2-selection--single {
+            height: 38px;
+            padding: 6px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 0.375rem;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 24px;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 36px;
+            right: 10px;
+        }
+
+        .select-style-icon .select2 {
+            border: none;
         }
     </style>
     <main class="main">
@@ -124,7 +146,9 @@
                                                             {{ $job->employer->company_name }}
                                                         </a>
                                                     </h6>
-                                                    <span class="location-small">{{ $job->location }}</span>
+                                                    <span class="location-small">
+                                                        {{ $job->province->name ?? $job->location }}
+                                                    </span>
                                                     <div class="tags">
                                                         {{ \App\Helpers\NumberHelper::formatSalary($job->salary) }} |
                                                         @foreach ($job->skills as $skill)
@@ -151,20 +175,18 @@
                         <div class="sidebar-shadow none-shadow mb-30">
                             <div class="sidebar-filters">
                                 <div class="filter-block head-border mb-30">
-                                    <h5>Bộ Lọc <a class="link-reset" href="#">Làm mới</a></h5>
+                                    <h5>Bộ Lọc <a class="link-reset" href="#" id="reset-filters">Làm mới</a></h5>
                                 </div>
 
-                                {{-- <div class="form-group select-style select-style-icon">
-                                    <select class="form-control form-icons" id="location_filter">
-                                        <option value="">Tất cả địa điểm</option>
-                                        <option value="Hải Phòng">Hải Phòng</option>
-                                        <option value="Hà Nội">Hà Nội</option>
-                                        <option value="Đà Nẵng">Đà Nẵng</option>
-                                        <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                                        <option value="Nha Trang">Nha Trang</option>
+                                <div class="form-group select-style select-style-icon">
+                                    <select class="form-select select2" id="location_filter">
+                                        @foreach ($provinces as $province)
+                                            <option value="{{ $province->id }}-{{ Str::slug($province->name) }}">
+                                                {{ $province->name }}
+                                            </option>
+                                        @endforeach
                                     </select>
-                                    <i class="fi-rr-marker"></i>
-                                </div> --}}
+                                </div>
 
                                 <div class="filter-block mb-20">
                                     <h5 class="medium-heading mb-15">Vị trí</h5>
@@ -177,7 +199,7 @@
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </li>
-                                            @foreach ($categories as $category)
+                                            @foreach ($categories->take(8) as $category)
                                                 <li>
                                                     <label class="cb-container">
                                                         <input type="checkbox" value="{{ $category->category_id }}">
@@ -189,7 +211,6 @@
                                         </ul>
                                     </div>
                                 </div>
-
 
                                 <div class="form-group mb-20">
                                     <h5 class="medium-heading mb-25">Mức lương</h5>
@@ -434,8 +455,18 @@
 @endsection
 
 @push('scripts')
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
     <script>
         $(document).ready(function() {
+            $('#reset-filters').click(function(e) {
+                e.preventDefault(); // Ngăn load lại trang mặc định
+
+                const baseUrl = window.location.origin + window.location.pathname;
+                window.location.href = baseUrl;
+            });
+
             const url = new URL(window.location.href);
             const urlParams = url.searchParams;
 
@@ -546,6 +577,12 @@
                         console.error('Lỗi khi tải dữ liệu:', error);
                     }
                 });
+            });
+
+            // tạo Select2
+            $('.select2').select2({
+                placeholder: "Chọn địa điểm",
+                allowClear: true
             });
         });
     </script>

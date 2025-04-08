@@ -39,28 +39,28 @@
 
 <script>
     $(document).ready(function() {
-        // Change form action based on dropdown selection
-        $('#search_type').on('change', function() {
-            var searchType = $(this).val();
-            var form = $('#searchForm');
+        function updateFormAction(formSelector, selectSelector) {
+            var searchType = $(selectSelector).val();
+            var form = $(formSelector);
 
             if (searchType === 'jobs') {
                 form.attr('action', '{{ route('jobs.index') }}');
             } else if (searchType === 'employers') {
                 form.attr('action', '{{ route('employers.index') }}');
             }
+        }
+
+        // Set action ngay khi load trang
+        updateFormAction('#searchForm', '#search_type');
+        updateFormAction('#mobileSearchForm', '#mobile_search_type');
+
+        // Cập nhật action khi người dùng chọn dropdown
+        $('#search_type').on('change', function() {
+            updateFormAction('#searchForm', '#search_type');
         });
 
-        // Mobile version
         $('#mobile_search_type').on('change', function() {
-            var searchType = $(this).val();
-            var form = $('#mobileSearchForm');
-
-            if (searchType === 'jobs') {
-                form.attr('action', '{{ route('jobs.index') }}');
-            } else if (searchType === 'employers') {
-                form.attr('action', '{{ route('employers.index') }}');
-            }
+            updateFormAction('#mobileSearchForm', '#mobile_search_type');
         });
     });
 </script>

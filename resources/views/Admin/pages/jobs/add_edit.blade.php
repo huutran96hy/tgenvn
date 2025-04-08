@@ -53,9 +53,22 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Địa điểm</label>
+                        <label class="form-label">Địa chỉ cụ thể (số nhà, ngõ...)</label>
                         <input type="text" name="location" class="form-control"
                             value="{{ old('location', $job->location ?? '') }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Tỉnh / Thành phố</label>
+                        <select name="province_id" class="form-select select2" required>
+                            <option value="">-- Chọn tỉnh/thành phố --</option>
+                            @foreach ($provinces as $province)
+                                <option value="{{ $province->id }}"
+                                    {{ old('province_id', $job->province_id ?? '') == $province->id ? 'selected' : '' }}>
+                                    {{ $province->name }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="mb-3">

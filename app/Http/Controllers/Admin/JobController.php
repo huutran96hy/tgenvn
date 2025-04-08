@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Job;
 use App\Models\JobCategory;
 use App\Models\Employer;
+use App\Models\Province;
 use Illuminate\Http\Request;
 use App\Models\Skill;
 use App\Traits\SlugCheck;
@@ -50,8 +51,14 @@ class JobController extends Controller
         $categories = JobCategory::all();
         $employers = Employer::all();
         $allSkills = Skill::all();
+        $provinces = Province::all();
 
-        return view('Admin.pages.jobs.add_edit', compact('categories', 'employers', 'allSkills'));
+        return view('Admin.pages.jobs.add_edit', compact(
+            'categories',
+            'employers',
+            'allSkills',
+            'provinces'
+        ));
     }
 
     public function store(Request $request)
@@ -64,6 +71,7 @@ class JobController extends Controller
             'job_benefit' => 'required|string',
             'salary' => 'nullable|string',
             'location' => 'required|string',
+            'province_id' => 'required|exists:provinces,id',
             'category_id' => 'required|exists:job_categories,category_id',
             'employer_id' => 'required|exists:employers,employer_id',
             'posted_date' => 'required',
@@ -102,8 +110,15 @@ class JobController extends Controller
         $categories = JobCategory::all();
         $employers = Employer::all();
         $allSkills = Skill::all();
+        $provinces = Province::all();
 
-        return view('Admin.pages.jobs.add_edit', compact('job', 'categories', 'employers', 'allSkills'));
+        return view('Admin.pages.jobs.add_edit', compact(
+            'job',
+            'categories',
+            'employers',
+            'allSkills',
+            'provinces'
+        ));
     }
 
     public function update(Request $request, Job $job)
@@ -116,6 +131,7 @@ class JobController extends Controller
             'job_benefit' => 'required|string',
             'salary' => 'nullable|string',
             'location' => 'required|string',
+            'province_id' => 'required|exists:provinces,id',
             'category_id' => 'required|exists:job_categories,category_id',
             'employer_id' => 'required|exists:employers,employer_id',
             'posted_date' => 'required',

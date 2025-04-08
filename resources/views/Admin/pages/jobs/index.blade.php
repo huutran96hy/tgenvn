@@ -15,7 +15,7 @@
             <div class="card-body">
                 <form action="{{ route('admin.jobs.index') }}" method="GET" class="mb-3">
                     <div class="row">
-                        <div class="col-md-3">ew ưefwfew
+                        <div class="col-md-3">
                             <input type="text" name="search" class="form-control"
                                 placeholder="Tìm kiếm theo tiêu đề công việc" value="{{ request('search') }}">
                         </div>

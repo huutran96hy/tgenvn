@@ -146,7 +146,9 @@
                                                                     href="{{ route('job_detail.show', $job->slug) }}">
                                                                     {{ $job->job_title }}
                                                                 </a>
-                                                                <span class="location-small">{{ $job->location }}</span>
+                                                                <span class="location-small">
+                                                                    {{ $job->province->name ?? $job->location }}
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </div>
