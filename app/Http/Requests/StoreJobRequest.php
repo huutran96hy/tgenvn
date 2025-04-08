@@ -36,7 +36,7 @@ class StoreJobRequest extends FormRequest
             'expiry_date' => 'required|after:posted_date|date_format:d-m-Y',
             'required_education' => 'nullable|string|max:50',
             'required_exp' => 'nullable|string|max:100',
-            'job_type' => 'nullable|string|max:30',
+            'job_type' => 'required|string|max:30',
             'is_hot' => 'nullable|in:yes,no',
             'approval_status' => 'nullable|in:approved,rejected,pending',
             'skills' => 'nullable|array',

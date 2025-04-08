@@ -93,9 +93,9 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Loại công việc</label>
+                        <label class="form-label">Loại công việc <span class="text-danger">*</span></label>
                         <input type="text" name="job_type" class="form-control"
-                            value="{{ old('job_type', $job->job_type ?? '') }}">
+                            value="{{ old('job_type', $job->job_type ?? '') }}" required>
                         <small class="text-muted">
                             Full-time, Part-time, Remote, ...
                         </small>

@@ -154,7 +154,7 @@
                                 .text(statusLabels[newStatus])
                                 .removeClass(
                                     "btn-warning btn-success btn-danger btn-primary btn-success"
-                                    )
+                                )
                                 .addClass(statusClasses[newStatus]);
                         } else {
                             alert("Có lỗi xảy ra!");
