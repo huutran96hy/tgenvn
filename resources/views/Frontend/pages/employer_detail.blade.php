@@ -118,11 +118,17 @@
                                     <h4 style="font-size: 24px; font-weight: bold; margin-bottom: 20px;">Hình ảnh về chúng
                                         tôi</h4>
                                     <div class="gallery-container">
-                                        @foreach (json_decode($employer->images, true) as $image)
-                                            <div class="gallery-item">
-                                                <img src="{{ asset($image) }}" alt="Ảnh về chúng tôi">
-                                            </div>
-                                        @endforeach
+                                        @php
+                                            $images = json_decode($employer->images, true);
+                                        @endphp
+
+                                        @if (!empty($images) && is_array($images))
+                                            @foreach ($images as $image)
+                                                <div class="gallery-item">
+                                                    <img src="{{ asset($image) }}" alt="Ảnh về chúng tôi">
+                                                </div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             </div>

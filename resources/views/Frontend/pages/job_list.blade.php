@@ -178,7 +178,7 @@
                                     <h5>Bộ Lọc <a class="link-reset" href="#" id="reset-filters">Làm mới</a></h5>
                                 </div>
 
-                                <div class="form-group select-style select-style-icon">
+                                <div class="form-group select-style  select-style-icon">
                                     <select class="form-select select2" id="location_filter">
                                         @foreach ($provinces as $province)
                                             <option value="{{ $province->id }}-{{ Str::slug($province->name) }}">
