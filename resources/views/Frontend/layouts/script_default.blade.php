@@ -21,11 +21,11 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        if (document.querySelector(".banner-slider")) {
-            var swiper = new Swiper(".banner-slider", {
+        if (document.querySelector(".banner-swiper")) {
+            var swiper = new Swiper(".banner-swiper", {
                 loop: true,
                 autoplay: {
-                    delay: 2000,
+                    delay: 3000,
                     disableOnInteraction: false,
                 },
                 pagination: {

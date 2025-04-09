@@ -190,7 +190,21 @@
                             @foreach ($employers as $employer)
                                 <option value="{{ $employer->employer_id }}"
                                     {{ isset($job) && $job->employer_id == $employer->employer_id ? 'selected' : '' }}>
-                                    {{ $employer->company_name }}</option>
+                                    {{ $employer->company_name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Vị trí chức vụ <span class="text-danger">*</span></label>
+                        <select name="position_id" class="form-control select2" required>
+                            <option value="">Chọn vị trí</option>
+                            @foreach ($positions as $position)
+                                <option value="{{ $position->id }}"
+                                    {{ isset($job) && $job->position_id == $position->id ? 'selected' : '' }}>
+                                    {{ $position->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>

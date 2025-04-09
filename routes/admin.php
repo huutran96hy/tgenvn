@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\{
     CandidateController,
     SkillController,
     ContactController,
+    CompanyPositionController
 };
 use App\Http\Middleware\AdminAccess;
 use App\Http\Middleware\RedirectIfAdmin;
@@ -40,7 +41,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('employers', EmployerController::class);
         Route::resource('news', NewsController::class);
         Route::post('/news/{news}/update-status', [NewsController::class, 'updateStatus'])->name('news.update-status');
-       
+
         Route::resource('news-categories', NewsCategoryController::class);
         Route::resource('applications', ApplicationController::class);
         Route::post('/applications/{application}/update-status', [ApplicationController::class, 'updateStatus'])->name('applications.update-status');
@@ -50,5 +51,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('contacts', ContactController::class)->only(['index', 'destroy']);
         Route::resource('configs', ConfigController::class);
         Route::delete('/delete-banner', [ConfigController::class, 'deleteBanner'])->name('configs.deleteBanner');
+        Route::resource('company-position', CompanyPositionController::class);
     });
 });

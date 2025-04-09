@@ -24,9 +24,9 @@
                         <h2 class="mb-30 mt-20 text-center">{{ $news->title }}</h2>
                         <div class="post-meta text-muted d-flex align-items-center mx-auto justify-content-center">
                             <div class="author d-flex align-items-center mr-30">
-                                <img alt="{{ $news->author->name }}"
+                                <img alt="{{ $news->author->name ?? 'Ẩn danh' }}"
                                     src="{{ asset('assets/images/demo/users/face9.jpg') }}" />
-                                <span>{{ $news->author->name }}</span>
+                                <span>{{ $news->author->name ?? 'Ẩn danh' }}</span>
                             </div>
                             <div class="date">
                                 <span class="font-xs color-text-paragraph-2 mr-20 d-inline-block">

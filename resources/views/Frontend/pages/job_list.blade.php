@@ -30,17 +30,14 @@
             border-radius: 0.375rem;
         }
 
-        .select2-container--default .select2-selection--single .select2-selection__rendered {
-            line-height: 24px;
-        }
-
         .select2-container--default .select2-selection--single .select2-selection__arrow {
-            height: 36px;
-            right: 10px;
+            height: 20px;
+            right: 5px;
         }
 
         .select-style-icon .select2 {
             border: none;
+            padding: 0px;
         }
     </style>
     <main class="main">
@@ -189,7 +186,7 @@
                                 </div>
 
                                 <div class="filter-block mb-20">
-                                    <h5 class="medium-heading mb-15">Vị trí</h5>
+                                    <h5 class="medium-heading mb-15">Ngành nghề</h5>
                                     <div class="form-group">
                                         <ul class="list-checkbox" id="job-category-checkbox-group">
                                             <li>
@@ -199,11 +196,35 @@
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </li>
-                                            @foreach ($categories->take(8) as $category)
+                                            @foreach ($categories->take(5) as $category)
                                                 <li>
                                                     <label class="cb-container">
                                                         <input type="checkbox" value="{{ $category->category_id }}">
                                                         <span class="text-small">{{ $category->category_name }}</span>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="filter-block mb-20">
+                                    <h5 class="medium-heading mb-15">Vị trí</h5>
+                                    <div class="form-group">
+                                        <ul class="list-checkbox" id="company-position-checkbox-group">
+                                            <li>
+                                                <label class="cb-container">
+                                                    <input type="checkbox" value="all" checked>
+                                                    <span class="text-small">Tất cả</span>
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </li>
+                                            @foreach ($positions as $position)
+                                                <li>
+                                                    <label class="cb-container">
+                                                        <input type="checkbox" value="{{ $position->id }}">
+                                                        <span class="text-small">{{ $position->name }}</span>
                                                         <span class="checkmark"></span>
                                                     </label>
                                                 </li>
@@ -552,6 +573,38 @@
             $('#location_filter').change(function() {
                 const selectedLocation = $(this).val();
                 updateURLParam('location', [selectedLocation]); // Cập nhật tham số location
+            });
+
+            // --- Handle Company Position ---
+            const positionParam = urlParams.get('position');
+            if (positionParam) {
+                const selectedPosition = positionParam.split(',')[0];
+                $('#company-position-checkbox-group input[type="checkbox"]').each(function() {
+                    const val = $(this).val();
+                    $(this).prop('checked', val === selectedPosition);
+                });
+            }
+
+            $('#company-position-checkbox-group input[type="checkbox"]').change(function() {
+                const clickedValue = $(this).val();
+
+                // Nếu "Tất cả" được chọn, xóa tham số position
+                if (clickedValue === 'all') {
+                    $('#company-position-checkbox-group input[type="checkbox"]').prop('checked', false);
+                    $(this).prop('checked', true);
+                    updateURLParam('position', []);
+                } else {
+                    $('#company-position-checkbox-group input[value="all"]').prop('checked', false);
+                    $('#company-position-checkbox-group input[type="checkbox"]').not(this).prop('checked',
+                        false);
+                    $(this).prop('checked', true);
+
+                    let selectedCategories = [];
+                    $('#company-position-checkbox-group input[type="checkbox"]:checked').each(function() {
+                        selectedCategories.push($(this).val());
+                    });
+                    updateURLParam('position', selectedCategories);
+                }
             });
         });
     </script>

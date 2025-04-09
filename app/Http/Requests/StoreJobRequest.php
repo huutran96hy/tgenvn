@@ -31,6 +31,7 @@ class StoreJobRequest extends FormRequest
             'location' => 'required|string|max:255',
             'province_id' => 'required|exists:provinces,id',
             'category_id' => 'required|exists:job_categories,category_id',
+            'position_id' => 'required|exists:company_position,id',
             'employer_id' => 'required|exists:employers,employer_id',
             'posted_date' => 'required|date_format:d-m-Y',
             'expiry_date' => 'required|after:posted_date|date_format:d-m-Y',

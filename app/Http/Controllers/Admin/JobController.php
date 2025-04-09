@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreJobRequest;
+use App\Models\CompanyPosition;
 use App\Models\Job;
 use App\Models\JobCategory;
 use App\Models\Employer;
@@ -53,12 +54,14 @@ class JobController extends Controller
         $employers = Employer::all();
         $allSkills = Skill::all();
         $provinces = Province::all();
+        $positions = CompanyPosition::all();
 
         return view('Admin.pages.jobs.add_edit', compact(
             'categories',
             'employers',
             'allSkills',
-            'provinces'
+            'provinces',
+            'positions'
         ));
     }
 
@@ -95,13 +98,15 @@ class JobController extends Controller
         $employers = Employer::all();
         $allSkills = Skill::all();
         $provinces = Province::all();
+        $positions = CompanyPosition::all();
 
         return view('Admin.pages.jobs.add_edit', compact(
             'job',
             'categories',
             'employers',
             'allSkills',
-            'provinces'
+            'provinces',
+            'positions'
         ));
     }
     public function update(StoreJobRequest $request, Job $job)

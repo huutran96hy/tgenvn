@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Job;
 use App\Models\JobCategory;
 use App\Models\Province;
+use App\Models\CompanyPosition;
 use Carbon\Carbon;
 
 class JobController extends Controller
@@ -18,6 +19,7 @@ class JobController extends Controller
     {
         $categories = JobCategory::all();
         $provinces = Province::all();
+        $positions = CompanyPosition::select('id', 'name')->get();
 
         $query = Job::with('employer', 'skills', 'category')
             ->where('approval_status', 'approved')
@@ -30,7 +32,12 @@ class JobController extends Controller
 
         $jobs = $query->paginate($perPage)->appends($request->query());
 
-        return view('Frontend.pages.job_list', compact('jobs', 'categories', 'provinces'));
+        return view('Frontend.pages.job_list', compact(
+            'jobs',
+            'categories',
+            'provinces',
+            'positions'
+        ));
     }
 
     public function create()
@@ -160,6 +167,11 @@ class JobController extends Controller
         // Lọc theo location
         if ($request->filled('location')) {
             $query->where('province_id', $request->input('location'));
+        }
+
+        // Lọc theo location
+        if ($request->filled('position')) {
+            $query->where('position_id', $request->input('position'));
         }
 
         return $query;

@@ -51,6 +51,11 @@ return [
         //     'icon' => 'ph-briefcase',
         // ],
         [
+            'route' => 'admin.company-position.index',
+            'label' => 'Danh sách vị trí chức vụ',
+            'icon' => 'ph-briefcase',
+        ],
+        [
             'route' => 'admin.configs.index',
             'label' => 'Cấu hình',
             'icon' => 'ph-gear',

@@ -94,7 +94,7 @@
                                                                     src="{{ asset('assets/images/demo/users/face9.jpg') }}">
                                                                 <div class="info-right-img">
                                                                     <span class="font-sm font-bold color-brand-1 op-70">
-                                                                        {{ $item->author->name }}
+                                                                        {{ $item->author->name ?? 'Ẩn danh' }}
                                                                     </span>
                                                                     <br>
                                                                     <span class="font-xs color-text-paragraph-2">

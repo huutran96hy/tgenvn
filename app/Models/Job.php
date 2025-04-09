@@ -22,6 +22,7 @@ class Job extends Model
         'location',
         'province_id',
         'category_id',
+        'position_id',
         'posted_date',
         'expiry_date',
         'required_education',
@@ -54,6 +55,11 @@ class Job extends Model
     public function province()
     {
         return $this->belongsTo(Province::class, 'province_id');
+    }
+
+    public function position()
+    {
+        return $this->belongsTo(CompanyPosition::class, 'position_id');
     }
 
     public function getPostedDateAttribute($value)

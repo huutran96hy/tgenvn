@@ -234,9 +234,9 @@
                                 <h4>Phúc lợi công ty</h4>
                                 <p>{!! $job->job_benefit ?? 'Không có phúc lợi cụ thể' !!}</p>
                             </div>
-                            <div class="author-single">
+                            {{-- <div class="author-single">
                                 <span>{{ $job->employer->company_name }}</span>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
