@@ -19,16 +19,18 @@
                         @method('PUT')
                     @endif
 
-                    <div class="mb-3">
-                        <label class="form-label">Tiêu đề công việc <span class="text-danger">*</span></label>
-                        <input type="text" name="job_title" class="form-control text-to-slug"
-                            value="{{ old('job_title', $job->job_title ?? '') }}" required>
-                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Tiêu đề công việc <span class="text-danger">*</span></label>
+                            <input type="text" name="job_title" class="form-control text-to-slug"
+                                value="{{ old('job_title', $job->job_title ?? '') }}" required>
+                        </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Slug</label>
-                        <input type="text" name="slug" class="form-control text-to-slug"
-                            value="{{ old('slug', $job->slug ?? '') }}" readonly>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Slug</label>
+                            <input type="text" name="slug" class="form-control text-to-slug"
+                                value="{{ old('slug', $job->slug ?? '') }}" readonly>
+                        </div>
                     </div>
 
                     <div class="mb-3">
@@ -52,53 +54,63 @@
                         </textarea>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Địa chỉ cụ thể (số nhà, ngõ...) <span class="text-danger">*</span></label>
-                        <input type="text" name="location" class="form-control"
-                            value="{{ old('location', $job->location ?? '') }}" required>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Địa chỉ cụ thể (số nhà, ngõ...) <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" name="location" class="form-control"
+                                value="{{ old('location', $job->location ?? '') }}" required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Tỉnh / Thành phố <span class="text-danger">*</span></label>
+                            <select name="province_id" class="form-select select2" required>
+                                <option value="">-- Chọn tỉnh/thành phố --</option>
+                                @foreach ($provinces as $province)
+                                    <option value="{{ $province->id }}"
+                                        {{ old('province_id', $job->province_id ?? '') == $province->id ? 'selected' : '' }}>
+                                        {{ $province->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Tỉnh / Thành phố <span class="text-danger">*</span></label>
-                        <select name="province_id" class="form-select select2" required>
-                            <option value="">-- Chọn tỉnh/thành phố --</option>
-                            @foreach ($provinces as $province)
-                                <option value="{{ $province->id }}"
-                                    {{ old('province_id', $job->province_id ?? '') == $province->id ? 'selected' : '' }}>
-                                    {{ $province->name }}
-                                </option>
-                            @endforeach
-                        </select>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Lương</label>
+                            <input type="text" name="salary" class="form-control"
+                                value="{{ old('salary', $job->salary ?? '') }}">
+                            <small class="text-muted">
+                                Vui lòng nhập mức lương (ví dụ: 10.000.000 VNĐ) hoặc ghi 'Thỏa thuận' nếu không cố định.
+                            </small>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Học vấn yêu cầu</label>
+                            <input type="text" name="required_education" class="form-control"
+                                value="{{ old('required_education', $job->required_education ?? '') }}">
+                            <small class="text-muted">
+                                VD: Cử nhân, Đại học, Thạc sĩ,...
+                            </small>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Lương</label>
-                        <input type="text" name="salary" class="form-control"
-                            value="{{ old('salary', $job->salary ?? '') }}">
-                        <small class="text-muted">
-                            Vui lòng nhập mức lương (ví dụ: 10.000.000 VNĐ) hoặc ghi 'Thỏa thuận' nếu không cố định.
-                        </small>
-                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">Kinh nghiệm yêu cầu</label>
+                            <input type="text" name="required_exp" class="form-control"
+                                value="{{ old('required_exp', $job->required_exp ?? '') }}">
+                        </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Học vấn yêu cầu</label>
-                        <input type="text" name="required_education" class="form-control"
-                            value="{{ old('required_education', $job->required_education ?? '') }}">
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Kinh nghiệm yêu cầu</label>
-                        <input type="text" name="required_exp" class="form-control"
-                            value="{{ old('required_exp', $job->required_exp ?? '') }}">
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Loại công việc <span class="text-danger">*</span></label>
-                        <input type="text" name="job_type" class="form-control"
-                            value="{{ old('job_type', $job->job_type ?? '') }}" required>
-                        <small class="text-muted">
-                            Full-time, Part-time, Remote, ...
-                        </small>
+                        <div class="col-md-6">
+                            <label class="form-label">Loại công việc <span class="text-danger">*</span></label>
+                            <input type="text" name="job_type" class="form-control"
+                                value="{{ old('job_type', $job->job_type ?? '') }}" required>
+                            <small class="text-muted">
+                                Full-time, Part-time, Remote, ...
+                            </small>
+                        </div>
                     </div>
 
                     <div class="mb-3">
@@ -122,25 +134,27 @@
                         <small class="text-muted">Chọn "Có" nếu bạn muốn làm nổi bật tin tuyển dụng này.</small>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Ngày đăng <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="ph-calendar"></i>
-                            </span>
-                            <input type="text" name="posted_date" class="form-control datepicker-autohide"
-                                value="{{ old('posted_date', $job->posted_date ?? '') }}" required>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Ngày đăng <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="ph-calendar"></i>
+                                </span>
+                                <input type="text" name="posted_date" class="form-control datepicker-autohide"
+                                    value="{{ old('posted_date', $job->posted_date ?? '') }}" required>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Ngày hết hạn <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="ph-calendar"></i>
-                            </span>
-                            <input type="text" name="expiry_date" class="form-control datepicker-autohide"
-                                value="{{ old('expiry_date', $job->expiry_date ?? '') }}" required>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Ngày hết hạn <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="ph-calendar"></i>
+                                </span>
+                                <input type="text" name="expiry_date" class="form-control datepicker-autohide"
+                                    value="{{ old('expiry_date', $job->expiry_date ?? '') }}" required>
+                            </div>
                         </div>
                     </div>
 
@@ -153,21 +167,6 @@
                                     {{ $skill->skill_name }}
                                 </option>
                             @endforeach
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Trạng thái phê duyệt <span class="text-danger">*</span></label>
-                        <select name="approval_status" class="form-control" required>
-                            <option value="pending"
-                                {{ old('approval_status', $job->approval_status ?? 'pending') == 'pending' ? 'selected' : '' }}>
-                                Chờ duyệt</option>
-                            <option value="approved"
-                                {{ old('approval_status', $job->approval_status ?? '') == 'approved' ? 'selected' : '' }}>
-                                Đã duyệt</option>
-                            <option value="rejected"
-                                {{ old('approval_status', $job->approval_status ?? '') == 'rejected' ? 'selected' : '' }}>
-                                Bị từ chối</option>
                         </select>
                     </div>
 
@@ -206,6 +205,21 @@
                                     {{ $position->name }}
                                 </option>
                             @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Trạng thái phê duyệt <span class="text-danger">*</span></label>
+                        <select name="approval_status" class="form-control" required>
+                            <option value="pending"
+                                {{ old('approval_status', $job->approval_status ?? 'pending') == 'pending' ? 'selected' : '' }}>
+                                Chờ duyệt</option>
+                            <option value="approved"
+                                {{ old('approval_status', $job->approval_status ?? '') == 'approved' ? 'selected' : '' }}>
+                                Đã duyệt</option>
+                            <option value="rejected"
+                                {{ old('approval_status', $job->approval_status ?? '') == 'rejected' ? 'selected' : '' }}>
+                                Bị từ chối</option>
                         </select>
                     </div>
 

@@ -50,8 +50,8 @@ class JobController extends Controller
 
     public function create()
     {
-        $categories = JobCategory::all();
-        $employers = Employer::all();
+        $categories = JobCategory::select('category_id', 'category_name')->get();
+        $employers = Employer::select('employer_id', 'company_name')->get();
         $allSkills = Skill::all();
         $provinces = Province::all();
         $positions = CompanyPosition::all();
@@ -94,8 +94,8 @@ class JobController extends Controller
 
     public function edit(Job $job)
     {
-        $categories = JobCategory::all();
-        $employers = Employer::all();
+        $categories = JobCategory::select('category_id', 'category_name')->get();
+        $employers = Employer::select('employer_id', 'company_name')->get();
         $allSkills = Skill::all();
         $provinces = Province::all();
         $positions = CompanyPosition::all();

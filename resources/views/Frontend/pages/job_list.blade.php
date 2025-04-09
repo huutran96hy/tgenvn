@@ -177,6 +177,7 @@
 
                                 <div class="form-group select-style select-style-icon">
                                     <select class="form-select select2" id="location_filter">
+                                        <option value="">Tất cả</option>
                                         @foreach ($provinces as $province)
                                             <option value="{{ $province->id }}-{{ Str::slug($province->name) }}">
                                                 {{ $province->name }}

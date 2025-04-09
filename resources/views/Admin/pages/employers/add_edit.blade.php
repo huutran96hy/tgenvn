@@ -33,6 +33,20 @@
                         </select>
                     </div> --}}
 
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Tên nhà tuyển dụng <span class="text-danger">*</span></label>
+                            <input type="text" name="company_name" class="form-control text-to-slug"
+                                value="{{ old('company_name', $employer->company_name ?? '') }}" required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Slug</label>
+                            <input type="text" name="slug" class="form-control text-to-slug"
+                                value="{{ old('slug', $employer->slug ?? '') }}" readonly>
+                        </div>
+                    </div>
+
                     <div class="file-input-wrapper mb-3">
                         <label class="form-label">Logo</label>
                         <input type="hidden" name="logo" class="all-images"
@@ -66,18 +80,6 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Tên nhà tuyển dụng <span class="text-danger">*</span></label>
-                        <input type="text" name="company_name" class="form-control text-to-slug"
-                            value="{{ old('company_name', $employer->company_name ?? '') }}" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Slug</label>
-                        <input type="text" name="slug" class="form-control text-to-slug"
-                            value="{{ old('slug', $employer->slug ?? '') }}" readonly>
-                    </div>
-
-                    <div class="mb-3">
                         <label class="form-label">Mô tả nhà tuyển dụng</label>
                         <textarea name="company_description" class="form-control ckeditor">
                             {{ old('company_description', $employer->company_description ?? '') }}
@@ -91,16 +93,18 @@
                         </textarea>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Website</label>
-                        <input type="url" name="website" class="form-control"
-                            value="{{ old('website', $employer->website ?? '') }}">
-                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Website</label>
+                            <input type="url" name="website" class="form-control"
+                                value="{{ old('website', $employer->website ?? '') }}">
+                        </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Số điện thoại <span class="text-danger">*</span></label>
-                        <input type="tel" name="contact_phone" class="form-control" maxlength="11"
-                            value="{{ old('contact_phone', $employer->contact_phone ?? '') }}" required>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Số điện thoại <span class="text-danger">*</span></label>
+                            <input type="tel" name="contact_phone" class="form-control" maxlength="11"
+                                value="{{ old('contact_phone', $employer->contact_phone ?? '') }}" required>
+                        </div>
                     </div>
 
                     <div class="mb-3">
@@ -124,16 +128,18 @@
                         </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Về chúng tôi</label>
-                        <input type="text" name="about" class="form-control"
-                            value="{{ old('about', $employer->about ?? '') }}">
-                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Về chúng tôi</label>
+                            <input type="text" name="about" class="form-control"
+                                value="{{ old('about', $employer->about ?? '') }}">
+                        </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Lĩnh vực công ty</label>
-                        <input type="text" name="company_type" class="form-control"
-                            value="{{ old('company_type', $employer->company_type ?? '') }}">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Lĩnh vực công ty</label>
+                            <input type="text" name="company_type" class="form-control"
+                                value="{{ old('company_type', $employer->company_type ?? '') }}">
+                        </div>
                     </div>
 
                     <button type="submit"
