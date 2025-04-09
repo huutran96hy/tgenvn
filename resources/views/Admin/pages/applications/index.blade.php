@@ -15,23 +15,23 @@
             <div class="card-body">
                 <form action="{{ route('admin.applications.index') }}" method="GET" class="mb-3">
                     <div class="row">
-                        <div class="col-md-4">
-                            <input type="text" name="search" class="form-control" placeholder="Tìm kiếm theo ứng viên"
-                                value="{{ request('search') }}">
-                        </div>
+                        {{-- <div class="col-md-4">
+                            <x-clearable-input name="search" placeholder="Tìm kiếm theo ứng viên" :value="request('search')" />
+                        </div> --}}
                         <div class="col-md-3">
                             <select name="status" class="form-control">
                                 <option value="">Tất cả trạng thái</option>
-                                <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Chờ
-                                    duyệt
+                                <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>
+                                    Chờ duyệt
                                 </option>
-                                <option value="interviewed" {{ request('status') == 'interviewed' ? 'selected' : '' }}>Đã
-                                    phỏng vấn</option>
-                                <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>Từ
-                                    chối
+                                <option value="interviewed" {{ request('status') == 'interviewed' ? 'selected' : '' }}>
+                                    Đã phỏng vấn
                                 </option>
-                                <option value="hired" {{ request('status') == 'hired' ? 'selected' : '' }}>Đã
-                                    tuyển
+                                <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>
+                                    Từ chối
+                                </option>
+                                <option value="hired" {{ request('status') == 'hired' ? 'selected' : '' }}>
+                                    Đã tuyển
                                 </option>
                             </select>
                         </div>
@@ -64,20 +64,20 @@
                                 </td>
                                 <td>{{ $application->job->job_title ?? 'Không có' }}</td>
                                 <td>{{ $application->application_date }}</td>
-                                <td class="text-center">
+                                <td>
                                     @php
                                         $statusLabels = [
+                                            'hired' => 'Đã tuyển',
+                                            'interviewed' => 'Đã phỏng vấn',
                                             'pending' => 'Chờ duyệt',
                                             'rejected' => 'Bị từ chối',
-                                            'interviewed' => 'Đã phỏng vấn',
-                                            'hired' => 'Đã tuyển',
                                         ];
 
                                         $statusClasses = [
+                                            'hired' => 'btn-success',
+                                            'interviewed' => 'btn-primary',
                                             'pending' => 'btn-warning',
                                             'rejected' => 'btn-danger',
-                                            'interviewed' => 'btn-primary',
-                                            'hired' => 'btn-success',
                                         ];
 
                                         $currentStatus = $application->status;

@@ -9,12 +9,18 @@
         </a>
 
         <div class="swiper-wrapper">
-            @foreach ($banners as $banner)
+            @forelse ($banners as $banner)
                 <div class="swiper-slide banner-slide">
                     <img src="{{ \App\Helpers\CustomHelper::logoSrc($banner) }}" alt="Banner"
                         style="height:150px; width: 100%; object-fit: cover;">
                 </div>
-            @endforeach
+            @empty
+                <div class="swiper-slide banner-slide">
+                    <img src="{{ asset('uploads/banner_thumb01.jpg') }}" alt="Banner"
+                        style="height:150px; width: 100%; object-fit: cover;">
+                </div>
+            @endforelse
         </div>
+
     </div>
 </section>
