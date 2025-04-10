@@ -90,8 +90,8 @@
                                                                 Mới nhất
                                                             @elseif(request('sort') == 'oldest')
                                                                 Cũ nhất
-                                                            @else
-                                                                Đánh giá cao
+                                                            {{-- @else
+                                                                Đánh giá cao --}}
                                                             @endif
                                                         </span>
                                                         <i class="fi-rr-angle-small-down"></i>
@@ -505,131 +505,69 @@
 
     <script>
         $(document).ready(function() {
-            $('#reset-filters').click(function(e) {
-                e.preventDefault(); // Ngăn load lại trang mặc định
-
-                const baseUrl = window.location.origin + window.location.pathname;
-                window.location.href = baseUrl;
-            });
-
+            const baseUrl = window.location.origin + window.location.pathname;
             const url = new URL(window.location.href);
             const urlParams = url.searchParams;
 
-            // Helper function to update URL params
+            $('#reset-filters').click(function(e) {
+                e.preventDefault();
+                window.location.href = baseUrl;
+            });
+
             function updateURLParam(param, value) {
-                if (value.length === 0) {
-                    urlParams.delete(param); // Xóa tham số nếu không có giá trị
+                if (!value.length || value[0] === 'all') {
+                    urlParams.delete(param);
                 } else {
-                    urlParams.set(param, value.join(',')); // Set tham số với giá trị mới
+                    urlParams.set(param, value.join(','));
                 }
-                window.location.href = url.toString(); // Tải lại trang với URL mới
+                window.location.href = url.toString();
             }
 
-            // --- Handle Job Categories ---
-            const jobCategoryParam = urlParams.get('job_category');
-            if (jobCategoryParam) {
-                const selectedCategory = jobCategoryParam.split(',')[0];
-                $('#job-category-checkbox-group input[type="checkbox"]').each(function() {
-                    const val = $(this).val();
-                    $(this).prop('checked', val === selectedCategory);
+            function initCheckboxGroup(param, groupSelector) {
+                const paramValue = urlParams.get(param);
+                if (paramValue) {
+                    const selected = paramValue.split(',')[0];
+                    $(`${groupSelector} input[type="checkbox"]`).prop('checked', function() {
+                        return $(this).val() === selected;
+                    });
+                }
+
+                $(`${groupSelector} input[type="checkbox"]`).change(function() {
+                    const value = $(this).val();
+
+                    if (value === 'all') {
+                        $(`${groupSelector} input[type="checkbox"]`).prop('checked', false);
+                        $(this).prop('checked', true);
+                        updateURLParam(param, []);
+                    } else {
+                        $(`${groupSelector} input[value="all"]`).prop('checked', false);
+                        $(`${groupSelector} input[type="checkbox"]`).not(this).prop('checked', false);
+                        $(this).prop('checked', true);
+
+                        const selected = $(`${groupSelector} input[type="checkbox"]:checked`)
+                            .map(function() {
+                                return $(this).val();
+                            }).get();
+
+                        updateURLParam(param, selected);
+                    }
                 });
             }
 
-            $('#job-category-checkbox-group input[type="checkbox"]').change(function() {
-                const clickedValue = $(this).val();
+            function initSelectFilter(param, selector) {
+                const paramValue = urlParams.get(param);
+                if (paramValue) $(selector).val(paramValue);
 
-                // Nếu "Tất cả" được chọn, xóa tham số job_category
-                if (clickedValue === 'all') {
-                    $('#job-category-checkbox-group input[type="checkbox"]').prop('checked', false);
-                    $(this).prop('checked', true);
-                    updateURLParam('job_category', []);
-                } else {
-                    $('#job-category-checkbox-group input[value="all"]').prop('checked', false);
-                    $('#job-category-checkbox-group input[type="checkbox"]').not(this).prop('checked',
-                        false);
-                    $(this).prop('checked', true);
-
-                    let selectedCategories = [];
-                    $('#job-category-checkbox-group input[type="checkbox"]:checked').each(function() {
-                        selectedCategories.push($(this).val());
-                    });
-                    updateURLParam('job_category', selectedCategories);
-                }
-            });
-
-            // --- Handle Salary Range ---
-            const salaryParam = urlParams.get('salary_range');
-            if (salaryParam) {
-                const selectedSalary = salaryParam.split(',')[0];
-                $('#salary-checkbox-group input[type="checkbox"]').each(function() {
-                    const val = $(this).val();
-                    $(this).prop('checked', val === selectedSalary);
+                $(selector).change(function() {
+                    updateURLParam(param, [$(this).val()]);
                 });
             }
 
-            $('#salary-checkbox-group input[type="checkbox"]').change(function() {
-                const clickedValue = $(this).val();
-
-                // Nếu "Tất cả" được chọn, xóa tham số salary_range
-                if (clickedValue === 'all') {
-                    $('#salary-checkbox-group input[type="checkbox"]').prop('checked', false);
-                    $(this).prop('checked', true);
-                    updateURLParam('salary_range', []);
-                } else {
-                    $('#salary-checkbox-group input[value="all"]').prop('checked', false);
-                    $('#salary-checkbox-group input[type="checkbox"]').not(this).prop('checked', false);
-                    $(this).prop('checked', true);
-
-                    let selectedSalaries = [];
-                    $('#salary-checkbox-group input[type="checkbox"]:checked').each(function() {
-                        selectedSalaries.push($(this).val());
-                    });
-                    updateURLParam('salary_range', selectedSalaries);
-                }
-            });
-
-            // --- Handle Location Filter ---
-            const locationParam = urlParams.get('location');
-            if (locationParam) {
-                $('#location_filter').val(locationParam);
-            }
-
-            $('#location_filter').change(function() {
-                const selectedLocation = $(this).val();
-                updateURLParam('location', [selectedLocation]); // Cập nhật tham số location
-            });
-
-            // --- Handle Company Position ---
-            const positionParam = urlParams.get('position');
-            if (positionParam) {
-                const selectedPosition = positionParam.split(',')[0];
-                $('#company-position-checkbox-group input[type="checkbox"]').each(function() {
-                    const val = $(this).val();
-                    $(this).prop('checked', val === selectedPosition);
-                });
-            }
-
-            $('#company-position-checkbox-group input[type="checkbox"]').change(function() {
-                const clickedValue = $(this).val();
-
-                // Nếu "Tất cả" được chọn, xóa tham số position
-                if (clickedValue === 'all') {
-                    $('#company-position-checkbox-group input[type="checkbox"]').prop('checked', false);
-                    $(this).prop('checked', true);
-                    updateURLParam('position', []);
-                } else {
-                    $('#company-position-checkbox-group input[value="all"]').prop('checked', false);
-                    $('#company-position-checkbox-group input[type="checkbox"]').not(this).prop('checked',
-                        false);
-                    $(this).prop('checked', true);
-
-                    let selectedCategories = [];
-                    $('#company-position-checkbox-group input[type="checkbox"]:checked').each(function() {
-                        selectedCategories.push($(this).val());
-                    });
-                    updateURLParam('position', selectedCategories);
-                }
-            });
+            // Init các nhóm lọc
+            initCheckboxGroup('job_category', '#job-category-checkbox-group');
+            initCheckboxGroup('salary_range', '#salary-checkbox-group');
+            initCheckboxGroup('position', '#company-position-checkbox-group');
+            initSelectFilter('location', '#location_filter');
         });
     </script>
 
@@ -666,9 +604,8 @@
             // Show more for job-category 
             $('#toggle-btn').click(function() {
                 const $extra = $('#extra-items');
-                $extra.slideToggle(300);
+                $extra.slideToggle(500);
 
-                // Toggle nút text
                 const isExpanded = $(this).text() === 'Ẩn bớt';
                 $(this).text(isExpanded ? 'Xem thêm' : 'Ẩn bớt');
             });

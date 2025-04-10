@@ -34,7 +34,7 @@ class CompanyPositionController extends Controller
 
         CompanyPosition::create($validated);
 
-        return redirect()->route('admin.company-position.index')->with('success', 'Position created successfully.');
+        return redirect()->route('admin.company-position.index')->with('success', 'Vị trí chức vụ tạo thành công.');
     }
 
     public function edit(CompanyPosition $companyPosition)
@@ -50,12 +50,12 @@ class CompanyPositionController extends Controller
 
         $companyPosition->update($validated);
 
-        return back()->with('success', 'Position updated successfully.');
+        return back()->with('success', 'Vị trí chức vụ cập nhật thành công.');
     }
 
     public function destroy(CompanyPosition $companyPosition)
     {
         $companyPosition->delete();
-        return back()->with('success', 'Position deleted successfully.');
+        return back()->with('success', 'Vị trí chức vụ xóa thành công.');
     }
 }

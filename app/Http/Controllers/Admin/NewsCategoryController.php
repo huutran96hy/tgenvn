@@ -35,7 +35,7 @@ class NewsCategoryController extends Controller
 
         NewsCategory::create($validated);
 
-        return redirect()->route('admin.news-categories.index')->with('success', 'Category created successfully.');
+        return redirect()->route('admin.news-categories.index')->with('success', 'Danh mục tin tức tạo thành công.');
     }
 
     public function edit(NewsCategory $newsCategory)
@@ -52,12 +52,12 @@ class NewsCategoryController extends Controller
 
         $newsCategory->update($validated);
 
-        return back()->with('success', 'Category updated successfully.');
+        return back()->with('success', 'Danh mục tin tức cập nhật thành công.');
     }
 
     public function destroy(NewsCategory $newsCategory)
     {
         $newsCategory->delete();
-        return back()->with('success', 'Category deleted successfully.');
+        return back()->with('success', 'Danh mục tin tức xóa thành công.');
     }
 }
