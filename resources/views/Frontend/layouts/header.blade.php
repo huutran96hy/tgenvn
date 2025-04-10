@@ -1,5 +1,11 @@
 <header class="header sticky-bar height-header" style="padding: 5px 0px; background: #265c77;">
     <div class="container">
+        <!-- Chỉ hiển thị trên mobile -->
+        <div class="left-logo-mobile">
+            <a href="{{ route('index') }}">
+                <img alt="logo" src="{{ asset(\App\Models\Config::getLogo()) }}" style="width: 40px">
+            </a>
+        </div>
         <div class="main-header d-flex justify-content-between align-items-center">
             <div class="header-left d-flex align-items-center">
                 <nav class="nav-main-menu">

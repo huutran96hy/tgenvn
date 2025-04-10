@@ -39,6 +39,7 @@ Route::post('/apply-job', [CandidateController::class, 'store'])->name('candidat
 Route::middleware('auth')->group(function () {
     // Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
 });
+
 Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function () {
     Route::get('/laravel-filemanager', '\UniSharp\LaravelFilemanager\controllers\LfmController@show');
     Route::post('/laravel-filemanager/upload', '\UniSharp\LaravelFilemanager\controllers\UploadController@upload');

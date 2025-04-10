@@ -4,6 +4,7 @@
     @endphp
 
     <div class="banner-container">
+        <!-- Chỉ hiển thị trên desktop  -->
         <div class="logo-side">
             <a href="{{ route('index') }}">
                 <img alt="logo" src="{{ asset(\App\Models\Config::getLogo()) }}" class="logo-img">
