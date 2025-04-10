@@ -5,6 +5,14 @@
     }
 
     $menuItems = config('menu.admin_menu', []);
+    $user = Auth::user();
+
+    // Ẩn menu user nếu là content_manager
+    if ($user && $user->role === 'content_manager') {
+        $menuItems = array_filter($menuItems, function ($item) {
+            return $item['route'] !== 'admin.users.index';
+        });
+    }
 @endphp
 
 @foreach ($menuItems as $item)

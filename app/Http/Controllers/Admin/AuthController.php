@@ -25,7 +25,7 @@ class AuthController extends Controller
             $user = Auth::user();
 
             // Chỉ cho phép login nếu là admin hoặc content_manager
-            if (!in_array($user->role, ['admin', 'content_manager'])) {
+            if (!in_array($user->role, [User::ADMIN_ROLE, User::CONTENT_MANAGER_ROLE])) {
                 Auth::logout();
                 return redirect()->route('admin.login')->withErrors(['error' => 'Bạn không có quyền truy cập!']);
             }

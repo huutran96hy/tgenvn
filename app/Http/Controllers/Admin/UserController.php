@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
     public function index(Request $request)
     {
+        Gate::authorize('manage-users');
+
         $query = User::query();
 
         // Lọc theo tên hoặc email
@@ -31,11 +34,15 @@ class UserController extends Controller
 
     public function create()
     {
+        Gate::authorize('manage-users');
+
         return view('Admin.pages.users.add_edit');
     }
 
     public function store(Request $request)
     {
+        Gate::authorize('manage-users');
+
         $validated = $request->validate([
             'name' => 'required',
             'username' => 'required|unique:users,username',
@@ -53,11 +60,15 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
+        Gate::authorize('manage-users');
+
         return view('Admin.pages.users.add_edit', compact('user'));
     }
 
     public function update(Request $request, User $user)
     {
+        Gate::authorize('manage-users');
+
         $validated = $request->validate([
             'name' => 'required',
             'username' => 'required|unique:users,username,' . $user->id,
@@ -78,6 +89,8 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        Gate::authorize('manage-users');
+
         if ($user->id == 1) {
             return back()->with('error', 'Không thể xóa Admin chính');
         }

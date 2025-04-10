@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class RedirectIfAdmin
 {
@@ -16,12 +17,15 @@ class RedirectIfAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        // Nếu chưa đăng nhập hoặc không phải admin → Chuyển hướng đến login
-        if (!Auth::check() || Auth::user()->role !== 'admin') {
+        $user = Auth::user();
+
+        // Nếu chưa đăng nhập hoặc không phải admin, content_manager → Chuyển hướng đến login
+        if (!$user || !in_array($user->role, [User::ADMIN_ROLE, User::CONTENT_MANAGER_ROLE])) {
+
             return redirect()->route('admin.login');
         }
 
-        // Nếu đã là admin → Chuyển hướng về dashboard
+        // Nếu đã là admin,content_manager → Chuyển hướng về dashboard
         return redirect()->route('admin.dashboard');
     }
 }

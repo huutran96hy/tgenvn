@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AdminAccess
 {
@@ -14,7 +15,7 @@ class AdminAccess
         $user = Auth::user();
         
         // Kiểm tra nếu chưa login hoặc không phải admin
-        if (!$user || !in_array($user->role, ['admin', 'content_manager'])) {
+        if (!$user || !in_array($user->role, [User::ADMIN_ROLE, User::CONTENT_MANAGER_ROLE])) {
             return redirect()->route('admin.login')->with('error', 'Bạn không có quyền truy cập!');
         }
 

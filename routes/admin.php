@@ -19,7 +19,6 @@ use App\Http\Controllers\Admin\{
 };
 use App\Http\Middleware\AdminAccess;
 use App\Http\Middleware\RedirectIfAdmin;
-use App\Http\Middleware\AdminOnly;
 
 Route::middleware(RedirectIfAdmin::class)->get('/admin', function () {
     return null;
@@ -34,11 +33,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-        // Chỉ admin mới được quản lý users
-        Route::middleware([AdminOnly::class])->group(function () {
-            Route::resource('users', UserController::class);
-        });
-
+        Route::resource('users', UserController::class);
         Route::resource('jobs', JobController::class);
         Route::post('/jobs/{job}/update-status', [JobController::class, 'updateStatus'])->name('jobs.update-status');
 
