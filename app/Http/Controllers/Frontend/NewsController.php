@@ -25,7 +25,6 @@ class NewsController extends Controller
         return view('Frontend.pages.news_list', compact('news'));
     }
 
-
     /**
      * Thêm tin tức mới.
      */

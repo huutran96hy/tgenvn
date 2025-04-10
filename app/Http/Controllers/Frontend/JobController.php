@@ -25,7 +25,7 @@ class JobController extends Controller
             ->where('approval_status', 'approved')
             ->whereDate('expiry_date', '>=', Carbon::today());
 
-        // Sử dụng hàm searchJobs để xử lý các điều kiện lọc
+        // Xử lý các điều kiện lọc
         $query = $this->searchJobs($request, $query);
 
         $perPage = $request->input('per_page', 12);
@@ -62,7 +62,6 @@ class JobController extends Controller
             'expiry_date'     => 'required|date|after_or_equal:posted_date',
         ]);
 
-        // Tạo job mới
         $job = Job::create($validatedData);
 
         return redirect()->route('jobs.index')->with('success', 'Job created successfully.');
@@ -83,9 +82,6 @@ class JobController extends Controller
     public function edit($id)
     {
         $job = Job::findOrFail($id);
-        // Nếu cần load thêm dữ liệu cho dropdown (employers, categories) thì thực hiện tại đây
-        // $employers = Employer::all();
-        // $categories = Category::all();
 
         return view('admin.jobs.edit', compact('job'));
     }
@@ -169,7 +165,7 @@ class JobController extends Controller
             $query->where('province_id', $request->input('location'));
         }
 
-        // Lọc theo location
+        // Lọc theo position
         if ($request->filled('position')) {
             $query->where('position_id', $request->input('position'));
         }

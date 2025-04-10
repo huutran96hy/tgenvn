@@ -13,16 +13,14 @@ class NumberHelper
      */
     public static function formatSalary($value)
     {
-         // Trả về giá trị ban đầu nếu đã có ký tự không phải là số
-        if (preg_match('/[^\d]/', $value)) {
-            return $value;
+        // Loại bỏ tất cả ký tự không phải số
+        $numericValue = preg_replace('/[^\d]/', '', $value);
+
+        // Nếu sau khi loại bỏ mà không còn gì, trả về "Thoả thuận"
+        if ($numericValue === '') {
+            return 'Thoả thuận';
         }
 
-        // Kiểm tra nếu là số thì định dạng
-        if (is_numeric($value)) {
-            return number_format($value, 0, ',', '.') . ' VNĐ';
-        }
-
-        return 'Thoả thuận'; 
+        return number_format($numericValue, 0, ',', '.') . ' VNĐ';
     }
 }
