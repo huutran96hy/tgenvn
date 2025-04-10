@@ -21,9 +21,11 @@ class AuthController extends Controller
     {
         $credentials = $request->only('username', 'password');
 
-        // Chỉ cho phép đăng nhập nếu role là admin
         if (Auth::attempt($credentials)) {
-            if (Auth::user()->role !== 'admin') {
+            $user = Auth::user();
+
+            // Chỉ cho phép login nếu là admin hoặc content_manager
+            if (!in_array($user->role, ['admin', 'content_manager'])) {
                 Auth::logout();
                 return redirect()->route('admin.login')->withErrors(['error' => 'Bạn không có quyền truy cập!']);
             }

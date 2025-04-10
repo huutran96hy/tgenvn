@@ -11,8 +11,10 @@ class AdminAccess
 {
     public function handle(Request $request, Closure $next)
     {
+        $user = Auth::user();
+        
         // Kiểm tra nếu chưa login hoặc không phải admin
-        if (!Auth::check() || Auth::user()->role !== 'admin') {
+        if (!$user || !in_array($user->role, ['admin', 'content_manager'])) {
             return redirect()->route('admin.login')->with('error', 'Bạn không có quyền truy cập!');
         }
 

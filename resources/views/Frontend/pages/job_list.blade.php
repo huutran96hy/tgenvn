@@ -313,35 +313,6 @@
                                 </div>
 
                                 {{-- <div class="filter-block mb-30">
-                                    <h5 class="medium-heading mb-10">Vị trí tuyển dụng</h5>
-                                    <div class="form-group">
-                                        <ul class="list-checkbox" id="position-checkbox-group">
-                                            <li>
-                                                <label class="cb-container">
-                                                    <input type="checkbox" value="Senior">
-                                                    <span class="text-small">Senior</span>
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="cb-container">
-                                                    <input type="checkbox" value="Junior">
-                                                    <span class="text-small">Junior</span>
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="cb-container">
-                                                    <input type="checkbox" value="Fresher">
-                                                    <span class="text-small">Fresher</span>
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> --}}
-
-                                {{-- <div class="filter-block mb-30">
                                     <h5 class="medium-heading mb-10">Từ khoá nổi bật</h5>
                                     <div class="form-group">
                                         <ul class="list-checkbox">
