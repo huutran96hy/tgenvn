@@ -172,7 +172,7 @@
                         <div class="sidebar-shadow none-shadow mb-30">
                             <div class="sidebar-filters">
                                 <div class="filter-block head-border mb-30">
-                                    <h5>Bộ Lọc <a class="link-reset" href="#" id="reset-filters">Làm mới</a></h5>
+                                    <h5>Lọc Nâng Cao<a class="link-reset" href="#" id="reset-filters">Xóa lọc</a></h5>
                                 </div>
 
                                 <div class="form-group select-style select-style-icon">
@@ -197,8 +197,9 @@
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </li>
+
                                             @foreach ($categories->take(5) as $category)
-                                                <li>
+                                                <li class="category-item">
                                                     <label class="cb-container">
                                                         <input type="checkbox" value="{{ $category->category_id }}">
                                                         <span class="text-small">{{ $category->category_name }}</span>
@@ -206,7 +207,29 @@
                                                     </label>
                                                 </li>
                                             @endforeach
+
+                                            @if ($categories->count() > 5)
+                                                <div id="extra-items" style="display: none;">
+                                                    @foreach ($categories->skip(5) as $category)
+                                                        <li class="category-item">
+                                                            <label class="cb-container">
+                                                                <input type="checkbox"
+                                                                    value="{{ $category->category_id }}">
+                                                                <span
+                                                                    class="text-small">{{ $category->category_name }}</span>
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </li>
+                                                    @endforeach
+                                                </div>
+                                            @endif
                                         </ul>
+
+                                        @if ($categories->count() > 5)
+                                            <button type="button" id="toggle-btn" class="btn btn-link p-0 mt-2">
+                                                Xem thêm
+                                            </button>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -612,6 +635,7 @@
 
     <script>
         $(document).ready(function() {
+            // Sorting for jobs
             $('.dropdown-item').on('click', function(event) {
                 event.preventDefault(); // Ngăn chặn load trang
                 let url = $(this).attr('href');
@@ -637,6 +661,16 @@
             $('.select2').select2({
                 placeholder: "Chọn địa điểm",
                 allowClear: true,
+            });
+
+            // Show more for job-category 
+            $('#toggle-btn').click(function() {
+                const $extra = $('#extra-items');
+                $extra.slideToggle(300);
+
+                // Toggle nút text
+                const isExpanded = $(this).text() === 'Ẩn bớt';
+                $(this).text(isExpanded ? 'Xem thêm' : 'Ẩn bớt');
             });
         });
     </script>
