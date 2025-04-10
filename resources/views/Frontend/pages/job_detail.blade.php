@@ -37,7 +37,15 @@
                                         referrerpolicy="no-referrer-when-downgrade"></iframe>
                                 </div>
                                 <ul class="ul-disc">
-                                    <li>{{ $job->employer->address }}</li>
+                                    @php
+                                        $address = $job->location;
+                                        $province = optional($job->province)->name;
+                                    @endphp
+
+                                    @if ($address || $province)
+                                        <li>{{ $address }}{{ $address && $province ? ' - ' : '' }}{{ $province }}
+                                        </li>
+                                    @endif
                                     <li>SĐT: +{{ $job->employer->contact_phone }}</li>
                                     <li>Email: {{ $job->employer->email }}</li>
                                 </ul>
@@ -93,7 +101,7 @@
                         </div>
                         @if ($job->skills->isNotEmpty())
                             <div class="sidebar-border">
-                                <h6 class="f-18">Thẻ</h6>
+                                <h6 class="f-18">Kỹ năng</h6>
                                 <div class="sidebar-list-job">
                                     @foreach ($job->skills as $skill)
                                         <a class="btn btn-grey-small bg-14 mb-10 mr-5" href="{{ route('jobs.index') }}">

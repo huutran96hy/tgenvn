@@ -128,7 +128,8 @@
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                                         <div class="card-grid-2 hover-up">
                                             <div class="card-grid-2-image-left" style="padding:15px">
-                                                <span class="flash"></span>
+                                                <span class="flash {{ $job->is_hot == 'yes' ? '' : 'd-none' }}">
+                                                </span>
                                                 <div class="image-box" style="padding-right: 20px;">
                                                     <img src="{{ \App\Helpers\CustomHelper::logoSrc($job->employer->logo) }}"
                                                         alt="{{ $job->employer->name }}"

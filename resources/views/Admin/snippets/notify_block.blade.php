@@ -1,10 +1,10 @@
 {{-- Notification --}}
 @if (session('success'))
-    <div class="alert alert-success">
+    <div class="alert alert-success" style="margin: 10px">
         {{ session('success') }}
     </div>
 @elseif (session('error'))
-    <div class="alert alert-danger">
+    <div class="alert alert-danger" style="margin: 10px">
         {{ session('error') }}
     </div>
 @endif

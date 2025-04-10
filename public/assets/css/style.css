@@ -312,7 +312,6 @@
     display: block;
 }
 
-/* Trên mobile thì đảo lại */
 @media (max-width: 768px) {
     .left-logo-mobile {
         display: block !important;
