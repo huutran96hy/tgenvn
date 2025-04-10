@@ -1,27 +1,22 @@
-<header class="header sticky-bar height-header" style="padding: 6px; background: #265c77;">
+<header class="header sticky-bar height-header" style="padding: 5px 0px; background: #265c77;">
     <div class="container">
         <div class="main-header d-flex justify-content-between align-items-center">
             <div class="header-left d-flex align-items-center">
                 <nav class="nav-main-menu">
                     <ul class="main-menu d-flex flex-wrap mb-0">
-                        <li><a href="{{ route('index') }}"
-                                class="{{ Request::routeIs('index') ? 'tab-link-fix' : '' }}">Trang
+                        <li class="{{ Request::routeIs('index') ? 'tab-link-fix' : '' }}"><a href="{{ route('index') }}">Trang
                                 chủ</a></li>
-                        <li>
-                            <a href="{{ route('jobs.index', ['type' => 'best']) }}"
-                                class="{{ Request::routeIs('jobs.index') && Request::get('type') == 'best' ? 'tab-link-fix' : '' }}">Việc
+                        <li class="{{ Request::routeIs('jobs.index') && Request::get('type') == 'best' ? 'tab-link-fix' : '' }}">
+                            <a href="{{ route('jobs.index', ['type' => 'best']) }}">Việc
                                 làm tốt nhất</a>
                         </li>
-                        <li>
-                            <a href="{{ route('jobs.index', ['type' => 'suggested']) }}"
-                                class="{{ Request::routeIs('jobs.index') && Request::get('type') == 'suggested' ? 'tab-link-fix' : '' }}">Việc
+                        <li class="{{ Request::routeIs('jobs.index') && Request::get('type') == 'suggested' ? 'tab-link-fix' : '' }}">
+                            <a href="{{ route('jobs.index', ['type' => 'suggested']) }}">Việc
                                 làm gợi ý</a>
                         </li>
-                        <li><a href="{{ route('employers.index') }}"
-                                class="{{ Request::routeIs('employers.*') ? 'tab-link-fix' : '' }}">Công ty hàng đầu</a>
+                        <li class="{{ Request::routeIs('employers.*') ? 'tab-link-fix' : '' }}"><a href="{{ route('employers.index') }}">Công ty hàng đầu</a>
                         </li>
-                        <li><a href="{{ route('news.index') }}"
-                                class="{{ Request::routeIs('news.*') ? 'tab-link-fix' : '' }}">Thông tin chia sẻ</a>
+                        <li class="{{ Request::routeIs('news.*') ? 'tab-link-fix' : '' }}"><a href="{{ route('news.index') }}">Thông tin chia sẻ</a>
                         </li>
                     </ul>
                 </nav>

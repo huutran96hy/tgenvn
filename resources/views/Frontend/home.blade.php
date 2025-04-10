@@ -30,11 +30,11 @@
         @include('Frontend.layouts.header')
 
         <section class="section-box">
-            <div class="section-box wow animate__animated animate__fadeIn mt-20">
+            <div class="section-box wow animate__animated animate__fadeIn mt-0">
                 <div class="container">
                     <div class="box-swiper">
                         <div class="swiper-container swiper-group-5 swiper">
-                            <div class="swiper-wrapper pb-70 pt-20">
+                            <div class="swiper-wrapper pb-20 pt-15">
                                 @foreach ($employers->chunk(5) as $chunk)
                                     <div class="swiper-slide hover-up">
                                         @foreach ($chunk as $employer)
