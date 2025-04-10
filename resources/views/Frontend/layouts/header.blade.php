@@ -1,4 +1,4 @@
-<header class="header sticky-bar height-header" style="padding: 0px; background: #265c77;">
+<header class="header sticky-bar height-header" style="padding: 5px 0px; background: #265c77;">
     <div class="container">
         <div class="main-header d-flex justify-content-between align-items-center">
             <div class="header-left d-flex align-items-center">
