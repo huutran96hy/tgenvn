@@ -106,9 +106,9 @@ class NewsController extends Controller
     public function destroy(News $news)
     {
         // Xóa iamges
-        if ($news->images) {
-            Storage::disk('public')->delete($news->images);
-        }
+        // if ($news->images) {
+        //     Storage::disk('public')->delete($news->images);
+        // }
 
         $news->delete();
         return back()->with('success', 'Xóa thành công.');

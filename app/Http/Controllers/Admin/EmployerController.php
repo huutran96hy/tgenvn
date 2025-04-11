@@ -115,14 +115,14 @@ class EmployerController extends Controller
     public function destroy(Employer $employer)
     {
         // Xóa logo
-        if ($employer->logo) {
-            Storage::disk('public')->delete($employer->logo);
-        }
+        // if ($employer->logo) {
+        //     Storage::disk('public')->delete($employer->logo);
+        // }
 
         // Xóa bgr-img
-        if ($employer->background_img) {
-            Storage::disk('public')->delete($employer->background_img);
-        }
+        // if ($employer->background_img) {
+        //     Storage::disk('public')->delete($employer->background_img);
+        // }
 
         $employer->delete();
         return back()->with('success', 'Xóa công ty thành công');

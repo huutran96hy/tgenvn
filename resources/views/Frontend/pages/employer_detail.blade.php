@@ -48,7 +48,7 @@
             <div class="container">
                 <div class="banner-hero banner-image-single">
                     <img src="{{ \App\Helpers\CustomHelper::logoSrc($employer->background_img) }}"
-                        alt="{{ $employer->name }}">
+                        alt="{{ $employer->name }}" style="max-height: 480px; object-fit: cover;">
                 </div>
                 <div class="box-company-profile">
                     <div class="image-compay">
