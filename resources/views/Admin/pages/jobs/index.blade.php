@@ -51,6 +51,7 @@
                     <thead>
                         <tr>
                             <th>Tiêu đề</th>
+                            <th>Danh mục</th>
                             <th>Loại công việc</th>
                             <th>Mức lương</th>
                             <th class="text-center">Trạng thái</th>
@@ -61,6 +62,7 @@
                         @foreach ($jobs as $job)
                             <tr>
                                 <td>{{ $job->job_title }}</td>
+                                <td>{{ $job->category->category_name ?? 'Không có' }}</td>
                                 <td>{{ $job->job_type }}</td>
                                 <td>{{ \App\Helpers\NumberHelper::formatSalary($job->salary) }}</td>
                                 <td class="text-center">

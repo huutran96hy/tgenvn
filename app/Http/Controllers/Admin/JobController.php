@@ -19,7 +19,7 @@ class JobController extends Controller
     use SlugCheck;
     public function index(Request $request)
     {
-        $query = Job::query();
+        $query = Job::with('category');
         $categories = JobCategory::all();
         $employers = Employer::all();
 
