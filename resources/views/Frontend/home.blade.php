@@ -43,7 +43,8 @@
                                                     <img alt="{{ $employer->company_name }}"
                                                         class="img-fluid d-block mx-auto"
                                                         style="height: 82px; object-fit: contain;"
-                                                        src="{{ asset('storage/' . $employer->logo) }}" width="100%" />
+                                                        src="{{ \App\Helpers\CustomHelper::logoSrc($employer->logo) }}"
+                                                        width="100%" />
                                                 </div>
                                             </a>
                                         @endforeach
