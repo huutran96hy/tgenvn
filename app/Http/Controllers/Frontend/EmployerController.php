@@ -23,15 +23,11 @@ class EmployerController extends Controller
             $query->where('company_name', 'like', '%' . $request->keyword . '%');
         }
 
-        // // Lọc theo ngành nghề
-        // if ($request->has('industry') && $request->industry != 0) {
-        //     $query->where('industry_id', $request->industry);
-        // }
-
-        // // Lọc theo tỉnh/thành phố
-        // if ($request->has('province') && !empty($request->province)) {
-        //     $query->where('province', $request->province);
-        // }
+        if ($request->get('type') === 'top') {
+            $query->where('is_hot', 'yes');
+        } elseif ($request->get('type') === 'suggested') {
+            $query->where('is_hot', 'no');
+        }
 
         $sort = $request->input('sort', 'newest');
         if ($sort === 'oldest') {

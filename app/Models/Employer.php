@@ -27,7 +27,8 @@ class Employer extends Model
         'founded_at',
         'about',
         'company_type',
-        'map_url'
+        'map_url',
+        'is_hot'
     ];
 
     public function user()

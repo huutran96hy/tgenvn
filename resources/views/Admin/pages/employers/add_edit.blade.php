@@ -108,6 +108,27 @@
                     </div>
 
                     <div class="mb-3">
+                        <label class="form-label">Công ty nổi bật</label>
+                        <div style="display:flex;align-items: center">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="is_hot" id="is_hot_yes" value="yes"
+                                    {{ old('is_hot', $employer->is_hot ?? '') === 'yes' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="is_hot_yes">
+                                    Có nổi bật
+                                </label>
+                            </div>
+                            <div class="form-check" style="margin-left:20px">
+                                <input class="form-check-input" type="radio" name="is_hot" id="is_hot_no" value="no"
+                                    {{ old('is_hot', $employer->is_hot ?? '') === 'no' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="is_hot_no">
+                                    Không nổi bật
+                                </label>
+                            </div>
+                        </div>
+                        <small class="text-muted">Chọn "Có" nếu bạn muốn làm nổi bật công ty tuyển dụng này.</small>
+                    </div>
+
+                    <div class="mb-3">
                         <label class="form-label">Địa chỉ <span class="text-danger">*</span></label>
                         <input type="text" name="address" class="form-control"
                             value="{{ old('address', $employer->address ?? '') }}" required>
@@ -145,12 +166,16 @@
                     <div class="mb-3">
                         <label for="map_url" class="form-label">Địa chỉ bản đồ</label>
                         <input type="text" class="form-control" id="map_url" name="map_url"
-                            placeholder="https://www.google.com/maps/embed?..."
+                            placeholder='<iframe src="https://www.google.com/maps/embed?..."'
                             value="{{ old('map_url', $employer->map_url ?? '') }}">
+                        <small class="form-text text-muted">
+                            Dán mã nhúng Google Maps (iframe) vào đây để hiển thị bản đồ.
+                        </small>
                     </div>
 
-                    <button type="submit"
-                        class="btn btn-success">{{ isset($employer) ? 'Cập nhật nhà tuyển dụng' : 'Thêm nhà tuyển dụng' }}</button>
+                    <button type="submit" class="btn btn-success">
+                        {{ isset($employer) ? 'Cập nhật nhà tuyển dụng' : 'Thêm nhà tuyển dụng' }}
+                    </button>
                     <a href="{{ route('admin.employers.index') }}" class="btn btn-secondary">Quay lại</a>
                 </form>
             </div>

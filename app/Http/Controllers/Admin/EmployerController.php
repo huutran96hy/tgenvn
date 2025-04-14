@@ -51,6 +51,7 @@ class EmployerController extends Controller
             'about' => 'nullable',
             'company_type' => 'nullable|max:600',
             'map_url' => 'nullable|string',
+            'is_hot' => 'nullable|in:yes,no',
         ], [
             'contact_phone.regex' => 'Số điện thoại không hợp lệ. Vui lòng nhập từ 10 đến 11 chữ số.',
         ]);
@@ -95,6 +96,7 @@ class EmployerController extends Controller
             'about' => 'nullable',
             'company_type' => 'nullable|max:600',
             'map_url' => 'nullable|string',
+            'is_hot' => 'nullable|in:yes,no',
         ], [
             'contact_phone.regex' => 'Số điện thoại không hợp lệ. Vui lòng nhập từ 10 đến 11 chữ số.',
         ]);

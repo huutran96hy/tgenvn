@@ -14,17 +14,20 @@
                             <a href="{{ route('index') }}">Trang chủ</a>
                         </li>
                         <li
-                            class="{{ Request::routeIs('jobs.index') && Request::get('type') == 'best' ? 'tab-link-fix' : '' }}">
-                            <a href="{{ route('jobs.index', ['type' => 'best']) }}">
-                                Việc làm tốt nhất</a>
+                            class="{{ request()->routeIs('jobs.index') && request('type') === 'best' ? 'tab-link-fix' : '' }}">
+                            <a href="{{ route('jobs.index', ['type' => 'best']) }}">Việc làm tốt nhất</a>
                         </li>
                         <li
-                            class="{{ Request::routeIs('jobs.index') && Request::get('type') == 'suggested' ? 'tab-link-fix' : '' }}">
-                            <a href="{{ route('jobs.index', ['type' => 'suggested']) }}">
-                                Việc làm gợi ý</a>
+                            class="{{ request()->routeIs('jobs.index') && request('type') === 'suggested' ? 'tab-link-fix' : '' }}">
+                            <a href="{{ route('jobs.index', ['type' => 'suggested']) }}">Việc làm gợi ý</a>
                         </li>
-                        <li class="{{ Request::routeIs('employers.*') ? 'tab-link-fix' : '' }}">
-                            <a href="{{ route('employers.index') }}">Công ty hàng đầu</a>
+                        <li
+                            class="{{ request()->routeIs('employers.index') && request('type') === 'top' ? 'tab-link-fix' : '' }}">
+                            <a href="{{ route('employers.index', ['type' => 'top']) }}">Công ty nổi bật</a>
+                        </li>
+                        <li
+                            class="{{ request()->routeIs('employers.index') && request('type') === 'suggested' ? 'tab-link-fix' : '' }}">
+                            <a href="{{ route('employers.index', ['type' => 'suggested']) }}">Công ty được gợi ý</a>
                         </li>
                         <li class="{{ Request::routeIs('news.*') ? 'tab-link-fix' : '' }}">
                             <a href="{{ route('news.index') }}">Thông tin chia sẻ</a>
@@ -86,8 +89,14 @@
                                     class="{{ Request::routeIs('jobs.index') && Request::get('type') == 'suggested' ? 'active' : '' }}">Việc
                                     làm gợi ý</a>
                             </li>
-                            <li><a class="{{ Request::routeIs('employers.*') ? 'active' : '' }}"
-                                    href="{{ route('employers.index') }}">Công ty hàng đầu</a>
+                            <li
+                                class="{{ request()->routeIs('employers.index') && request('type') === 'top' ? 'active' : '' }}">
+                                <a href="{{ route('employers.index', ['type' => 'top']) }}">Công ty hàng đầu</a>
+                            </li>
+                            <li
+                                class="{{ request()->routeIs('employers.index') && request('type') === 'suggested' ? 'active' : '' }}">
+                                <a href="{{ route('employers.index', ['type' => 'suggested']) }}">Công ty được gợi
+                                    ý</a>
                             </li>
                             <li><a class="{{ Request::routeIs('news.*') ? 'active' : '' }}"
                                     href="{{ route('news.index') }}">Thông tin chia sẻ</a>

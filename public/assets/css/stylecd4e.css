@@ -3197,7 +3197,7 @@ ul li:last-child .card-list-4 {
   padding: 14px 22px 10px 35px;
   transition: 0.3s;
 }
-.header .main-menu li ul li a::after {
+/* .header .main-menu li ul li a::after {
   content: "";
   position: absolute;
   left: 22px;
@@ -3208,7 +3208,7 @@ ul li:last-child .card-list-4 {
   border-radius: 50%;
   opacity: 0.7;
   transition-duration: 0.2s;
-}
+} */
 .header .main-menu li ul li a:hover, .header .main-menu li ul li a.active {
   padding-left: 38px;
   transition: 0.5s;
