@@ -69,7 +69,8 @@
                                             <div class="text-center card-grid-3-image">
                                                 <a href="{{ route('news.show', $item->slug) }}">
                                                     <figure>
-                                                        <img alt="{{ $item->title }}" src="{{ \App\Helpers\CustomHelper::logoSrc($item->images) }}">
+                                                        <img alt="{{ $item->title }}" src="{{ \App\Helpers\CustomHelper::logoSrc($item->images) }}"
+                                                        style="max-height:250px;object-fit:cover">
                                                     </figure>
                                                 </a>
                                             </div>
