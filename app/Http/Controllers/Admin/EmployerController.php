@@ -50,6 +50,7 @@ class EmployerController extends Controller
             'founded_at' => 'nullable',
             'about' => 'nullable',
             'company_type' => 'nullable|max:600',
+            'map_url' => 'nullable|string',
         ], [
             'contact_phone.regex' => 'Số điện thoại không hợp lệ. Vui lòng nhập từ 10 đến 11 chữ số.',
         ]);
@@ -93,6 +94,7 @@ class EmployerController extends Controller
             'founded_at' => 'nullable',
             'about' => 'nullable',
             'company_type' => 'nullable|max:600',
+            'map_url' => 'nullable|string',
         ], [
             'contact_phone.regex' => 'Số điện thoại không hợp lệ. Vui lòng nhập từ 10 đến 11 chữ số.',
         ]);

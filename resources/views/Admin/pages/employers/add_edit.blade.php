@@ -142,6 +142,13 @@
                         </div>
                     </div>
 
+                    <div class="mb-3">
+                        <label for="map_url" class="form-label">Địa chỉ bản đồ</label>
+                        <input type="text" class="form-control" id="map_url" name="map_url"
+                            placeholder="https://www.google.com/maps/embed?..."
+                            value="{{ old('map_url', $employer->map_url ?? '') }}">
+                    </div>
+
                     <button type="submit"
                         class="btn btn-success">{{ isset($employer) ? 'Cập nhật nhà tuyển dụng' : 'Thêm nhà tuyển dụng' }}</button>
                     <a href="{{ route('admin.employers.index') }}" class="btn btn-secondary">Quay lại</a>

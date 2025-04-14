@@ -53,8 +53,7 @@
                 <div class="box-company-profile">
                     <div class="image-compay">
                         <img src="{{ \App\Helpers\CustomHelper::logoSrc($employer->logo) }}" alt="{{ $employer->name }}"
-                            class="img-fluid d-block mx-auto bg-white p-1 img-company-fix"
-                            style="">
+                            class="img-fluid d-block mx-auto bg-white p-1 img-company-fix" style="">
                     </div>
                     <div class="row mt-10">
                         <div class="col-lg-8 col-md-12">
@@ -66,7 +65,8 @@
                             </p>
                         </div>
                         <div class="col-lg-4 col-md-12 text-lg-end">
-                            <a class="btn btn-call-icon btn-apply btn-apply-bigs btn-call-fix" href="{{ route('contact.index') }}">
+                            <a class="btn btn-call-icon btn-apply btn-apply-bigs btn-call-fix"
+                                href="{{ route('contact.index') }}">
                                 Liên hệ với chúng tôi
                             </a>
                         </div>
@@ -207,14 +207,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="sidebar-list-job">
-                                <div class="box-map">
-                                    <iframe
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3728.8339089556225!2d106.71297808844172!3d20.838412383817857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a7bef0610ffd9%3A0x4d6da8ffdf078c43!2sGarage%20Nam%20Kh%C3%A1nh!5e0!3m2!1svi!2s!4v1742976293412!5m2!1svi!2s"
-                                        width="200" height="200" style="border:0;" allowfullscreen=""
-                                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            @if ($employer->map_url)
+                                <div class="sidebar-list-job">
+                                    <div class="box-map">
+                                        {!! $employer->map_url !!}
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                             <div class="sidebar-list-job">
                                 <ul>
                                     <li>

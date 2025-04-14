@@ -31,10 +31,9 @@
                             </div>
                             <div class="sidebar-list-job">
                                 <div class="box-map">
-                                    <iframe
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3728.8339089556225!2d106.71297808844172!3d20.838412383817857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a7bef0610ffd9%3A0x4d6da8ffdf078c43!2sGarage%20Nam%20Kh%C3%A1nh!5e0!3m2!1svi!2s!4v1742976293412!5m2!1svi!2s"
-                                        width="200" height="150" style="border:0;" allowfullscreen="" loading="lazy"
-                                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    @if ($job->employer->map_url)
+                                        {!! $job->employer->map_url !!}
+                                    @endif
                                 </div>
                                 <ul class="ul-disc">
                                     @php
@@ -367,7 +366,7 @@
                         }
                     },
                     error: function(xhr) {
-                        console.error("Lỗi từ server:", xhr); 
+                        console.error("Lỗi từ server:", xhr);
                         let errorMessage = "Đã có lỗi xảy ra!\n";
 
                         if (xhr.responseJSON) {
