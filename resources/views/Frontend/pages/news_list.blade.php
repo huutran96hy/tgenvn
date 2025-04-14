@@ -68,7 +68,8 @@
                                         <div class="card-grid-3 hover-up">
                                             <div class="text-center card-grid-3-image">
                                                 <a href="{{ route('news.show', $item->slug) }}">
-                                                    <figure><img alt="{{ $item->title }}" src="{{ asset($item->images) }}">
+                                                    <figure>
+                                                        <img alt="{{ $item->title }}" src="{{ \App\Helpers\CustomHelper::logoSrc($item->images) }}">
                                                     </figure>
                                                 </a>
                                             </div>
@@ -84,8 +85,8 @@
                                                     </a>
                                                 </h5>
                                                 <!-- <span class="mt-10 color-text-paragraph font-sm">
-                                                    {!! Str::limit($item->content, 50) !!}
-                                                </span> -->
+                                                        {!! Str::limit($item->content, 50) !!}
+                                                    </span> -->
                                                 <div class="card-2-bottom mt-20">
                                                     <div class="row">
                                                         <div class="col-lg-6 col-6">

@@ -12,7 +12,7 @@
     <section class="section-box">
         <div>
             <img class="cover-image-post"
-                src="{{ asset($news->images ? $news->images : 'uploads/banner_thumb01.jpg') }}"
+                src="{{ \App\Helpers\CustomHelper::logoSrc($news->images) }}"
                 alt="{{ $news->title }}" />
         </div>
     </section>
