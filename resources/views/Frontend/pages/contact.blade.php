@@ -1,6 +1,6 @@
 @extends('Frontend.layouts.app')
 
-@section('pageTitle', 'Trang liên hệ')
+@section('pageTitle', 'Liên hệ - Hỗ trợ & Tư vấn tuyển dụng')
 
 @push('meta')
     <meta name="description"

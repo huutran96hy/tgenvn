@@ -1,6 +1,11 @@
 @extends('Frontend.layouts.app')
 
-@section('pageTitle', 'Dashboard')
+@section('pageTitle', 'Tìm việc làm nhanh, tuyển dụng hiệu quả | Trang chủ')
+
+@push('meta')
+    <meta name="description"
+        content="Nền tảng tuyển dụng hàng đầu – kết nối ứng viên chất lượng với nhà tuyển dụng uy tín. Tìm việc làm nhanh, đa ngành nghề, cập nhật mỗi ngày.">
+@endpush
 
 @section('content')
     <style>

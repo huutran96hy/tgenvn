@@ -1,6 +1,6 @@
 @extends('Frontend.layouts.app')
 
-@section('pageTitle', 'Danh sách công ty')
+@section('pageTitle', 'Danh sách công ty uy tín - Nhà tuyển dụng hàng đầu')
 
 @push('meta')
     <meta name="description"
@@ -109,31 +109,34 @@
                                             style="padding:0px">
                                             <div class="banner-hero banner-image-single" style="padding-top:0px">
                                                 <img src="{{ \App\Helpers\CustomHelper::logoSrc($employer->background_img) }}"
-                                                    alt="jobbox"
+                                                    alt="{{ $employer->company_name }}"
                                                     style="border-radius: 0px;height:112px;width:100%;object-fit:cover">
                                             </div>
                                             <div class="box-company-profile" style="padding-top:8px">
                                                 <div class="image-compay" style="top: -70px">
                                                     <img style="width:125px;height:65px;border-radius:8px;object-fit: cover;background: #fff;padding: 10px;"
                                                         src="{{ \App\Helpers\CustomHelper::logoSrc($employer->logo) }}"
-                                                        alt="jobbox">
+                                                        alt="{{ $employer->company_name }}">
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12 text-start">
                                                         <h5 class="f-18"
                                                             style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
                                                             <a href="{{ route('employers.show', $employer->slug) }}">
-                                                                {{ $employer->company_name }}</a>
+                                                                {{ $employer->company_name }}
+                                                            </a>
                                                         </h5>
-                                                        <p class="mt-0 font-md color-text-paragraph-2 mb-5"><span
-                                                                class="card-location d-block">{{ $employer->address }}</span>
+                                                        <p class="mt-0 font-md color-text-paragraph-2 mb-5">
+                                                            <span class="card-location d-block">{{ $employer->address }}
+                                                            </span>
                                                         </p>
                                                     </div>
-                                                    <div class="col-lg-12 col-md-12 text-end p-0 mb-2"><a
-                                                            class="btn btn-apply btn-apply-big"
-                                                            href="{{ route('employers.show', $employer->slug) }}"
-                                                            style="padding: 15px 25px">{{ $employer->jobs_count }} Công
-                                                            việc</a></div>
+                                                    <div class="col-lg-12 col-md-12 text-end p-0 mb-2">
+                                                        <a class="btn btn-apply btn-apply-big btn-apply-fix"
+                                                            href="{{ route('employers.show', $employer->slug) }}">
+                                                            {{ $employer->jobs_count }} Công việc
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

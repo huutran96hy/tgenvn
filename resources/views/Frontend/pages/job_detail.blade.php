@@ -1,6 +1,6 @@
 @extends('Frontend.layouts.app')
 
-@section('pageTitle', 'Chi tiết công việc - ' . $job->job_title)
+@section('pageTitle', 'Tuyển ' . $job->job_title . ' Tại ' . $job->employer->company_name)
 
 @push('meta')
     <meta name="description"
@@ -13,7 +13,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4 col-md-12 col-sm-12 col-12 pl-40 pl-lg-15 mt-lg-30">
-                        <div class="sidebar-border">
+                        <div class="sidebar-border sidebar-border-fix">
                             <div class="sidebar-heading">
                                 <div class="avatar-sidebar">
                                     <figure>
@@ -124,8 +124,8 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-12 text-lg-end">
-                                    <div class="btn btn-apply-icon btn-apply btn-apply-big hover-up" data-bs-toggle="modal"
-                                        data-bs-target="#ModalApplyJobForm">Gửi CV ngay</div>
+                                    <div class="btn btn-apply-icon btn-apply btn-apply-big hover-up button-fix"
+                                        data-bs-toggle="modal" data-bs-target="#ModalApplyJobForm">Gửi CV ngay</div>
                                 </div>
                             </div>
                             {{-- <div class="job-overview">
@@ -367,7 +367,7 @@
                         }
                     },
                     error: function(xhr) {
-                        console.error("Lỗi từ server:", xhr); // Log lỗi chi tiết lên console
+                        console.error("Lỗi từ server:", xhr); 
                         let errorMessage = "Đã có lỗi xảy ra!\n";
 
                         if (xhr.responseJSON) {

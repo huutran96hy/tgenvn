@@ -1,6 +1,6 @@
 @extends('Frontend.layouts.app')
 
-@section('pageTitle', 'Chi tiết công ty - ' . $employer->company_name)
+@section('pageTitle', $employer->company_name . ' - Thông tin công ty & việc làm')
 
 @push('meta')
     <meta name="description"
@@ -47,14 +47,14 @@
         <section class="section-box-2">
             <div class="container">
                 <div class="banner-hero banner-image-single">
-                    <img src="{{ \App\Helpers\CustomHelper::logoSrc($employer->background_img) }}"
-                        alt="{{ $employer->name }}" style="max-height: 480px; object-fit: cover;">
+                    <img src="{{ \App\Helpers\CustomHelper::logoSrc($employer->background_img) }}" alt="{{ $employer->name }}"
+                        class="img-fix">
                 </div>
                 <div class="box-company-profile">
                     <div class="image-compay">
                         <img src="{{ \App\Helpers\CustomHelper::logoSrc($employer->logo) }}" alt="{{ $employer->name }}"
-                            class="img-fluid d-block mx-auto bg-white p-1"
-                            style="width: 140px;height: 100px;object-fit: contain;box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
+                            class="img-fluid d-block mx-auto bg-white p-1 img-company-fix"
+                            style="">
                     </div>
                     <div class="row mt-10">
                         <div class="col-lg-8 col-md-12">
@@ -66,14 +66,14 @@
                             </p>
                         </div>
                         <div class="col-lg-4 col-md-12 text-lg-end">
-                            <a class="btn btn-call-icon btn-apply btn-apply-bigs" href="{{ route('contact.index') }}">
+                            <a class="btn btn-call-icon btn-apply btn-apply-bigs btn-call-fix" href="{{ route('contact.index') }}">
                                 Liên hệ với chúng tôi
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="box-nav-tabs mt-40 mb-5">
-                    <ul class="nav" role="tablist">
+                    <ul class="nav nav-fix" role="tablist">
                         <li>
                             <a class="btn btn-border aboutus-icon mr-15 mb-5 active" href="#tab-about" data-bs-toggle="tab"
                                 role="tab" aria-controls="tab-about" aria-selected="true">Về chúng tôi
@@ -199,7 +199,7 @@
                     </div>
 
                     <div class="col-lg-4 col-md-12 col-sm-12 col-12 pl-40 pl-lg-15 mt-lg-30">
-                        <div class="sidebar-border">
+                        <div class="sidebar-border sidebar-border-fix">
                             <div class="sidebar-heading">
                                 <div class="avatar-sidebar">
                                     <div class="sidebar-info pl-0">

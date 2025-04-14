@@ -1,6 +1,6 @@
 @extends('Frontend.layouts.app')
 
-@section('pageTitle', 'Danh sách công việc')
+@section('pageTitle', 'Việc làm mới nhất - Danh sách công việc hấp dẫn')
 
 @push('meta')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />

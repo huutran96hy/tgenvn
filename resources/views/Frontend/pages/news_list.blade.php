@@ -1,6 +1,6 @@
 @extends('Frontend.layouts.app')
 
-@section('pageTitle', 'Danh sách tin tức')
+@section('pageTitle', 'Tin tức việc làm mới nhất - Thị trường lao động | Danh sách tin tức')
 
 @push('meta')
     <meta name="description"
@@ -69,8 +69,9 @@
                                             <div class="text-center card-grid-3-image">
                                                 <a href="{{ route('news.show', $item->slug) }}">
                                                     <figure>
-                                                        <img alt="{{ $item->title }}" src="{{ \App\Helpers\CustomHelper::logoSrc($item->images) }}"
-                                                        style="max-height:250px;object-fit:cover">
+                                                        <img alt="{{ $item->title }}"
+                                                            src="{{ \App\Helpers\CustomHelper::logoSrc($item->images) }}"
+                                                            style="max-height:250px;object-fit:cover">
                                                     </figure>
                                                 </a>
                                             </div>
@@ -85,9 +86,9 @@
                                                         {{ $item->title }}
                                                     </a>
                                                 </h5>
-                                                <!-- <span class="mt-10 color-text-paragraph font-sm">
-                                                        {!! Str::limit($item->content, 50) !!}
-                                                    </span> -->
+                                                {{-- <span class="mt-10 color-text-paragraph font-sm">
+                                                    {!! Str::limit($item->content, 50) !!}
+                                                </span> --}}
                                                 <div class="card-2-bottom mt-20">
                                                     <div class="row">
                                                         <div class="col-lg-6 col-6">

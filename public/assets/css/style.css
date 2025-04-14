@@ -43,7 +43,7 @@
 }
 
 .header .main-header {
-    padding:  6px 0;
+    padding: 6px 0;
 }
 
 .form-input {
@@ -312,6 +312,22 @@
     display: block;
 }
 
+.btn-apply-fix {
+    padding: 15px 25px
+}
+
+.img-fix {
+    max-height: 480px;
+    object-fit: cover;
+}
+
+.img-company-fix {
+    width: 140px !important;
+    height: 100px;
+    object-fit: contain;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
 @media (max-width: 768px) {
     .left-logo-mobile {
         display: block !important;
@@ -319,5 +335,51 @@
 
     .logo-side {
         display: none !important;
+    }
+
+    .banner-container {
+        padding: 1px 5px;
+    }
+
+    .sidebar-border-fix {
+        padding: 15px;
+    }
+
+    .btn-apply-big.button-fix {
+        padding: 15px 30px;
+        padding-left: 35px;
+        background-position: 10px 14px;
+    }
+
+    .btn-apply-fix {
+        padding: 12px 20px;
+    }
+
+    .img-fix {
+        max-height: 250px;
+        min-height: 120px;
+        /* object-fit: unset; */
+    }
+
+    .img-company-fix {
+        width: 110px !important;
+        height: 80px;
+    }
+
+    .btn-call-fix {
+        padding: 12px 20px 12px 50px;
+        font-size: 13px;
+        background-position: 12px 12px;
+    }
+
+    .nav-fix {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: 5px 0;
+    }
+
+    .nav-fix a {
+        white-space: nowrap;
     }
 }
