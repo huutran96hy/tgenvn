@@ -435,7 +435,7 @@
     .custom-text p {
         line-height: 28px !important;
         font-size: 15px;
-        text-align: justify;
+        /* text-align: justify; */
     }
 }
 
