@@ -17,23 +17,27 @@ require __DIR__ . '/admin.php';
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
 // Trang danh sách job & chi tiết job
-Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
-Route::get('/job-detail/{slug}', [JobDetailController::class, 'index'])->name('job_detail.show');
+Route::get('/viec-lam', [JobController::class, 'index'])->name('jobs.index');
+Route::get('/viec-lam-tot-nhat', [JobController::class, 'best'])->name('jobs.best');
+Route::get('/viec-lam-goi-y', [JobController::class, 'suggested'])->name('jobs.suggested');
+Route::get('/viec-lam/{slug}', [JobDetailController::class, 'index'])->name('job_detail.show');
 
 // Trang danh sách công ty & chi tiết công ty
-Route::get('/employers', [EmployerController::class, 'index'])->name('employers.index');
-Route::get('/employer-detail/{employer}', [EmployerController::class, 'show'])->name('employers.show');
+Route::get('/cong-ty', [EmployerController::class, 'index'])->name('employers.index');
+Route::get('/cong-ty-hang-dau', [EmployerController::class, 'top'])->name('employers.top');
+Route::get('/cong-ty-de-xuat', [EmployerController::class, 'suggested'])->name('employers.suggested');
+Route::get('/cong-ty/{employer}', [EmployerController::class, 'show'])->name('employers.show');
 
 // Trang liên hệ
-Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::get('/lien-he', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/lien-he', [ContactController::class, 'store'])->name('contact.store');
 
 // Tin tức & danh mục tin tức
-Route::get('/news', [NewsController::class, 'index'])->name('news.index');
-Route::get('/news/{news}', [NewsController::class, 'show'])->name('news.show');
+Route::get('/tin-tuc', [NewsController::class, 'index'])->name('news.index');
+Route::get('/tin-tuc/{news}', [NewsController::class, 'show'])->name('news.show');
 // Route::get('/news-categories', [NewsCategoryController::class, 'index'])->name('news-categories.index');
 
-Route::post('/apply-job', [CandidateController::class, 'store'])->name('candidate.store');
+Route::post('/ung-tuyen', [CandidateController::class, 'store'])->name('candidate.store');
 
 // Các route yêu cầu đăng nhập
 Route::middleware('auth')->group(function () {

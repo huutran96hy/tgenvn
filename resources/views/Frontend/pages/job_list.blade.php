@@ -90,7 +90,7 @@
                                                                 Mới nhất
                                                             @elseif(request('sort') == 'oldest')
                                                                 Cũ nhất
-                                                            {{-- @else
+                                                                {{-- @else
                                                                 Đánh giá cao --}}
                                                             @endif
                                                         </span>

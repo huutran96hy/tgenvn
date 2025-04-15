@@ -47,7 +47,7 @@
 </head>
 
 <body>
-    @if (!Route::is('index', 'jobs.index', 'employers.index'))
+    @if (!Route::is(['index', 'jobs.*', 'employers.index', 'employers.top', 'employers.suggested']))
         <!-- Header -->
         @include('Frontend.layouts.header')
     @endif

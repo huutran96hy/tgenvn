@@ -10,33 +10,50 @@ use Illuminate\Http\Request;
 class EmployerController extends Controller
 {
     /**
-     * Display a listing of the employers.
+     * Hiển thị danh sách nhà tuyển dụng.
      */
     public function index(Request $request)
+    {
+        return $this->getEmployerList($request);
+    }
+
+    /**
+     * Hiển thị danh sách công ty hàng đầu.
+     */
+    public function top(Request $request)
+    {
+        return $this->getEmployerList($request, 'yes');
+    }
+
+    /**
+     * Hiển thị danh sách công ty đề xuất.
+     */
+    public function suggested(Request $request)
+    {
+        return $this->getEmployerList($request, 'no');
+    }
+    private function getEmployerList(Request $request, $isHot = null)
     {
         $query = Employer::query()->withCount(['jobs' => function ($query) {
             $query->where('approval_status', 'approved');
         }]);
 
-        // Tìm kiếm theo từ khóa
-        if ($request->has('keyword') && !empty($request->keyword)) {
+        if ($request->filled('keyword')) {
             $query->where('company_name', 'like', '%' . $request->keyword . '%');
         }
 
-        if ($request->get('type') === 'top') {
-            $query->where('is_hot', 'yes');
-        } elseif ($request->get('type') === 'suggested') {
-            $query->where('is_hot', 'no');
+        $sort = $request->input('sort', 'newest');
+        $query = match ($sort) {
+            'oldest' => $query->orderBy('created_at', 'asc'),
+            'rating' => $query->orderByDesc('rating'),
+            default => $query->orderByDesc('created_at'),
+        };
+
+        // Lọc theo 'is_hot' nếu có
+        if ($isHot !== null) {
+            $query->where('is_hot', $isHot);
         }
 
-        $sort = $request->input('sort', 'newest');
-        if ($sort === 'oldest') {
-            $query->orderBy('created_at', 'asc');
-        } elseif ($sort === 'rating') {
-            $query->orderByDesc('rating');
-        } else {
-            $query->orderByDesc('created_at');
-        }
         $perPage = $request->input('per_page', 12);
 
         $employers = $query->paginate($perPage)->appends($request->query());

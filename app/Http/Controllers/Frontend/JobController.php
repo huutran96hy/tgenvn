@@ -13,23 +13,55 @@ use Carbon\Carbon;
 class JobController extends Controller
 {
     /**
-     * Display a listing of the jobs.
+     * Hiển thị danh sách việc làm với các bộ lọc và sắp xếp.
      */
     public function index(Request $request)
     {
-        $categories = JobCategory::all();
-        $provinces = Province::all();
-        $positions = CompanyPosition::select('id', 'name')->get();
+        return $this->getJobList($request, null);
+    }
 
+    /**
+     * Hiển thị danh sách việc làm tốt nhất.
+     */
+    public function best(Request $request)
+    {
+        return $this->getJobList($request, 'yes');
+    }
+
+    /**
+     * Hiển thị danh sách việc làm gợi ý.
+     */
+    public function suggested(Request $request)
+    {
+        return $this->getJobList($request, 'no');
+    }
+
+    /**
+     * Phương thức chung để lấy danh sách việc làm.
+     * 
+     * @param Request $request
+     * @param string|null $isHot
+     * @return \Illuminate\View\View
+     */
+    private function getJobList(Request $request, $isHot = null)
+    {
         $query = Job::with('employer', 'skills', 'category')
             ->where('approval_status', 'approved')
             ->whereDate('expiry_date', '>=', Carbon::today());
 
-        // Xử lý các điều kiện lọc
+        $categories = JobCategory::all();
+        $provinces = Province::all();
+        $positions = CompanyPosition::select('id', 'name')->get();
+
+        if (!is_null($isHot)) {
+            $query->where('is_hot', $isHot);
+        }
+
         $query = $this->searchJobs($request, $query);
 
         $perPage = $request->input('per_page', 12);
 
+        // Lấy danh sách job đã lọc và sắp xếp
         $jobs = $query->paginate($perPage)->appends($request->query());
 
         return view('Frontend.pages.job_list', compact(
@@ -40,95 +72,15 @@ class JobController extends Controller
         ));
     }
 
-    public function create()
-    {
-        return view('admin.jobs.create');
-    }
-
     /**
-     * Lưu một job mới vào cơ sở dữ liệu.
+     * Lọc và sắp xếp danh sách việc làm.
+     * 
+     * @param Request $request
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'employer_id'     => 'required|integer',
-            'job_title'       => 'required|string|max:255',
-            'job_description' => 'required|string',
-            'requirements'    => 'required|string',
-            'salary'          => 'required|numeric',
-            'location'        => 'required|string|max:255',
-            'category_id'     => 'required|integer',
-            'posted_date'     => 'required|date',
-            'expiry_date'     => 'required|date|after_or_equal:posted_date',
-        ]);
-
-        $job = Job::create($validatedData);
-
-        return redirect()->route('jobs.index')->with('success', 'Job created successfully.');
-    }
-
-    /**
-     * Hiển thị chi tiết của một job.
-     */
-    public function show($id)
-    {
-        $job = Job::with(['employer', 'category'])->findOrFail($id);
-        return view('admin.jobs.show', compact('job'));
-    }
-
-    /**
-     * Hiển thị form chỉnh sửa job.
-     */
-    public function edit($id)
-    {
-        $job = Job::findOrFail($id);
-
-        return view('admin.jobs.edit', compact('job'));
-    }
-
-    /**
-     * Cập nhật job đã chỉnh sửa vào cơ sở dữ liệu.
-     */
-    public function update(Request $request, $id)
-    {
-        $job = Job::findOrFail($id);
-
-        $validatedData = $request->validate([
-            'employer_id'     => 'required|integer',
-            'job_title'       => 'required|string|max:255',
-            'job_description' => 'required|string',
-            'requirements'    => 'required|string',
-            'salary'          => 'required|numeric',
-            'location'        => 'required|string|max:255',
-            'category_id'     => 'required|integer',
-            'posted_date'     => 'required|date',
-            'expiry_date'     => 'required|date|after_or_equal:posted_date',
-        ]);
-
-        $job->update($validatedData);
-
-        return redirect()->route('jobs.index')->with('success', 'Job updated successfully.');
-    }
-
-    /**
-     * Xóa một job khỏi cơ sở dữ liệu.
-     */
-    public function destroy($id)
-    {
-        $job = Job::findOrFail($id);
-        $job->delete();
-
-        return redirect()->route('jobs.index')->with('success', 'Job deleted successfully.');
-    }
     public function searchJobs(Request $request, $query)
     {
-        // Phân biệt việc làm tốt nhất và việc làm gợi ý
-        if ($request->get('type') === 'best') {
-            $query->where('is_hot', 'yes');
-        } elseif ($request->get('type') === 'suggested') {
-            $query->where('is_hot', 'no');
-        }
-
         // Sắp xếp
         $sort = $request->input('sort', 'newest');
         if ($sort === 'oldest') {
