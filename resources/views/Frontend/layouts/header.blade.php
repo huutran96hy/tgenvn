@@ -27,7 +27,7 @@
                         </li>
                         <li
                             class="{{ request()->routeIs('employers.index') && request('type') === 'suggested' ? 'tab-link-fix' : '' }}">
-                            <a href="{{ route('employers.index', ['type' => 'suggested']) }}">Công ty gợi ý</a>
+                            <a href="{{ route('employers.index', ['type' => 'suggested']) }}">Công ty đề xuất</a>
                         </li>
                         <li class="{{ Request::routeIs('news.*') ? 'tab-link-fix' : '' }}">
                             <a href="{{ route('news.index') }}">Thông tin chia sẻ</a>
@@ -95,7 +95,7 @@
                             </li>
                             <li
                                 class="{{ request()->routeIs('employers.index') && request('type') === 'suggested' ? 'tab-link-fix' : '' }}">
-                                <a href="{{ route('employers.index', ['type' => 'suggested']) }}">Công ty gợi ý</a>
+                                <a href="{{ route('employers.index', ['type' => 'suggested']) }}">Công ty đề xuất</a>
                             </li>
                             <li><a class="{{ Request::routeIs('news.*') ? 'active' : '' }}"
                                     href="{{ route('news.index') }}">Thông tin chia sẻ</a>
@@ -104,7 +104,7 @@
                     </nav>
                 </div>
 
-                <div class="mobile-search mt-3 px-3">
+                <div class="mobile-search mt-3">
                     <form method="GET" id="mobileSearchForm" class="d-grid gap-2">
                         <div class="d-flex gap-2">
                             <input class="form-control flex-grow-1" type="text" name="keyword"
@@ -117,7 +117,7 @@
                                     {{ request('search_type') == 'employers' ? 'selected' : '' }}>Công ty</option>
                             </select>
                         </div>
-                        <button class="btn btn-primary w-100" type="submit">Tìm</button>
+                        <button class="btn btn-primary w-100" type="submit">Tìm kiếm</button>
                     </form>
                 </div>
             </div>

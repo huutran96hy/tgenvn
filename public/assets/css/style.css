@@ -158,12 +158,6 @@
     }
 }
 
-@media (max-width: 768px) {
-    .mobile-search form {
-        padding: 0;
-    }
-}
-
 .custom-search-form {
     background: #f8f9fa;
     border-radius: 50px;
@@ -399,4 +393,8 @@
     .height-header {
         height: 45px;
     }
+}
+
+.mobile-search form {
+    padding: 0;
 }
