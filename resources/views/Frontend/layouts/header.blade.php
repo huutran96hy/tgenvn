@@ -90,11 +90,11 @@
                                     làm gợi ý</a>
                             </li>
                             <li
-                                class="{{ request()->routeIs('employers.index') && request('type') === 'top' ? 'tab-link-fix' : '' }}">
+                                class="{{ request()->routeIs('employers.index') && request('type') === 'top' ? 'active' : '' }}">
                                 <a href="{{ route('employers.index', ['type' => 'top']) }}">Công ty hàng đầu</a>
                             </li>
                             <li
-                                class="{{ request()->routeIs('employers.index') && request('type') === 'suggested' ? 'tab-link-fix' : '' }}">
+                                class="{{ request()->routeIs('employers.index') && request('type') === 'suggested' ? 'active' : '' }}">
                                 <a href="{{ route('employers.index', ['type' => 'suggested']) }}">Công ty đề xuất</a>
                             </li>
                             <li><a class="{{ Request::routeIs('news.*') ? 'active' : '' }}"
