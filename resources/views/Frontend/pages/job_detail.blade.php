@@ -234,13 +234,13 @@
                                     </div>
                                 </div>
                             </div> --}}
-                            <div class="content-single">
+                            <div class="content-single custom-text">
                                 <h4 class="custom-h4">Chào mừng đến với {{ $job->employer->company_name }}</h4>
-                                <p class="custom-text">{!! $job->job_description ?? 'Chưa có mô tả công việc' !!}</p>
+                                <p>{!! $job->job_description ?? 'Chưa có mô tả công việc' !!}</p>
                                 <h4 class="custom-h4">Yêu cầu công việc</h4>
-                                <p class="custom-text">{!! $job->requirements ?? 'Không có yêu cầu cụ thể' !!}</p>
+                                <p>{!! $job->requirements ?? 'Không có yêu cầu cụ thể' !!}</p>
                                 <h4 class="custom-h4">Phúc lợi công ty</h4>
-                                <p class="custom-text">{!! $job->job_benefit ?? 'Không có phúc lợi cụ thể' !!}</p>
+                                <p>{!! $job->job_benefit ?? 'Không có phúc lợi cụ thể' !!}</p>
                             </div>
                             {{-- <div class="author-single">
                                 <span>{{ $job->employer->company_name }}</span>
