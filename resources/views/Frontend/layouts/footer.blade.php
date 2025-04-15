@@ -29,27 +29,31 @@
             <div class="footer-col-6 col-md-4 col-xs-6">
                 <h6 class="mb-20">Liên kết</h6>
                 <ul class="menu-footer">
-                    <li><a href="#">Trang chủ</a></li>
-                    <li><a href="#">Tuyển dụng</a></li>
-                    <li><a href="#">Tin Tức</a></li>
-                    <li><a href="#">Liên hệ</a></li>
+                    <li><a href="{{ route('index') }}">Trang chủ</a></li>
+                    <li><a href="{{ route('jobs.index') }}">Tuyển dụng</a></li>
+                    <li><a href="{{ route('employers.index') }}">Công ty</a></li>
+                    <li><a href="{{ route('news.index') }}">Tin Tức</a></li>
+                    {{-- <li><a href="{{ route('index') }}">Liên hệ</a></li> --}}
                 </ul>
             </div>
             <div class="footer-col-6 col-md-4 col-xs-6">
                 <h6 class="mb-20">Liên kết</h6>
                 <div class="footer-social">
-                    <a class="icon-socials icon-facebook" href="#"></a><a class="icon-socials icon-twitter"
-                        href="#"></a><a class="icon-socials icon-linkedin" href="#"></a>
+                    <a class="icon-socials icon-facebook" href="#"></a>
+                    <a class="icon-socials icon-twitter" href="#"></a>
+                    <a class="icon-socials icon-linkedin" href="#"></a>
                 </div>
                 </ul>
             </div>
-            <!-- <div class="footer-col-6 col-md-3 col-sm-12 flex-left">
-          <h6 class="mb-20">Tải ứng dụng</h6>
-          <p class="color-text-paragraph-2 font-xs">Tải ứng dụng của chúng tôi để tìm kiếm công việc phù hợp với bạn
-            &mldr;!</p>
-          <div class="mt-15"><a class="mr-5" href="#"><img src="assets/imgs/template/icons/app-store.png"
-                alt="joxBox"></a><a href="#"><img alt="ORSCorp" src="assets/imgs/template/icons/android.png"></a></div>
-        </div> -->
+            {{-- <div class="footer-col-6 col-md-3 col-sm-12 flex-left">
+                <h6 class="mb-20">Tải ứng dụng</h6>
+                <p class="color-text-paragraph-2 font-xs">Tải ứng dụng của chúng tôi để tìm kiếm công việc phù hợp với
+                    bạn
+                    &mldr;!</p>
+                <div class="mt-15"><a class="mr-5" href="#"><img src="assets/imgs/template/icons/app-store.png"
+                            alt="joxBox"></a><a href="#"><img alt="ORSCorp"
+                            src="assets/imgs/template/icons/android.png"></a></div>
+            </div> --}}
         </div>
         <div class="footer-bottom mt-20">
             <div class="row">
