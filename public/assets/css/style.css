@@ -316,9 +316,22 @@
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
+.box-border-single-fix {
+    margin-bottom: 40px;
+}
+
+.location-fix {
+    max-width: 100%;
+}
+
 @media (max-width: 768px) {
     .left-logo-mobile {
         display: block !important;
+    }
+
+    .box-border-single-fix {
+        margin-bottom: 0;
+        margin-top: 20px;
     }
 
     .logo-side {
@@ -331,13 +344,14 @@
 
     .sidebar-border-fix {
         padding: 15px;
+        margin-bottom: 20px;
     }
 
     .btn-apply-big.button-fix {
-        padding: 15px 25px;
+        padding: 12px 28px;
         padding-left: 35px;
-        background-position: 10px 13.5px;
-        font-size: 12px;
+        background-position: 10px 11px;
+        font-size: 13px;
     }
 
     .btn-apply-fix {
@@ -370,6 +384,56 @@
 
     .nav-fix a {
         white-space: nowrap;
+    }
+
+    .tablist-fix {
+        padding: 8px 20px;
+        padding-left: 20px;
+        background-image: none;
+        font-size: 13px;
+    }
+
+    .tablist-fix.active {
+        background-image: none;
+    }
+
+    .about-body {
+        font-size: 13px;
+    }
+
+    .custom-text {
+        line-height: 30px !important;
+    }
+
+    .custom-h4 {
+        font-size: 18px;
+    }
+
+    .custom-h3 {
+        font-size: 22px;
+    }
+
+    .box-related-job {
+        margin-top: 5px;
+    }
+
+    .mt-lg-20 {
+        margin-top: 20px;
+    }
+
+    .box-filters-job {
+        margin-bottom: 20px;
+    }
+
+    .paginations .pager li .pager-next,
+    .paginations .pager li .pager-prev {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+    }
+
+    .paginations {
+        margin-bottom: 20px;
     }
 }
 

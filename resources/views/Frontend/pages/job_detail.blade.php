@@ -9,19 +9,20 @@
 
 @section('content')
     <main class="main">
-        <section class="section-box mt-50">
+        <section class="section-box mt-0 mt-md-5">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4 col-md-12 col-sm-12 col-12 pl-40 pl-lg-15 mt-lg-30">
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-12 pl-40 pl-lg-15 mt-lg-20 order-2 order-lg-1">
                         <div class="sidebar-border sidebar-border-fix">
                             <div class="sidebar-heading">
                                 <div class="avatar-sidebar">
                                     <figure>
-                                        <img alt="jobBox" src="{{ $job->employer->getLogoUrl() }}">
+                                        <img alt="{{ $job->employer->company_name }}"
+                                            src="{{ $job->employer->getLogoUrl() }}">
                                     </figure>
                                     <div class="sidebar-info">
                                         <span class="sidebar-company">{{ $job->employer->company_name }}</span>
-                                        <span class="card-location">{{ $job->employer->address }}</span>
+                                        <span class="card-location location-fix">{{ $job->employer->address }}</span>
                                         <a class="link-underline mt-15" href="#">
                                             {{ $employer->jobs_count }}
                                             Công việc
@@ -42,7 +43,7 @@
                                     @endphp
 
                                     @if ($address || $province)
-                                        <li>{{ $address }}{{ $address && $province ? ' - ' : '' }}{{ $province }}
+                                        <li>{{ $address }}{{ $address && $province ? ', ' : '' }}{{ $province }}
                                         </li>
                                     @endif
                                     <li>SĐT: +{{ $job->employer->contact_phone }}</li>
@@ -50,7 +51,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="sidebar-border">
+                        <div class="sidebar-border sidebar-border-fix">
                             <h6 class="f-18">Các vị trí khác</h6>
                             <div class="sidebar-list-job">
                                 <ul>
@@ -59,7 +60,7 @@
                                             <div class="card-list-4 wow animate__animated animate__fadeIn hover-up">
                                                 <div class="image">
                                                     <a href="{{ route('job_detail.show', ['slug' => $randomJob->slug]) }}">
-                                                        <img src="{{ \App\Helpers\CustomHelper::logoSrc($randomJob->employer->logo) }}"
+                                                        <img src="{{ $randomJob->employer->getLogoUrl() }}"
                                                             alt="{{ $randomJob->job_title }}" style="width: 50px">
                                                     </a>
                                                 </div>
@@ -78,13 +79,13 @@
                                                     </div>
                                                     <div class="mt-5">
                                                         <div class="row">
-                                                            <div class="col-6">
+                                                            <div class="col-12">
                                                                 <h6 class="card-price">
                                                                     {{ \App\Helpers\NumberHelper::formatSalary($randomJob->salary) }}
                                                                     <span>/Tháng</span>
                                                                 </h6>
                                                             </div>
-                                                            <div class="col-6 text-end">
+                                                            <div class="col-12">
                                                                 <span class="card-briefcase">
                                                                     {{ $randomJob->province->name ?? $randomJob->location }}
                                                                 </span>
@@ -111,11 +112,11 @@
                             </div>
                         @endif
                     </div>
-                    <div class="col-lg-8 col-md-12 col-sm-12 col-12">
+                    <div class="col-lg-8 col-md-12 col-sm-12 col-12 box-border-single-fix order-1 order-lg-2">
                         <div class="box-border-single">
                             <div class="row mt-10">
                                 <div class="col-lg-8 col-md-12">
-                                    <h3>{{ $job->job_title ?? 'Chưa có tiêu đề' }}</h3>
+                                    <h3 class="custom-h3">{{ $job->job_title ?? 'Chưa có tiêu đề' }}</h3>
                                     <div class="mt-0 mb-15">
                                         <span class="card-briefcase">Fulltime</span>
                                         <span
@@ -234,12 +235,12 @@
                                 </div>
                             </div> --}}
                             <div class="content-single">
-                                <h4>Chào mừng đến với {{ $job->employer->company_name }}</h4>
-                                <p>{!! $job->job_description ?? 'Chưa có mô tả công việc' !!}</p>
-                                <h4>Yêu cầu công việc</h4>
-                                <p>{!! $job->requirements ?? 'Không có yêu cầu cụ thể' !!}</p>
-                                <h4>Phúc lợi công ty</h4>
-                                <p>{!! $job->job_benefit ?? 'Không có phúc lợi cụ thể' !!}</p>
+                                <h4 class="custom-h4">Chào mừng đến với {{ $job->employer->company_name }}</h4>
+                                <p class="custom-text">{!! $job->job_description ?? 'Chưa có mô tả công việc' !!}</p>
+                                <h4 class="custom-h4">Yêu cầu công việc</h4>
+                                <p class="custom-text">{!! $job->requirements ?? 'Không có yêu cầu cụ thể' !!}</p>
+                                <h4 class="custom-h4">Phúc lợi công ty</h4>
+                                <p class="custom-text">{!! $job->job_benefit ?? 'Không có phúc lợi cụ thể' !!}</p>
                             </div>
                             {{-- <div class="author-single">
                                 <span>{{ $job->employer->company_name }}</span>

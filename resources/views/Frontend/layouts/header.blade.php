@@ -22,9 +22,6 @@
                         <li class="{{ request()->routeIs('employers.top') ? 'tab-link-fix' : '' }}">
                             <a href="{{ route('employers.top') }}">Công ty hàng đầu</a>
                         </li>
-                        <li class="{{ request()->routeIs('employers.suggested') ? 'tab-link-fix' : '' }}">
-                            <a href="{{ route('employers.suggested') }}">Công ty đề xuất</a>
-                        </li>
                         <li class="{{ Request::routeIs('news.*') ? 'tab-link-fix' : '' }}">
                             <a href="{{ route('news.index') }}">Thông tin chia sẻ</a>
                         </li>
@@ -85,9 +82,6 @@
                             </li>
                             <li class="{{ request()->routeIs('employers.top') ? 'active' : '' }}">
                                 <a href="{{ route('employers.top') }}">Công ty hàng đầu</a>
-                            </li>
-                            <li class="{{ request()->routeIs('employers.suggested') ? 'active' : '' }}">
-                                <a href="{{ route('employers.suggested') }}">Công ty đề xuất</a>
                             </li>
                             <li><a class="{{ Request::routeIs('news.*') ? 'active' : '' }}"
                                     href="{{ route('news.index') }}">Thông tin chia sẻ</a>

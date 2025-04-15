@@ -45,7 +45,7 @@
 
         @include('Frontend.layouts.header')
 
-        <section class="section-box mt-30">
+        <section class="section-box mt-3 mt-md-4">
             <div class="container">
                 <div class="row flex-row-reverse">
                     <div class="col-lg-9 col-md-12 col-sm-12 col-12 float-right">
@@ -58,7 +58,7 @@
                                             <strong>{{ $jobs->total() }}</strong> công việc
                                         </span>
                                     </div>
-                                    <div class="col-xl-6 col-lg-7 text-end mt-sm-15">
+                                    <div class="col-xl-6 col-lg-7 text-end mt-sm-10">
                                         <div class="display-flex2">
                                             <div class="box-border mr-10">
                                                 <span class="text-sortby">Hiển thị:</span>
@@ -271,42 +271,42 @@
                                         <li>
                                             <label class="cb-container">
                                                 <input type="checkbox" value="10000000-20000000">
-                                                <span class="text-small">10-20.000.000đ</span>
+                                                <span class="text-small">10 - 20 triệu</span>
                                                 <span class="checkmark"></span>
                                             </label>
                                         </li>
                                         <li>
                                             <label class="cb-container">
                                                 <input type="checkbox" value="20000000-40000000">
-                                                <span class="text-small">20-40.000.000đ</span>
+                                                <span class="text-small">20 - 40 triệu</span>
                                                 <span class="checkmark"></span>
                                             </label>
                                         </li>
                                         <li>
                                             <label class="cb-container">
                                                 <input type="checkbox" value="40000000-60000000">
-                                                <span class="text-small">40-60.000.000đ</span>
+                                                <span class="text-small">40 - 60 triệu</span>
                                                 <span class="checkmark"></span>
                                             </label>
                                         </li>
                                         <li>
                                             <label class="cb-container">
                                                 <input type="checkbox" value="60000000-80000000">
-                                                <span class="text-small">60-80.000.000đ</span>
+                                                <span class="text-small">60 - 80 triệu</span>
                                                 <span class="checkmark"></span>
                                             </label>
                                         </li>
                                         <li>
                                             <label class="cb-container">
                                                 <input type="checkbox" value="80000000-100000000">
-                                                <span class="text-small">80-100.000.000đ</span>
+                                                <span class="text-small">80 - 100 triệu</span>
                                                 <span class="checkmark"></span>
                                             </label>
                                         </li>
                                         <li>
                                             <label class="cb-container">
                                                 <input type="checkbox" value=">100000000">
-                                                <span class="text-small">>100.000.000đ</span>
+                                                <span class="text-small">Trên 100 triệu</span>
                                                 <span class="checkmark"></span>
                                             </label>
                                         </li>

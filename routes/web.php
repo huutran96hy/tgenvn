@@ -25,7 +25,6 @@ Route::get('/viec-lam/{slug}', [JobDetailController::class, 'index'])->name('job
 // Trang danh sách công ty & chi tiết công ty
 Route::get('/cong-ty', [EmployerController::class, 'index'])->name('employers.index');
 Route::get('/cong-ty-hang-dau', [EmployerController::class, 'top'])->name('employers.top');
-Route::get('/cong-ty-de-xuat', [EmployerController::class, 'suggested'])->name('employers.suggested');
 Route::get('/cong-ty/{employer}', [EmployerController::class, 'show'])->name('employers.show');
 
 // Trang liên hệ

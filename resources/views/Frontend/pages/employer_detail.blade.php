@@ -47,8 +47,10 @@
         <section class="section-box-2">
             <div class="container">
                 <div class="banner-hero banner-image-single">
-                    <img src="{{ \App\Helpers\CustomHelper::logoSrc($employer->background_img) }}" alt="{{ $employer->name }}"
-                        class="img-fix">
+                    <img src="{{ $employer->background_img
+                        ? \App\Helpers\CustomHelper::logoSrc($employer->background_img)
+                        : asset('uploads/default_banner.png') }}"
+                        alt="{{ $employer->name }}" class="img-fix">
                 </div>
                 <div class="box-company-profile">
                     <div class="image-compay">
@@ -60,7 +62,7 @@
                             <h5 class="f-18">
                                 {{ $employer->company_name }}
                             </h5>
-                            <p class="mt-5 font-md color-text-paragraph-2 mb-15">
+                            <p class="mt-3 mb-4 about-body">
                                 {{ $employer->about }}
                             </p>
                         </div>
@@ -72,22 +74,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="box-nav-tabs mt-40 mb-5">
+                <div class="box-nav-tabs mt-3 mt-md-5 mb-5">
                     <ul class="nav nav-fix" role="tablist">
                         <li>
-                            <a class="btn btn-border aboutus-icon mr-15 mb-5 active" href="#tab-about" data-bs-toggle="tab"
-                                role="tab" aria-controls="tab-about" aria-selected="true">Về chúng tôi
+                            <a class="btn btn-border aboutus-icon mr-15 mb-5 active tablist-fix" href="#tab-about"
+                                data-bs-toggle="tab" role="tab" aria-controls="tab-about" aria-selected="true">
+                                Về chúng tôi
                             </a>
                         </li>
                         <li>
-                            <a class="btn btn-border recruitment-icon mr-15 mb-5" href="#employer_benefit"
+                            <a class="btn btn-border recruitment-icon mr-15 mb-5 tablist-fix" href="#employer_benefit"
                                 data-bs-toggle="tab" role="tab" aria-controls="employer_benefit"
                                 aria-selected="false">Quyền lợi
                             </a>
                         </li>
                         <li>
-                            <a class="btn btn-border people-icon mb-5" href="#images" data-bs-toggle="tab" role="tab"
-                                aria-controls="images" aria-selected="false">
+                            <a class="btn btn-border people-icon mb-5 tablist-fix" href="#images" data-bs-toggle="tab"
+                                role="tab" aria-controls="images" aria-selected="false">
                                 Hình ảnh về chúng tôi
                             </a>
                         </li>
@@ -97,7 +100,7 @@
             </div>
         </section>
 
-        <section class="section-box mt-50">
+        <section class="section-box mt-0 mt-md-5">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-12 col-sm-12 col-12">
@@ -105,18 +108,18 @@
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="tab-about" role="tabpanel"
                                     aria-labelledby="tab-about">
-                                    <h4>Chào mừng đến với {{ $employer->company_name }}</h4>
-                                    <p>{!! $employer->company_description !!}</p>
-
+                                    <h4 class="custom-h4">Chào mừng đến với {{ $employer->company_name }}</h4>
+                                    <p class="custom-text">{!! $employer->company_description !!}</p>
                                 </div>
                                 <div class="tab-pane fade" id="employer_benefit" role="tabpanel"
                                     aria-labelledby="employer_benefit">
-                                    <h4>Quyền lợi</h4>
-                                    <p>{!! $employer->employer_benefit !!}</p>
+                                    <h4 class="custom-h4">Quyền lợi</h4>
+                                    <p class="custom-text">{!! $employer->employer_benefit !!}</p>
                                 </div>
                                 <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images">
-                                    <h4 style="font-size: 24px; font-weight: bold; margin-bottom: 20px;">Hình ảnh về chúng
-                                        tôi</h4>
+                                    <h4 class="custom-h4">
+                                        Hình ảnh về chúng tôi
+                                    </h4>
                                     <div class="gallery-container">
                                         @php
                                             $images = json_decode($employer->images, true);
@@ -177,6 +180,7 @@
                                                                 <span class="card-text-price">Lương:</span>
                                                                 <span class="text-muted">
                                                                     {{ \App\Helpers\NumberHelper::formatSalary($job->salary) }}
+                                                                    <span>/Tháng</span>
                                                                 </span>
                                                             </div>
                                                             <div class="col-5 text-end">

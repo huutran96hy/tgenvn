@@ -4,23 +4,29 @@ namespace App\Helpers;
 
 class NumberHelper
 {
-    /**
-     * Định dạng số lương với dấu chấm phân cách hàng nghìn
-     * Nếu giá trị đã có ký tự tiền tệ hoặc dấu chấm, không định dạng lại.
-     *
-     * @param mixed $value
-     * @return string
-     */
     public static function formatSalary($value)
     {
         // Loại bỏ tất cả ký tự không phải số
         $numericValue = preg_replace('/[^\d]/', '', $value);
 
-        // Nếu sau khi loại bỏ mà không còn gì, trả về "Thoả thuận"
-        if ($numericValue === '') {
+        if ($numericValue === '' || !is_numeric($numericValue)) {
             return 'Thoả thuận';
         }
 
-        return number_format($numericValue, 0, ',', '.') . ' VNĐ';
+        $number = (int) $numericValue;
+
+        // Nếu số >= 1 triệu => đổi ra triệu
+        if ($number >= 1000000) {
+            $million = $number / 1000000;
+            // Nếu là số nguyên như 10 triệu => bỏ phần thập phân
+            if (fmod($million, 1) == 0) {
+                return number_format($million, 0, ',', '.') . ' triệu';
+            } else {
+                return number_format($million, 1, ',', '.') . ' triệu';
+            }
+        }
+
+        // Nếu nhỏ hơn 1 triệu thì format kiểu VNĐ 
+        return number_format($number, 0, ',', '.') . ' VNĐ';
     }
 }

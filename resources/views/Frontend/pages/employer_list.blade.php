@@ -26,7 +26,7 @@
 
         @include('Frontend.layouts.header')
 
-        <section class="section-box mt-30">
+        <section class="section-box mt-3 mt-md-4">
             <div class="container">
                 <div class="row flex-row-reverse">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12 float-right">
@@ -38,7 +38,7 @@
                                             <strong>{{ $employers->firstItem() }}-{{ $employers->lastItem() }} </strong>trên
                                             <strong>{{ $employers->total() }} </strong>nhà tuyển dụng</span>
                                     </div>
-                                    <div class="col-xl-6 col-lg-7 text-end mt-sm-15">
+                                    <div class="col-xl-6 col-lg-7 text-end mt-sm-10">
                                         <div class="display-flex2">
                                             <div class="box-border mr-10">
                                                 <span class="text-sortby">Hiển thị:</span>
@@ -108,8 +108,10 @@
                                         <div class="card-grid-1 hover-up wow animate__animated animate__fadeIn"
                                             style="padding:0px">
                                             <div class="banner-hero banner-image-single" style="padding-top:0px">
-                                                <img src="{{ \App\Helpers\CustomHelper::logoSrc($employer->background_img) }}"
-                                                    alt="{{ $employer->company_name }}"
+                                                <img src="{{ $employer->background_img
+                                                    ? \App\Helpers\CustomHelper::logoSrc($employer->background_img)
+                                                    : asset('uploads/default_banner.png') }}"
+                                                    alt="{{ $employer->name }}"
                                                     style="border-radius: 0px;height:112px;width:100%;object-fit:cover">
                                             </div>
                                             <div class="box-company-profile" style="padding-top:8px">
