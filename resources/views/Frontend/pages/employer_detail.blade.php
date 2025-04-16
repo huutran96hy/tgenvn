@@ -55,7 +55,7 @@
                 <div class="box-company-profile">
                     <div class="image-compay">
                         <img src="{{ \App\Helpers\CustomHelper::logoSrc($employer->logo) }}" alt="{{ $employer->name }}"
-                            class="img-fluid d-block mx-auto bg-white p-1 img-company-fix" style="">
+                            class="img-fluid d-block mx-auto bg-white p-1 img-company-fix">
                     </div>
                     <div class="row mt-10">
                         <div class="col-lg-8 col-md-12">

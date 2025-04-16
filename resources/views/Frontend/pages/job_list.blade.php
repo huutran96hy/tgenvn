@@ -123,50 +123,16 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                @foreach ($jobs as $job)
-                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                                        <div class="card-grid-2 hover-up">
-                                            <div class="card-grid-2-image-left" style="padding:15px">
-                                                <span class="flash {{ $job->is_hot == 'yes' ? '' : 'd-none' }}">
-                                                </span>
-                                                <div class="image-box" style="padding-right: 20px;">
-                                                    <img src="{{ \App\Helpers\CustomHelper::logoSrc($job->employer->logo) }}"
-                                                        alt="{{ $job->employer->name }}"
-                                                        style="width: 100px; height: 100px;border-radius:8px; object-fit:contain;background:#ffff; ;box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;">
-                                                </div>
-                                                <div class="right-info">
-                                                    <a class="name-job name-fix ellipsis"
-                                                        href="{{ route('job_detail.show', $job->slug) }}">
-                                                        {{ $job->job_title }}
-                                                    </a>
-                                                    <h6>
-                                                        <a class="name-fix ellipsis"
-                                                            href="{{ route('job_detail.show', $job->slug) }}">
-                                                            {{ $job->employer->company_name }}
-                                                        </a>
-                                                    </h6>
-                                                    <span class="location-small">
-                                                        {{ $job->province->name ?? $job->location }}
-                                                    </span>
-                                                    <div class="tags">
-                                                        {{ \App\Helpers\NumberHelper::formatSalary($job->salary) }} |
-                                                        @foreach ($job->skills as $skill)
-                                                            <a class="btn btn-grey-small mr-5"
-                                                                href="{{ route('jobs.index') }}">
-                                                                {{ $skill->skill_name }}
-                                                            </a>
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
+                            <!-- Spinner -->
+                            <div class="loading-spinner d-none" id="loading-spinner">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Đang tải...</span>
+                                </div>
                             </div>
 
-                            <div class="paginations">
-                                {{ $jobs->appends(request()->query())->links('Frontend.pagination.custom') }}
+                            <!-- Danh sách công việc -->
+                            <div class="row" id="job-list-container">
+                                @include('Frontend.partials.job_list_items', ['jobs' => $jobs])
                             </div>
                         </div>
                     </div>
@@ -218,8 +184,8 @@
                                                             <label class="cb-container">
                                                                 <input type="checkbox"
                                                                     value="{{ $category->category_id }}">
-                                                                <span
-                                                                    class="text-small">{{ $category->category_name }}</span>
+                                                                <span class="text-small">{{ $category->category_name }}
+                                                                </span>
                                                                 <span class="checkmark"></span>
                                                             </label>
                                                         </li>
@@ -483,9 +449,11 @@
             const url = new URL(window.location.href);
             const urlParams = url.searchParams;
 
+            // Reset filter
             $('#reset-filters').click(function(e) {
                 e.preventDefault();
-                window.location.href = baseUrl;
+                url.search = '';
+                fetchJobs('');
             });
 
             function updateURLParam(param, value) {
@@ -494,7 +462,42 @@
                 } else {
                     urlParams.set(param, value.join(','));
                 }
-                window.location.href = url.toString();
+
+                fetchJobs(urlParams.toString());
+            }
+
+            function fetchJobs(queryString) {
+                $.ajax({
+                    url: `${baseUrl}?${queryString}`,
+                    type: 'GET',
+                    dataType: 'json',
+                    beforeSend: function() {
+                        $('#loading-spinner').removeClass('d-none'); // Hiện spinner
+                        $('#job-list-container').html('');
+                    },
+                    success: function(res) {
+                        $('#loading-spinner').addClass('d-none'); // Ẩn spinner
+                        $('#job-list-container').html(res.html);
+
+                        $('.paginations').html(res.pagination);
+
+                        // Update text tổng số
+                        if (res.meta.total === 0) {
+                            $('.text-showing').html("Không có công việc nào.");
+                        } else {
+                            $('.text-showing').html(
+                                `Hiển thị <strong>${res.meta.from}-${res.meta.to}</strong> trên <strong>${res.meta.total}</strong> công việc`
+                            );
+                        }
+
+                        // Update URL
+                        window.history.pushState({}, '', `${baseUrl}?${queryString}`);
+                    },
+                    error: function() {
+                        $('#loading-spinner').addClass('d-none'); // Ẩn spinner 
+                        $('#job-list-container').html('<p>Lỗi khi tải dữ liệu!</p>');
+                    }
+                });
             }
 
             function initCheckboxGroup(param, groupSelector) {
@@ -537,45 +540,43 @@
                 });
             }
 
-            // Init các nhóm lọc
+            // phân trang
+            $(document).on('click', '.paginations a', function(e) {
+                e.preventDefault();
+                const url = new URL($(this).attr('href'));
+                fetchJobs(url.searchParams.toString());
+            });
+
+            // sorting
+            $(document).on('click', '.dropdown-menu a', function(e) {
+                e.preventDefault();
+
+                const link = new URL($(this).attr('href'));
+                const clickedParams = link.searchParams;
+
+                for (let [key, value] of clickedParams.entries()) {
+                    urlParams.set(key, value);
+                }
+
+                // Reset page về 1 khi đổi sort/per_page
+                urlParams.delete('page');
+
+                fetchJobs(urlParams.toString());
+            });
+
+            // Init các filter
             initCheckboxGroup('job_category', '#job-category-checkbox-group');
             initCheckboxGroup('salary_range', '#salary-checkbox-group');
             initCheckboxGroup('position', '#company-position-checkbox-group');
             initSelectFilter('location', '#location_filter');
-        });
-    </script>
 
-    <script>
-        $(document).ready(function() {
-            // Sorting for jobs
-            $('.dropdown-item').on('click', function(event) {
-                event.preventDefault(); // Ngăn chặn load trang
-                let url = $(this).attr('href');
-
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest'
-                    },
-                    success: function(data) {
-                        let newContent = $(data).find('.content-page').html();
-                        $('.content-page').html(newContent);
-                        window.history.pushState({}, '', url);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Lỗi khi tải dữ liệu:', error);
-                    }
-                });
-            });
-
-            // tạo Select2
+            // Select2
             $('.select2').select2({
                 placeholder: "Chọn địa điểm",
                 allowClear: true,
             });
 
-            // Show more for job-category 
+            // Xem thêm / ẩn bớt danh mục
             $('#toggle-btn').click(function() {
                 const $extra = $('#extra-items');
                 $extra.slideToggle(500);

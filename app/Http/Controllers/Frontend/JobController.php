@@ -64,6 +64,19 @@ class JobController extends Controller
         // Lấy danh sách job đã lọc và sắp xếp
         $jobs = $query->paginate($perPage)->appends($request->query());
 
+        // Ajax
+        if ($request->ajax()) {
+            return response()->json([
+                'html' => view('Frontend.partials.job_list_items', compact('jobs'))->render(),
+                'pagination' => $jobs->appends($request->query())->links('Frontend.pagination.custom')->toHtml(),
+                'meta' => [
+                    'from' => $jobs->firstItem(),
+                    'to' => $jobs->lastItem(),
+                    'total' => $jobs->total(),
+                ],
+            ]);
+        }
+
         return view('Frontend.pages.job_list', compact(
             'jobs',
             'categories',

@@ -61,7 +61,8 @@
                                                 <div class="image">
                                                     <a href="{{ route('job_detail.show', ['slug' => $randomJob->slug]) }}">
                                                         <img src="{{ $randomJob->employer->getLogoUrl() }}"
-                                                            alt="{{ $randomJob->job_title }}" style="width: 50px">
+                                                            alt="{{ $randomJob->job_title }}"
+                                                            style="height: 50px;width: auto">
                                                     </a>
                                                 </div>
                                                 <div class="info-text">
