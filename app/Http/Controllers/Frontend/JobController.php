@@ -66,9 +66,11 @@ class JobController extends Controller
 
         // Ajax
         if ($request->ajax()) {
+            $jobs->appends($request->query());
+
             return response()->json([
                 'html' => view('Frontend.partials.job_list_items', compact('jobs'))->render(),
-                'pagination' => $jobs->appends($request->query())->links('Frontend.pagination.custom')->toHtml(),
+                'pagination' => $jobs->links('Frontend.pagination.custom')->toHtml(),
                 'meta' => [
                     'from' => $jobs->firstItem(),
                     'to' => $jobs->lastItem(),
@@ -120,9 +122,13 @@ class JobController extends Controller
             $query->where('job_title', 'like', '%' . $request->input('keyword') . '%');
         }
 
-        // Lọc theo category
+        // Lọc theo ngành nghề đã chọn
         if ($request->filled('job_category')) {
-            $query->where('category_id', $request->input('job_category'));
+            $categories = (array) $request->input('job_category');
+
+            if (!in_array('all', $categories)) {
+                $query->whereIn('category_id', $categories);
+            }
         }
 
         // Lọc theo location

@@ -39,13 +39,15 @@
             border: none;
             padding: 0px;
         }
-        .cb-container .checkmark {
+
+        .cb-container .checkmark-fix {
             width: 20px;
             height: 20px;
             border-radius: 50%;
             border: 1px solid #3498db;
         }
-        .cb-container .checkmark:after {
+
+        .cb-container .checkmark-fix:after {
             left: -2px;
             top: -3px;
             border-radius: 50%
@@ -221,7 +223,7 @@
                                                 <label class="cb-container">
                                                     <input type="checkbox" value="all" checked>
                                                     <span class="text-small">Tất cả</span>
-                                                    <span class="checkmark"></span>
+                                                    <span class="checkmark checkmark-fix"></span>
                                                 </label>
                                             </li>
                                             @foreach ($positions as $position)
@@ -229,7 +231,7 @@
                                                     <label class="cb-container">
                                                         <input type="checkbox" value="{{ $position->id }}">
                                                         <span class="text-small">{{ $position->name }}</span>
-                                                        <span class="checkmark"></span>
+                                                        <span class="checkmark checkmark-fix"></span>
                                                     </label>
                                                 </li>
                                             @endforeach
@@ -237,58 +239,31 @@
                                     </div>
                                 </div>
 
+                                @php
+                                    $salaryOptions = [
+                                        ['label' => 'Tất cả', 'value' => 'all', 'checked' => true],
+                                        ['label' => '10 - 20 triệu', 'value' => '10000000-20000000'],
+                                        ['label' => '20 - 40 triệu', 'value' => '20000000-40000000'],
+                                        ['label' => '40 - 60 triệu', 'value' => '40000000-60000000'],
+                                        ['label' => '60 - 80 triệu', 'value' => '60000000-80000000'],
+                                        ['label' => '80 - 100 triệu', 'value' => '80000000-100000000'],
+                                        ['label' => 'Trên 100 triệu', 'value' => '>100000000'],
+                                    ];
+                                @endphp
+
                                 <div class="form-group mb-20">
                                     <h5 class="medium-heading mb-25">Mức lương</h5>
                                     <ul class="list-checkbox" id="salary-checkbox-group">
-                                        <li>
-                                            <label class="cb-container">
-                                                <input type="checkbox" value="all" checked>
-                                                <span class="text-small">Tất cả</span>
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="cb-container">
-                                                <input type="checkbox" value="10000000-20000000">
-                                                <span class="text-small">10 - 20 triệu</span>
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="cb-container">
-                                                <input type="checkbox" value="20000000-40000000">
-                                                <span class="text-small">20 - 40 triệu</span>
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="cb-container">
-                                                <input type="checkbox" value="40000000-60000000">
-                                                <span class="text-small">40 - 60 triệu</span>
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="cb-container">
-                                                <input type="checkbox" value="60000000-80000000">
-                                                <span class="text-small">60 - 80 triệu</span>
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="cb-container">
-                                                <input type="checkbox" value="80000000-100000000">
-                                                <span class="text-small">80 - 100 triệu</span>
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="cb-container">
-                                                <input type="checkbox" value=">100000000">
-                                                <span class="text-small">Trên 100 triệu</span>
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </li>
+                                        @foreach ($salaryOptions as $option)
+                                            <li>
+                                                <label class="cb-container">
+                                                    <input type="checkbox" value="{{ $option['value'] }}"
+                                                        {{ !empty($option['checked']) ? 'checked' : '' }}>
+                                                    <span class="text-small">{{ $option['label'] }}</span>
+                                                    <span class="checkmark checkmark-fix"></span>
+                                                </label>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
 
@@ -463,7 +438,19 @@
             // Reset filter
             $('#reset-filters').click(function(e) {
                 e.preventDefault();
+
                 url.search = '';
+                urlParams.forEach((_, key) => urlParams.delete(key));
+
+                // Reset tất cả checkbox về all
+                $('ul.list-checkbox').each(function() {
+                    const group = $(this);
+                    group.find('input[type="checkbox"]').prop('checked', false);
+                    group.find('input[value="all"]').prop('checked', true);
+                });
+
+                $('.select2').val(null).trigger('change');
+
                 fetchJobs('');
             });
 
@@ -511,12 +498,12 @@
                 });
             }
 
-            function initCheckboxGroup(param, groupSelector) {
+            function initCheckboxGroup(param, groupSelector, multiple = false) {
                 const paramValue = urlParams.get(param);
                 if (paramValue) {
-                    const selected = paramValue.split(',')[0];
-                    $(`${groupSelector} input[type="checkbox"]`).prop('checked', function() {
-                        return $(this).val() === selected;
+                    const selected = paramValue.split(',');
+                    $(`${groupSelector} input[type="checkbox"]`).each(function() {
+                        $(this).prop('checked', selected.includes($(this).val()));
                     });
                 }
 
@@ -529,8 +516,12 @@
                         updateURLParam(param, []);
                     } else {
                         $(`${groupSelector} input[value="all"]`).prop('checked', false);
-                        $(`${groupSelector} input[type="checkbox"]`).not(this).prop('checked', false);
-                        $(this).prop('checked', true);
+
+                        if (!multiple) {
+                            // Nếu không cho phép chọn nhiều, bỏ chọn tất cả trừ checkbox hiện tại
+                            $(`${groupSelector} input[type="checkbox"]`).not(this).prop('checked', false);
+                            $(this).prop('checked', true);
+                        }
 
                         const selected = $(`${groupSelector} input[type="checkbox"]:checked`)
                             .map(function() {
@@ -551,14 +542,14 @@
                 });
             }
 
-            // phân trang
+            // Pagination
             $(document).on('click', '.paginations a', function(e) {
                 e.preventDefault();
                 const url = new URL($(this).attr('href'));
                 fetchJobs(url.searchParams.toString());
             });
 
-            // sorting
+            // Sorting
             $(document).on('click', '.dropdown-menu a', function(e) {
                 e.preventDefault();
 
@@ -576,9 +567,9 @@
             });
 
             // Init các filter
-            initCheckboxGroup('job_category', '#job-category-checkbox-group');
-            initCheckboxGroup('salary_range', '#salary-checkbox-group');
-            initCheckboxGroup('position', '#company-position-checkbox-group');
+            initCheckboxGroup('job_category', '#job-category-checkbox-group', true); // ngành nghề - chọn nhiều
+            initCheckboxGroup('salary_range', '#salary-checkbox-group', false);
+            initCheckboxGroup('position', '#company-position-checkbox-group', false);
             initSelectFilter('location', '#location_filter');
 
             // Select2
