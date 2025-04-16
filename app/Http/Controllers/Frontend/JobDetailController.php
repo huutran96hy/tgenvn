@@ -32,7 +32,7 @@ class JobDetailController extends Controller
             ->where('job_id', '!=', $job->job_id)
             ->where('approval_status', 'approved')
             ->inRandomOrder()
-            ->take(8)
+            ->take(5)
             ->get();
 
         return view('Frontend.pages.job_detail', compact('job', 'employer', 'randomJobs'));
