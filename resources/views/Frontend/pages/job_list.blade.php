@@ -39,6 +39,17 @@
             border: none;
             padding: 0px;
         }
+        .cb-container .checkmark {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid #3498db;
+        }
+        .cb-container .checkmark:after {
+            left: -2px;
+            top: -3px;
+            border-radius: 50%
+        }
     </style>
     <main class="main">
         @include('Frontend.snippets.banner')
