@@ -71,7 +71,8 @@
                 <div class="mobile-menu-wrap mobile-header-border">
                     <nav>
                         <ul class="mobile-menu font-heading">
-                            <li><a class="{{ Request::routeIs('index') ? 'active' : '' }}"
+                            <li>
+                                <a class="{{ Request::routeIs('index') ? 'active' : '' }}"
                                     href="{{ route('index') }}">Trang chủ</a>
                             </li>
                             <li class="{{ request()->routeIs('jobs.best') ? 'active' : '' }}">
@@ -83,7 +84,8 @@
                             <li class="{{ request()->routeIs('employers.top') ? 'active' : '' }}">
                                 <a href="{{ route('employers.top') }}">Công ty hàng đầu</a>
                             </li>
-                            <li><a class="{{ Request::routeIs('news.*') ? 'active' : '' }}"
+                            <li>
+                                <a class="{{ Request::routeIs('news.*') ? 'active' : '' }}"
                                     href="{{ route('news.index') }}">Thông tin chia sẻ</a>
                             </li>
                         </ul>

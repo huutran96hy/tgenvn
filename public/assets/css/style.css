@@ -347,6 +347,18 @@
     line-height: 30px;
 }
 
+.paginations .pager li .pager-next,
+.paginations .pager li .pager-prev {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.paginations {
+    justify-content: center;
+    display: flex;
+}
+
 @media (max-width: 768px) {
     .left-logo-mobile {
         display: block !important;
@@ -393,9 +405,10 @@
     }
 
     .btn-call-fix {
-        padding: 12px 20px 12px 50px;
-        font-size: 13px;
+        padding: 12px 18px;
+        font-size: 12px;
         background-position: 12px 12px;
+        background-image: unset;
     }
 
     .nav-fix {
@@ -442,13 +455,6 @@
 
     .box-filters-job {
         margin-bottom: 20px;
-    }
-
-    .paginations .pager li .pager-next,
-    .paginations .pager li .pager-prev {
-        height: 40px;
-        width: 40px;
-        border-radius: 50%;
     }
 
     .paginations {

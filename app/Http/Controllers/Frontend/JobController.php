@@ -71,7 +71,7 @@ class JobController extends Controller
             return response()->json([
                 'html' => view('Frontend.partials.job_list_items', compact('jobs'))->render(),
                 'pagination' => $jobs->links('Frontend.pagination.custom')->toHtml(),
-                'meta' => [
+                'data' => [
                     'from' => $jobs->firstItem(),
                     'to' => $jobs->lastItem(),
                     'total' => $jobs->total(),

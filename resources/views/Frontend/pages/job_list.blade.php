@@ -122,12 +122,6 @@
                                                                 Cũ nhất
                                                             </a>
                                                         </li>
-                                                        {{-- <li>
-                                                            <a class="dropdown-item"
-                                                                href="{{ url()->current() }}?{{ http_build_query(array_merge(request()->query(), ['sort' => 'rating'])) }}">
-                                                                Đánh giá cao
-                                                            </a>
-                                                        </li> --}}
                                                     </ul>
                                                 </div>
                                             </div>
@@ -480,11 +474,11 @@
                         $('.paginations').html(res.pagination);
 
                         // Update text tổng số
-                        if (res.meta.total === 0) {
+                        if (res.data.total === 0) {
                             $('.text-showing').html("Không có công việc nào.");
                         } else {
                             $('.text-showing').html(
-                                `Hiển thị <strong>${res.meta.from}-${res.meta.to}</strong> trên <strong>${res.meta.total}</strong> công việc`
+                                `Hiển thị <strong>${res.data.from}-${res.data.to}</strong> trên <strong>${res.data.total}</strong> công việc`
                             );
                         }
 
