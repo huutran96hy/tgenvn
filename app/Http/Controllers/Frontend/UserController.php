@@ -36,15 +36,9 @@ class UserController extends Controller
             'role' => 'nullable|in:candidate, employer, admin, content_manager',
         ]);
 
-        $password = $validated['password'] ?? 'password';
+        $validated['password'] = Hash::make($validated['password'] ?? 'password');
 
-        $user = User::create([
-            'name' => $validated['name'],
-            'username' => $validated['username'],
-            'email' => $validated['email'],
-            'password' => Hash::make($password),
-            'role' => $validated['role'] ?? 'candidate',
-        ]);
+        $user = User::create($validated);
 
         return response()->json([
             'success' => true,
@@ -72,13 +66,11 @@ class UserController extends Controller
             'role' => 'nullable|in:candidate, employer, admin, content_manager',
         ]);
 
-        $user->update(array_filter([
-            'name' => $validated['name'] ?? $user->name,
-            'username' => $validated['username'] ?? $user->username,
-            'email' => $validated['email'] ?? $user->email,
-            'password' => isset($validated['password']) ? Hash::make($validated['password']) : $user->password,
-            'role' => $validated['role'] ?? $user->role,
-        ]));
+        if (isset($validated['password'])) {
+            $validated['password'] = Hash::make($validated['password']);
+        }
+
+        $user->update($validated);
 
         return response()->json([
             'success' => true,
