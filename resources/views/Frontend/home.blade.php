@@ -22,11 +22,17 @@
         .item-logo img {
             transition: transform 0.3s ease;
             object-fit: contain;
+            height: 82px;
+            width: auto;
         }
 
         .item-logo:hover {
             transform: translateY(-10px) rotateY(10deg) rotateX(10deg);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .skeleton-width {
+            width: 250px;
         }
     </style>
     <main class="main">
@@ -41,15 +47,15 @@
                         <div class="swiper-container swiper-group-5 swiper">
                             <div class="swiper-wrapper pb-20 pt-15">
                                 @foreach ($employers->chunk(5) as $chunk)
-                                    <div class="swiper-slide hover-up">
+                                    <div class="swiper-slide hover-up skeleton-width">
                                         @foreach ($chunk as $employer)
-                                            <a href="{{ route('employers.show', $employer->slug) }}">
+                                            <a href="{{ route('employers.show', $employer->slug) }}"
+                                                aria-label="Xem thông tin về {{ $employer->company_name }}">
                                                 <div class="item-logo">
                                                     <img alt="{{ $employer->company_name }}"
                                                         class="img-fluid d-block mx-auto"
-                                                        style="height: 82px; object-fit: contain;"
                                                         src="{{ \App\Helpers\CustomHelper::logoSrc($employer->logo) }}"
-                                                        width="100%" />
+                                                        width="100%" loading="lazy" />
                                                 </div>
                                             </a>
                                         @endforeach

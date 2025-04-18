@@ -57,19 +57,21 @@
                             <div class="sidebar-list-job">
                                 <ul>
                                     @foreach ($randomJobs as $randomJob)
+                                        @php
+                                            $detailUrl = route('job_detail.show', ['slug' => $randomJob->slug]);
+                                        @endphp
                                         <li>
                                             <div class="card-list-4 wow animate__animated animate__fadeIn hover-up">
                                                 <div class="image">
-                                                    <a href="{{ route('job_detail.show', ['slug' => $randomJob->slug]) }}">
+                                                    <a href="{{ $detailUrl }}">
                                                         <img src="{{ $randomJob->employer->getLogoUrl() }}"
-                                                            alt="{{ $randomJob->job_title }}"
-                                                            style="height: 50px;width: auto">
+                                                            alt="{{ $randomJob->job_title }}" class="img-fluid"
+                                                            style="height: 50px; width: auto;" loading="lazy" />
                                                     </a>
                                                 </div>
                                                 <div class="info-text">
                                                     <h5 class="font-md font-bold color-brand-1">
-                                                        <a
-                                                            href="{{ route('job_detail.show', ['slug' => $randomJob->slug]) }}">
+                                                        <a href="{{ $detailUrl }}">
                                                             {{ $randomJob->job_title }}
                                                         </a>
                                                     </h5>
@@ -99,6 +101,7 @@
                                         </li>
                                     @endforeach
                                 </ul>
+
                             </div>
                         </div>
                         @if ($job->skills->isNotEmpty())

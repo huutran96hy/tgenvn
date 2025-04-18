@@ -11,12 +11,7 @@ class JobDetailController extends Controller
 {
     public function index($slug)
     {
-        $job = Job::with([
-            'employer',
-            'category:category_id,category_name',
-            'skills:skill_id,skill_name'
-        ])
-            ->where('slug', $slug)
+        $job = Job::where('slug', $slug)
             ->where('approval_status', 'approved')
             ->firstOrFail();
 
@@ -25,9 +20,8 @@ class JobDetailController extends Controller
         }])->find($job->employer_id);
 
         $randomJobs = Job::with([
-            'employer',
-            'category:category_id,category_name',
-            'skills:skill_id,skill_name'
+            'employer:employer_id,logo',
+            'province:id,name',
         ])
             ->where('job_id', '!=', $job->job_id)
             ->where('approval_status', 'approved')

@@ -16,18 +16,18 @@ require __DIR__ . '/admin.php';
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
-// Trang danh sách job & chi tiết job
+// Danh sách job & chi tiết job
 Route::get('/viec-lam', [JobController::class, 'index'])->name('jobs.index');
 Route::get('/viec-lam-tot-nhat', [JobController::class, 'best'])->name('jobs.best');
 Route::get('/viec-lam-goi-y', [JobController::class, 'suggested'])->name('jobs.suggested');
 Route::get('/viec-lam/{slug}', [JobDetailController::class, 'index'])->name('job_detail.show');
 
-// Trang danh sách công ty & chi tiết công ty
+// Danh sách công ty & chi tiết công ty
 Route::get('/cong-ty', [EmployerController::class, 'index'])->name('employers.index');
 Route::get('/cong-ty-hang-dau', [EmployerController::class, 'top'])->name('employers.top');
 Route::get('/cong-ty/{employer}', [EmployerController::class, 'show'])->name('employers.show');
 
-// Trang liên hệ
+// Liên hệ
 Route::get('/lien-he', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/lien-he', [ContactController::class, 'store'])->name('contact.store');
 
@@ -38,7 +38,7 @@ Route::get('/tin-tuc/{news}', [NewsController::class, 'show'])->name('news.show'
 
 Route::post('/ung-tuyen', [CandidateController::class, 'store'])->name('candidate.store');
 
-// Các route yêu cầu đăng nhập
+// Các route yêu cầu login
 Route::middleware('auth')->group(function () {
     // Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
 });

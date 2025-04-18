@@ -90,7 +90,11 @@ class EmployerController extends Controller
     public function show($slug)
     {
         $employer = Employer::where('slug', $slug)->firstOrFail();
-        $latestJobs = $employer->jobs()->where('approval_status', 'approved')->latest('created_at')->paginate(2);
+        $latestJobs = $employer->jobs()
+            ->with('province')
+            ->where('approval_status', 'approved')
+            ->latest('created_at')
+            ->paginate(2);
 
         return view('Frontend.pages.employer_detail', compact('employer', 'latestJobs'));
     }

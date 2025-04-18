@@ -255,6 +255,8 @@
 .logo-img {
     height: 65px;
     width: auto;
+    /* aspect-ratio: 3 / 1; */
+    /* object-fit: contain; */
 }
 
 .banner-side {
@@ -498,4 +500,8 @@
 
 .mobile-search form {
     padding: 0;
+}
+
+.burger-icon > span.burger-icon-bottom {
+    bottom: 1px;
 }

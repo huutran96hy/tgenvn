@@ -3,7 +3,7 @@
         <!-- Chỉ hiển thị trên mobile -->
         <div class="left-logo-mobile">
             <a href="{{ route('index') }}">
-                <img alt="logo" src="{{ asset(\App\Models\Config::getLogo()) }}" style="width: 40px">
+                <img alt="logo" src="{{ asset(\App\Models\Config::getLogo()) }}" style="height: 40px; width:auto">
             </a>
         </div>
         <div class="main-header d-flex justify-content-between align-items-center">
@@ -40,7 +40,8 @@
                 <form method="GET" id="searchForm"
                     class="custom-search-form d-flex align-items-center gap-2 position-relative">
 
-                    <select class="custom-search-select" name="search_type" id="search_type">
+                    <select class="custom-search-select" name="search_type" id="search_type"
+                        aria-label="Tìm kiếm theo loại">
                         <option value="jobs" {{ request('search_type') == 'jobs' ? 'selected' : '' }}>Việc làm
                         </option>
                         <option value="employers" {{ request('search_type') == 'employers' ? 'selected' : '' }}>Công ty
@@ -50,7 +51,7 @@
                     <input class="custom-search-input" type="text" name="keyword" placeholder="Nhập từ khoá..."
                         value="{{ request('keyword') }}">
 
-                    <button class="custom-search-button" type="submit">
+                    <button class="custom-search-button" type="submit" aria-label="Tìm kiếm">
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
                             class="bi bi-search" viewBox="0 0 16 16">
                             <path

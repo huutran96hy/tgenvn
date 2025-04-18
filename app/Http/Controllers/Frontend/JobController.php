@@ -45,7 +45,11 @@ class JobController extends Controller
      */
     private function getJobList(Request $request, $isHot = null)
     {
-        $query = Job::with('employer', 'skills', 'category')
+        $query = Job::with([
+            'employer:employer_id,company_name,logo',
+            'skills',
+            'province:id,name'
+        ])
             ->where('approval_status', 'approved')
             ->whereDate('expiry_date', '>=', Carbon::today());
 

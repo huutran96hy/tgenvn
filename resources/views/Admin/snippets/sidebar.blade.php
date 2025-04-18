@@ -1,8 +1,6 @@
 <!-- Main sidebar -->
 <div class="sidebar sidebar-dark sidebar-main sidebar-expand-lg">
-    <!-- Sidebar content -->
     <div class="sidebar-content">
-        <!-- Sidebar header -->
         <div class="sidebar-section">
             <div class="sidebar-section-body d-flex justify-content-center">
                 <h5 class="sidebar-resize-hide flex-grow-1 my-auto">Điều hướng</h5>
@@ -19,20 +17,16 @@
                 </div>
             </div>
         </div>
-        <!-- /sidebar header -->
 
-        <!-- Main navigation -->
         <div class="sidebar-section">
             <ul class="nav nav-sidebar" data-nav-type="accordion">
-                <!-- Ví dụ danh mục menu -->
                 <li class="nav-item-header pt-0">
                     <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Main</div>
                     <i class="ph-dots-three sidebar-resize-show"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('admin') }}"
+                    <a href="{{ route('admin.dashboard') }}"
                         class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                        {{-- <i class="ph-house"></i> --}}
                         <i class="ph-house"></i>
                         <span>
                             Dashboard
@@ -43,8 +37,5 @@
 
             </ul>
         </div>
-        <!-- /main navigation -->
     </div>
-    <!-- /sidebar content -->
 </div>
-<!-- /main sidebar -->

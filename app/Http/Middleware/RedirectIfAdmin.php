@@ -19,13 +19,14 @@ class RedirectIfAdmin
     {
         $user = Auth::user();
 
-        // Nếu chưa đăng nhập hoặc không phải admin, content_manager → Chuyển hướng đến login
+        // Kiểm tra nếu chưa login hoặc không phải admin, content_manager
+
         if (!$user || !in_array($user->role, [User::ADMIN_ROLE, User::CONTENT_MANAGER_ROLE])) {
 
             return redirect()->route('admin.login');
         }
 
-        // Nếu đã là admin,content_manager → Chuyển hướng về dashboard
+        // Nếu là admin,content_manager → Chuyển hướng về dashboard
         return redirect()->route('admin.dashboard');
     }
 }

@@ -3,8 +3,7 @@
         <div class="row" style="background: #ffff;border-radius: 8px;padding: 10px;margin:0;">
             <div class="footer-col-8 col-md-4 col-sm-12 mr-20">
                 <a href="{{ route('index') }}">
-                    <img alt="logo" src="{{ asset(\App\Models\Config::getLogo()) }}" width="50%"
-                        style="width:80px" />
+                    <img alt="logo" src="{{ asset(\App\Models\Config::getLogo()) }}" style="width:80px;height:auto" />
                 </a>
                 <div class="mt-20 mb-20 font-xs color-text-paragraph-2">
                     Công ty cổ phần FDI Work thành lập năm 2025. Với sự kết
@@ -39,9 +38,9 @@
             <div class="footer-col-6 col-md-4 col-xs-6">
                 <h6 class="mb-20">Liên kết</h6>
                 <div class="footer-social">
-                    <a class="icon-socials icon-facebook" href="#"></a>
-                    <a class="icon-socials icon-twitter" href="#"></a>
-                    <a class="icon-socials icon-linkedin" href="#"></a>
+                    <a class="icon-socials icon-facebook" href="#" aria-label="Facebook"></a>
+                    <a class="icon-socials icon-twitter" href="#" aria-label="Twitter"></a>
+                    <a class="icon-socials icon-linkedin" href="#" aria-label="Linkedin"></a>
                 </div>
                 </ul>
             </div>

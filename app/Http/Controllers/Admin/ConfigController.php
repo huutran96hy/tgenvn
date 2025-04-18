@@ -47,6 +47,10 @@ class ConfigController extends Controller
             // Lưu file mới
             $filePath = $request->file($config->key)->store($fileKeys[$config->key], 'public');
             $config->update(['value' => $filePath]);
+
+            if ($config->key === 'logo') {
+                Config::resetLogoCache();
+            }
         }
         // Xử lý banners
         elseif ($config->key === 'banners' && $request->hasFile('banners')) {
