@@ -23,7 +23,8 @@
                                     <div class="sidebar-info">
                                         <span class="sidebar-company">{{ $job->employer->company_name }}</span>
                                         <span class="card-location location-fix">{{ $job->employer->address }}</span>
-                                        <a class="link-underline mt-15" href="#">
+                                        <a class="link-underline mt-15"
+                                            href="{{ route('employers.show', $job->employer->slug) }}">
                                             {{ $employer->jobs_count }}
                                             Công việc
                                         </a>

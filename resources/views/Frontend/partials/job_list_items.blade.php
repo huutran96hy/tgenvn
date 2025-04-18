@@ -35,6 +35,6 @@
     </div>
 @endforeach
 
-<div class="paginations mt-4">
+<div class="paginations">
     {{ $jobs->appends(request()->query())->links('Frontend.pagination.custom') }}
 </div>

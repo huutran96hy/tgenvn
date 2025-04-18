@@ -89,12 +89,6 @@
                                                                 Cũ nhất
                                                             </a>
                                                         </li>
-                                                        {{-- <li>
-                                                            <a class="dropdown-item"
-                                                                href="{{ url()->current() }}?{{ http_build_query(array_merge(request()->query(), ['sort' => 'rating'])) }}">
-                                                    Đánh giá cao
-                                                    </a>
-                                                    </li> --}}
                                                     </ul>
                                                 </div>
                                             </div>

@@ -384,8 +384,8 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </div> --}}
-                                {{-- <div class="filter-block mb-20">
+                                </div> 
+                                <div class="filter-block mb-20">
                                     <h5 class="medium-heading mb-15">Loại công việc</h5>
                                     <div class="form-group">
                                         <ul class="list-checkbox">
