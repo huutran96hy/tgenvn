@@ -150,7 +150,8 @@
                                                             <div class="card-grid-2-image-left">
                                                                 <div class="image-box">
                                                                     <img src="{{ \App\Helpers\CustomHelper::logoSrc($job->employer->logo) }}"
-                                                                        alt="{{ $job->job_title }}">
+                                                                        alt="{{ $job->job_title }}"
+                                                                        style="width: 100px; height: 100px;border-radius:8px; object-fit:contain;background:#ffff; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;">
                                                                 </div>
                                                                 <div class="right-info">
                                                                     <a class="name-job"
@@ -165,8 +166,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="card-block-info">
-                                                        <h4><a
-                                                                href="{{ route('job_detail.show', $job->slug) }}">{{ $job->job_title }}</a>
+                                                        <h4 style="font-weight: 600;font-size:20px">
+                                                            <a href="{{ route('job_detail.show', $job->slug) }}">
+                                                                {{ $job->job_title }}
+                                                            </a>
                                                         </h4>
                                                         <div class="mt-5">
                                                             @if (!empty($job->job_type))
@@ -212,7 +215,9 @@
                             <div class="sidebar-heading">
                                 <div class="avatar-sidebar">
                                     <div class="sidebar-info pl-0">
-                                        <span class="sidebar-company">{{ $employer->company_name }}</span>
+                                        <span class="sidebar-company" style="font-weight: 600;">
+                                            {{ $employer->company_name }}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
