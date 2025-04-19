@@ -69,7 +69,7 @@
                                                     <a href="{{ $detailUrl }}">
                                                         <img src="{{ $randomJob->employer->getLogoUrl() }}"
                                                             alt="{{ $randomJob->job_title }}" class="img-fluid"
-                                                            style="height: 50px; width: auto;" loading="lazy" />
+                                                            style="width: 50px; height: auto;" loading="lazy" />
                                                     </a>
                                                 </div>
                                                 <div class="info-text">
