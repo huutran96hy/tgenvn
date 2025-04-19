@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Employer;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use App\Traits\SlugCheck;
 use Carbon\Carbon;
+use App\Http\Requests\StoreEmployerRequest;
 
 class EmployerController extends Controller
 {
@@ -32,34 +32,16 @@ class EmployerController extends Controller
         return view('Admin.pages.employers.add_edit', compact('users'));
     }
 
-    public function store(Request $request)
+    public function store(StoreEmployerRequest $request)
     {
-        $validated = $request->validate([
-            // 'user_id' => 'required|exists:users,id',
-            'company_name' => 'required|max:255',
-            'slug' => 'required',
-            'logo' => 'nullable',
-            'background_img' => 'nullable',
-            'images' => 'nullable',
-            'company_description' => 'nullable',
-            'employer_benefit' => 'nullable',
-            'website' => 'nullable|url|max:200',
-            'contact_phone' => 'required|regex:/^[0-9]{10,11}$/',
-            'address' => 'required|max:255',
-            'email' => 'nullable|max:50',
-            'founded_at' => 'nullable',
-            'about' => 'nullable|max:200',
-            'company_type' => 'nullable|max:600',
-            'map_url' => 'nullable|string',
-            'is_hot' => 'nullable|in:yes,no',
-        ], [
-            'contact_phone.regex' => 'Số điện thoại không hợp lệ. Vui lòng nhập từ 10 đến 11 chữ số.',
-        ]);
+        $validated = $request->validated();
 
-        $slug = $request->input('slug');
-
-        $slug = $this->getStorySlugExist($slug, Employer::class, 'slug', 'employer_id');
-        $validated['slug'] = $slug;
+        $validated['slug'] = $this->getStorySlugExist(
+            $validated['slug'],
+            Employer::class,
+            'slug',
+            'employer_id'
+        );
 
         // Xử lý ngày
         $validated['founded_at'] = Carbon::createFromFormat(
@@ -77,34 +59,17 @@ class EmployerController extends Controller
         return view('Admin.pages.employers.add_edit', compact('employer', 'users'));
     }
 
-    public function update(Request $request, Employer $employer)
+    public function update(StoreEmployerRequest $request, Employer $employer)
     {
-        $validated = $request->validate([
-            // 'user_id' => 'required|exists:users,id',
-            'company_name' => 'required|max:255',
-            'slug' => 'required',
-            'logo' => 'nullable',
-            'background_img' => 'nullable',
-            'images' => 'nullable',
-            'company_description' => 'nullable',
-            'employer_benefit' => 'nullable',
-            'website' => 'nullable|url',
-            'contact_phone' => 'required|regex:/^[0-9]{10,11}$/',
-            'address' => 'required|max:255',
-            'email' => 'nullable',
-            'founded_at' => 'nullable',
-            'about' => 'nullable',
-            'company_type' => 'nullable|max:600',
-            'map_url' => 'nullable|string',
-            'is_hot' => 'nullable|in:yes,no',
-        ], [
-            'contact_phone.regex' => 'Số điện thoại không hợp lệ. Vui lòng nhập từ 10 đến 11 chữ số.',
-        ]);
+        $validated = $request->validated();
 
-        $slug = $request->input('slug');
-
-        $slug = $this->getStorySlugExist($slug, Employer::class, 'slug', 'employer_id', $employer->employer_id);
-        $validated['slug'] = $slug;
+        $validated['slug'] = $this->getStorySlugExist(
+            $validated['slug'],
+            Employer::class,
+            'slug',
+            'employer_id',
+            $employer->employer_id
+        );
 
         // Xử lý ngày
         $validated['founded_at'] = Carbon::createFromFormat(
@@ -118,16 +83,6 @@ class EmployerController extends Controller
 
     public function destroy(Employer $employer)
     {
-        // Xóa logo
-        // if ($employer->logo) {
-        //     Storage::disk('public')->delete($employer->logo);
-        // }
-
-        // Xóa bgr-img
-        // if ($employer->background_img) {
-        //     Storage::disk('public')->delete($employer->background_img);
-        // }
-
         $employer->delete();
         return back()->with('success', 'Xóa công ty thành công');
     }

@@ -100,10 +100,13 @@
                                 placeholder="Nhập từ khoá..." value="{{ request('keyword') }}">
                             <select class="form-select" name="search_type" id="mobile_search_type"
                                 style="max-width: 120px;">
-                                <option value="jobs" {{ request('search_type') == 'jobs' ? 'selected' : '' }}>Việc
-                                    làm</option>
+                                <option value="jobs" {{ request('search_type') == 'jobs' ? 'selected' : '' }}>
+                                    Việc làm
+                                </option>
                                 <option value="employers"
-                                    {{ request('search_type') == 'employers' ? 'selected' : '' }}>Công ty</option>
+                                    {{ request('search_type') == 'employers' ? 'selected' : '' }}>
+                                    Công ty
+                                </option>
                             </select>
                         </div>
                         <button class="btn btn-primary w-100" type="submit">Tìm kiếm</button>

@@ -56,7 +56,6 @@
                                                                         <a href="#"
                                                                             class="btn btn-danger btn-sm rounded-circle shadow delete-banner"
                                                                             data-url="{{ route('admin.configs.deleteBanner', ['banner' => $banner]) }}">
-                                                                            {{-- <i class="fas fa-trash-alt" style="font-size: 12px"></i> --}}
                                                                             X
                                                                         </a>
                                                                     </div>
@@ -65,7 +64,6 @@
                                                         @endforeach
                                                     </div>
                                                 </div>
-
                                             @endif
                                         </div>
                                     </td>

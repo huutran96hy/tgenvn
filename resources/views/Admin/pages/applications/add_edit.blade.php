@@ -86,6 +86,7 @@
 @push('scripts')
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            // Datepicker 
             const options = {
                 autohide: true,
                 format: "dd-mm-yyyy",
@@ -95,11 +96,8 @@
             document.querySelectorAll(".datepicker-autohide").forEach(function(el) {
                 new Datepicker(el, options);
             });
-        });
-    </script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
+            // Select2 
             $('.select2').select2({
                 placeholder: "Chọn một mục",
                 allowClear: true

@@ -36,6 +36,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('users', UserController::class);
         Route::resource('jobs', JobController::class);
         Route::post('/jobs/{job}/update-status', [JobController::class, 'updateStatus'])->name('jobs.update-status');
+        Route::post('/jobs/bulk-update', [JobController::class, 'bulkUpdate'])->name('jobs.bulkUpdate');
+        Route::post('/jobs/bulk-delete', [JobController::class, 'bulkDelete'])->name('jobs.bulkDelete');
 
         Route::resource('job-categories', JobCategoryController::class);
         Route::resource('employers', EmployerController::class);

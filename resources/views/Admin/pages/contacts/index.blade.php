@@ -15,8 +15,8 @@
                 <form action="{{ route('admin.contacts.index') }}" method="GET" class="mb-3">
                     <div class="row">
                         <div class="col-md-4">
-                            <input type="text" name="search" class="form-control" placeholder="Tìm kiếm theo tên hoặc email"
-                                value="{{ request('search') }}">
+                            <input type="text" name="search" class="form-control"
+                                placeholder="Tìm kiếm theo tên hoặc email" value="{{ request('search') }}">
                         </div>
                         <div class="col-md-2">
                             <button type="submit" class="btn btn-primary w-100">Tìm kiếm</button>
@@ -44,12 +44,7 @@
                                 <td>{{ $contact->phone ?? 'Không có' }}</td>
                                 <td>{{ $contact->subject }}</td>
                                 <td class="text-center">
-                                    <form action="{{ route('admin.contacts.destroy', $contact->contact_id) }}"
-                                        method="POST" onsubmit="return confirm('Bạn có chắc muốn xóa?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
-                                    </form>
+                                    <x-action-dropdown deleteRoute="admin.contacts.destroy" :id="$contact->contact_id" />
                                 </td>
                             </tr>
                         @endforeach

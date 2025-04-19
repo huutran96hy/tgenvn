@@ -23,7 +23,7 @@
                             <select name="category_id" class="form-control select2">
                                 <option value="">Tất cả danh mục</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->category_id }}"
+                                    <option value="{{ $category->category_id }} "
                                         {{ request('category_id') == $category->category_id ? 'selected' : '' }}>
                                         {{ $category->category_name }}
                                     </option>
@@ -33,11 +33,14 @@
                         <div class="col-md-3">
                             <select name="approval_status" class="form-control">
                                 <option value="">Tất cả trạng thái</option>
-                                <option value="pending" {{ request('approval_status') == 'pending' ? 'selected' : '' }}>Chờ
+                                <option value="pending" {{ request('approval_status') == 'pending' ? 'selected' : '' }}>
+                                    Chờ
                                     duyệt</option>
-                                <option value="approved" {{ request('approval_status') == 'approved' ? 'selected' : '' }}>Đã
+                                <option value="approved" {{ request('approval_status') == 'approved' ? 'selected' : '' }}>
+                                    Đã
                                     duyệt</option>
-                                <option value="rejected" {{ request('approval_status') == 'rejected' ? 'selected' : '' }}>Bị
+                                <option value="rejected" {{ request('approval_status') == 'rejected' ? 'selected' : '' }}>
+                                    Bị
                                     từ chối</option>
                             </select>
                         </div>
@@ -47,9 +50,25 @@
                     </div>
                 </form>
 
+                <!-- Alert Container -->
+                <div id="alert-container" class="mb-3"></div>
+
+                <div id="bulk-actions" class="mb-3 d-flex align-items-center gap-2">
+                    <select id="bulk-status" class="form-select" style="width: 200px;">
+                        <option value="">-- Cập nhật trạng thái --</option>
+                        <option value="pending">Chờ duyệt</option>
+                        <option value="approved">Đã duyệt</option>
+                        <option value="rejected">Bị từ chối</option>
+                    </select>
+
+                    <button class="btn btn-success" id="btn-bulk-update">Cập nhật</button>
+                    <button class="btn btn-danger" id="btn-bulk-delete">Xóa</button>
+                </div>
+
                 <table class="table table-hover">
                     <thead>
                         <tr>
+                            <th><input type="checkbox" id="check-all" /></th>
                             <th>Tiêu đề</th>
                             <th>Danh mục</th>
                             <th>Loại công việc</th>
@@ -61,6 +80,7 @@
                     <tbody>
                         @foreach ($jobs as $job)
                             <tr>
+                                <td><input type="checkbox" class="job-checkbox" value="{{ $job->job_id }}"></td>
                                 <td>{{ $job->job_title }}</td>
                                 <td>{{ $job->category->category_name ?? 'Không có' }}</td>
                                 <td>{{ $job->job_type }}</td>
@@ -118,6 +138,16 @@
                 allowClear: true
             });
 
+            // Function to show alerts
+            function showAlert(type, message) {
+                $('#alert-container').html(`
+                    <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                        ${message}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Đóng"></button>
+                    </div>
+                `);
+            }
+
             $(".change-status").click(function(e) {
                 e.preventDefault();
                 let newStatus = $(this).data("status");
@@ -147,12 +177,79 @@
                             button.text(statusText[newStatus]);
                             button.attr("class", "btn btn-sm dropdown-toggle " + statusClass[
                                 newStatus]);
+                            showAlert('success', 'Cập nhật trạng thái thành công!');
                         } else {
-                            alert("Có lỗi xảy ra!");
+                            showAlert('danger', 'Có lỗi xảy ra!');
                         }
                     },
                     error: function() {
-                        alert("Có lỗi xảy ra khi cập nhật trạng thái.");
+                        showAlert('danger', 'Có lỗi xảy ra khi cập nhật trạng thái.');
+                    }
+                });
+            });
+
+            // Check all
+            $('#check-all').on('change', function() {
+                $('.job-checkbox').prop('checked', this.checked);
+            });
+
+            // Bulk update
+            $('#btn-bulk-update').click(function() {
+                let selected = $('.job-checkbox:checked').map(function() {
+                    return $(this).val();
+                }).get();
+
+                let status = $('#bulk-status').val();
+                if (!selected.length || !status) return alert('Vui lòng chọn công việc và trạng thái.');
+
+                $.ajax({
+                    url: '{{ route('admin.jobs.bulkUpdate') }}',
+                    type: 'POST',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        ids: selected,
+                        status: status
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            showAlert('success', response.message);
+                            location.reload();
+                        } else {
+                            showAlert('danger', response.message);
+                        }
+                    },
+                    error: function() {
+                        showAlert('danger', 'Có lỗi xảy ra khi cập nhật trạng thái.');
+                    }
+                });
+            });
+
+
+            // Bulk delete
+            $('#btn-bulk-delete').click(function() {
+                let selected = $('.job-checkbox:checked').map(function() {
+                    return $(this).val();
+                }).get();
+
+                if (!selected.length || !confirm('Bạn có chắc muốn xóa?')) return;
+
+                $.ajax({
+                    url: '{{ route('admin.jobs.bulkDelete') }}',
+                    type: 'POST',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        ids: selected
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            showAlert('success', response.message);
+                            location.reload();
+                        } else {
+                            showAlert('danger', response.message);
+                        }
+                    },
+                    error: function() {
+                        showAlert('danger', 'Có lỗi xảy ra khi xóa công việc.');
                     }
                 });
             });

@@ -123,9 +123,12 @@
                                 <div class="col-lg-8 col-md-12">
                                     <h3 class="custom-h3">{{ $job->job_title ?? 'Chưa có tiêu đề' }}</h3>
                                     <div class="mt-0 mb-15">
-                                        <span class="card-briefcase">Fulltime</span>
-                                        <span
-                                            class="card-time">{{ \Carbon\Carbon::parse($job->posted_date)->diffForHumans() ?? 'Ngày chưa xác định' }}</span>
+                                        @if (!empty($job->job_type))
+                                            <span class="card-briefcase">{{ $job->job_type }}</span>
+                                        @endif
+                                        <span class="card-time">
+                                            {{ \Carbon\Carbon::parse($job->posted_date)->diffForHumans() ?? 'Ngày chưa xác định' }}
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-12 text-lg-end">

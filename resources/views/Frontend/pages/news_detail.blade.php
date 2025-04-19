@@ -60,7 +60,6 @@
                     </div>
                 </div>
 
-                <!-- Hiển thị bài viết liên quan -->
                 @if ($relatedNews->isNotEmpty())
                     <div class="related-posts">
                         <h3 class="mt-50">Bài viết liên quan</h3>

@@ -169,7 +169,9 @@
                                                                 href="{{ route('job_detail.show', $job->slug) }}">{{ $job->job_title }}</a>
                                                         </h4>
                                                         <div class="mt-5">
-                                                            <span class="card-briefcase">{{ $job->job_type }}</span>
+                                                            @if (!empty($job->job_type))
+                                                                <span class="card-briefcase">{{ $job->job_type }}</span>
+                                                            @endif
                                                             <span
                                                                 class="card-time">{{ $job->created_at->diffForHumans() }}</span>
                                                         </div>

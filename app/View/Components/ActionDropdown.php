@@ -27,6 +27,6 @@ class ActionDropdown extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.action-dropdown-cms');
+        return view('components.action-cms');
     }
 }

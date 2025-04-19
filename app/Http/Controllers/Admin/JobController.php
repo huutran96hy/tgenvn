@@ -151,4 +151,40 @@ class JobController extends Controller
 
         return response()->json(['success' => true]);
     }
+    public function bulkUpdate(Request $request)
+    {
+        $ids = $request->input('ids', []);
+        $status = $request->input('status');
+
+        if ($ids && $status) {
+            Job::whereIn('job_id', $ids)->update(['approval_status' => $status]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Cập nhật trạng thái thành công!'
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Có lỗi xảy ra khi cập nhật trạng thái.'
+        ]);
+    }
+    public function bulkDelete(Request $request)
+    {
+        $ids = $request->input('ids', []);
+        if ($ids) {
+            Job::whereIn('job_id', $ids)->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Xóa công việc thành công!'
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Có lỗi xảy ra khi xóa công việc.'
+        ]);
+    }
 }

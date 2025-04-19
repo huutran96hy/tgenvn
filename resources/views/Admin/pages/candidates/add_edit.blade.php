@@ -49,8 +49,9 @@
                         <input type="file" name="resume" class="form-control">
                         @if (isset($candidate) && $candidate->resume)
                             <small class="d-block mt-2">
-                                <a href="{{ asset('storage/' . $candidate->resume) }}" target="_blank">Xem tệp hiện
-                                    tại</a>
+                                <a href="{{ asset('storage/' . $candidate->resume) }}" target="_blank">
+                                    Xem tệp hiện tại
+                                </a>
                             </small>
                         @endif
                     </div>
