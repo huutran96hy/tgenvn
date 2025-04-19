@@ -24,38 +24,22 @@
                     </div>
                 </form> --}}
 
-                <table class="table table-hover">
-                    <thead>
+                <x-table-wrapper-cms :headers="['Tệp hồ sơ (CV)', 'Hành động']">
+                    @foreach ($candidates as $candidate)
                         <tr>
-                            {{-- <th>Họ và Tên</th>
-                            <th>Số điện thoại</th>
-                            <th>Địa chỉ</th> --}}
-                            <th>Tệp hồ sơ (CV)</th>
-                            <th>Hành động</th>
+                            <td>
+                                <a href="{{ asset('storage/' . $candidate->resume) }}" target="_blank">
+                                    Xem CV
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <x-action-dropdown deleteRoute="admin.candidates.destroy" :id="$candidate->candidate_id" />
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($candidates as $candidate)
-                            <tr>
-                                {{-- <td>{{ $candidate->full_name }}</td>
-                                <td>{{ $candidate->phone }}</td>
-                                <td>{{ $candidate->address ?? 'N/A' }}</td> --}}
-                                <td>
-                                    <a href="{{ asset('storage/' . $candidate->resume) }}" target="_blank">
-                                        Xem CV
-                                    </a>
-                                </td>
-                                <td class="text-center">
-                                    <x-action-dropdown deleteRoute="admin.candidates.destroy" :id="$candidate->candidate_id" />
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                    @endforeach
+                </x-table-wrapper-cms>
 
-                <div class="d-flex justify-content-center mt-3">
-                    {{ $candidates->appends(request()->query())->links('Admin.pagination.custom') }}
-                </div>
+                <x-pagination-links-cms :paginator="$candidates" />
             </div>
         </div>
     </div>

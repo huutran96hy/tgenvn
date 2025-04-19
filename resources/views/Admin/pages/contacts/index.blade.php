@@ -13,47 +13,33 @@
 
             <div class="card-body">
                 <form action="{{ route('admin.contacts.index') }}" method="GET" class="mb-3">
-                    <div class="row">
-                        <div class="col-md-4">
+                    <div class="row g-2">
+                        <div class="col-12 col-md-4">
                             <input type="text" name="search" class="form-control"
                                 placeholder="Tìm kiếm theo tên hoặc email" value="{{ request('search') }}">
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-12 col-md-2">
                             <button type="submit" class="btn btn-primary w-100">Tìm kiếm</button>
                         </div>
                     </div>
                 </form>
 
-                <table class="table table-hover">
-                    <thead>
+                <x-table-wrapper-cms :headers="['ID', 'Họ & Tên', 'Email', 'Điện thoại', 'Chủ đề', 'Hành động']">
+                    @foreach ($contacts as $contact)
                         <tr>
-                            <th>ID</th>
-                            <th>Họ & Tên</th>
-                            <th>Email</th>
-                            <th>Điện thoại</th>
-                            <th>Chủ đề</th>
-                            <th>Hành động</th>
+                            <td>{{ $contact->contact_id }}</td>
+                            <td>{{ $contact->full_name }}</td>
+                            <td>{{ $contact->email }}</td>
+                            <td>{{ $contact->phone ?? 'Không có' }}</td>
+                            <td>{{ $contact->subject }}</td>
+                            <td class="text-center">
+                                <x-action-dropdown deleteRoute="admin.contacts.destroy" :id="$contact->contact_id" />
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($contacts as $contact)
-                            <tr>
-                                <td>{{ $contact->contact_id }}</td>
-                                <td>{{ $contact->full_name }}</td>
-                                <td>{{ $contact->email }}</td>
-                                <td>{{ $contact->phone ?? 'Không có' }}</td>
-                                <td>{{ $contact->subject }}</td>
-                                <td class="text-center">
-                                    <x-action-dropdown deleteRoute="admin.contacts.destroy" :id="$contact->contact_id" />
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                    @endforeach
+                </x-table-wrapper-cms>
 
-                <div class="d-flex justify-content-center mt-3">
-                    {{ $contacts->appends(request()->query())->links('Admin.pagination.custom') }}
-                </div>
+                <x-pagination-links-cms :paginator="$contacts" />
             </div>
         </div>
     </div>

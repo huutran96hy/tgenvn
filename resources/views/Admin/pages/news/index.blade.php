@@ -14,12 +14,12 @@
 
             <div class="card-body">
                 <form action="{{ route('admin.news.index') }}" method="GET" class="mb-3">
-                    <div class="row">
-                        <div class="col-md-4">
+                    <div class="row g-2">
+                        <div class="col-12 col-md-4">
                             <x-clearable-input name="search" placeholder="Tìm kiếm theo tiêu đề tin tức"
                                 :value="request('search')" />
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-12 col-md-3">
                             <select name="news_category_id" class="form-control select2">
                                 <option value="">Tất cả danh mục</option>
                                 @foreach ($categories as $category)
@@ -30,68 +30,54 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-12 col-md-2">
                             <button type="submit" class="btn btn-primary w-100">Tìm kiếm</button>
                         </div>
                     </div>
                 </form>
 
-                <table class="table table-hover">
-                    <thead>
+                <x-table-wrapper-cms :headers="['Tiêu đề', 'Danh mục', 'Tác giả', 'Ngày xuất bản', 'Trạng thái', 'Hành động']">
+                    @foreach ($news as $item)
                         <tr>
-                            <th>Tiêu đề</th>
-                            <th>Danh mục</th>
-                            <th>Tác giả</th>
-                            <th>Ngày xuất bản</th>
-                            <th>Trạng thái</th>
-                            <th>Hành động</th>
+                            <td>{{ $item->title }}</td>
+                            <td>{{ $item->category->category_name ?? 'Không có' }}</td>
+                            <td>{{ $item->author->name ?? 'Ẩn danh' }}</td>
+                            <td>{{ $item->published_date }}</td>
+                            <td>
+                                <div class="dropdown">
+                                    <button
+                                        class="btn btn-sm dropdown-toggle 
+                                        {{ $item->status == 'published' ? 'bg-success bg-opacity-10 text-success' : 'btn-warning' }}"
+                                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        @if ($item->status == 'published')
+                                            Xuất bản
+                                        @else
+                                            Nháp
+                                        @endif
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item change-status"
+                                                data-url="{{ route('admin.news.update-status', $item->news_id) }}"
+                                                data-status="published">Xuất bản</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item change-status"
+                                                data-url="{{ route('admin.news.update-status', $item->news_id) }}"
+                                                data-status="draft">Nháp</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <x-action-dropdown editRoute="admin.news.edit" deleteRoute="admin.news.destroy"
+                                    :id="$item->news_id" />
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($news as $item)
-                            <tr>
-                                <td>{{ $item->title }}</td>
-                                <td>{{ $item->category->category_name ?? 'Không có' }}</td>
-                                <td>{{ $item->author->name ?? 'Ẩn danh' }}</td>
-                                <td>{{ $item->published_date }}</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button
-                                            class="btn btn-sm dropdown-toggle 
-                                            {{ $item->status == 'published' ? 'bg-success bg-opacity-10 text-success' : 'btn-warning' }}"
-                                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            @if ($item->status == 'published')
-                                                Xuất bản
-                                            @else
-                                                Nháp
-                                            @endif
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li>
-                                                <a class="dropdown-item change-status"
-                                                    data-url="{{ route('admin.news.update-status', $item->news_id) }}"
-                                                    data-status="published">Xuất bản</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item change-status"
-                                                    data-url="{{ route('admin.news.update-status', $item->news_id) }}"
-                                                    data-status="draft">Nháp</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <x-action-dropdown editRoute="admin.news.edit" deleteRoute="admin.news.destroy"
-                                        :id="$item->news_id" />
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                    @endforeach
+                </x-table-wrapper-cms>
 
-                <div class="d-flex justify-content-center mt-3">
-                    {{ $news->appends(request()->query())->links('Admin.pagination.custom') }}
-                </div>
+                <x-pagination-links-cms :paginator="$news" />
             </div>
         </div>
     </div>

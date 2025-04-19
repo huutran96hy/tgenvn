@@ -14,46 +14,32 @@
 
             <div class="card-body">
                 <form action="{{ route('admin.configs.index') }}" method="GET" class="mb-3">
-                    <div class="row">
-                        <div class="col-md-4">
+                    <div class="row g-2">
+                        <div class="col-12 col-md-4">
                             <x-clearable-input name="search" placeholder="Tìm kiếm theo tên cấu hình" :value="request('search')" />
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-12 col-md-2">
                             <button type="submit" class="btn btn-primary w-100">Tìm kiếm</button>
                         </div>
                     </div>
                 </form>
 
-                <table class="table table-hover">
-                    <thead>
+                <x-table-wrapper-cms :headers="['Key', 'Hành động']">
+                    @foreach ($configs as $config)
                         <tr>
-                            {{-- <th>ID</th> --}}
-                            <th>Key</th>
-                            {{-- <th>Value</th> --}}
-                            <th>Hành động</th>
+                            <td>{{ $config->key }}</td>
+                            <td class="text-center">
+                                <div class="d-flex">
+                                    <a href="{{ route('admin.configs.edit', $config->id) }}" class="me-3">
+                                        <i class="ph-pencil"></i>
+                                    </a>
+                                </div>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($configs as $config)
-                            <tr>
-                                {{-- <td>{{ $config->config_id }}</td> --}}
-                                <td>{{ $config->key }}</td>
-                                {{-- <td>{{ $config->value }}</td> --}}
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="{{ route('admin.configs.edit', $config->id) }}" class="me-3">
-                                            <i class="ph-pencil"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                    @endforeach
+                </x-table-wrapper-cms>
 
-                <div class="d-flex justify-content-center mt-3">
-                    {{ $configs->appends(request()->query())->links('Admin.pagination.custom') }}
-                </div>
+                <x-pagination-links-cms :paginator="$configs" />
             </div>
         </div>
     </div>

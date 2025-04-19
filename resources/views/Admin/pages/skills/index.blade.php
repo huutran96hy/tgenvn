@@ -14,41 +14,30 @@
 
             <div class="card-body">
                 <form action="{{ route('admin.skills.index') }}" method="GET" class="mb-3">
-                    <div class="row">
-                        <div class="col-md-4">
+                    <div class="row g-2">
+                        <div class="col-12 col-md-4">
                             <x-clearable-input name="search" placeholder="Tìm kiếm theo tên kỹ năng" :value="request('search')" />
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-12 col-md-2">
                             <button type="submit" class="btn btn-primary w-100">Tìm kiếm</button>
                         </div>
                     </div>
                 </form>
 
-                <table class="table table-hover">
-                    <thead>
+                <x-table-wrapper-cms :headers="['STT', 'Tên Kỹ Năng', 'Hành động']">
+                    @foreach ($skills as $index => $skill)
                         <tr>
-                            <th>STT</th>
-                            <th>Tên Kỹ Năng</th>
-                            <th>Hành động</th>
+                            <td>{{ $skills->firstItem() + $index }}</td>
+                            <td>{{ $skill->skill_name }}</td>
+                            <td class="text-center">
+                                <x-action-dropdown editRoute="admin.skills.edit" deleteRoute="admin.skills.destroy"
+                                    :id="$skill->skill_id" />
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($skills as $index => $skill)
-                            <tr>
-                                <td>{{ $skills->firstItem() + $index }}</td>
-                                <td>{{ $skill->skill_name }}</td>
-                                <td class="text-center">
-                                    <x-action-dropdown editRoute="admin.skills.edit" deleteRoute="admin.skills.destroy"
-                                        :id="$skill->skill_id" />
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                    @endforeach
+                </x-table-wrapper-cms>
 
-                <div class="d-flex justify-content-center mt-3">
-                    {{ $skills->appends(request()->query())->links('Admin.pagination.custom') }}
-                </div>
+                <x-pagination-links-cms :paginator="$skills" />
             </div>
         </div>
     </div>

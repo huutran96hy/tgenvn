@@ -14,12 +14,10 @@
     <link href="{{ asset('assets/icons/fontawesome/styles.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/icons/phosphor/styles.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/ltr/all.min.css') }}" id="stylesheet" rel="stylesheet" type="text/css">
-    <!-- /global stylesheets -->
 
     <!-- Core JS files -->
     <script src="{{ asset('assets/demo/demo_configurator.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
-    <!-- /core JS files -->
 
     <!-- Theme JS files -->
     <script src="{{ asset('assets/js/app.js') }}"></script>

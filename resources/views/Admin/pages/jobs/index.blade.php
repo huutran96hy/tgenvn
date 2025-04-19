@@ -14,37 +14,34 @@
 
             <div class="card-body">
                 <form action="{{ route('admin.jobs.index') }}" method="GET" class="mb-3">
-                    <div class="row">
-                        <div class="col-md-3">
+                    <div class="row g-2">
+                        <div class="col-12 col-md-3">
                             <x-clearable-input name="search" placeholder="Tìm kiếm theo tiêu đề công việc"
                                 :value="request('search')" />
                         </div>
-                        <div class="col-md-3">
-                            <select name="category_id" class="form-control select2">
+                        <div class="col-12 col-md-3">
+                            <select name="category_id" class="form-control select2 w-100">
                                 <option value="">Tất cả danh mục</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->category_id }} "
+                                    <option value="{{ $category->category_id }}"
                                         {{ request('category_id') == $category->category_id ? 'selected' : '' }}>
                                         {{ $category->category_name }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-3">
-                            <select name="approval_status" class="form-control">
+                        <div class="col-12 col-md-3">
+                            <select name="approval_status" class="form-control w-100">
                                 <option value="">Tất cả trạng thái</option>
                                 <option value="pending" {{ request('approval_status') == 'pending' ? 'selected' : '' }}>
-                                    Chờ
-                                    duyệt</option>
+                                    Chờ duyệt</option>
                                 <option value="approved" {{ request('approval_status') == 'approved' ? 'selected' : '' }}>
-                                    Đã
-                                    duyệt</option>
+                                    Đã duyệt</option>
                                 <option value="rejected" {{ request('approval_status') == 'rejected' ? 'selected' : '' }}>
-                                    Bị
-                                    từ chối</option>
+                                    Bị từ chối</option>
                             </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-12 col-md-2">
                             <button type="submit" class="btn btn-primary w-100">Tìm kiếm</button>
                         </div>
                     </div>
@@ -53,8 +50,8 @@
                 <!-- Alert Container -->
                 <div id="alert-container" class="mb-3"></div>
 
-                <div id="bulk-actions" class="mb-3 d-flex align-items-center gap-2">
-                    <select id="bulk-status" class="form-select" style="width: 200px;">
+                <div id="bulk-actions" class="mb-3 d-flex flex-wrap align-items-center gap-2">
+                    <select id="bulk-status" class="form-select" style="min-width: 200px;">
                         <option value="">-- Cập nhật trạng thái --</option>
                         <option value="pending">Chờ duyệt</option>
                         <option value="approved">Đã duyệt</option>
@@ -65,65 +62,56 @@
                     <button class="btn btn-danger" id="btn-bulk-delete">Xóa</button>
                 </div>
 
-                <table class="table table-hover">
-                    <thead>
+                <x-table-wrapper-cms :headers="['', 'Tiêu đề', 'Danh mục', 'Loại công việc', 'Trạng thái', 'Hành động']">
+                    @foreach ($jobs as $job)
                         <tr>
-                            <th><input type="checkbox" id="check-all" /></th>
-                            <th>Tiêu đề</th>
-                            <th>Danh mục</th>
-                            <th>Loại công việc</th>
-                            <th>Mức lương</th>
-                            <th class="text-center">Trạng thái</th>
-                            <th>Hành động</th>
+                            <td><input type="checkbox" class="job-checkbox" value="{{ $job->job_id }}"></td>
+                            <td>{{ $job->job_title }}</td>
+                            <td>{{ $job->category->category_name ?? 'Không có' }}</td>
+                            <td>{{ $job->job_type }}</td>
+                            {{-- <td>{{ \App\Helpers\NumberHelper::formatSalary($job->salary) }}</td> --}}
+                            <td class="text-center">
+                                <div class="dropdown">
+                                    <button
+                                        class="btn btn-sm dropdown-toggle 
+                                        {{ $job->approval_status == 'pending' ? 'btn-warning' : ($job->approval_status == 'approved' ? 'btn-success' : 'btn-danger') }}"
+                                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        @if ($job->approval_status == 'pending')
+                                            Chờ duyệt
+                                        @elseif ($job->approval_status == 'approved')
+                                            Đã duyệt
+                                        @else
+                                            Bị từ chối
+                                        @endif
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item change-status"
+                                                data-url="{{ route('admin.jobs.update-status', $job->job_id) }}"
+                                                data-status="pending">Chờ duyệt</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item change-status"
+                                                data-url="{{ route('admin.jobs.update-status', $job->job_id) }}"
+                                                data-status="approved">Đã duyệt</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item change-status"
+                                                data-url="{{ route('admin.jobs.update-status', $job->job_id) }}"
+                                                data-status="rejected">Bị từ chối</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <x-action-dropdown editRoute="admin.jobs.edit" deleteRoute="admin.jobs.destroy"
+                                    :id="$job->job_id" />
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($jobs as $job)
-                            <tr>
-                                <td><input type="checkbox" class="job-checkbox" value="{{ $job->job_id }}"></td>
-                                <td>{{ $job->job_title }}</td>
-                                <td>{{ $job->category->category_name ?? 'Không có' }}</td>
-                                <td>{{ $job->job_type }}</td>
-                                <td>{{ \App\Helpers\NumberHelper::formatSalary($job->salary) }}</td>
-                                <td class="text-center">
-                                    <div class="dropdown">
-                                        <button
-                                            class="btn btn-sm dropdown-toggle 
-                                            {{ $job->approval_status == 'pending' ? 'btn-warning' : ($job->approval_status == 'approved' ? 'btn-success' : 'btn-danger') }}"
-                                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            @if ($job->approval_status == 'pending')
-                                                Chờ duyệt
-                                            @elseif ($job->approval_status == 'approved')
-                                                Đã duyệt
-                                            @else
-                                                Bị từ chối
-                                            @endif
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item change-status"
-                                                    data-url="{{ route('admin.jobs.update-status', $job->job_id) }}"
-                                                    data-status="pending">Chờ duyệt</a></li>
-                                            <li><a class="dropdown-item change-status"
-                                                    data-url="{{ route('admin.jobs.update-status', $job->job_id) }}"
-                                                    data-status="approved">Đã duyệt</a></li>
-                                            <li><a class="dropdown-item change-status"
-                                                    data-url="{{ route('admin.jobs.update-status', $job->job_id) }}"
-                                                    data-status="rejected">Bị từ chối</a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <x-action-dropdown editRoute="admin.jobs.edit" deleteRoute="admin.jobs.destroy"
-                                        :id="$job->job_id" />
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                    @endforeach
+                </x-table-wrapper-cms>
 
-                <div class="d-flex justify-content-center mt-3">
-                    {{ $jobs->appends(request()->query())->links('Admin.pagination.custom') }}
-                </div>
+                <x-pagination-links-cms :paginator="$jobs" />
             </div>
         </div>
     </div>

@@ -14,11 +14,11 @@
 
             <div class="card-body">
                 <form action="{{ route('admin.applications.index') }}" method="GET" class="mb-3">
-                    <div class="row">
-                        {{-- <div class="col-md-4">
+                    <div class="row g-2">
+                        {{-- <div class="col-12 col-md-4">
                             <x-clearable-input name="search" placeholder="Tìm kiếm theo ứng viên" :value="request('search')" />
                         </div> --}}
-                        <div class="col-md-3">
+                        <div class="col-12 col-md-3">
                             <select name="status" class="form-control">
                                 <option value="">Tất cả trạng thái</option>
                                 <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>
@@ -35,83 +35,69 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-12 col-md-2">
                             <button type="submit" class="btn btn-primary w-100">Tìm kiếm</button>
                         </div>
                     </div>
                 </form>
 
-                <table class="table table-hover">
-                    <thead>
+                <x-table-wrapper-cms :headers="['Ứng viên', 'Công việc', 'Ngày ứng tuyển', 'Trạng thái', 'Hành động']">
+                    @foreach ($applications as $application)
                         <tr>
-                            <th>Ứng viên</th>
-                            <th>Công việc</th>
-                            <th>Ngày ứng tuyển</th>
-                            <th>Trạng thái</th>
-                            <th>Hành động</th>
+                            <td>
+                                @if ($cv = optional($application->candidate)->resume)
+                                    <a href="{{ asset('storage/' . $cv) }}" target="_blank">Xem CV</a>
+                                @else
+                                    <span>Không có CV</span>
+                                @endif
+                            </td>
+                            <td>{{ $application->job->job_title ?? 'Không có' }}</td>
+                            <td>{{ $application->application_date }}</td>
+                            <td>
+                                @php
+                                    $statusLabels = [
+                                        'hired' => 'Đã tuyển',
+                                        'interviewed' => 'Đã phỏng vấn',
+                                        'pending' => 'Chờ duyệt',
+                                        'rejected' => 'Bị từ chối',
+                                    ];
+
+                                    $statusClasses = [
+                                        'hired' => 'btn-success',
+                                        'interviewed' => 'btn-primary',
+                                        'pending' => 'btn-warning',
+                                        'rejected' => 'btn-danger',
+                                    ];
+
+                                    $currentStatus = $application->status;
+                                @endphp
+
+                                <div class="dropdown">
+                                    <button
+                                        class="btn btn-sm dropdown-toggle {{ $statusClasses[$currentStatus] ?? 'btn-secondary' }}"
+                                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{ $statusLabels[$currentStatus] ?? 'Không xác định' }}
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        @foreach ($statusLabels as $key => $label)
+                                            <li>
+                                                <a class="dropdown-item change-status"
+                                                    data-url="{{ route('admin.applications.update-status', $application->application_id) }}"
+                                                    data-status="{{ $key }}">{{ $label }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <x-action-dropdown editRoute="admin.applications.edit"
+                                    deleteRoute="admin.applications.destroy" :id="$application->application_id" />
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($applications as $application)
-                            <tr>
-                                {{-- <td>{{ $application->candidate->name ?? 'Không xác định' }}</td> --}}
-                                <td>
-                                    @if ($cv = optional($application->candidate)->resume)
-                                        <a href="{{ asset('storage/' . $cv) }}" target="_blank">Xem CV</a>
-                                    @else
-                                        <span>Không có CV</span>
-                                    @endif
-                                </td>
-                                <td>{{ $application->job->job_title ?? 'Không có' }}</td>
-                                <td>{{ $application->application_date }}</td>
-                                <td>
-                                    @php
-                                        $statusLabels = [
-                                            'hired' => 'Đã tuyển',
-                                            'interviewed' => 'Đã phỏng vấn',
-                                            'pending' => 'Chờ duyệt',
-                                            'rejected' => 'Bị từ chối',
-                                        ];
+                    @endforeach
+                </x-table-wrapper-cms>
 
-                                        $statusClasses = [
-                                            'hired' => 'btn-success',
-                                            'interviewed' => 'btn-primary',
-                                            'pending' => 'btn-warning',
-                                            'rejected' => 'btn-danger',
-                                        ];
-
-                                        $currentStatus = $application->status;
-                                    @endphp
-
-                                    <div class="dropdown">
-                                        <button
-                                            class="btn btn-sm dropdown-toggle {{ $statusClasses[$currentStatus] ?? 'btn-secondary' }}"
-                                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            {{ $statusLabels[$currentStatus] ?? 'Không xác định' }}
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            @foreach ($statusLabels as $key => $label)
-                                                <li>
-                                                    <a class="dropdown-item change-status"
-                                                        data-url="{{ route('admin.applications.update-status', $application->application_id) }}"
-                                                        data-status="{{ $key }}">{{ $label }}</a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <x-action-dropdown editRoute="admin.applications.edit"
-                                        deleteRoute="admin.applications.destroy" :id="$application->application_id" />
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-
-                <div class="d-flex justify-content-center mt-3">
-                    {{ $applications->appends(request()->query())->links('Admin.pagination.custom') }}
-                </div>
+                <x-pagination-links-cms :paginator="$applications" />
             </div>
         </div>
     </div>

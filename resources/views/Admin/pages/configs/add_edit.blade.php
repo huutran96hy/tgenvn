@@ -17,104 +17,108 @@
                     @csrf
                     @method('PUT')
 
-                    <table class="table table-bordered">
-                        <tbody>
-                            <tr>
-                                <th class="w-25">Key</th>
-                                <td>
-                                    <input type="text" name="key" class="form-control"
-                                        value="{{ old('key', $config->key ?? '') }}" readonly>
-                                </td>
-                            </tr>
-
-                            @if ($config->key === 'banners')
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tbody>
                                 <tr>
-                                    <th>Banners</th>
+                                    <th class="w-25">Key</th>
                                     <td>
-                                        <div class="mb-3">
-                                            <input type="file" name="banners[]" class="file-input" multiple
-                                                accept="image/*" id="bannersInput">
+                                        <input type="text" name="key" class="form-control"
+                                            value="{{ old('key', $config->key ?? '') }}" readonly>
+                                    </td>
+                                </tr>
 
-                                            @if (!empty($config->value))
-                                                @php
-                                                    $banners = json_decode($config->value, true);
-                                                @endphp
+                                @if ($config->key === 'banners')
+                                    <tr>
+                                        <th>Banners</th>
+                                        <td>
+                                            <div class="mb-3">
+                                                <input type="file" name="banners[]" class="file-input" multiple
+                                                    accept="image/*" id="bannersInput">
 
-                                                <div class="mt-4">
-                                                    <label class="font-weight-semibold fs-5">Ảnh hiện tại:</label>
-                                                    <div class="row row-cols-2 row-cols-md-4 g-4 mt-3">
-                                                        @foreach ($banners as $banner)
-                                                            <div class="col banner_img">
-                                                                <div class="card shadow-sm border-0 position-relative">
-                                                                    <div class="d-flex justify-content-center align-items-center"
-                                                                        style="height: 200px; overflow: hidden;">
-                                                                        <img src="{{ asset('storage/' . $banner) }}"
-                                                                            class="img-fluid rounded" alt="Banner"
-                                                                            style="object-fit: none; width: 100%; height: 100%;" />
-                                                                    </div>
-                                                                    <div class="position-absolute top-0 end-0 p-1">
-                                                                        <a href="#"
-                                                                            class="btn btn-danger btn-sm rounded-circle shadow delete-banner"
-                                                                            data-url="{{ route('admin.configs.deleteBanner', ['banner' => $banner]) }}">
-                                                                            X
-                                                                        </a>
+                                                @if (!empty($config->value))
+                                                    @php
+                                                        $banners = json_decode($config->value, true);
+                                                    @endphp
+
+                                                    <div class="mt-4">
+                                                        <label class="font-weight-semibold fs-5">Ảnh hiện tại:</label>
+                                                        <div class="row row-cols-2 row-cols-md-4 g-4 mt-3">
+                                                            @foreach ($banners as $banner)
+                                                                <div class="col banner_img">
+                                                                    <div class="card shadow-sm border-0 position-relative">
+                                                                        <div class="d-flex justify-content-center align-items-center"
+                                                                            style="height: 200px; overflow: hidden;">
+                                                                            <img src="{{ asset('storage/' . $banner) }}"
+                                                                                class="img-fluid rounded" alt="Banner"
+                                                                                style="object-fit: none; width: 100%; height: 100%;" />
+                                                                        </div>
+                                                                        <div class="position-absolute top-0 end-0 p-1">
+                                                                            <a href="#"
+                                                                                class="btn btn-danger btn-sm rounded-circle shadow delete-banner"
+                                                                                data-url="{{ route('admin.configs.deleteBanner', ['banner' => $banner]) }}">
+                                                                                X
+                                                                            </a>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        @endforeach
+                                                            @endforeach
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            @endif
-                                        </div>
-                                    </td>
-                                </tr>
-                            @elseif($config->key === 'logo')
-                                <tr>
-                                    <th>Logo</th>
-                                    <td>
-                                        <div class="mb-3">
-                                            <input type="file" name="logo" class="form-control" accept="image/*"
-                                                id="logoInput">
+                                                @endif
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @elseif($config->key === 'logo')
+                                    <tr>
+                                        <th>Logo</th>
+                                        <td>
+                                            <div class="mb-3">
+                                                <input type="file" name="logo" class="form-control" accept="image/*"
+                                                    id="logoInput">
 
-                                            @if (!empty($config->value))
-                                                <div class="mt-3">
-                                                    <label>Logo hiện tại:</label>
-                                                    <img src="{{ asset('storage/' . $config->value) }}" class="img-fluid" style="width:100px"/>
-                                                </div>
-                                            @endif
-                                        </div>
-                                    </td>
-                                </tr>
-                            @elseif($config->key === 'icon')
-                                <tr>
-                                    <th>Icon</th>
-                                    <td>
-                                        <div class="mb-3">
-                                            <input type="file" name="icon" class="form-control" accept="image/*"
-                                                id="iconInput">
+                                                @if (!empty($config->value))
+                                                    <div class="mt-3">
+                                                        <label>Logo hiện tại:</label>
+                                                        <img src="{{ asset('storage/' . $config->value) }}"
+                                                            class="img-fluid" style="width:100px" />
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @elseif($config->key === 'icon')
+                                    <tr>
+                                        <th>Icon</th>
+                                        <td>
+                                            <div class="mb-3">
+                                                <input type="file" name="icon" class="form-control" accept="image/*"
+                                                    id="iconInput">
 
-                                            @if (!empty($config->value))
-                                                <div class="mt-3">
-                                                    <label>Icon hiện tại:</label>
-                                                    <img src="{{ asset('storage/' . $config->value) }}" class="img-fluid" style="width:100px"/>
-                                                </div>
-                                            @endif
-                                        </div>
-                                    </td>
-                                </tr>
-                            @else
-                                <tr>
-                                    <th>Giá trị</th>
-                                    <td>
-                                        <div class="mb-3">
-                                            <input type="text" name="value" class="form-control"
-                                                value="{{ $config->value }}">
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endif
-                        </tbody>
-                    </table>
+                                                @if (!empty($config->value))
+                                                    <div class="mt-3">
+                                                        <label>Icon hiện tại:</label>
+                                                        <img src="{{ asset('storage/' . $config->value) }}"
+                                                            class="img-fluid" style="width:100px" />
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <th>Giá trị</th>
+                                        <td>
+                                            <div class="mb-3">
+                                                <input type="text" name="value" class="form-control"
+                                                    value="{{ $config->value }}">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
 
                     <div class="text-end" style="margin-top: 15px">
                         <button type="submit" class="btn btn-success">Cập nhật</button>

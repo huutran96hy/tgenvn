@@ -14,43 +14,31 @@
 
             <div class="card-body">
                 <form action="{{ route('admin.employers.index') }}" method="GET" class="mb-3">
-                    <div class="row">
-                        <div class="col-md-4">
+                    <div class="row g-2">
+                        <div class="col-12 col-md-4">
                             <x-clearable-input name="search" placeholder="Tìm kiếm theo tên công ty" :value="request('search')" />
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-12col-md-2">
                             <button type="submit" class="btn btn-primary w-100">Tìm kiếm</button>
                         </div>
                     </div>
                 </form>
 
-                <table class="table table-hover">
-                    <thead>
+                <x-table-wrapper-cms :headers="['Công ty', 'Website', 'Liên hệ', 'Hành động']">
+                    @foreach ($employers as $employer)
                         <tr>
-                            <th>Công ty</th>
-                            <th>Website</th>
-                            <th>Liên hệ</th>
-                            <th>Hành động</th>
+                            <td>{{ Str::words($employer->company_name, 5) }}</td>
+                            <td>{{ $employer->website ?? 'N/A' }}</td>
+                            <td>{{ $employer->contact_phone }}</td>
+                            <td class="text-center">
+                                <x-action-dropdown editRoute="admin.employers.edit" deleteRoute="admin.employers.destroy"
+                                    :id="$employer->employer_id" />
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($employers as $employer)
-                            <tr>
-                                <td>{{ $employer->company_name }}</td>
-                                <td>{{ $employer->website ?? 'N/A' }}</td>
-                                <td>{{ $employer->contact_phone }}</td>
-                                <td class="text-center">
-                                    <x-action-dropdown editRoute="admin.employers.edit"
-                                        deleteRoute="admin.employers.destroy" :id="$employer->employer_id" />
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                    @endforeach
+                </x-table-wrapper-cms>
 
-                <div class="d-flex justify-content-center mt-3">
-                    {{ $employers->appends(request()->query())->links('Admin.pagination.custom') }}
-                </div>
+                <x-pagination-links-cms :paginator="$employers" />
             </div>
         </div>
     </div>

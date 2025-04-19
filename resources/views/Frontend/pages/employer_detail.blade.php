@@ -149,7 +149,7 @@
                                                         <div class="col-12">
                                                             <div class="card-grid-2-image-left">
                                                                 <div class="image-box">
-                                                                    <img src="{{ \App\Helpers\CustomHelper::logoSrc($job->logo) }}"
+                                                                    <img src="{{ \App\Helpers\CustomHelper::logoSrc($job->employer->logo) }}"
                                                                         alt="{{ $job->job_title }}">
                                                                 </div>
                                                                 <div class="right-info">
