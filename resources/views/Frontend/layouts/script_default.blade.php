@@ -38,7 +38,7 @@
         if (document.querySelector(".swiper-group-5")) {
             new Swiper(".swiper-group-5", {
                 slidesPerView: 1,
-                spaceBetween: 20,
+                spaceBetween: 15,
                 loop: true,
                 navigation: {
                     nextEl: '.swiper-button-next',
