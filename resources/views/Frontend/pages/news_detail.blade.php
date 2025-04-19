@@ -20,7 +20,7 @@
                 <div class="container">
                     <div class="box-white">
                         <div class="max-width-single">
-                            <h2 class="mb-30 mt-20 text-center">{{ $news->title }}</h2>
+                            <h2 class="mb-30 mt-20 text-center custom-h2">{{ $news->title }}</h2>
                             <div class="post-meta text-muted d-flex align-items-center mx-auto justify-content-center">
                                 <div class="author d-flex align-items-center mr-30">
                                     <img alt="{{ $news->author->name ?? 'Ẩn danh' }}"

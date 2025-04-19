@@ -166,7 +166,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="card-block-info">
-                                                        <h4 style="font-weight: 600;font-size:20px">
+                                                        <h4 style="font-weight: 600;font-size: 18px">
                                                             <a href="{{ route('job_detail.show', $job->slug) }}">
                                                                 {{ $job->job_title }}
                                                             </a>
@@ -215,7 +215,7 @@
                             <div class="sidebar-heading">
                                 <div class="avatar-sidebar">
                                     <div class="sidebar-info pl-0">
-                                        <span class="sidebar-company" style="font-weight: 600;">
+                                        <span class="sidebar-company fw-semibold" style="line-height: 22px;">
                                             {{ $employer->company_name }}
                                         </span>
                                     </div>
