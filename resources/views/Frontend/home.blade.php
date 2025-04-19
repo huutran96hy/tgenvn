@@ -55,7 +55,7 @@
                                                     <img alt="{{ $employer->company_name }}"
                                                         class="img-fluid d-block mx-auto"
                                                         src="{{ \App\Helpers\CustomHelper::logoSrc($employer->logo) }}"
-                                                        width="100%" loading="lazy" />
+                                                        width="100%" decoding="async" loading="lazy" />
                                                 </div>
                                             </a>
                                         @endforeach

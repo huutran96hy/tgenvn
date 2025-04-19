@@ -10,10 +10,11 @@
 @section('content')
     <main class="main">
         @include('Frontend.snippets.notify_block')
-        <section class="section-box mt-70">
+        <section class="section-box mt-0 mt-md-5">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8 mb-40"><span class="font-md color-brand-2 mt-20 d-inline-block">Liên hệ</span>
+                    <div class="col-lg-8 mb-40">
+                        <span class="font-md color-brand-2 mt-20 d-inline-block">Liên hệ</span>
                         <h2 class="mt-5 mb-10">Kết nối với chúng tôi</h2>
                         <p class="font-md color-text-paragraph-2">Luôn luôn lắng nghe những ý kiến , đóng góp của bạn</p>
                         <form class="contact-form-style mt-30" id="contact-form" action="{{ route('contact.store') }}"
@@ -45,15 +46,16 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12">
-                                    <div class="textarea-style mb-30">
-                                        <textarea class="font-sm color-text-paragraph-2" name="message" placeholder="Gửi tin nhắn đến chúng tôi" required></textarea>
+                                    <div class="textarea-style mb-20">
+                                        <textarea class="font-sm color-text-paragraph-2 textarea-fix" name="message"
+                                            placeholder="Gửi tin nhắn đến chúng tôi"required></textarea>
                                     </div>
-                                    <button class="submit btn btn-send-message" type="submit">Gửi tin nhắn</button>
+                                    <button class="submit btn btn-send-message btn-send-message-fix" type="submit">
+                                        Gửi tin nhắn
+                                    </button>
                                 </div>
                             </div>
                         </form>
-
-                        <p class="form-messege"></p>
                     </div>
                     <div class="col-lg-4 text-center d-none d-lg-block">
                         <iframe

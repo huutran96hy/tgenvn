@@ -43,6 +43,13 @@
             width: 100%;
             z-index: 0;
         }
+
+        .icon-zalo {
+            background-image: url('{{ asset('uploads/Icon_of_Zalo.svg.webp') }}');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
     </style>
 </head>
 

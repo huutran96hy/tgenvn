@@ -17,7 +17,7 @@
                     @forelse ($banners as $banner)
                         <div class="swiper-slide">
                             <img src="{{ \App\Helpers\CustomHelper::logoSrc($banner) }}" alt="Banner"
-                                class="banner-img" loading="lazy">
+                                class="banner-img">
                         </div>
                     @empty
                         <div class="swiper-slide">

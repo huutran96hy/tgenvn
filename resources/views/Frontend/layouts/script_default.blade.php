@@ -22,7 +22,7 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         if (document.querySelector(".banner-swiper")) {
-            var swiper = new Swiper(".banner-swiper", {
+            new Swiper(".banner-swiper", {
                 loop: true,
                 autoplay: {
                     delay: 3000,
@@ -34,38 +34,36 @@
                 },
             });
         }
-    });
-</script>
 
-<script defer>
-    window.addEventListener('DOMContentLoaded', function() {
-        const swiper = new Swiper('.swiper-group-5', {
-            slidesPerView: 1,
-            spaceBetween: 20,
-            loop: true,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            autoplay: {
-                delay: 3000,
-                disableOnInteraction: false,
-            },
-            breakpoints: {
-                576: {
-                    slidesPerView: 2 // 576px trở lên, hiển thị 2 slide
+        if (document.querySelector(".swiper-group-5")) {
+            new Swiper(".swiper-group-5", {
+                slidesPerView: 1,
+                spaceBetween: 20,
+                loop: true,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
                 },
-                768: {
-                    slidesPerView: 3 // 768px trở lên, hiển thị 3 slide
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
                 },
-                992: {
-                    slidesPerView: 4 // 992px trở lên, hiển thị 4 slide
+                breakpoints: {
+                    576: {
+                        slidesPerView: 2
+                    },
+                    768: {
+                        slidesPerView: 3
+                    },
+                    992: {
+                        slidesPerView: 4
+                    },
+                    1200: {
+                        slidesPerView: 5
+                    },
                 },
-                1200: {
-                    slidesPerView: 5 // 1200px trở lên, hiển thị 5 slide
-                },
-            },
-        });
+            });
+        }
     });
 </script>
 

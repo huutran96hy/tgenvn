@@ -1,16 +1,16 @@
 <footer class="footer pt-50" style="background: #265c77;">
     <div class="container">
         <div class="row" style="background: #ffff;border-radius: 8px;padding: 10px;margin:0;">
-            <div class="footer-col-8 col-md-4 col-sm-12 mr-20">
+            <div class="footer-col-8 col-md-4 col-sm-12 mr-20 d-flex align-items-center justify-content-center">
                 <a href="{{ route('index') }}">
-                    <img alt="logo" src="{{ asset(\App\Models\Config::getLogo()) }}" style="width:80px;height:auto" />
+                    <img alt="logo" src="{{ asset(\App\Models\Config::getLogo()) }}" style="width:100px;height:auto" />
                 </a>
-                <div class="mt-20 mb-20 font-xs color-text-paragraph-2">
+                {{-- <div class="mt-20 mb-20 font-xs color-text-paragraph-2">
                     Công ty cổ phần FDI Work thành lập năm 2025. Với sự kết
                     hợp giữa các kỹ sư công nghệ và đội ngũ chuyên gia giàu kinh
                     nghiệm, chúng tôi tự hào mang đến cho khách hàng các
                     dịch vụ chất lượng cao.
-                </div>
+                </div> --}}
             </div>
             <div class="footer-col-6 col-md-4 col-xs-6">
                 <h6 class="mb-20">Tin tức</h6>
@@ -38,9 +38,10 @@
             <div class="footer-col-6 col-md-4 col-xs-6">
                 <h6 class="mb-20">Liên kết</h6>
                 <div class="footer-social">
-                    <a class="icon-socials icon-facebook" href="#" aria-label="Facebook"></a>
+                    {{-- <a class="icon-socials icon-facebook" href="#" aria-label="Facebook"></a>
                     <a class="icon-socials icon-twitter" href="#" aria-label="Twitter"></a>
-                    <a class="icon-socials icon-linkedin" href="#" aria-label="Linkedin"></a>
+                    <a class="icon-socials icon-linkedin" href="#" aria-label="Linkedin"></a> --}}
+                    <a class="icon-socials icon-zalo" aria-label="Zalo" target="_blank"></a>
                 </div>
                 </ul>
             </div>
