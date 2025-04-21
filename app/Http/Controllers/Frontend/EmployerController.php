@@ -96,6 +96,14 @@ class EmployerController extends Controller
             ->latest('created_at')
             ->paginate(2);
 
+        // Ajax request
+        if (request()->ajax()) {
+            return response()->json([
+                'html' => view('Frontend.partials.latest_job_items', compact('latestJobs'))->render(),
+                'pagination' => $latestJobs->links('Frontend.pagination.custom')->toHtml(),
+            ]);
+        }
+
         return view('Frontend.pages.employer_detail', compact('employer', 'latestJobs'));
     }
 

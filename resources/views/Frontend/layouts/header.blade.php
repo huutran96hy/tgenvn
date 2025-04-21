@@ -13,10 +13,12 @@
                         <li class="{{ Request::routeIs('index') ? 'tab-link-fix' : '' }}">
                             <a href="{{ route('index') }}">Trang chủ</a>
                         </li>
-                        <li class="{{ request()->routeIs('jobs.best') ? 'tab-link-fix' : '' }}">
+                        <li
+                            class="{{ request()->routeIs('jobs.best') || $isHotTabActive === 'best' ? 'tab-link-fix' : '' }}">
                             <a href="{{ route('jobs.best') }}">Việc làm tốt nhất</a>
                         </li>
-                        <li class="{{ request()->routeIs('jobs.suggested') ? 'tab-link-fix' : '' }}">
+                        <li
+                            class="{{ request()->routeIs('jobs.suggested') || $isHotTabActive === 'suggested' ? 'tab-link-fix' : '' }}">
                             <a href="{{ route('jobs.suggested') }}">Việc làm gợi ý</a>
                         </li>
                         <li class="{{ request()->routeIs('employers.top') ? 'tab-link-fix' : '' }}">

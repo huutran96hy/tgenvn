@@ -139,71 +139,19 @@
                         @if ($latestJobs->count())
                             <div class="box-related-job content-page">
                                 <h5 class="mb-30">Công việc mới nhất</h5>
-                                <div class="box-list-jobs display-list">
-                                    <div class="row">
-                                        @foreach ($latestJobs as $job)
-                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                                <div class="card-grid-2 hover-up">
-                                                    <span class="flash"></span>
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <div class="card-grid-2-image-left">
-                                                                <div class="image-box">
-                                                                    <img src="{{ \App\Helpers\CustomHelper::logoSrc($job->employer->logo) }}"
-                                                                        alt="{{ $job->job_title }}" class="img-box-fix">
-                                                                </div>
-                                                                <div class="right-info">
-                                                                    <a class="name-job"
-                                                                        href="{{ route('job_detail.show', $job->slug) }}">
-                                                                        {{ $job->job_title }}
-                                                                    </a>
-                                                                    <span class="location-small">
-                                                                        {{ $job->province->name ?? $job->location }}
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-block-info">
-                                                        <h4 style="font-weight: 600;font-size: 18px">
-                                                            <a href="{{ route('job_detail.show', $job->slug) }}">
-                                                                {{ $job->job_title }}
-                                                            </a>
-                                                        </h4>
-                                                        <div class="mt-5">
-                                                            @if (!empty($job->job_type))
-                                                                <span class="card-briefcase">{{ $job->job_type }}</span>
-                                                            @endif
-                                                            <span
-                                                                class="card-time">{{ $job->created_at->diffForHumans() }}</span>
-                                                        </div>
-                                                        <p class="font-sm color-text-paragraph mt-10">
-                                                            {!! Str::words(preg_replace('/<img[^>]+>/i', '', $job->requirements), 10, '...') !!}
-                                                        </p>
-                                                        <div class="card-2-bottom mt-20">
-                                                            <div class="row">
-                                                                <div class="col-7">
-                                                                    <span class="card-text-price">Lương:</span>
-                                                                    <span class="text-muted">
-                                                                        {{ \App\Helpers\NumberHelper::formatSalary($job->salary) }}
-                                                                        <span>/Tháng</span>
-                                                                    </span>
-                                                                </div>
-                                                                <div class="col-5 text-end">
-                                                                    <a class="btn btn-apply-now"
-                                                                        href="{{ route('job_detail.show', $job->slug) }}">Xem</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
 
-                                <div class="paginations">
-                                    {{ $latestJobs->appends(request()->query())->links('Frontend.pagination.custom') }}
+                                <div class="box-list-jobs display-list" id="latest-job-wrapper">
+                                    {{-- Danh sách công việc --}}
+                                    <div class="row" id="job-list">
+                                        @include('Frontend.partials.latest_job_items', [
+                                            'latestJobs' => $latestJobs,
+                                        ])
+                                    </div>
+
+                                    {{-- Phân trang --}}
+                                    <div class="paginations" id="pagination">
+                                        {{ $latestJobs->links('Frontend.pagination.custom') }}
+                                    </div>
                                 </div>
                             </div>
                         @endif
@@ -276,3 +224,35 @@
         </section>
     </main>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            // Phân trang
+            $(document).on('click', '.paginations a', function(e) {
+                e.preventDefault();
+                const url = $(this).attr('href');
+                if (!url || url === '#') return;
+
+                loadJobs(url);
+            });
+
+            function loadJobs(url) {
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function(response) {
+                        $('#job-list').html(response.html);
+                        $('#pagination').html(response.pagination);
+
+                        //Update URL
+                        window.history.pushState({}, '', url);
+                    },
+                    error: function() {
+                        alert('Có lỗi xảy ra, vui lòng thử lại.');
+                    }
+                });
+            }
+        });
+    </script>
+@endpush

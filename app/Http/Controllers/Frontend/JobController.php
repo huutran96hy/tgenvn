@@ -68,7 +68,7 @@ class JobController extends Controller
         // Lấy danh sách job đã lọc và sắp xếp
         $jobs = $query->paginate($perPage)->appends($request->query());
 
-        // Ajax
+        // Ajax request
         if ($request->ajax()) {
             $jobs->appends($request->query());
 
