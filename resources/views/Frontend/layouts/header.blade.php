@@ -71,7 +71,7 @@
             <div class="perfect-scroll">
                 <div class="mobile-menu-wrap mobile-header-border">
                     <nav>
-                        <ul class="mobile-menu font-heading">
+                        <ul class="mobile-menu font-heading menu-mobile-fix">
                             <li>
                                 <a class="{{ Request::routeIs('index') ? 'active' : '' }}"
                                     href="{{ route('index') }}">Trang chủ</a>
@@ -85,7 +85,7 @@
                             <li class="{{ request()->routeIs('employers.top') ? 'active' : '' }}">
                                 <a href="{{ route('employers.top') }}">Công ty hàng đầu</a>
                             </li>
-                            <li>
+                            <li style="height: 40px">
                                 <a class="{{ Request::routeIs('news.*') ? 'active' : '' }}"
                                     href="{{ route('news.index') }}">Thông tin chia sẻ</a>
                             </li>
@@ -93,7 +93,7 @@
                     </nav>
                 </div>
 
-                <div class="mobile-search mt-3">
+                <div class="mobile-search mt-2">
                     <form method="GET" id="mobileSearchForm" class="d-grid gap-2">
                         <div class="d-flex gap-2">
                             <input class="form-control flex-grow-1" type="text" name="keyword"

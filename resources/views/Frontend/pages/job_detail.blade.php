@@ -22,9 +22,12 @@
                                     <div class="sidebar-info">
                                         <span class="sidebar-company fw-semibold"
                                             style="letter-spacing: 0.05em; line-height: 22px;">
-                                            {{ $job->employer->company_name }}
+                                            <a href="{{ route('employers.show', $job->employer->slug) }}">
+                                                {{ $job->employer->company_name }}
+                                            </a>
                                         </span>
-                                        <span class="card-location location-fix">{{ $job->employer->address }}</span>
+                                        <span class="card-location location-fix">{{ $job->employer->address }}
+                                        </span>
                                         <a class="link-underline mt-15"
                                             href="{{ route('employers.show', $job->employer->slug) }}">
                                             {{ $employer->jobs_count }}

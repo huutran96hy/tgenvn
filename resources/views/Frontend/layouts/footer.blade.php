@@ -13,7 +13,7 @@
                 </div> --}}
             </div>
             <div class="footer-col-6 col-md-4 col-xs-6">
-                <h6 class="mb-20">Tin tức</h6>
+                <h6 class="mb-20">Thông tin chia sẻ</h6>
                 <ul class="menu-footer">
                     @foreach ($latestNews as $news)
                         <li>
@@ -29,10 +29,10 @@
                 <h6 class="mb-20">Liên kết</h6>
                 <ul class="menu-footer">
                     <li><a href="{{ route('index') }}">Trang chủ</a></li>
-                    <li><a href="{{ route('jobs.index') }}">Tuyển dụng</a></li>
-                    <li><a href="{{ route('employers.index') }}">Công ty</a></li>
-                    <li><a href="{{ route('news.index') }}">Tin Tức</a></li>
-                    {{-- <li><a href="{{ route('index') }}">Liên hệ</a></li> --}}
+                    <li><a href="{{ route('jobs.best') }}">Việc làm tốt nhất</a></li>
+                    <li><a href="{{ route('jobs.suggested') }}">Việc làm gợi ý</a></li>
+                    <li><a href="{{ route('employers.top') }}">Công ty hàng đầu</a></li>
+                    <li><a href="{{ route('news.index') }}">Thông tin chia sẻ</a></li>
                 </ul>
             </div>
             <div class="footer-col-6 col-md-4 col-xs-6">

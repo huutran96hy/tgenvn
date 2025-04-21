@@ -5,9 +5,8 @@
                 <span class="flash {{ $job->is_hot == 'yes' ? '' : 'd-none' }}">
                 </span>
                 <div class="image-box">
-                    <img src="{{ \App\Helpers\CustomHelper::logoSrc($job->employer->logo) }}"
-                        alt="{{ $job->employer->company_name }}"
-                        style="width: 100px; height: 100px;border-radius:8px; object-fit:contain;background:#ffff; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;">
+                    <img src="{{ $job->employer->logo_url }}" alt="{{ $job->employer->company_name }}"
+                        class="img-box-fix">
                 </div>
                 <div class="right-info">
                     <a class="name-job name-fix ellipsis" href="{{ route('job_detail.show', $job->slug) }}">

@@ -50,7 +50,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::resource('candidates', CandidateController::class);
         Route::resource('skills', SkillController::class);
-        Route::resource('contacts', ContactController::class)->only(['index', 'destroy']);
+        Route::resource('contacts', ContactController::class)->only(['index', 'destroy','show']);
         Route::resource('configs', ConfigController::class);
         Route::delete('/delete-banner', [ConfigController::class, 'deleteBanner'])->name('configs.deleteBanner');
         Route::resource('company-position', CompanyPositionController::class);

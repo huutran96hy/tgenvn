@@ -74,7 +74,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="box-nav-tabs mt-3 mt-md-5 mb-5">
+                <div class="box-nav-tabs mt-3 mt-md-1 mb-5">
                     <ul class="nav nav-fix" role="tablist">
                         <li>
                             <a class="btn btn-border aboutus-icon mr-15 mb-5 active tablist-fix" href="#tab-about"
@@ -150,8 +150,7 @@
                                                             <div class="card-grid-2-image-left">
                                                                 <div class="image-box">
                                                                     <img src="{{ \App\Helpers\CustomHelper::logoSrc($job->employer->logo) }}"
-                                                                        alt="{{ $job->job_title }}"
-                                                                        style="width: 100px; height: 100px;border-radius:8px; object-fit:contain;background:#ffff; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;">
+                                                                        alt="{{ $job->job_title }}" class="img-box-fix">
                                                                 </div>
                                                                 <div class="right-info">
                                                                     <a class="name-job"
@@ -231,18 +230,23 @@
                             <div class="sidebar-list-job">
                                 <ul>
                                     <li>
-                                        <div class="sidebar-icon-item"><i class="fi-rr-briefcase"></i></div>
+                                        <div class="sidebar-icon-item">
+                                            <i class="fi-rr-briefcase"></i>
+                                        </div>
                                         <div class="sidebar-text-info">
                                             <span class="text-description">Lĩnh vực công ty</span>
-                                            <strong class="small-heading">{{ $employer->company_type }}
+                                            <strong class="small-heading fw-semibold">{{ $employer->company_type }}
                                             </strong>
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="sidebar-icon-item"><i class="fi-rr-marker"></i></div>
+                                        <div class="sidebar-icon-item">
+                                            <i class="fi-rr-marker"></i>
+                                        </div>
                                         <div class="sidebar-text-info">
                                             <span class="text-description">Địa chỉ</span>
-                                            <strong class="small-heading">{{ $employer->address }}</strong>
+                                            <strong class="small-heading fw-semibold">{{ $employer->address }}
+                                            </strong>
                                         </div>
                                     </li>
                                     <li>
@@ -251,7 +255,7 @@
                                             <span class="text-description">
                                                 Ngày thành lập
                                             </span>
-                                            <strong class="small-heading">
+                                            <strong class="small-heading fw-semibold">
                                                 {{ $employer->founded_at ? \Carbon\Carbon::parse($employer->founded_at)->format('d/m/Y') : '' }}
                                             </strong>
                                         </div>

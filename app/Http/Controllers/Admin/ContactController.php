@@ -24,6 +24,13 @@ class ContactController extends Controller
 
         return view('Admin.pages.contacts.index', compact('contacts'));
     }
+    /**
+     * Hiển thị chi tiết liên hệ.
+     */
+    public function show(Contact $contact)
+    {
+        return view('Admin.pages.contacts.add_edit', compact('contact'));
+    }
 
     /**
      * Xóa liên hệ.

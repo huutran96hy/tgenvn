@@ -33,7 +33,8 @@
                             <td>{{ $contact->phone ?? 'Không có' }}</td>
                             <td>{{ $contact->subject }}</td>
                             <td class="text-center">
-                                <x-action-dropdown deleteRoute="admin.contacts.destroy" :id="$contact->contact_id" />
+                                <x-action-dropdown editRoute="admin.contacts.show" deleteRoute="admin.contacts.destroy"
+                                    :id="$contact->contact_id" />
                             </td>
                         </tr>
                     @endforeach
