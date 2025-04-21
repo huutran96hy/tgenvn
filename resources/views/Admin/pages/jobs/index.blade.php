@@ -51,7 +51,7 @@
                 <div id="alert-container" class="mb-3"></div>
 
                 <div id="bulk-actions" class="mb-3 d-flex flex-wrap align-items-center gap-2">
-                    <select id="bulk-status" class="form-select" style="min-width: 200px;">
+                    <select id="bulk-status" class="form-select" style="max-width:300px">
                         <option value="">-- Cập nhật trạng thái --</option>
                         <option value="pending">Chờ duyệt</option>
                         <option value="approved">Đã duyệt</option>
@@ -62,7 +62,7 @@
                     <button class="btn btn-danger" id="btn-bulk-delete">Xóa</button>
                 </div>
 
-                <x-table-wrapper-cms :headers="['', 'Tiêu đề', 'Danh mục', 'Loại công việc', 'Trạng thái', 'Hành động']">
+                <x-table-wrapper-cms :headers="['Tiêu đề', 'Danh mục', 'Loại công việc', 'Trạng thái', 'Hành động']" :showCheckbox="true">
                     @foreach ($jobs as $job)
                         <tr>
                             <td><input type="checkbox" class="job-checkbox" value="{{ $job->job_id }}"></td>

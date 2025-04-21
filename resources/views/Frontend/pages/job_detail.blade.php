@@ -17,8 +17,7 @@
                             <div class="sidebar-heading">
                                 <div class="avatar-sidebar">
                                     <figure>
-                                        <img alt="{{ $job->employer->company_name }}"
-                                            src="{{ $job->employer->getLogoUrl() }}">
+                                        <img alt="{{ $job->employer->company_name }}" src="{{ $job->employer->logo_url }}">
                                     </figure>
                                     <div class="sidebar-info">
                                         <span class="sidebar-company fw-semibold"
@@ -36,18 +35,24 @@
                             </div>
                             <div class="sidebar-list-job">
                                 <div class="box-map">
-                                    @if ($job->employer->map_url)
-                                        {!! $job->employer->map_url !!}
-                                    @endif
+                                    {!! \App\Helpers\CustomHelper::safeMapHtml($job->employer->map_url) !!}
                                 </div>
                                 <ul class="ul-disc">
                                     @php
                                         $address = $job->location;
                                         $province = optional($job->province)->name;
+
+                                        if ($address && $province) {
+                                            // Cắt tỉnh ở cuối chuỗi
+                                            $pattern = '/,\s*' . preg_quote($province, '/') . '\s*$/iu';
+
+                                            $address = preg_replace($pattern, '', $address);
+                                        }
                                     @endphp
 
                                     @if ($address || $province)
-                                        <li>{{ $address }}{{ $address && $province ? ', ' : '' }}{{ $province }}
+                                        <li>
+                                            {{ trim($address) }}{{ $address && $province ? ', ' : '' }}{{ $province }}
                                         </li>
                                     @endif
                                     <li>SĐT: +{{ $job->employer->contact_phone }}</li>
@@ -67,9 +72,9 @@
                                             <div class="card-list-4 wow animate__animated animate__fadeIn hover-up">
                                                 <div class="image">
                                                     <a href="{{ $detailUrl }}">
-                                                        <img src="{{ $randomJob->employer->getLogoUrl() }}"
-                                                            alt="{{ $randomJob->job_title }}" class="img-fluid"
-                                                            style="width: 50px; height: auto;" loading="lazy" />
+                                                        <img alt="{{ $randomJob->employer->company_name }}"
+                                                            src="{{ $randomJob->employer->logo_url }}" class="img-fluid"
+                                                            style="width: 50px; height: auto;" loading="lazy">
                                                     </a>
                                                 </div>
                                                 <div class="info-text">

@@ -18,17 +18,17 @@
                         <div class="col-12 col-md-4">
                             <x-clearable-input name="search" placeholder="Tìm kiếm theo tên công ty" :value="request('search')" />
                         </div>
-                        <div class="col-12col-md-2">
+                        <div class="col-12 col-md-2">
                             <button type="submit" class="btn btn-primary w-100">Tìm kiếm</button>
                         </div>
                     </div>
                 </form>
 
-                <x-table-wrapper-cms :headers="['Công ty', 'Website', 'Liên hệ', 'Hành động']">
+                <x-table-wrapper-cms :headers="['Công ty', 'Email', 'Liên hệ', 'Hành động']">
                     @foreach ($employers as $employer)
                         <tr>
                             <td>{{ Str::words($employer->company_name, 5) }}</td>
-                            <td>{{ $employer->website ?? 'N/A' }}</td>
+                            <td>{{ $employer->email ?? 'N/A' }}</td>
                             <td>{{ $employer->contact_phone }}</td>
                             <td class="text-center">
                                 <x-action-dropdown editRoute="admin.employers.edit" deleteRoute="admin.employers.destroy"

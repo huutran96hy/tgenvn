@@ -17,11 +17,12 @@
                     @forelse ($banners as $banner)
                         <div class="swiper-slide">
                             <img src="{{ \App\Helpers\CustomHelper::logoSrc($banner) }}" alt="Banner"
-                                class="banner-img">
+                                class="banner-img" rel="preload" fetchpriority="high">
                         </div>
                     @empty
                         <div class="swiper-slide">
-                            <img src="{{ asset('uploads/banner_thumb01.jpg') }}" alt="Banner" class="banner-img">
+                            <img src="{{ asset('uploads/banner_thumb01.jpg') }}" alt="Banner" class="banner-img"
+                                rel="preload" fetchpriority="high">
                         </div>
                     @endforelse
                 </div>

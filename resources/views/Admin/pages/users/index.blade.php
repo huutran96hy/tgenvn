@@ -15,7 +15,7 @@
             <div class="card-body">
                 <form action="{{ route('admin.users.index') }}" method="GET" class="mb-3">
                     <div class="row g-2">
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-3">
                             <x-clearable-input name="search" placeholder="Tìm kiếm theo tên" :value="request('search')" />
                         </div>
                         <div class="col-12 col-md-3">

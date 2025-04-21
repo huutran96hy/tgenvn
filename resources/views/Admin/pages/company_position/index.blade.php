@@ -18,7 +18,7 @@
                         <div class="col-12 col-md-4">
                             <x-clearable-input name="search" placeholder="Tìm kiếm theo tên vị trí" :value="request('search')" />
                         </div>
-                        <div class="col-12 col-md-3">
+                        <div class="col-12 col-md-2">
                             <button type="submit" class="btn btn-primary w-100">Tìm kiếm</button>
                         </div>
                     </div>

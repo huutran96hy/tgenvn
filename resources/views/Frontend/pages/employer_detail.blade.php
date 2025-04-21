@@ -224,7 +224,7 @@
                             @if ($employer->map_url)
                                 <div class="sidebar-list-job">
                                     <div class="box-map">
-                                        {!! $employer->map_url !!}
+                                        {!! \App\Helpers\CustomHelper::safeMapHtml($employer->map_url) !!}
                                     </div>
                                 </div>
                             @endif

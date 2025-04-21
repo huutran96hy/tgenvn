@@ -41,15 +41,13 @@ class Employer extends Model
         return $this->hasMany(Job::class, 'employer_id');
     }
 
-    public function getLogoUrl()
+    public function getLogoUrlAttribute()
     {
-        if ($this->logo && file_exists(public_path('storage/' . $this->logo))) {
-            return asset('storage/' . $this->logo);
-        }
-
-        // Trả về logo mặc định nếu không có logo
-        return asset('assets/imgs/template/logo.svg');
+        return $this->logo
+            ? \App\Helpers\CustomHelper::logoSrc($this->logo)
+            : asset('assets/imgs/template/logo.svg');
     }
+
     public function getFoundedAtAttribute($value)
     {
         return Carbon::parse($value)->format('d-m-Y');
