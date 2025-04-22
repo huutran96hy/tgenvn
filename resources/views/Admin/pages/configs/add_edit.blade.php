@@ -28,7 +28,12 @@
                                     </td>
                                 </tr>
 
-                                @if ($config->key === 'banners')
+                                @php
+                                    $key = $config->key;
+                                    $value = $config->value;
+                                @endphp
+
+                                @if ($key === 'banners')
                                     <tr>
                                         <th>Banners</th>
                                         <td>
@@ -36,9 +41,9 @@
                                                 <input type="file" name="banners[]" class="file-input" multiple
                                                     accept="image/*" id="bannersInput">
 
-                                                @if (!empty($config->value))
+                                                @if (!empty($value))
                                                     @php
-                                                        $banners = json_decode($config->value, true);
+                                                        $banners = json_decode($value, true);
                                                     @endphp
 
                                                     <div class="mt-4">
@@ -69,40 +74,20 @@
                                             </div>
                                         </td>
                                     </tr>
-                                @elseif($config->key === 'logo')
+                                @elseif(in_array($key, ['logo', 'icon']))
                                     <tr>
-                                        <th>Logo</th>
+                                        <th>{{ ucfirst($key) }}</th>
                                         <td>
-                                            <div class="mb-3">
-                                                <input type="file" name="logo" class="form-control" accept="image/*"
-                                                    id="logoInput">
+                                            <input type="file" name="{{ $key }}" class="form-control"
+                                                accept="image/*">
 
-                                                @if (!empty($config->value))
-                                                    <div class="mt-3">
-                                                        <label>Logo hiện tại:</label>
-                                                        <img src="{{ asset('storage/' . $config->value) }}"
-                                                            class="img-fluid" style="width:100px" />
-                                                    </div>
-                                                @endif
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @elseif($config->key === 'icon')
-                                    <tr>
-                                        <th>Icon</th>
-                                        <td>
-                                            <div class="mb-3">
-                                                <input type="file" name="icon" class="form-control" accept="image/*"
-                                                    id="iconInput">
-
-                                                @if (!empty($config->value))
-                                                    <div class="mt-3">
-                                                        <label>Icon hiện tại:</label>
-                                                        <img src="{{ asset('storage/' . $config->value) }}"
-                                                            class="img-fluid" style="width:100px" />
-                                                    </div>
-                                                @endif
-                                            </div>
+                                            @if (!empty($value))
+                                                <div class="mt-3">
+                                                    <label>{{ ucfirst($key) }} hiện tại:</label><br>
+                                                    <img src="{{ asset('storage/' . $value) }}" alt="{{ $key }}"
+                                                        class="img-fluid" style="width: 100px;">
+                                                </div>
+                                            @endif
                                         </td>
                                     </tr>
                                 @else
@@ -111,7 +96,7 @@
                                         <td>
                                             <div class="mb-3">
                                                 <input type="text" name="value" class="form-control"
-                                                    value="{{ $config->value }}">
+                                                    value="{{ $value }}">
                                             </div>
                                         </td>
                                     </tr>

@@ -16,15 +16,14 @@ class ConfigSeeder extends Seeder
             ['key' => 'banners', 'value' => null],
             ['key' => 'logo', 'value' => null],
             ['key' => 'icon', 'value' => null],
+            ['key' => 'zalo', 'value' => null],
         ];
 
         foreach ($configs as $config) {
-            DB::table('config')->insert([
-                'key' => $config['key'],
-                'value' => $config['value'],
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            DB::table('config')->updateOrInsert(
+                ['key' => $config['key']],
+                ['value' => $config['value'], 'updated_at' => now(), 'created_at' => now()]
+            );
         }
     }
 }

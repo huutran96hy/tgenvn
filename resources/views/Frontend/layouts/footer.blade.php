@@ -41,7 +41,9 @@
                     {{-- <a class="icon-socials icon-facebook" href="#" aria-label="Facebook"></a>
                     <a class="icon-socials icon-twitter" href="#" aria-label="Twitter"></a>
                     <a class="icon-socials icon-linkedin" href="#" aria-label="Linkedin"></a> --}}
-                    <a class="icon-socials icon-zalo" href="#" aria-label="Zalo"></a>
+                    <a class="icon-socials icon-zalo" target="_blank" href="{{ \App\Models\Config::get('zalo', '#') }}"
+                        aria-label="Zalo">
+                    </a>
                 </div>
                 </ul>
             </div>
