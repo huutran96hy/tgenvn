@@ -115,7 +115,6 @@
                                         </div>
                                     </div>
                                 @endforeach
-
                             </div>
                             <div class="paginations">
                                 {{ $news->appends(request()->query())->links('Frontend.pagination.custom') }}
@@ -152,11 +151,15 @@
                                 </div>
                             </div> --}}
 
-                            <div class="sidebar-border-bg bg-right"><span class="text-grey">ỨNG VIÊN CẦN</span><span
-                                    class="text-hiring">CHÚNG TÔI CÓ</span>
-                                <h4 class="font-xs color-text-paragraph mt-5">Giúp ứng viên nhanh chóng tìm công việc phù
-                                    hợp</h4>
-                                <div class="mt-15"><a class="btn btn-paragraph-2" href="#">Tìm hiểu thêm</a></div>
+                            <div class="sidebar-border-bg bg-right">
+                                <span class="text-grey">ỨNG VIÊN CẦN</span>
+                                <span class="text-hiring">CHÚNG TÔI CÓ</span>
+                                <h4 class="font-xs color-text-paragraph mt-5">
+                                    Giúp ứng viên nhanh chóng tìm công việc phù hợp
+                                </h4>
+                                <div class="mt-15">
+                                    <a class="btn btn-paragraph-2" href="#">Tìm hiểu thêm</a>
+                                </div>
                             </div>
                         </div>
                     </div>

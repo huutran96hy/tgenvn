@@ -491,6 +491,10 @@
     .textarea-fix {
         min-height: 150px;
     }
+
+    .section-box .bg-news-fix {
+        max-height: 200px;
+    }
 }
 
 @media (max-width: 1230px) {

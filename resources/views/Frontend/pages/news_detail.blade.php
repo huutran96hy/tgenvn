@@ -11,7 +11,7 @@
     <main class="main">
         <section class="section-box">
             <div>
-                <img class="cover-image-post" src="{{ \App\Helpers\CustomHelper::logoSrc($news->images) }}"
+                <img class="cover-image-post bg-news-fix" src="{{ \App\Helpers\CustomHelper::logoSrc($news->images) }}"
                     alt="{{ $news->title }}" />
             </div>
         </section>
@@ -56,30 +56,56 @@
                                     {!! $news->content !!}
                                 </div>
                             </div>
+
+                            <div class="single-apply-jobs mt-20">
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <a class="btn btn-border-3 mr-10 hover-up" href="#">
+                                            # {{ $news->category->category_name }}
+                                        </a>
+                                    </div>
+                                    {{-- <div class="col-md-5 text-lg-end social-share">
+                                        <h6 class="color-text-paragraph-2 d-inline-block d-baseline mr-20 mt-10">
+                                            Chia sẻ
+                                        </h6>
+                                        <a class="mr-20 d-inline-block d-middle hover-up" href="#">
+                                            <img alt="jobBox" src="assets/imgs/page/blog/fb.svg" />
+                                        </a>
+                                    </div> --}}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                @if ($relatedNews->isNotEmpty())
-                    <div class="related-posts">
-                        <h3 class="mt-50">Bài viết liên quan</h3>
-                        <div class="row">
+                {{-- @if ($relatedNews->isNotEmpty())
+                    <div class="related-posts mt-5">
+                        <h3 class="mb-4 fw-bold">📰 Bài viết liên quan</h3>
+                        <div class="row g-4">
                             @foreach ($relatedNews as $related)
-                                <div class="col-md-4">
-                                    <div class="related-item">
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="card border-0 h-100 shadow-sm rounded-4 overflow-hidden">
                                         <a href="{{ route('news.show', $related->slug) }}">
-                                            <img src="{{ \App\Helpers\CustomHelper::logoSrc($related->image) }}"
-                                                alt="{{ $related->title }}">
+                                            <div class="ratio ratio-16x9">
+                                                <img src="{{ \App\Helpers\CustomHelper::logoSrc($related->images) }}"
+                                                    alt="{{ $related->title }}"
+                                                    class="img-fluid object-fit-cover w-100 h-100">
+                                            </div>
                                         </a>
-                                        <h4>
-                                            <a href="{{ route('news.show', $related->slug) }}">{{ $related->title }}</a>
-                                        </h4>
+                                        <div class="card-body">
+                                            <h6 class="card-title fw-semibold">
+                                                <a href="{{ route('news.show', $related->slug) }}"
+                                                    class="text-dark text-decoration-none">
+                                                    {{ Str::limit($related->title, 80) }}
+                                                </a>
+                                            </h6>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                     </div>
-                @endif
+                @endif --}}
             </div>
         </div>
     </main>
