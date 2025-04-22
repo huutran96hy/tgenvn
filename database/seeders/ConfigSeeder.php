@@ -20,10 +20,12 @@ class ConfigSeeder extends Seeder
         ];
 
         foreach ($configs as $config) {
-            DB::table('config')->updateOrInsert(
-                ['key' => $config['key']],
-                ['value' => $config['value'], 'updated_at' => now(), 'created_at' => now()]
-            );
+            DB::table('config')->insertOrIgnore([
+                'key' => $config['key'],
+                'value' => $config['value'],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
         }
     }
 }
