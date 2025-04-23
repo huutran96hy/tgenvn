@@ -2,6 +2,11 @@
 
 @section('pageTitle', 'Công việc')
 
+{{-- @push('meta')
+    <script src="{{ asset('assets/js/extra_noty.js') }}"></script>
+    <script src="{{ asset('assets/js/noty.min.js') }}"></script>
+@endpush --}}
+
 @section('content')
     @include('Admin.snippets.page_header')
 
@@ -70,7 +75,7 @@
                             <td>{{ $job->category->category_name ?? 'Không có' }}</td>
                             <td>{{ $job->job_type }}</td>
                             {{-- <td>{{ \App\Helpers\NumberHelper::formatSalary($job->salary) }}</td> --}}
-                            <td class="text-center">
+                            <td>
                                 <div class="dropdown">
                                     <button
                                         class="btn btn-sm dropdown-toggle 
@@ -103,7 +108,7 @@
                                     </ul>
                                 </div>
                             </td>
-                            <td class="text-center">
+                            <td>
                                 <x-action-dropdown editRoute="admin.jobs.edit" deleteRoute="admin.jobs.destroy"
                                     :id="$job->job_id" />
                             </td>

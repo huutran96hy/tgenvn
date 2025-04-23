@@ -21,7 +21,7 @@
                             class="{{ request()->routeIs('jobs.suggested') || $isHotTabActive === 'suggested' ? 'tab-link-fix' : '' }}">
                             <a href="{{ route('jobs.suggested') }}">Việc làm gợi ý</a>
                         </li>
-                        <li class="{{ request()->routeIs('employers.top') ? 'tab-link-fix' : '' }}">
+                        <li class="{{ Request::routeIs('employers.*') ? 'tab-link-fix' : '' }}">
                             <a href="{{ route('employers.top') }}">Công ty hàng đầu</a>
                         </li>
                         <li class="{{ Request::routeIs('news.*') ? 'tab-link-fix' : '' }}">

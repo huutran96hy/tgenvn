@@ -153,8 +153,9 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
+            // Sorting
             $('.dropdown-item').on('click', function(event) {
-                event.preventDefault(); // Ngăn chặn load trang
+                event.preventDefault();
                 let url = $(this).attr('href');
 
                 $.ajax({

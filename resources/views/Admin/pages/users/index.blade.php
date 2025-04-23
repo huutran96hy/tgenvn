@@ -23,14 +23,14 @@
                                 <option value="">Tất cả vai trò</option>
                                 <option value="admin" {{ request('role') == 'admin' ? 'selected' : '' }}>Quản trị viên
                                 </option>
+                                <option value="content_manager"
+                                    {{ request('role') == 'content_manager' ? 'selected' : '' }}>
+                                    Quản lý nội dung
+                                </option>
                                 <option value="candidate" {{ request('role') == 'candidate' ? 'selected' : '' }}>Ứng viên
                                 </option>
                                 <option value="employer" {{ request('role') == 'employer' ? 'selected' : '' }}>Nhà tuyển
                                     dụng
-                                </option>
-                                <option value="content_manager"
-                                    {{ request('role') == 'content_manager' ? 'selected' : '' }}>
-                                    Người quản lý nội dung
                                 </option>
                             </select>
                         </div>

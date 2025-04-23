@@ -46,7 +46,9 @@
                             </span>
                         </div>
                         <div class="col-5 text-end">
-                            <a class="btn btn-apply-now" href="{{ route('job_detail.show', $job->slug) }}">Xem</a>
+                            <a class="btn btn-apply-now" href="{{ route('job_detail.show', $job->slug) }}">
+                                Xem
+                            </a>
                         </div>
                     </div>
                 </div>

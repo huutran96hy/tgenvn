@@ -96,7 +96,8 @@
                                         <td>
                                             <div class="mb-3">
                                                 <input type="text" name="value" class="form-control"
-                                                    value="{{ $value }}">
+                                                    value="{{ $value }}"
+                                                    placeholder="Nhập link Zalo của bạn vào đây">
                                             </div>
                                         </td>
                                     </tr>

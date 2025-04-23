@@ -5,8 +5,7 @@
                 <span class="flash {{ $job->is_hot == 'yes' ? '' : 'd-none' }}">
                 </span>
                 <div class="image-box">
-                    <img src="{{ $job->employer->logo_url }}" alt="{{ $job->employer->company_name }}"
-                        class="img-box-fix">
+                    <img src="{{ $job->employer->logo_url }}" alt="{{ $job->employer->company_name }}" class="img-box-fix">
                 </div>
                 <div class="right-info">
                     <a class="name-job name-fix ellipsis" href="{{ route('job_detail.show', $job->slug) }}">

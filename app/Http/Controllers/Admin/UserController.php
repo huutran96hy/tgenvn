@@ -15,14 +15,14 @@ class UserController extends Controller
 
         $query = User::query();
 
-        // Lọc theo tên hoặc email
+        // Lọc theo username 
         if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
                 $q->where('username', 'like', "%{$request->search}%");
             });
         }
 
-        // Lọc theo vai trò (role)
+        // Lọc theo role
         if ($request->filled('role')) {
             $query->where('role', $request->role);
         }
@@ -75,6 +75,11 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email,' . $user->id,
             'role' => 'required',
         ]);
+
+        // Không đc sửa role của Admin chính (ID = 1)
+        if ($user->id == 1) {
+            unset($validated['role']);
+        }
 
         $data = $validated;
 

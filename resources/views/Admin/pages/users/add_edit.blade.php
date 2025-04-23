@@ -41,19 +41,26 @@
 
                     <div class="mb-3">
                         <label class="form-label">Vai trò <span class="text-danger">*</span></label>
-                        <select name="role" class="form-control">
-                            <option value="" disabled {{ !isset($user) || !$user->role ? 'selected' : '' }}>-- Chọn
-                                vai trò --</option>
-                            <option value="admin" {{ isset($user) && $user->role == 'admin' ? 'selected' : '' }}>Quản trị viên
+                        @php
+                            $isMainAdmin = isset($user) && $user->id == 1;
+                            $currentRole = old('role', $user->role ?? '');
+                            $roles = [
+                                'admin' => 'Quản trị viên',
+                                'content_manager' => 'Quản lý nội dung',
+                                'candidate' => 'Ứng viên',
+                                'employer' => 'Nhà tuyển dụng',
+                            ];
+                        @endphp
+
+                        <select name="role" class="form-control" {{ $isMainAdmin ? 'disabled' : '' }}>
+                            <option value="" disabled>-- Chọn vai trò --
                             </option>
-                            <option value="candidate" {{ isset($user) && $user->role == 'candidate' ? 'selected' : '' }}>
-                                Ứng viên</option>
-                            <option value="employer" {{ isset($user) && $user->role == 'employer' ? 'selected' : '' }}>
-                                Nhà tuyển dụng</option>
-                            <option value="content_manager"
-                                {{ isset($user) && $user->role == 'content_manager' ? 'selected' : '' }}>Người quản lý nội
-                                dung
-                            </option>
+
+                            @foreach ($roles as $value => $label)
+                                <option value="{{ $value }}" {{ $currentRole == $value ? 'selected' : '' }}>
+                                    {{ $label }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
 

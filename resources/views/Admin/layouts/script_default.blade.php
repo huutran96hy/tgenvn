@@ -6,36 +6,6 @@
 <!-- Select2 JS -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
-<script>
-    $(document).ready(function() {
-        let body = $("body");
-        let themeIcon = $("#theme-icon");
-        let toggleThemeBtn = $("#toggle-theme");
-
-        // Lấy theme từ localStorage trước
-        let currentTheme = localStorage.getItem("theme") || "light";
-        applyTheme(currentTheme);
-
-        // Khi nhấn vào nút đổi theme
-        toggleThemeBtn.click(function(e) {
-            e.preventDefault();
-            let newTheme = body.attr("data-color-theme") === "dark" ? "light" : "dark";
-
-            applyTheme(newTheme);
-
-            // Lưu vào localStorage
-            localStorage.setItem("theme", newTheme);
-        });
-
-        // Hàm áp dụng theme
-        function applyTheme(theme) {
-            body.attr("data-color-theme", theme);
-            themeIcon.toggleClass("fa-sun", theme === "dark");
-            themeIcon.toggleClass("fa-moon", theme === "light");
-        }
-    });
-</script>
-
 {{-- Clear input search --}}
 <script>
     $(document).ready(function() {
