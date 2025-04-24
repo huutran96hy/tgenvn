@@ -181,9 +181,11 @@
                 });
             });
 
+            let isSelectAll = false;
             // Check all
             $('#check-all').on('change', function() {
                 $('.job-checkbox').prop('checked', this.checked);
+                isSelectAll = this.checked;
             });
 
             // Bulk update
@@ -201,7 +203,8 @@
                     data: {
                         _token: "{{ csrf_token() }}",
                         ids: selected,
-                        status: status
+                        status: status,
+                        select_all: isSelectAll ? 1 : 0
                     },
                     success: function(response) {
                         if (response.success) {
@@ -231,7 +234,8 @@
                     type: 'POST',
                     data: {
                         _token: "{{ csrf_token() }}",
-                        ids: selected
+                        ids: selected,
+                        select_all: isSelectAll ? 1 : 0
                     },
                     success: function(response) {
                         if (response.success) {

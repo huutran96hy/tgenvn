@@ -4,65 +4,34 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreJobRequest;
-use App\Models\CompanyPosition;
 use App\Models\Job;
-use App\Models\JobCategory;
-use App\Models\Employer;
-use App\Models\Province;
 use Illuminate\Http\Request;
-use App\Models\Skill;
+use App\Services\JobService;
 use App\Traits\SlugCheck;
-use Carbon\Carbon;
 
 class JobController extends Controller
 {
     use SlugCheck;
+
+    protected JobService $jobService;
+
+    public function __construct(JobService $jobService)
+    {
+        $this->jobService = $jobService;
+    }
+
     public function index(Request $request)
     {
-        $query = Job::with('category');
-        $categories = JobCategory::all();
-        $employers = Employer::all();
-
-        // Tìm kiếm theo tiêu đề công việc
-        if ($request->filled('search')) {
-            $query->where('job_title', 'like', "%{$request->search}%");
-        }
-
-        // Lọc theo danh mục
-        if ($request->filled('category_id')) {
-            $query->where('category_id', $request->category_id);
-        }
-
-        // Lọc theo nhà tuyển dụng
-        if ($request->filled('employer_id')) {
-            $query->where('employer_id', $request->employer_id);
-        }
-
-        // Lọc theo trạng thái phê duyệt
-        if ($request->filled('approval_status')) {
-            $query->where('approval_status', $request->approval_status);
-        }
-
-        $jobs = $query->paginate(10);
+        $jobs = $this->jobService->searchJobs($request);
+        $categories = $this->jobService->getCategories();
+        $employers = $this->jobService->getEmployers();
 
         return view('Admin.pages.jobs.index', compact('jobs', 'categories', 'employers'));
     }
 
     public function create()
     {
-        $categories = JobCategory::select('category_id', 'category_name')->get();
-        $employers = Employer::select('employer_id', 'company_name')->get();
-        $allSkills = Skill::all();
-        $provinces = Province::all();
-        $positions = CompanyPosition::all();
-
-        return view('Admin.pages.jobs.add_edit', compact(
-            'categories',
-            'employers',
-            'allSkills',
-            'provinces',
-            'positions'
-        ));
+        return view('Admin.pages.jobs.add_edit', $this->jobService->getFormData());
     }
 
     public function store(StoreJobRequest $request)
@@ -78,37 +47,19 @@ class JobController extends Controller
             'job_id'
         );
 
-        // Chuyển đổi ngày
-        foreach (['posted_date', 'expiry_date'] as $field) {
-            $validated[$field] = Carbon::createFromFormat('d-m-Y', $validated[$field])->format('Y-m-d');
-        }
-
-        $job = Job::create($validated);
-
-        if ($request->has('skills')) {
-            $job->skills()->sync($request->skills);
-        }
+        $this->jobService->createJob($validated, $request->skills);
 
         return redirect()->route('admin.jobs.index')->with('success', 'Công việc đã được tạo thành công.');
     }
 
     public function edit(Job $job)
     {
-        $categories = JobCategory::select('category_id', 'category_name')->get();
-        $employers = Employer::select('employer_id', 'company_name')->get();
-        $allSkills = Skill::all();
-        $provinces = Province::all();
-        $positions = CompanyPosition::all();
-
-        return view('Admin.pages.jobs.add_edit', compact(
-            'job',
-            'categories',
-            'employers',
-            'allSkills',
-            'provinces',
-            'positions'
+        return view('Admin.pages.jobs.add_edit', array_merge(
+            $this->jobService->getFormData(),
+            ['job' => $job]
         ));
     }
+
     public function update(StoreJobRequest $request, Job $job)
     {
         $validated = $request->validated();
@@ -118,19 +69,10 @@ class JobController extends Controller
             Job::class,
             'slug',
             'job_id',
-            $job->job_id // tránh trùng slug chính nó
+            $job->job_id
         );
 
-        // Chuyển đổi ngày
-        foreach (['posted_date', 'expiry_date'] as $field) {
-            $validated[$field] = Carbon::createFromFormat('d-m-Y', $validated[$field])->format('Y-m-d');
-        }
-
-        $job->update($validated);
-
-        if ($request->has('skills')) {
-            $job->skills()->sync($request->skills);
-        }
+        $this->jobService->updateJob($job, $validated, $request->skills);
 
         return back()->with('success', 'Công việc đã được cập nhật.');
     }
@@ -155,36 +97,36 @@ class JobController extends Controller
     {
         $ids = $request->input('ids', []);
         $status = $request->input('status');
+        $selectAll = $request->boolean('select_all');
 
-        if ($ids && $status) {
-            Job::whereIn('job_id', $ids)->update(['approval_status' => $status]);
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Cập nhật trạng thái thành công!'
-            ]);
+        if ($status && ($selectAll || count($ids))) {
+            $this->jobService->bulkUpdateStatus($ids, $status, $selectAll);
+            return $this->jsonSuccess('Cập nhật trạng thái thành công!');
         }
 
-        return response()->json([
-            'success' => false,
-            'message' => 'Có lỗi xảy ra khi cập nhật trạng thái.'
-        ]);
+        return $this->jsonError('Có lỗi xảy ra khi cập nhật trạng thái.');
     }
+
     public function bulkDelete(Request $request)
     {
         $ids = $request->input('ids', []);
-        if ($ids) {
-            Job::whereIn('job_id', $ids)->delete();
+        $selectAll = $request->boolean('select_all');
 
-            return response()->json([
-                'success' => true,
-                'message' => 'Xóa công việc thành công!'
-            ]);
+        if ($selectAll || count($ids)) {
+            $this->jobService->bulkDelete($ids, $selectAll);
+            return $this->jsonSuccess('Xóa công việc thành công!');
         }
 
-        return response()->json([
-            'success' => false,
-            'message' => 'Có lỗi xảy ra khi xóa công việc.'
-        ]);
+        return $this->jsonError('Có lỗi xảy ra khi xóa công việc.');
+    }
+
+    private function jsonSuccess(string $message)
+    {
+        return response()->json(['success' => true, 'message' => $message]);
+    }
+
+    private function jsonError(string $message)
+    {
+        return response()->json(['success' => false, 'message' => $message]);
     }
 }
