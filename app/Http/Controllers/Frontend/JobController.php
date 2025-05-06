@@ -113,11 +113,15 @@ class JobController extends Controller
         // Lọc theo mức lương
         if ($request->filled('salary_range')) {
             $range = $request->input('salary_range');
+
+            // Loại bỏ dấu phân cách và đơn vị tiền tệ
+            $salaryColumn = "REPLACE(REPLACE(salary, '.', ''), 'VNĐ', '') + 0";
+
             if ($range === '>100000000') {
-                $query->where('salary', '>', 100000000);
+                $query->whereRaw("$salaryColumn > ?", [100000000]);
             } else {
                 [$min, $max] = explode('-', $range);
-                $query->whereBetween('salary', [(int)$min, (int)$max]);
+                $query->whereRaw("$salaryColumn BETWEEN ? AND ?", [(int) $min, (int) $max]);
             }
         }
 
