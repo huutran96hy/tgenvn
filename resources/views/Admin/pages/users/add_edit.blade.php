@@ -51,10 +51,10 @@
                                 'employer' => 'Nhà tuyển dụng',
                             ];
                         @endphp
+                        <input type="hidden" name="role" value="{{ $currentRole }}">
 
                         <select name="role" class="form-control" {{ $isMainAdmin ? 'disabled' : '' }}>
-                            <option value="" disabled>-- Chọn vai trò --
-                            </option>
+                            <option value="" disabled>-- Chọn vai trò --</option>
 
                             @foreach ($roles as $value => $label)
                                 <option value="{{ $value }}" {{ $currentRole == $value ? 'selected' : '' }}>
