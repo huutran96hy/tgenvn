@@ -19,6 +19,13 @@
                     <span class="location-small">
                         {{ $job->province->name ?? $job->location }}
                     </span>
+
+                    @if (\Carbon\Carbon::parse($job->expiry_date)->isPast())
+                        <span style="font-size: 12px; padding: 0 10px">
+                            Việc đã hết hạn
+                        </span>
+                    @endif
+
                     <div class="tags">
                         {{ \App\Helpers\NumberHelper::formatSalary($job->salary) }} |
                         @foreach ($job->skills as $skill)

@@ -132,7 +132,13 @@
                         <div class="box-border-single">
                             <div class="row mt-10">
                                 <div class="col-lg-8 col-md-12">
-                                    <h3 class="custom-h3 fw-semibold">{{ $job->job_title ?? 'Chưa có tiêu đề' }}</h3>
+                                    <h3 class="custom-h3 fw-semibold">{{ $job->job_title ?? 'Chưa có tiêu đề' }}
+                                        @if (\Carbon\Carbon::parse($job->expiry_date)->isPast())
+                                            <span class="mt-1">
+                                                (Đã hết hạn)
+                                            </span>
+                                        @endif
+                                    </h3>
                                     <div class="mt-0 mb-15">
                                         @if (!empty($job->job_type))
                                             <span class="card-briefcase">{{ $job->job_type }}</span>

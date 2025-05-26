@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card-grid-2-image-left">
-                        <div class="image-box">
+                        <div class="image-box" style="min-width: 80px">
                             <img src="{{ \App\Helpers\CustomHelper::logoSrc($job->employer->logo) }}"
                                 alt="{{ $job->job_title }}" class="img-box-fix" loading="lazy">
                         </div>
@@ -32,6 +32,11 @@
                         <span class="card-briefcase">{{ $job->job_type }}</span>
                     @endif
                     <span class="card-time">{{ $job->created_at->diffForHumans() }}</span>
+                    @if (\Carbon\Carbon::parse($job->expiry_date)->isPast())
+                        <span style="font-size: 12px;">
+                            Việc đã hết hạn
+                        </span>
+                    @endif
                 </div>
                 <p class="font-sm color-text-paragraph mt-10">
                     {!! Str::words(preg_replace('/<img[^>]+>/i', '', $job->requirements), 10, '...') !!}
