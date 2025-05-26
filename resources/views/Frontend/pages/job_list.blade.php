@@ -261,6 +261,17 @@
                                     </ul>
                                 </div>
 
+                                <div class="form-group mb-20">
+                                    <h5 class="medium-heading mb-25">Việc làm</h5>
+
+                                    <label class="cb-container" for="only_valid_jobs">
+                                        <input type="checkbox" id="only_valid_jobs" name="only_valid_jobs"
+                                            {{ request('only_valid_jobs') === 'valid_jobs' ? 'checked' : '' }}
+                                            value="valid_jobs">
+                                        <span>Chỉ hiển thị việc làm còn hạn</span>
+                                        <span class="checkmark checkmark-fix"></span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -279,6 +290,20 @@
             const baseUrl = window.location.origin + window.location.pathname;
             const url = new URL(window.location.href);
             const urlParams = url.searchParams;
+            // Hển thị việc làm còn hạn
+            const onlyValidJobs = urlParams.get('only_valid_jobs');
+            if (onlyValidJobs === 'valid_jobs') {
+                $('#only_valid_jobs').prop('checked', true);
+            }
+
+            $('#only_valid_jobs').change(function() {
+                if ($(this).is(':checked')) {
+                    urlParams.set('only_valid_jobs', 'valid_jobs');
+                } else {
+                    urlParams.delete('only_valid_jobs');
+                }
+                fetchJobs(urlParams.toString());
+            });
 
             // Reset filter
             $('#reset-filters').click(function(e) {

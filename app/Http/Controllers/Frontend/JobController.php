@@ -50,8 +50,8 @@ class JobController extends Controller
             'skills',
             'province:id,name'
         ])
-            ->where('approval_status', 'approved')
-            ->whereDate('expiry_date', '>=', Carbon::today());
+            ->where('approval_status', 'approved');
+        // ->whereDate('expiry_date', '>=', Carbon::today());
 
         $categories = JobCategory::all();
         $provinces = Province::all();
@@ -147,6 +147,10 @@ class JobController extends Controller
         // Lọc theo position
         if ($request->filled('position')) {
             $query->where('position_id', $request->input('position'));
+        }
+
+        if ($request->input('only_valid_jobs') === 'valid_jobs') {
+            $query->whereDate('expiry_date', '>=', now());
         }
 
         return $query;
