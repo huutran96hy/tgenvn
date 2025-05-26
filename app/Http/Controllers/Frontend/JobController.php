@@ -100,6 +100,8 @@ class JobController extends Controller
      */
     public function searchJobs(Request $request, $query)
     {
+        $query->orderByRaw("CASE WHEN expiry_date >= ? THEN 0 ELSE 1 END", [now()]);
+
         // Sắp xếp
         $sort = $request->input('sort', 'newest');
         if ($sort === 'oldest') {
