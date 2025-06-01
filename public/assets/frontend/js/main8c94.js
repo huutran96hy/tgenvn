@@ -274,39 +274,39 @@
             }
         });
     });
-    $(".swiper-group-5").each(function() {
-        var swiper_5_items = new Swiper(this, {
-            spaceBetween: 15,
-            slidesPerGroup: 3,
-            slidesPerView: 5,
-            loop: true,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true
-            },
-            autoplay: {
-                delay: 10000
-            },
-            breakpoints: {
-                1199: {
-                    slidesPerView: 5
-                },
-                800: {
-                    slidesPerView: 3
-                },
-                475: {
-                    slidesPerView: 2
-                },
-                350: {
-                    slidesPerView: 1,
-                    slidesPerGroup: 1
-                },
-                275: {
-                    slidesPerView: 1
-                }
-            }
-        });
-    });
+    // $(".swiper-group-5").each(function() {
+    //     var swiper_5_items = new Swiper(this, {
+    //         spaceBetween: 15,
+    //         slidesPerGroup: 3,
+    //         slidesPerView: 5,
+    //         loop: true,
+    //         pagination: {
+    //             el: ".swiper-pagination",
+    //             clickable: true
+    //         },
+    //         autoplay: {
+    //             delay: 10000
+    //         },
+    //         breakpoints: {
+    //             1199: {
+    //                 slidesPerView: 5
+    //             },
+    //             800: {
+    //                 slidesPerView: 3
+    //             },
+    //             475: {
+    //                 slidesPerView: 2
+    //             },
+    //             350: {
+    //                 slidesPerView: 1,
+    //                 slidesPerGroup: 1
+    //             },
+    //             275: {
+    //                 slidesPerView: 1
+    //             }
+    //         }
+    //     });
+    // });
     $(".swiper-group-4-border").each(function() {
         var swiper_4_items_border = new Swiper(this, {
             spaceBetween: 30,

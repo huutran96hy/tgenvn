@@ -45,7 +45,7 @@
                     prevEl: '.swiper-button-prev',
                 },
                 autoplay: {
-                    delay: 3000,
+                    delay: 4000,
                     disableOnInteraction: false,
                 },
                 breakpoints: {
