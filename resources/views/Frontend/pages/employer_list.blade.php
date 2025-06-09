@@ -122,10 +122,12 @@
                                                                 {{ $employer->company_name }}
                                                             </a>
                                                         </h5>
-                                                        <p class="mt-0 font-md color-text-paragraph-2 mb-5">
-                                                            <span class="card-location d-block">{{ $employer->address }}
-                                                            </span>
-                                                        </p>
+                                                        @if ($employer->show_company_address)
+                                                            <p class="mt-0 font-md color-text-paragraph-2 mb-5">
+                                                                <span class="card-location d-block">{{ $employer->address }}
+                                                                </span>
+                                                            </p>
+                                                        @endif
                                                     </div>
                                                     <div class="col-lg-12 col-md-12 text-end p-0 mb-2">
                                                         <a class="btn btn-apply btn-apply-big btn-apply-fix"

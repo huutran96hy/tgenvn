@@ -9,6 +9,10 @@ use Carbon\Carbon;
 class Employer extends Model
 {
     use HasFactory;
+    protected $casts = [
+        'show_company_address' => 'boolean',
+    ];
+
     protected $table = 'employers';
     protected $primaryKey = 'employer_id';
     protected $fillable = [
@@ -23,6 +27,7 @@ class Employer extends Model
         'website',
         'contact_phone',
         'address',
+        'show_company_address',
         'email',
         'founded_at',
         'about',

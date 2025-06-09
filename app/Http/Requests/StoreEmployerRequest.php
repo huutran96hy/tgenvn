@@ -33,6 +33,7 @@ class StoreEmployerRequest extends FormRequest
             'website' => 'nullable|url|max:200',
             'contact_phone' => 'required|regex:/^[0-9]{10,11}$/',
             'address' => 'required|max:255',
+            'show_company_address' => 'nullable|boolean',
             'email' => 'nullable|email|max:50',
             'founded_at' => 'nullable',
             'about' => 'nullable|max:200',

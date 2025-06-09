@@ -26,8 +26,10 @@
                                                 {{ $job->employer->company_name }}
                                             </a>
                                         </span>
-                                        <span class="card-location location-fix">{{ $job->employer->address }}
-                                        </span>
+                                        @if ($employer->show_company_address)
+                                            <span class="card-location location-fix">{{ $job->employer->address }}
+                                            </span>
+                                        @endif
                                         <a class="link-underline mt-15"
                                             href="{{ route('employers.show', $job->employer->slug) }}">
                                             {{ $employer->jobs_count }}

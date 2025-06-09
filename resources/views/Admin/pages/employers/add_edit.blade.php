@@ -135,6 +135,28 @@
                     </div>
 
                     <div class="mb-3">
+                        <label class="form-label">Hiển thị địa chỉ công ty</label>
+                        <div style="display:flex;align-items: center">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="show_company_address"
+                                    id="show_company_address_yes" value="1"
+                                    {{ old('show_company_address', $employer->show_company_address ?? 0) == 1 ? 'checked' : '' }}>
+                                <label class="form-check-label" for="show_company_address_yes">
+                                    Hiển thị
+                                </label>
+                            </div>
+                            <div class="form-check" style="margin-left:20px">
+                                <input class="form-check-input" type="radio" name="show_company_address"
+                                    id="show_company_address_no" value="0"
+                                    {{ old('show_company_address', $employer->show_company_address ?? 0) == 0 ? 'checked' : '' }}>
+                                <label class="form-check-label" for="show_company_address_no">
+                                    Không hiển thị
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
                         <label class="form-label">Email</label>
                         <input type="email" name="email" class="form-control"
                             value="{{ old('email', $employer->email ?? '') }}">

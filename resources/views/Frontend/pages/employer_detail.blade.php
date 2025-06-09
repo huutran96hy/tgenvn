@@ -187,16 +187,18 @@
                                             </strong>
                                         </div>
                                     </li>
-                                    <li>
-                                        <div class="sidebar-icon-item">
-                                            <i class="fi-rr-marker"></i>
-                                        </div>
-                                        <div class="sidebar-text-info">
-                                            <span class="text-description">Địa chỉ</span>
-                                            <strong class="small-heading fw-semibold">{{ $employer->address }}
-                                            </strong>
-                                        </div>
-                                    </li>
+                                    @if ($employer->show_company_address)
+                                        <li>
+                                            <div class="sidebar-icon-item">
+                                                <i class="fi-rr-marker"></i>
+                                            </div>
+                                            <div class="sidebar-text-info">
+                                                <span class="text-description">Địa chỉ</span>
+                                                <strong class="small-heading fw-semibold">{{ $employer->address }}
+                                                </strong>
+                                            </div>
+                                        </li>
+                                    @endif
                                     <li>
                                         <div class="sidebar-icon-item"><i class="fi-rr-clock"></i></div>
                                         <div class="sidebar-text-info">
@@ -212,7 +214,9 @@
                             </div>
                             <div class="sidebar-list-job">
                                 <ul class="ul-disc">
-                                    <li>{{ $employer->address }}</li>
+                                    @if ($employer->show_company_address)
+                                        <li>{{ $employer->address }}</li>
+                                    @endif
                                     <li>SĐT: {{ $employer->contact_phone }}</li>
                                     <li>Email: {{ $employer->email }}</li>
                                 </ul>
