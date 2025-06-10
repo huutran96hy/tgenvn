@@ -135,7 +135,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Hiển thị địa chỉ công ty</label>
+                        <label class="form-label">Hiển thị thông tin công ty</label>
                         <div style="display:flex;align-items: center">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="show_company_address"

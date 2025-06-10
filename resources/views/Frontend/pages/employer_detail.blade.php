@@ -212,15 +212,15 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="sidebar-list-job">
-                                <ul class="ul-disc">
-                                    @if ($employer->show_company_address)
+                            @if ($employer->show_company_address)
+                                <div class="sidebar-list-job">
+                                    <ul class="ul-disc">
                                         <li>{{ $employer->address }}</li>
-                                    @endif
-                                    <li>SĐT: {{ $employer->contact_phone }}</li>
-                                    <li>Email: {{ $employer->email }}</li>
-                                </ul>
-                            </div>
+                                        <li>SĐT: {{ $employer->contact_phone }}</li>
+                                        <li>Email: {{ $employer->email }}</li>
+                                    </ul>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
