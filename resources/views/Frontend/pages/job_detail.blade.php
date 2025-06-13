@@ -266,7 +266,7 @@
                             <div class="content-single custom-text">
                                 <h4 class="custom-h4">Chào mừng đến với {{ $job->employer->company_name }}</h4>
                                 <h4 class="custom-h4">Mô tả công việc</h4>
-                                <p{!! $job->job_description ?? 'Chưa có mô tả công việc' !!}</p>
+                                <p>{!! $job->job_description ?? 'Chưa có mô tả công việc' !!}</p>
                                 <h4 class="custom-h4">Yêu cầu công việc</h4>
                                 <p>{!! $job->requirements ?? 'Không có yêu cầu cụ thể' !!}</p>
                                 <h4 class="custom-h4">Phúc lợi công ty</h4>
