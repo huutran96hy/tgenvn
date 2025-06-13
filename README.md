@@ -40,7 +40,20 @@ php artisan migrate
 php artisan db:seed
 ```
 
+# Run storage (optional)
+
+```bash
+php artisan storage:link
+```
+
 # Run Vite development server
+
 ```bash
 npm run dev
+```
+
+# Run Laravel development server
+
+```bash
+php artisan serve
 ```
