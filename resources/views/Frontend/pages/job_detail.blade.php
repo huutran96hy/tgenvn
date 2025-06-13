@@ -42,27 +42,29 @@
                                 <div class="box-map">
                                     {!! \App\Helpers\CustomHelper::safeMapHtml($job->employer->map_url) !!}
                                 </div>
-                                <ul class="ul-disc">
-                                    @php
-                                        $address = $job->location;
-                                        $province = optional($job->province)->name;
+                                @if ($job->employer->show_company_address)
+                                    <ul class="ul-disc">
+                                        @php
+                                            $address = $job->location;
+                                            $province = optional($job->province)->name;
 
-                                        if ($address && $province) {
-                                            // Cắt tỉnh ở cuối chuỗi
-                                            $pattern = '/,\s*' . preg_quote($province, '/') . '\s*$/iu';
+                                            if ($address && $province) {
+                                                // Cắt tỉnh ở cuối chuỗi
+                                                $pattern = '/,\s*' . preg_quote($province, '/') . '\s*$/iu';
 
-                                            $address = preg_replace($pattern, '', $address);
-                                        }
-                                    @endphp
+                                                $address = preg_replace($pattern, '', $address);
+                                            }
+                                        @endphp
 
-                                    @if ($address || $province)
-                                        <li>
-                                            {{ trim($address) }}{{ $address && $province ? ', ' : '' }}{{ $province }}
-                                        </li>
-                                    @endif
-                                    <li>SĐT: +{{ $job->employer->contact_phone }}</li>
-                                    <li>Email: {{ $job->employer->email }}</li>
-                                </ul>
+                                        @if ($address || $province)
+                                            <li>
+                                                {{ trim($address) }}{{ $address && $province ? ', ' : '' }}{{ $province }}
+                                            </li>
+                                        @endif
+                                        <li>SĐT: +{{ $job->employer->contact_phone }}</li>
+                                        <li>Email: {{ $job->employer->email }}</li>
+                                    </ul>
+                                @endif
                             </div>
                         </div>
                         <div class="sidebar-border sidebar-border-fix">
@@ -263,15 +265,13 @@
                             </div> --}}
                             <div class="content-single custom-text">
                                 <h4 class="custom-h4">Chào mừng đến với {{ $job->employer->company_name }}</h4>
-                                <p>{!! $job->job_description ?? 'Chưa có mô tả công việc' !!}</p>
+                                <h4 class="custom-h4">Mô tả công việc</h4>
+                                <p{!! $job->job_description ?? 'Chưa có mô tả công việc' !!}</p>
                                 <h4 class="custom-h4">Yêu cầu công việc</h4>
                                 <p>{!! $job->requirements ?? 'Không có yêu cầu cụ thể' !!}</p>
                                 <h4 class="custom-h4">Phúc lợi công ty</h4>
                                 <p>{!! $job->job_benefit ?? 'Không có phúc lợi cụ thể' !!}</p>
                             </div>
-                            {{-- <div class="author-single">
-                                <span>{{ $job->employer->company_name }}</span>
-                            </div> --}}
                         </div>
                     </div>
                 </div>
