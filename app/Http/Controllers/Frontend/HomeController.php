@@ -10,11 +10,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $employers = Employer::orderByRaw("CASE WHEN is_hot = 'yes' THEN 0 ELSE 1 END")
-            ->orderBy('created_at', 'desc')
-            ->take(50)
-            ->get();
-
-        return view('Frontend.home', compact('employers'));
+        return view('Frontend.home');
     }
 }

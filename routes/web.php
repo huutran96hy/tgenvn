@@ -14,34 +14,69 @@ use App\Http\Controllers\Frontend\{
 
 require __DIR__ . '/admin.php';
 
-Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/', function () {
+    return view('Frontend.home');
+})->name('home');
 
-// Danh sách job & chi tiết job
-Route::get('/viec-lam', [JobController::class, 'index'])->name('jobs.index');
-Route::get('/viec-lam-tot-nhat', [JobController::class, 'best'])->name('jobs.best');
-Route::get('/viec-lam-goi-y', [JobController::class, 'suggested'])->name('jobs.suggested');
-Route::get('/viec-lam/{slug}', [JobDetailController::class, 'index'])->name('job_detail.show');
+Route::get('/about', function () {
+    return view('Frontend.about');
+})->name('about');
 
-// Danh sách công ty & chi tiết công ty
-Route::get('/cong-ty', [EmployerController::class, 'index'])->name('employers.index');
-Route::get('/cong-ty-hang-dau', [EmployerController::class, 'top'])->name('employers.top');
-Route::get('/cong-ty/{employer}', [EmployerController::class, 'show'])->name('employers.show');
+Route::get('/about', function () {
+    return view('frontend.about');
+})->name('about');
 
-// Liên hệ
-Route::get('/lien-he', [ContactController::class, 'index'])->name('contact.index');
-Route::post('/lien-he', [ContactController::class, 'store'])->name('contact.store');
+Route::get('/about/greeting', function () {
+    return view('frontend.about');
+})->name('about.greeting');
 
-// Tin tức & danh mục tin tức
-Route::get('/tin-tuc', [NewsController::class, 'index'])->name('news.index');
-Route::get('/tin-tuc/{news}', [NewsController::class, 'show'])->name('news.show');
-// Route::get('/news-categories', [NewsCategoryController::class, 'index'])->name('news-categories.index');
+Route::get('/about/organization', function () {
+    return view('frontend.about');
+})->name('about.organization');
 
-Route::post('/ung-tuyen', [CandidateController::class, 'store'])->name('candidate.store');
+Route::get('/about/technology', function () {
+    return view('frontend.about');
+})->name('about.technology');
 
-// Các route yêu cầu login
-Route::middleware('auth')->group(function () {
-    // Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
-});
+Route::get('/about/directions', function () {
+    return view('frontend.about');
+})->name('about.directions');
+
+Route::get('/products', function () {
+    return view('Frontend.products');
+})->name('products');
+
+Route::get('/process', function () {
+    return view('Frontend.process');
+})->name('process');
+
+Route::get('/quote', function () {
+    return view('Frontend.quote');
+})->name('quote');
+
+Route::get('/technology', function () {
+    return view('Frontend.technology');
+})->name('technology');
+
+Route::get('/support', function () {
+    return view('Frontend.support');
+})->name('support');
+
+Route::get('/products/precision', function () {
+    return view('products');
+})->name('products.precision');
+
+Route::get('/products/general', function () {
+    return view('products');
+})->name('products.general');
+
+Route::get('/products/custom', function () {
+    return view('products');
+})->name('products.custom');
+
+Route::get('/products/air-bearing', function () {
+    return view('products');
+})->name('products.air-bearing');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function () {
     Route::get('/laravel-filemanager', '\UniSharp\LaravelFilemanager\controllers\LfmController@show');
