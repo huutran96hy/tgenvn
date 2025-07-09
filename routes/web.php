@@ -23,23 +23,23 @@ Route::get('/about', function () {
 })->name('about');
 
 Route::get('/about', function () {
-    return view('frontend.about');
+    return view('Frontend.about');
 })->name('about');
 
 Route::get('/about/greeting', function () {
-    return view('frontend.about');
+    return view('Frontend.about');
 })->name('about.greeting');
 
 Route::get('/about/organization', function () {
-    return view('frontend.about');
+    return view('Frontend.about');
 })->name('about.organization');
 
 Route::get('/about/technology', function () {
-    return view('frontend.technology-status');
+    return view('Frontend.technology-status');
 })->name('about.technology');
 
 Route::get('/about/directions', function () {
-    return view('frontend.directions');
+    return view('Frontend.directions');
 })->name('about.directions');
 
 Route::get('/products', function () {
@@ -48,7 +48,7 @@ Route::get('/products', function () {
 
 
 Route::get('/quote', function () {
-    return view('frontend.quote');
+    return view('Frontend.quote');
 })->name('quote');
 
 Route::post('/quote', function () {
@@ -65,11 +65,11 @@ Route::get('/support', function () {
 })->name('support');
 
 Route::get('/products', function () {
-    return view('frontend.products-main');
+    return view('Frontend.products-main');
 })->name('products');
 
 Route::get('/products/general', function () {
-    return view('frontend.products-main');
+    return view('Frontend.products-main');
 })->name('products.general');
 Route::get('/products/precision', function () {
     $precisionTools = [
@@ -135,7 +135,7 @@ Route::get('/products/precision', function () {
         ]
     ];
 
-    return view('frontend.product-category', [
+    return view('Frontend.product-category', [
         'activePage' => 'precision',
         'pageTitle' => '정밀 측정구',
         'pageTitleEn' => 'Precision Measuring Tools',
@@ -202,7 +202,7 @@ Route::get('/products/custom', function () {
         ]
     ];
 
-    return view('frontend.product-category', [
+    return view('Frontend.product-category', [
         'activePage' => 'custom',
         'pageTitle' => '주문형 FOP 정반',
         'pageTitleEn' => 'Custom FOP Surface Plate',
@@ -269,7 +269,7 @@ Route::get('/products/air-bearing', function () {
         ]
     ];
 
-    return view('frontend.product-category', [
+    return view('Frontend.product-category', [
         'activePage' => 'air-bearing',
         'pageTitle' => 'Air Bearing Stage',
         'pageTitleEn' => 'Air Bearing Stage',
@@ -366,7 +366,7 @@ Route::get('/process/material', function () {
         ]
     ];
 
-    return view('frontend.process', [
+    return view('Frontend.process', [
         'activePage' => 'material',
         'pageTitle' => '소재 지원',
         'pageTitleEn' => 'Material Support',
@@ -427,7 +427,7 @@ Route::get('/process/order', function () {
         ]
     ];
 
-    return view('frontend.process', [
+    return view('Frontend.process', [
         'activePage' => 'order',
         'pageTitle' => '주문 및 측정',
         'pageTitleEn' => 'Order & Measurement',
