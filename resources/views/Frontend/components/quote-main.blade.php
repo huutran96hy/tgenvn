@@ -1,4 +1,4 @@
 <div class="lg:col-span-3">
-    @include('frontend.components.quote-header')
-    @include('frontend.components.quote-form')
+    @include('Frontend.components.quote-header')
+    @include('Frontend.components.quote-form')
 </div>

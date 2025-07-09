@@ -1,4 +1,4 @@
 <div class="lg:col-span-3">
-    @include('frontend.components.technology-header')
-    @include('frontend.components.technology-history')
+    @include('Frontend.components.technology-header')
+    @include('Frontend.components.technology-history')
 </div>

@@ -1,4 +1,4 @@
 <div class="lg:col-span-3">
-    @include('frontend.components.directions-header')
-    @include('frontend.components.directions-content')
+    @include('Frontend.components.directions-header')
+    @include('Frontend.components.directions-content')
 </div>

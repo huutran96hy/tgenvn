@@ -1,8 +1,8 @@
-@extends('frontend.layouts.app')
+@extends('Frontend.layouts.app')
 
 @section('title', 'TG ENC - 찾아오시는 길 | Precision Granite Stage Technology')
 
 @section('content')
-    @include('frontend.sections.about-hero')
-    @include('frontend.sections.directions-content')
+    @include('Frontend.sections.about-hero')
+    @include('Frontend.sections.directions-content')
 @endsection

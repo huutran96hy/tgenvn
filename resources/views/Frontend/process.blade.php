@@ -1,8 +1,8 @@
-@extends('frontend.layouts.app')
+@extends('Frontend.layouts.app')
 
 @section('title', 'TG ENC - {{ $pageTitle }} | Precision Granite Stage Technology')
 
 @section('content')
-    @include('frontend.sections.products-hero')
-    @include('frontend.sections.process-content')
+    @include('Frontend.sections.products-hero')
+    @include('Frontend.sections.process-content')
 @endsection

@@ -21,7 +21,7 @@
                     @else
                         {{-- Fallback to icon-based display for products without image links --}}
                         @if($activePage === 'precision' && isset($product['icon']))
-                            @include('frontend.components.product-icons.' . $product['icon'])
+                            @include('Frontend.components.product-icons.' . $product['icon'])
                         @elseif($activePage === 'custom')
                             <div class="text-center">
                                 <div class="w-32 h-20 bg-gradient-to-r from-gray-700 to-gray-900 rounded-lg mx-auto mb-4 relative">

@@ -24,5 +24,5 @@
         </nav>
     </div>
 
-    @include('frontend.components.customer-support')
+    @include('Frontend.components.customer-support')
 </div>
