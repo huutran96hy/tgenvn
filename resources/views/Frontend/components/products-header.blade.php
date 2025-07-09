@@ -1,6 +1,5 @@
 <div class="flex items-center justify-between mb-8 pb-4 border-b-2 border-gray-200">
     <div class="flex items-center">
-        <span class="w-3 h-3 bg-blue-600 rounded-full mr-3"></span>
         <h1 class="text-3xl font-bold text-blue-600 mr-4" data-ko="정밀 측정구" data-en="Precision Measuring Tools" data-vi="Dụng cụ đo chính xác">정밀 측정구</h1>
         <span class="text-gray-400 text-lg">Technical Granite Stage Technology</span>
     </div>
