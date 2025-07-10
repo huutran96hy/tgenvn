@@ -1,4 +1,4 @@
-@extends('Frontend.layouts.app')
+@extends('Frontendlayouts.app')
 
 @section('pageTitle', 'Danh sách công ty uy tín - Nhà tuyển dụng hàng đầu')
 
@@ -22,9 +22,9 @@
         }
     </style>
     <main class="main">
-        @include('Frontend.snippets.banner')
+        @include('Frontendsnippets.banner')
 
-        @include('Frontend.layouts.header')
+        @include('Frontendlayouts.header')
 
         <section class="section-box mt-3 mt-md-4">
             <div class="container">
@@ -142,7 +142,7 @@
                                 @endforeach
                             </div>
                             <div class="paginations">
-                                {{ $employers->appends(request()->query())->links('Frontend.pagination.custom') }}
+                                {{ $employers->appends(request()->query())->links('Frontendpagination.custom') }}
                             </div>
                         </div>
                     </div>

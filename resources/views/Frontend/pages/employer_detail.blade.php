@@ -1,4 +1,4 @@
-@extends('Frontend.layouts.app')
+@extends('Frontendlayouts.app')
 
 @section('pageTitle', $employer->company_name . ' - Thông tin công ty & việc làm')
 
@@ -143,14 +143,14 @@
                                 <div class="box-list-jobs display-list" id="latest-job-wrapper">
                                     {{-- Danh sách công việc --}}
                                     <div class="row" id="job-list">
-                                        @include('Frontend.partials.latest_job_items', [
+                                        @include('Frontendpartials.latest_job_items', [
                                             'latestJobs' => $latestJobs,
                                         ])
                                     </div>
 
                                     {{-- Phân trang --}}
                                     <div class="paginations" id="pagination">
-                                        {{ $latestJobs->links('Frontend.pagination.custom') }}
+                                        {{ $latestJobs->links('Frontendpagination.custom') }}
                                     </div>
                                 </div>
                             </div>

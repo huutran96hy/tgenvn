@@ -1,4 +1,4 @@
-@extends('Frontend.layouts.app')
+@extends('Frontendlayouts.app')
 
 @section('pageTitle', 'Việc làm mới nhất - Danh sách công việc hấp dẫn')
 
@@ -54,9 +54,9 @@
         }
     </style>
     <main class="main">
-        @include('Frontend.snippets.banner')
+        @include('Frontendsnippets.banner')
 
-        @include('Frontend.layouts.header')
+        @include('Frontendlayouts.header')
 
         <section class="section-box mt-3 mt-md-4">
             <div class="container">
@@ -139,7 +139,7 @@
 
                             <!-- Danh sách công việc -->
                             <div class="row" id="job-list-container">
-                                @include('Frontend.partials.job_list_items', ['jobs' => $jobs])
+                                @include('Frontendpartials.job_list_items', ['jobs' => $jobs])
                             </div>
                         </div>
                     </div>

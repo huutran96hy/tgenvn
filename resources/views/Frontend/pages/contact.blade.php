@@ -1,4 +1,4 @@
-@extends('Frontend.layouts.app')
+@extends('Frontendlayouts.app')
 
 @section('pageTitle', 'Liên hệ - Hỗ trợ & Tư vấn tuyển dụng')
 
@@ -9,7 +9,7 @@
 
 @section('content')
     <main class="main">
-        @include('Frontend.snippets.notify_block')
+        @include('Frontendsnippets.notify_block')
         <section class="section-box mt-0 mt-md-5">
             <div class="container">
                 <div class="row">
