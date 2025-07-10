@@ -143,14 +143,14 @@
                                 <div class="box-list-jobs display-list" id="latest-job-wrapper">
                                     {{-- Danh sách công việc --}}
                                     <div class="row" id="job-list">
-                                        @include('Frontendpartials.latest_job_items', [
+                                        @include('Frontend.partials.latest_job_items', [
                                             'latestJobs' => $latestJobs,
                                         ])
                                     </div>
 
                                     {{-- Phân trang --}}
                                     <div class="paginations" id="pagination">
-                                        {{ $latestJobs->links('Frontendpagination.custom') }}
+                                        {{ $latestJobs->links('Frontend.pagination.custom') }}
                                     </div>
                                 </div>
                             </div>

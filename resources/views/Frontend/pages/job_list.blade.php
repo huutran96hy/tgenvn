@@ -139,7 +139,7 @@
 
                             <!-- Danh sách công việc -->
                             <div class="row" id="job-list-container">
-                                @include('Frontendpartials.job_list_items', ['jobs' => $jobs])
+                                @include('Frontend.partials.job_list_items', ['jobs' => $jobs])
                             </div>
                         </div>
                     </div>

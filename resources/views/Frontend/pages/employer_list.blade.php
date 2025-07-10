@@ -142,7 +142,7 @@
                                 @endforeach
                             </div>
                             <div class="paginations">
-                                {{ $employers->appends(request()->query())->links('Frontendpagination.custom') }}
+                                {{ $employers->appends(request()->query())->links('Frontend.pagination.custom') }}
                             </div>
                         </div>
                     </div>

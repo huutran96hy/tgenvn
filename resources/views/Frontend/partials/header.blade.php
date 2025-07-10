@@ -11,11 +11,11 @@
             </div>
 
             <!-- Desktop Navigation -->
-            @include('Frontendpartials.navigation')
+            @include('Frontend.partials.navigation')
 
             <!-- Language Selector & Mobile Menu Button -->
             <div class="flex items-center space-x-4">
-                @include('Frontendpartials.language-selector')
+                @include('Frontend.partials.language-selector')
 
                 <!-- Mobile Menu Button -->
                 <button id="mobileMenuBtn" class="lg:hidden hamburger">
@@ -27,5 +27,5 @@
         </div>
     </div>
 
-    @include('Frontendpartials.mobile-menu')
+    @include('Frontend.partials.mobile-menu')
 </header>

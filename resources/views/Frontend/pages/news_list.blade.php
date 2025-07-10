@@ -117,7 +117,7 @@
                                 @endforeach
                             </div>
                             <div class="paginations">
-                                {{ $news->appends(request()->query())->links('Frontendpagination.custom') }}
+                                {{ $news->appends(request()->query())->links('Frontend.pagination.custom') }}
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-12 col-sm-12 col-12 pl-40 pl-lg-15 mt-lg-30">

@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'TG ENC - Precision Granite Stage Technology')</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    @include('Frontendpartials.styles')
+    @include('Frontend.partials.styles')
 </head>
 <body class="min-h-screen bg-white">
-    @include('Frontendpartials.header')
+    @include('Frontend.partials.header')
     
     <main>
         @yield('content')
     </main>
     
-    @include('Frontendpartials.footer')
-    @include('Frontendpartials.scripts')
+    @include('Frontend.partials.footer')
+    @include('Frontend.partials.scripts')
 </body>
 </html>
