@@ -76,32 +76,7 @@
                 </nav>
 
                 <!-- Contact Information -->
-                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg border-l-4 border-blue-400">
-                    <h4 class="font-bold text-gray-800 mb-3" data-ko="고객 지원 센터" data-en="Customer Support Center" data-vi="Trung tâm hỗ trợ khách hàng">고객 지원 센터</h4>
-                    
-                    <div class="space-y-2 text-sm">
-                        <div class="flex items-center">
-                            <span class="font-bold text-green-600 text-lg mr-2">📞</span>
-                            <span class="font-bold text-green-600">031) 431-4418</span>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="font-bold mr-2">📠</span>
-                            <span>Fax : 031) 358-4418</span>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="font-bold mr-2">✉️</span>
-                            <span class="text-blue-600">tgenc@tg-enc.co.kr</span>
-                        </div>
-                    </div>
-
-                    <p class="text-xs text-gray-600 mt-3" data-ko="전문직원이 견적상담 및 상담해 드립니다." data-en="Professional staff will provide quote consultation and advice." data-vi="Nhân viên chuyên nghiệp sẽ tư vấn báo giá và lời khuyên.">
-                        전문직원이 견적상담 및 상담해 드립니다.
-                    </p>
-
-                    <div class="mt-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-center py-2 rounded text-xs font-bold">
-                        CUSTOMER SERVICE
-                    </div>
-                </div>
+                 @include('Frontend.components.customer-support')
             </div>
         </div>
     </div>
