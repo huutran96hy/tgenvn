@@ -1,4 +1,4 @@
-@extends('Frontendlayouts.app')
+@extends('Frontend.layouts.app')
 
 @section('pageTitle', 'Tin tức việc làm mới nhất - Thị trường lao động | Danh sách tin tức')
 

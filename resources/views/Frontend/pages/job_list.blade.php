@@ -1,4 +1,4 @@
-@extends('Frontendlayouts.app')
+@extends('Frontend.layouts.app')
 
 @section('pageTitle', 'Việc làm mới nhất - Danh sách công việc hấp dẫn')
 
@@ -54,9 +54,9 @@
         }
     </style>
     <main class="main">
-        @include('Frontendsnippets.banner')
+        @include('Frontend.snippets.banner')
 
-        @include('Frontendlayouts.header')
+        @include('Frontend.layouts.header')
 
         <section class="section-box mt-3 mt-md-4">
             <div class="container">

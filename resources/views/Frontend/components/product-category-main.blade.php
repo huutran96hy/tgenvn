@@ -1,6 +1,6 @@
 <div class="lg:col-span-3">
-    @include('Frontendcomponents.product-category-header')
-    @include('Frontendcomponents.products-sorting')
-    @include('Frontendcomponents.product-category-grid')
-    @include('Frontendcomponents.products-pagination')
+    @include('Frontend.components.product-category-header')
+    @include('Frontend.components.products-sorting')
+    @include('Frontend.components.product-category-grid')
+    @include('Frontend.components.products-pagination')
 </div>

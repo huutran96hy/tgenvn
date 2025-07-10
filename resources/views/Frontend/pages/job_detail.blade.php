@@ -1,4 +1,4 @@
-@extends('Frontendlayouts.app')
+@extends('Frontend.layouts.app')
 
 @section('pageTitle', 'Tuyển ' . $job->job_title . ' Tại ' . $job->employer->company_name)
 

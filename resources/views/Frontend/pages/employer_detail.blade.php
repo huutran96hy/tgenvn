@@ -1,4 +1,4 @@
-@extends('Frontendlayouts.app')
+@extends('Frontend.layouts.app')
 
 @section('pageTitle', $employer->company_name . ' - Thông tin công ty & việc làm')
 

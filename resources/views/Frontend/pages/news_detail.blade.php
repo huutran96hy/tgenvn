@@ -1,4 +1,4 @@
-@extends('Frontendlayouts.app')
+@extends('Frontend.layouts.app')
 
 @section('pageTitle', $news->title)
 

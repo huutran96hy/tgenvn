@@ -1,4 +1,4 @@
 <div class="lg:col-span-3">
-    @include('Frontendcomponents.general-surface-plate-header')
-    @include('Frontendcomponents.general-surface-plate-content')
+    @include('Frontend.components.general-surface-plate-header')
+    @include('Frontend.components.general-surface-plate-content')
 </div>

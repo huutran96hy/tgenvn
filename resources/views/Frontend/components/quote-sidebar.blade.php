@@ -43,7 +43,7 @@
         </div>
         
         <!-- Mobile Customer Support -->
-        @include('Frontendcomponents.customer-support-mobile')
+        @include('Frontend.components.customer-support-mobile')
     </div>
 
     <!-- Desktop Sidebar -->

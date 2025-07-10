@@ -1,7 +1,7 @@
 <div class="lg:col-span-3">
-    @include('Frontendcomponents.products-header')
-    @include('Frontendcomponents.products-sorting')
-    @include('Frontendcomponents.products-grid')
-    @include('Frontendcomponents.products-pagination')
-    @include('Frontendcomponents.products-search')
+    @include('Frontend.components.products-header')
+    @include('Frontend.components.products-sorting')
+    @include('Frontend.components.products-grid')
+    @include('Frontend.components.products-pagination')
+    @include('Frontend.components.products-search')
 </div>
