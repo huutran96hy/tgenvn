@@ -13,7 +13,7 @@
                         >
                     @elseif(isset($product['image']))
                         <img
-                            src="{{ $product['image'] }}"
+                            src="{{ $paroduct['image'] }}"
                             alt="{{ $product['ko'] }}"
                             class="w-full h-full object-cover"
                             loading="lazy"

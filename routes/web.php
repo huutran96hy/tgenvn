@@ -9,8 +9,11 @@ use App\Http\Controllers\Frontend\{
     NewsController,
     ContactController,
     HomeController,
-    JobDetailController
+    JobDetailController,
+    QuoteController
 };
+use App\Mail\QuoteMail;
+use Illuminate\Support\Facades\Mail;
 
 require __DIR__ . '/admin.php';
 
@@ -30,9 +33,6 @@ Route::get('/about/greeting', function () {
     return view('Frontend.about');
 })->name('about.greeting');
 
-Route::get('/about/organization', function () {
-    return view('Frontend.about');
-})->name('about.organization');
 
 Route::get('/about/technology', function () {
     return view('Frontend.technology-status');
@@ -287,7 +287,7 @@ Route::get('/process/material', function () {
             'ko' => 'O-RING 용 가공',
             'en' => 'O-RING Processing',
             'vi' => 'Gia công O-RING',
-            'image' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/498/040/170x130.crop.jpg',
+            'image' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/446/040/170x130.crop.jpg',
             'description_ko' => 'O-링 제작을 위한 정밀 가공',
             'description_en' => 'Precision processing for O-ring manufacturing',
             'description_vi' => 'Gia công chính xác để sản xuất O-ring'
@@ -305,7 +305,7 @@ Route::get('/process/material', function () {
             'ko' => '압도공정',
             'en' => 'Pressure Process',
             'vi' => 'Quy trình áp lực',
-            'image' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/490/040/170x130.crop.jpg',
+            'image' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/379/170x130.crop.jpg',
             'description_ko' => '고압을 이용한 성형 공정',
             'description_en' => 'Forming process using high pressure',
             'description_vi' => 'Quy trình tạo hình sử dụng áp suất cao'
@@ -323,7 +323,7 @@ Route::get('/process/material', function () {
             'ko' => '절삭가공정(중국)',
             'en' => 'Cutting Process (China)',
             'vi' => 'Quy trình cắt (Trung Quốc)',
-            'image' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/482/040/170x130.crop.jpg',
+            'image' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/269/170x130.crop.jpg',
             'description_ko' => '중국 공장의 절삭 가공 공정',
             'description_en' => 'Cutting process at China factory',
             'description_vi' => 'Quy trình cắt tại nhà máy Trung Quốc'
@@ -332,7 +332,7 @@ Route::get('/process/material', function () {
             'ko' => '절삭가공정(중국)',
             'en' => 'Cutting Process (China)',
             'vi' => 'Quy trình cắt (Trung Quốc)',
-            'image' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/478/040/170x130.crop.jpg',
+            'image' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/266/170x130.crop.jpg',
             'description_ko' => '중국 공장의 절삭 가공 공정',
             'description_en' => 'Cutting process at China factory',
             'description_vi' => 'Quy trình cắt tại nhà máy Trung Quốc'
@@ -341,7 +341,7 @@ Route::get('/process/material', function () {
             'ko' => '절삭가공정(중국)',
             'en' => 'Cutting Process (China)',
             'vi' => 'Quy trình cắt (Trung Quốc)',
-            'image' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/474/040/170x130.crop.jpg',
+            'image' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/263/170x130.crop.jpg',
             'description_ko' => '중국 공장의 절삭 가공 공정',
             'description_en' => 'Cutting process at China factory',
             'description_vi' => 'Quy trình cắt tại nhà máy Trung Quốc'
@@ -350,7 +350,7 @@ Route::get('/process/material', function () {
             'ko' => '대형절삭 제작 (중국공정)',
             'en' => 'Large Cutting Manufacturing (China Process)',
             'vi' => 'Sản xuất cắt lớn (Quy trình Trung Quốc)',
-            'image' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/470/040/170x130.crop.jpg',
+            'image' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/260/170x130.crop.jpg',
             'description_ko' => '대형 부품의 절삭 제작 공정',
             'description_en' => 'Large part cutting manufacturing process',
             'description_vi' => 'Quy trình sản xuất cắt bộ phận lớn'
@@ -359,7 +359,7 @@ Route::get('/process/material', function () {
             'ko' => '절단 및 외곽곡절절삭(중국공정)',
             'en' => 'Cutting & Outer Edge Processing (China Process)',
             'vi' => 'Cắt & Gia công cạnh ngoài (Quy trình Trung Quốc)',
-            'image' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/466/040/170x130.crop.jpg',
+            'image' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/257/170x130.crop.jpg',
             'description_ko' => '절단 및 외곽 가공 공정',
             'description_en' => 'Cutting and outer edge processing',
             'description_vi' => 'Cắt và gia công cạnh ngoài'
@@ -383,7 +383,8 @@ Route::get('/process/order', function () {
             'vi' => 'Tiếp nhận đơn hàng',
             'description_ko' => '고객 주문 접수 및 검토',
             'description_en' => 'Customer order reception and review',
-            'description_vi' => 'Tiếp nhận và xem xét đơn hàng của khách hàng'
+            'description_vi' => 'Tiếp nhận và xem xét đơn hàng của khách hàng',
+            'image' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/044/041/170x130.crop.jpg'
         ],
         [
             'ko' => '설계 검토',
@@ -391,7 +392,8 @@ Route::get('/process/order', function () {
             'vi' => 'Xem xét thiết kế',
             'description_ko' => '제품 설계 및 사양 검토',
             'description_en' => 'Product design and specification review',
-            'description_vi' => 'Xem xét thiết kế và thông số kỹ thuật sản phẩm'
+            'description_vi' => 'Xem xét thiết kế và thông số kỹ thuật sản phẩm',
+            'image' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/399/170x130.crop.jpg'
         ],
         [
             'ko' => '정밀 측정',
@@ -399,7 +401,8 @@ Route::get('/process/order', function () {
             'vi' => 'Đo lường chính xác',
             'description_ko' => '고정밀 측정 및 품질 검사',
             'description_en' => 'High precision measurement and quality inspection',
-            'description_vi' => 'Đo lường độ chính xác cao và kiểm tra chất lượng'
+            'description_vi' => 'Đo lường độ chính xác cao và kiểm tra chất lượng',
+            'image' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/299/170x130.crop.jpg'
         ],
         [
             'ko' => '품질 관리',
@@ -407,7 +410,8 @@ Route::get('/process/order', function () {
             'vi' => 'Kiểm soát chất lượng',
             'description_ko' => '전 공정 품질 관리 시스템',
             'description_en' => 'Full process quality control system',
-            'description_vi' => 'Hệ thống kiểm soát chất lượng toàn quy trình'
+            'description_vi' => 'Hệ thống kiểm soát chất lượng toàn quy trình',
+            'image' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/296/170x130.crop.jpg'
         ],
         [
             'ko' => '최종 검사',
@@ -415,7 +419,8 @@ Route::get('/process/order', function () {
             'vi' => 'Kiểm tra cuối cùng',
             'description_ko' => '출하 전 최종 품질 검사',
             'description_en' => 'Final quality inspection before shipment',
-            'description_vi' => 'Kiểm tra chất lượng cuối cùng trước khi giao hàng'
+            'description_vi' => 'Kiểm tra chất lượng cuối cùng trước khi giao hàng',
+            'image' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/293/170x130.crop.jpg'
         ],
         [
             'ko' => '포장 및 출하',
@@ -423,7 +428,8 @@ Route::get('/process/order', function () {
             'vi' => 'Đóng gói & Giao hàng',
             'description_ko' => '안전한 포장 및 배송',
             'description_en' => 'Safe packaging and delivery',
-            'description_vi' => 'Đóng gói an toàn và giao hàng'
+            'description_vi' => 'Đóng gói an toàn và giao hàng',
+            'image' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/290/170x130.crop.jpg'
         ]
     ];
 
@@ -439,6 +445,104 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function ()
     Route::get('/laravel-filemanager', '\UniSharp\LaravelFilemanager\controllers\LfmController@show');
     Route::post('/laravel-filemanager/upload', '\UniSharp\LaravelFilemanager\controllers\UploadController@upload');
     // list all lfm routes here...
+});
+
+// Quote routes
+Route::get('/quote', [QuoteController::class, 'index'])->name('quote');
+Route::post('/quote', [QuoteController::class, 'store'])->name('quote.submit');
+Route::post('/quote/preview', [QuoteController::class, 'preview'])->name('quote.preview');
+Route::post('/quote/upload-image', [QuoteController::class, 'uploadImage'])->name('quote.upload-image');
+
+Route::get('/test-mail', function () {
+    try {
+        // Sample form data for testing
+        $testFormData = [
+            'name' => '홍길동',
+            'company' => '테스트 회사',
+            'email' => 'test@example.com',
+            'contact_email' => 'customer@example.com',
+            'phone' => '010-1234-5678',
+            'fax' => '02-1234-5678',
+            'subject' => '테스트 견적 요청',
+            'message' => '<p><strong>테스트 견적 요청입니다.</strong></p><p>다음 제품에 대한 견적을 요청드립니다:</p><ul><li>정밀 측정구 - 스트레이트 엣지</li><li>수량: 10개</li><li>납기: 2주</li></ul><p>추가 문의사항이 있으시면 연락 부탁드립니다.</p>',
+            'response_method' => 'both',
+            'category' => '정밀 측정구',
+            'address' => '서울시 강남구 테스트로 123',
+            'homepage' => 'https://test-company.com',
+            'tags' => '견적요청, 정밀측정구, 긴급',
+            'visibility' => 'public',
+            'allow_comments' => true,
+            'allow_web' => true,
+            'attachments' => [],
+            'submitted_at' => now(),
+            'ip_address' => request()->ip(),
+            'user_agent' => request()->userAgent()
+        ];
+
+        // Test email addresses
+        $testAdminEmail = 'admin@test.com';
+        $testCustomerEmail = 'customer@test.com';
+
+        // Send test emails
+        $results = [];
+
+        // Test Admin Email
+        try {
+            Mail::to($testAdminEmail)->send(new QuoteMail($testFormData, 'admin'));
+            $results['admin'] = '✅ Admin email sent successfully';
+        } catch (\Exception $e) {
+            $results['admin'] = '❌ Admin email failed: ' . $e->getMessage();
+        }
+
+        // Test Customer Email
+        try {
+            Mail::to($testCustomerEmail)->send(new QuoteMail($testFormData, 'customer'));
+            $results['customer'] = '✅ Customer email sent successfully';
+        } catch (\Exception $e) {
+            $results['customer'] = '❌ Customer email failed: ' . $e->getMessage();
+        }
+
+        // Test CC Email
+        try {
+            Mail::to('cc@test.com')->send(new QuoteMail($testFormData, 'cc'));
+            $results['cc'] = '✅ CC email sent successfully';
+        } catch (\Exception $e) {
+            $results['cc'] = '❌ CC email failed: ' . $e->getMessage();
+        }
+
+        // Mail configuration info
+        $mailConfig = [
+            'driver' => config('mail.default'),
+            'host' => config('mail.mailers.smtp.host'),
+            'port' => config('mail.mailers.smtp.port'),
+            'encryption' => config('mail.mailers.smtp.encryption'),
+            'username' => config('mail.mailers.smtp.username'),
+            'from_address' => config('mail.from.address'),
+            'from_name' => config('mail.from.name'),
+        ];
+
+        return response()->view('test-mail-results', [
+            'results' => $results,
+            'mailConfig' => $mailConfig,
+            'testFormData' => $testFormData
+        ]);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'error' => 'Mail test failed',
+            'message' => $e->getMessage(),
+            'trace' => $e->getTraceAsString()
+        ], 500);
+    }
+})->name('test.mail');
+
+Route::get('/test-mail-1', function () {
+    Mail::raw('Đây là email test gửi từ hệ thống Laravel.', function ($message) {
+        $message->to('huutran96hy@gmail.com')
+                ->subject('Test gửi mail Laravel');
+    });
+
+    return 'Đã gửi thử mail!';
 });
 
 Route::group(['prefix' => 'admin/laravel-filemanager', 'middleware' => ['web', 'auth']], function () {

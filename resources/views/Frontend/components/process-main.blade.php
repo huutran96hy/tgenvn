@@ -3,5 +3,4 @@
     @include('Frontend.components.products-sorting')
     @include('Frontend.components.process-grid')
     @include('Frontend.components.products-pagination')
-    @include('Frontend.components.products-search')
 </div>
