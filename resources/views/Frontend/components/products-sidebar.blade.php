@@ -33,7 +33,7 @@
         </div>
         
         <!-- Mobile Customer Support -->
-        @include('frontend.components.customer-support-mobile')
+        @include('Frontend.components.customer-support-mobile')
     </div>
 
     <!-- Desktop Sidebar -->
@@ -57,6 +57,6 @@
             </nav>
         </div>
 
-        @include('frontend.components.customer-support')
+        @include('Frontend.components.customer-support')
     </div>
 </div>
