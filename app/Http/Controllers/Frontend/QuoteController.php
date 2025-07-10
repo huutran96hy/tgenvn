@@ -13,7 +13,7 @@ class QuoteController extends Controller
 {
     public function index()
     {
-        return view('frontend.quote');
+        return view('Frontendquote');
     }
 
     public function store(Request $request)

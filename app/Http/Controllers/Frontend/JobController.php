@@ -73,8 +73,8 @@ class JobController extends Controller
             $jobs->appends($request->query());
 
             return response()->json([
-                'html' => view('Frontend.partials.job_list_items', compact('jobs'))->render(),
-                'pagination' => $jobs->links('Frontend.pagination.custom')->toHtml(),
+                'html' => view('Frontendpartials.job_list_items', compact('jobs'))->render(),
+                'pagination' => $jobs->links('Frontendpagination.custom')->toHtml(),
                 'data' => [
                     'from' => $jobs->firstItem(),
                     'to' => $jobs->lastItem(),
@@ -83,7 +83,7 @@ class JobController extends Controller
             ]);
         }
 
-        return view('Frontend.pages.job_list', compact(
+        return view('Frontendpages.job_list', compact(
             'jobs',
             'categories',
             'provinces',

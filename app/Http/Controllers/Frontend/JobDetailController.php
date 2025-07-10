@@ -29,6 +29,6 @@ class JobDetailController extends Controller
             ->take(5)
             ->get();
 
-        return view('Frontend.pages.job_detail', compact('job', 'employer', 'randomJobs'));
+        return view('Frontendpages.job_detail', compact('job', 'employer', 'randomJobs'));
     }
 }

@@ -21,7 +21,7 @@ class NewsController extends Controller
 
         $news = $query->paginate(6);
 
-        return view('Frontend.pages.news_list', compact('news'));
+        return view('Frontendpages.news_list', compact('news'));
     }
 
     /**
@@ -37,6 +37,6 @@ class NewsController extends Controller
             ->limit(3)
             ->get();
 
-        return view('Frontend.pages.news_detail', compact('news', 'relatedNews'));
+        return view('Frontendpages.news_detail', compact('news', 'relatedNews'));
     }
 }

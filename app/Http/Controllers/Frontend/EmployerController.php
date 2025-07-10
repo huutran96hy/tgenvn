@@ -58,7 +58,7 @@ class EmployerController extends Controller
 
         $employers = $query->paginate($perPage)->appends($request->query());
 
-        return view('Frontend.pages.employer_list', compact('employers'));
+        return view('Frontendpages.employer_list', compact('employers'));
     }
 
     /**
@@ -99,12 +99,12 @@ class EmployerController extends Controller
         // Ajax request
         if (request()->ajax()) {
             return response()->json([
-                'html' => view('Frontend.partials.latest_job_items', compact('latestJobs'))->render(),
-                'pagination' => $latestJobs->links('Frontend.pagination.custom')->toHtml(),
+                'html' => view('Frontendpartials.latest_job_items', compact('latestJobs'))->render(),
+                'pagination' => $latestJobs->links('Frontendpagination.custom')->toHtml(),
             ]);
         }
 
-        return view('Frontend.pages.employer_detail', compact('employer', 'latestJobs'));
+        return view('Frontendpages.employer_detail', compact('employer', 'latestJobs'));
     }
 
     /**
