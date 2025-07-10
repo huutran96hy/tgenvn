@@ -40,16 +40,26 @@
         const currentLang = document.getElementById('currentLang');
         let currentLanguage = 'ko';
 
+        // Config cho tên và icon
+        const langConfig = {
+            'ko': { text: '한국어', flag: 'flag-kr' },
+            'en': { text: 'English', flag: 'flag-us' },
+            'vi': { text: 'Tiếng Việt', flag: 'flag-vn' }
+        };
+
+        // --- Đọc ngôn ngữ lưu từ localStorage (nếu có) ---
+        const savedLang = localStorage.getItem('selectedLang');
+        if (savedLang && savedLang !== currentLanguage) {
+            switchLanguage(savedLang);
+        }
+
         function switchLanguage(lang) {
             currentLanguage = lang;
-            
-            // Update current language display
-            const langConfig = {
-                'ko': { text: '한국어', flag: 'flag-kr' },
-                'en': { text: 'English', flag: 'flag-us' },
-                'vi': { text: 'Tiếng Việt', flag: 'flag-vn' }
-            };
 
+            // Lưu lại vào localStorage
+            localStorage.setItem('selectedLang', lang);
+
+            // Update current language display
             currentLang.textContent = langConfig[lang].text;
             languageBtn.querySelector('.flag-icon').className = `flag-icon ${langConfig[lang].flag}`;
 
