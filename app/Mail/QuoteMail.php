@@ -11,7 +11,7 @@ use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
 
-class QuoteMail extends Mailable implements ShouldQueue
+class QuoteMail extends Mailable 
 {
     use Queueable, SerializesModels;
 
