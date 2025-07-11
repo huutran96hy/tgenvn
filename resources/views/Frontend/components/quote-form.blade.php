@@ -660,11 +660,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Load auto-saved content on page load
     const autoSavedContent = localStorage.getItem('quote-form-content');
-    if (autoSavedContent && !savedContent) {
-        if (confirm('이전에 작성하던 내용이 있습니다. 불러오시겠습니까?')) {
-            quill.root.innerHTML = autoSavedContent;
-        }
-    }
 
     // Clear auto-save on successful submission
     if (document.querySelector('.bg-green-50')) {

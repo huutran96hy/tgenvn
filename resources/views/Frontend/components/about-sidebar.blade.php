@@ -39,9 +39,9 @@
     <div class="hidden lg:block space-y-6">
         <!-- Company Information -->
         <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-            <div class="text-center py-6 px-4 bg-gradient-to-b from-gray-50 to-white">
-                <h2 class="text-2xl font-bold text-blue-600 mb-2">COMPANY</h2>
-                <h3 class="text-xl font-light text-blue-400 mb-4">INFORMATION</h3>
+            <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-1 py-1 text-center">
+                <h2 class="text-2xl font-bold text-white mb-0">COMPANY</h2>
+                <h3 class="text-xl font-light text-white mb-1">INFORMATION</h3>
                 <div class="w-full h-1 bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
             </div>
             

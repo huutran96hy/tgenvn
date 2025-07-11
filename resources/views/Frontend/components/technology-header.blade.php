@@ -1,4 +1,4 @@
-<div class="mb-6 lg:mb-8">
+<div class="mb-0">
     <!-- Mobile Header -->
     <div class="block lg:hidden">
         <div class="bg-white rounded-lg shadow-sm p-4 mb-4">

@@ -1,9 +1,8 @@
-<div class="mb-6 lg:mb-8">
+<div class="mb-0">
     <!-- Mobile Header -->
     <div class="block lg:hidden">
         <div class="bg-white rounded-lg shadow-sm p-4 mb-4">
             <div class="flex items-center justify-center mb-2">
-                <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
                 <h1 class="text-xl font-bold text-blue-600" data-ko="인사말" data-en="Greeting" data-vi="Lời chào">인사말</h1>
             </div>
             <p class="text-center text-sm text-gray-500" data-ko="회사소개" data-en="About Us" data-vi="Giới thiệu">회사소개</p>

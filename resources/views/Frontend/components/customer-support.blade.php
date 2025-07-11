@@ -33,9 +33,5 @@
         <p class="text-sm text-gray-700 text-center mb-4 leading-relaxed" data-ko="전화주시면 언제나 친절한 상담해드립니다." data-en="We provide kind consultation whenever you call." data-vi="Chúng tôi tư vấn tận tình bất cứ khi nào bạn gọi.">
             전화주시면 언제나 친절한 상담해드립니다.
         </p>
-        
-        <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white text-center py-2 rounded font-bold text-sm">
-            CUSTOMER SERVICE
-        </div>
     </div>
 </div>

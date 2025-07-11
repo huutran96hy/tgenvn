@@ -1,4 +1,4 @@
-<div class="flex flex-wrap gap-2 mb-6">
+<div class="flex flex-wrap gap-2 mb-0">
     @php
         $sortOptions = [
             ['key' => 'all', 'ko' => '조회 수 ', 'en' => 'View All', 'vi' => 'Xem tất cả', 'active' => false],

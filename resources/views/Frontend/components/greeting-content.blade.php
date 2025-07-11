@@ -37,9 +37,6 @@
         <!-- Signature -->
         <div class="mt-12 text-center">
             <div class="inline-block">
-                <div class="w-32 h-16 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                    <span class="text-gray-500 text-sm">Signature</span>
-                </div>
                 <p class="text-lg font-bold text-gray-800" data-ko="(주)티지이엔씨 임직원 일동" data-en="TG ENC Co., Ltd. All Employees" data-vi="Toàn thể nhân viên TG ENC Co., Ltd.">
                     (주)티지이엔씨 임직원 일동
                 </p>

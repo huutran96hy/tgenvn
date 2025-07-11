@@ -3,11 +3,9 @@
         <div class="flex items-center justify-between h-20">
             <!-- Logo -->
             <div class="flex items-center space-x-2">
-                <div class="text-3xl font-bold">
-                    <span class="text-blue-600">TG</span>
-                    <span class="text-blue-400 ml-2">ENC</span>
-                </div>
-                <div class="text-xs text-gray-500 ml-2 hidden sm:block">Precision Granite Stage Technology</div>
+                <a href="{{ route('home') }}" class="flex items-center">
+                    <img src="{{ asset('assets/images/logo_width.png') }}" alt="TG-ENC Logo" class="h-16 w-auto">
+                </a>
             </div>
 
             <!-- Desktop Navigation -->

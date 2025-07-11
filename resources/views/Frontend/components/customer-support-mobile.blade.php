@@ -18,9 +18,5 @@
                 <span class="text-xs" data-ko="이메일상담" data-en="Email" data-vi="Email">이메일상담</span>
             </a>
         </div>
-        
-        <div class="mt-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-center py-1.5 rounded text-xs font-bold">
-            CUSTOMER SERVICE
-        </div>
     </div>
 </div>

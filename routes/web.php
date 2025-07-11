@@ -453,6 +453,18 @@ Route::post('/quote', [QuoteController::class, 'store'])->name('quote.submit');
 Route::post('/quote/preview', [QuoteController::class, 'preview'])->name('quote.preview');
 Route::post('/quote/upload-image', [QuoteController::class, 'uploadImage'])->name('quote.upload-image');
 
+// Customer Support routes
+Route::get('/support', function () {
+    return redirect()->route('support.consultation');
+})->name('support');
+
+Route::get('/support/notices', function () {
+    return view('frontend.support-notices');
+})->name('support.notices');
+
+Route::get('/support/consultation', function () {
+    return view('frontend.customer-support');
+})->name('support.consultation');
 Route::get('/test-mail', function () {
     try {
         // Sample form data for testing
