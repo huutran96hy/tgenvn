@@ -9,12 +9,44 @@
             </div>
         </div>
 
-        <div class="text-sm text-gray-600 space-y-1">
-            <p data-ko="회사명 : (주)티지이엔씨 | 대표 : 백시호 | 사업자등록번호 : 140-81-54818 | 대표전화 : 031-431-4418 | 팩스 : 031-358-4418" data-en="Company: TG ENC Co., Ltd. | CEO: Baek Si-ho | Business Registration: 140-81-54818 | Tel: 031-431-4418 | Fax: 031-358-4418" data-vi="Công ty: TG ENC Co., Ltd. | Giám đốc: Baek Si-ho | Đăng ký kinh doanh: 140-81-54818 | ĐT: 031-431-4418 | Fax: 031-358-4418">
-                회사명 : (주)티지이엔씨 | 대표 : 백시호 | 사업자등록번호 : 140-81-54818 | 대표전화 : 031-431-4418 | 팩스 : 031-358-4418
+        <div class="text-sm text-gray-600 space-y-2">
+            <!-- Company Legal Information -->
+            <p data-ko="회사명: TGEN VN COMPANY LIMITED | 사업자등록번호: 0801452209" 
+               data-en="Company: TGEN VN COMPANY LIMITED | Business Registration: 0801452209" 
+               data-vi="Công ty: TGEN VN COMPANY LIMITED | Mã số doanh nghiệp: 0801452209">
+                Công ty: TGEN VN COMPANY LIMITED | Đại diện: NGUYỄN HỮU THÀNH | Mã số doanh nghiệp: 0801452209
             </p>
-            <p data-ko="본사 : 경기 : 경기도 화성시 장안면 3,1만석로 367-4 | E-mail : tgenc@tg-enc.co.kr" data-en="Head Office: Gyeonggi-do, Hwaseong-si, Jangan-myeon, 3,1 Manseok-ro 367-4 | E-mail: tgenc@tg-enc.co.kr" data-vi="Trụ sở chính: Gyeonggi-do, Hwaseong-si, Jangan-myeon, 3,1 Manseok-ro 367-4 | E-mail: tgenc@tg-enc.co.kr">본사 : 경기 : 경기도 화성시 장안면 3,1만석로 367-4 | E-mail : tgenc@tg-enc.co.kr</p>
-            <p class="text-gray-500">Copyright © Since 2012 TGENC.CO.KR All Rights Reserved</p>
+            
+            <!-- Address and Contact -->
+            <p data-ko="본사: 베트남 하이즈엉성 뜨끼현 치민사 응이케촌 | 전화: 0977.112.185" 
+               data-en="Head Office: Thon Nghi Khe, Xa Chi Minh, Huyen Tu Ky, Tinh Hai Duong, Viet Nam | Tel: 0977.112.185" 
+               data-vi="Trụ sở chính: Thôn Nghi Khê, xã Chi Minh, Huyện Tứ Kỳ, Tỉnh Hải Dương, Việt Nam | ĐT: 0977.112.185">
+                Trụ sở chính: Thôn Nghi Khê, xã Chi Minh, Huyện Tứ Kỳ, Tỉnh Hải Dương, Việt Nam | ĐT: 0977.112.185
+            </p>
+            
+            <!-- Registration Details -->
+            <p data-ko="등록일: 2025년 6월 11일 " 
+               data-en="Registration Date: June 11, 2025" 
+               data-vi="Ngày đăng ký: 11/06/2025">
+                Ngày đăng ký: 11/06/2025 
+            </p>
+            
+            <!-- Email -->
+            <p data-ko="이메일: tgenvn@gmail.com" 
+               data-en="E-mail: tgenvn@gmail.com" 
+               data-vi="E-mail: tgenvn@gmail.com">
+                E-mail: tgenvn@gmail.com
+            </p>
+            
+            <!-- Copyright -->
+            <p class="text-gray-500 pt-2 border-t border-gray-100">
+                <span data-ko="저작권 © 2025년부터 TGENVN.CO.KR 모든 권리 보유" 
+                      data-en="Copyright © Since 2025 TGENVN.CO.KR All Rights Reserved" 
+                      data-vi="Bản quyền © Từ năm 2025 TGENVN.CO.KR Tất cả quyền được bảo lưu">
+                    Copyright © Since 2025 TGENVN.CO.KR All Rights Reserved
+                </span>
+            </p>
         </div>
     </div>
 </footer>
+
