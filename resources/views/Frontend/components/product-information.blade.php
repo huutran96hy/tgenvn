@@ -5,17 +5,17 @@
                 <h3 class="text-lg font-bold text-blue-600" data-ko="제품정보" data-en="Product Info" data-vi="Thông tin sản phẩm">제품정보</h3>
                 <div class="flex items-center text-sm text-gray-500">
                     <span>PRODUCT VIEW</span>
-                    <button class="ml-2 text-blue-600 hover:text-blue-800">
+                    <a class="ml-2 text-blue-600 hover:text-blue-800" href="{{ route('products') }}" data-ko="더보기" data-en="View More" data-vi="Xem thêm">
                         MORE →
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
 
         <div class="p-4">
             <div class="mb-4">
-                <div class="w-full h-32 bg-gray-200 rounded-lg flex items-center justify-center">
-                    <span class="text-gray-500 text-sm">Product Image</span>
+                <div class="w-full h-58 bg-gray-200 rounded-lg flex items-center justify-center">
+                    <img src="{{ asset('assets/images/product-placeholder.png') }}" alt="Product Image" class="max-w-full max-h-full object-cover rounded-lg">
                 </div>
             </div>
 
@@ -34,18 +34,20 @@
     <!-- Product Categories -->
     <div class="space-y-2">
         @php
-            $categories = [
-                ['ko' => '01 규격 정반', 'en' => '01 Standard Surface Plate', 'vi' => '01 Bàn chuẩn', 'bg' => 'bg-gray-800 hover:bg-gray-700'],
-                ['ko' => '02 정밀 측정구', 'en' => '02 Precision Measuring Tools', 'vi' => '02 Dụng cụ đo chính xác', 'bg' => 'bg-gray-700 hover:bg-gray-600'],
-                ['ko' => '03 고객주문형정반', 'en' => '03 Custom Surface Plate', 'vi' => '03 Bàn tùy chỉnh', 'bg' => 'bg-gray-600 hover:bg-gray-500'],
-                ['ko' => '04 Air Bearing Stage', 'en' => '04 Air Bearing Stage', 'vi' => '04 Air Bearing Stage', 'bg' => 'bg-blue-600 hover:bg-blue-700']
-            ];
+        $categories = [
+        ['ko' => '01 규격 정반', 'en' => '01 Standard Surface Plate', 'vi' => '01 Bàn chuẩn', 'bg' => 'bg-gray-800 hover:bg-gray-700','link'=> route('products.general')],
+        ['ko' => '02 정밀 측정구', 'en' => '02 Precision Measuring Tools', 'vi' => '02 Dụng cụ đo chính xác', 'bg' => 'bg-gray-700 hover:bg-gray-600','link'=> route('products.precision')],
+        ['ko' => '03 고객주문형정반', 'en' => '03 Custom Surface Plate', 'vi' => '03 Bàn tùy chỉnh', 'bg' => 'bg-gray-600 hover:bg-gray-500', 'link'=> route('products.custom')],
+        ['ko' => '04 Air Bearing Stage', 'en' => '04 Air Bearing Stage', 'vi' => '04 Air Bearing Stage', 'bg' => 'bg-blue-600 hover:bg-blue-700', 'link'=> route('products.air-bearing')],
+        ];
         @endphp
 
         @foreach($categories as $index => $category)
+        <a href="{{ $category['link'] }}" class="block">
             <div class="{{ $category['bg'] }} text-white p-3 {{ $index === 0 ? 'rounded-t-lg' : ($index === count($categories) - 1 ? 'rounded-b-lg' : '') }} cursor-pointer transition-colors">
                 <span class="text-sm font-medium" data-ko="{{ $category['ko'] }}" data-en="{{ $category['en'] }}" data-vi="{{ $category['vi'] }}">{{ $category['ko'] }}</span>
             </div>
+        </a>
         @endforeach
     </div>
 </div>

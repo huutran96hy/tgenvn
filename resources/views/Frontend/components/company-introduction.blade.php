@@ -15,15 +15,15 @@
         <p class="text-xs text-gray-500 mb-4" data-ko="• 티지이엔씨는 한국의 정밀기계를 통하여 잘 된 기업입니다." data-en="• TG ENC is a successful company through precision machinery in Korea." data-vi="• TG ENC là một công ty thành công thông qua máy móc chính xác tại Hàn Quốc.">• 티지이엔씨는 한국의 정밀기계를 통하여 잘 된 기업입니다.</p>
 
         <div class="flex flex-wrap gap-2">
-            <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded transition-colors" data-ko="인사말" data-en="Greeting" data-vi="Lời chào">
+            <a href="{{route('about.greeting')}}" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded transition-colors" data-ko="인사말" data-en="Greeting" data-vi="Lời chào">
                 인사말
-            </button>
-            <button class="px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 text-sm rounded transition-colors" data-ko="조직도" data-en="Organization" data-vi="Sơ đồ tổ chức">
-                조직도
-            </button>
-            <button class="px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 text-sm rounded transition-colors" data-ko="제조기술 현황" data-en="Technology Status" data-vi="Tình trạng công nghệ">
+            </a>
+            <a href="{{route('about.technology')}}" class="px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 text-sm rounded transition-colors" data-ko="제조기술 현황" data-en="Technology Status" data-vi="Tình trạng công nghệ">
                 제조기술 현황
-            </button>
+            </a>
+            <a href="{{route('about.directions')}}" class="px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 text-sm rounded transition-colors" data-ko="찾아오시는 길" data-en="Directions" data-vi="Chỉ đường">
+                찾아오시는 길
+            </a>
         </div>
     </div>
 </div>
