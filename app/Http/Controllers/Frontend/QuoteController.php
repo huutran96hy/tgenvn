@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -68,12 +69,12 @@ class QuoteController extends Controller
         try {
             // Process form data
             $formData = $request->all();
-            
+
             // Combine phone numbers
             if ($request->phone1 && $request->phone2 && $request->phone3) {
                 $formData['phone'] = $request->phone1 . '-' . $request->phone2 . '-' . $request->phone3;
             }
-            
+
             // Combine fax numbers
             if ($request->fax1 && $request->fax2 && $request->fax3) {
                 $formData['fax'] = $request->fax1 . '-' . $request->fax2 . '-' . $request->fax3;
@@ -86,7 +87,7 @@ class QuoteController extends Controller
                     if ($file->isValid()) {
                         $filename = time() . '_' . $file->getClientOriginalName();
                         $path = $file->storeAs('quote-attachments', $filename, 'public');
-                        
+
                         $attachments[] = [
                             'original_name' => $file->getClientOriginalName(),
                             'filename' => $filename,
@@ -97,7 +98,7 @@ class QuoteController extends Controller
                     }
                 }
             }
-            
+
             $formData['attachments'] = $attachments;
             $formData['submitted_at'] = now();
             $formData['ip_address'] = $request->ip();
@@ -112,7 +113,6 @@ class QuoteController extends Controller
             return redirect()->route('quote')
                 ->with('success', '견적 요청이 성공적으로 전송되었습니다. 빠른 시일 내에 답변드리겠습니다.')
                 ->with('quote_id', 'Q' . date('Ymd') . rand(1000, 9999));
-
         } catch (\Exception $e) {
             // Log the error
             Log::error('Quote form submission error: ' . $e->getMessage(), [
@@ -131,7 +131,8 @@ class QuoteController extends Controller
         // Send to admin
         $adminEmail = 'huutran96hy@gmail.com';
         Mail::to($adminEmail)->send(new QuoteMail($formData, 'admin'));
-
+        $adEmail = 'tgenc@tg-enc.co.kr';
+        Mail::to($adEmail)->send(new QuoteMail($formData, 'admin'));
         // Send confirmation to customer
         Mail::to($formData['contact_email'])->send(new QuoteMail($formData, 'customer'));
 
@@ -147,7 +148,7 @@ class QuoteController extends Controller
     public function preview(Request $request)
     {
         $content = $request->input('content', '');
-        
+
         return response()->json([
             'success' => true,
             'preview_html' => $content,
@@ -173,7 +174,7 @@ class QuoteController extends Controller
             $file = $request->file('image');
             $filename = time() . '_' . $file->getClientOriginalName();
             $path = $file->storeAs('quote-images', $filename, 'public');
-            
+
             return response()->json([
                 'success' => true,
                 'url' => Storage::url($path),
