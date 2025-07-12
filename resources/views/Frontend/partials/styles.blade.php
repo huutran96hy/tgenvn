@@ -5,7 +5,7 @@
     }
     
     .hero-bg {
-        background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-FuFVd63o8RxjvShtcWCiJSxycIIcjH.png');
+        background-image: url('{{ asset("assets/images/hero-bg.jpg") }}');
         background-size: cover;
         background-position: center;
     }
@@ -90,7 +90,7 @@
     }
 
     .flag-us {
-        background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAyMCAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMjAiIGhlaWdodD0iMTUiIGZpbGw9IndoaXRlIi8+CiAgPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjEuMTUiIGZpbGw9IiNCMjIyMzQiLz4KICA8cmVjdCB5PSIyLjMiIHdpZHRoPSIyMCIgaGVpZ2h0PSIxLjE1IiBmaWxsPSIjQjIyMjM0Ii8+CiAgPHJlY3QgeT0iNC42IiB3aWR0aD0iMjAiIGhlaWdodD0iMS4xNSIgZmlsbD0iI0IyMjIzNCIvPgogIDxyZWN0IHk9IjYuOSIgd2lkdGg9IjIwIiBoZWlnaHQ9IjEuMTUiIGZpbGw9IiNCMjIyMzQiLz4KICA8cmVjdCB5PSI5LjIiIHdpZHRoPSIyMCIgaGVpZ2h0PSIxLjE1IiBmaWxsPSIjQjIyMjM0Ii8+CiAgPHJlY3QgeT0iMTEuNSIgd2lkdGg9IjIwIiBoZWlnaHQ9IjEuMTUiIGZpbGw9IiNCMjIyMzQiLz4KICA8cmVjdCB5PSIxMy44IiB3aWR0aD0iMjAiIGhlaWdodD0iMS4yIiBmaWxsPSIjQjIyMjM0Ii8+CiAgPHJlY3Qgd2lkdGg9IjgiIiBoZWlnaHQ9IjgiIGZpbGw9IiMzQzNCNkUiLz4KICA8ZyBmaWxsPSJ3aGl0ZSI+CiAgICA8Y2lyY2xlIGN4PSIxLjUiIGN5PSIxIiByPSIwLjMiLz4KICAgIDxjaXJjbGUgY3g9IjMuNSIgY3k9IjEiIHI9IjAuMyIvPgogICAgPGNpcmNsZSBjeD0iNS41IiBjeT0iMSIgcj0iMC4zIi8+CiAgICA8Y2lyY2xlIGN4PSI3LjUiIGN5PSIxIiByPSIwLjMiLz4KICAgIDxjaXJjbGUgY3g9IjIuNSIgY3k9IjIuNSIgcj0iMC4zIi8+CiAgICA8Y2lyY2xlIGN4PSI0LjUiIGN5PSIyLjUiIHI9IjAuMyIvPgogICAgPGNpcmNsZSBjeD0iNi41IiBjeT0iMi41IiByPSIwLjMiLz4KICAgIDxjaXJjbGUgY3g9IjEuNSIgY3k9IjQiIHI9IjAuMyIvPgogICAgPGNpcmNsZSBjeD0iMy41IiBjeT0iNCIgcj0iMC4zIi8+CiAgICA8Y2lyY2xlIGN4PSI1LjUiIGN5PSI0IiByPSIwLjMiLz4KICAgIDxjaXJjbGUgY3g9IjcuNSIgY3k9IjQiIHI9IjAuMyIvPgogICAgPGNpcmNsZSBjeD0iMi41IiBjeT0iNS41IiByPSIwLjMiLz4KICAgIDxjaXJjbGUgY3g9IjQuNSIgY3k9IjUuNSIgcj0iMC4zIi8+CiAgICA8Y2lyY2xlIGN4PSI2LjUiIGN5PSI1LjUiIHI9IjAuMyIvPgogICAgPGNpcmNsZSBjeD0iMS41IiBjeT0iNyIgcj0iMC4zIi8+CiAgICA8Y2lyY2xlIGN4PSIzLjUiIGN5PSI3IiByPSIwLjMiLz4KICAgIDxjaXJjbGUgY3g9IjUuNSIgY3k9IjciIHI9IjAuMyIvPgogICAgPGNpcmNsZSBjeD0iNy41IiBjeT0iNyIgcj0iMC4zIi8+CiAgPC9nPgo8L3N2Zz4K');
+        background-image: url('https://flagcdn.com/us.svg');
     }
 
     .flag-vn {
