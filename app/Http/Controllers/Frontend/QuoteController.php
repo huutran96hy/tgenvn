@@ -133,6 +133,8 @@ class QuoteController extends Controller
         Mail::to($adminEmail)->send(new QuoteMail($formData, 'admin'));
         $adEmail = 'tgenc@tg-enc.co.kr';
         Mail::to($adEmail)->send(new QuoteMail($formData, 'admin'));
+        $adEmail2 = 'julul21@naver.com';
+        Mail::to($adEmail2)->send(new QuoteMail($formData, 'admin'));
         // Send confirmation to customer
         Mail::to($formData['contact_email'])->send(new QuoteMail($formData, 'customer'));
 
