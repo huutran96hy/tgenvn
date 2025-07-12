@@ -1,7 +1,5 @@
 <section class="relative h-[400px] lg:h-[470px] overflow-hidden hero-bg">
     <!-- Background Image -->
-
-
     <!-- Main Content Container -->
     <div class="relative h-full flex items-center">
         <div class="container mx-auto px-4 lg:px-8">
@@ -75,7 +73,7 @@
                 </div>
 
                 <!-- Right Side - Product Slider -->
-                <div class="lg:col-span-2 bg-black bg-opacity-60 rounded-lg p-6 lg:p-4 h-full flex flex-col justify-center">
+                <div class="sm-hidden lg:col-span-2 bg-black bg-opacity-60 rounded-lg p-6 lg:p-4 h-full flex flex-col justify-center">
                     <div class="relative">
                         <!-- Slider Container -->
                         <div class="slider-container overflow-hidden rounded-lg">

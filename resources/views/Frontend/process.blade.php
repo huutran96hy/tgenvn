@@ -3,6 +3,6 @@
 @section('title', 'TG ENC - 생산공정 | Precision Granite Stage Technology')
 
 @section('content')
-    @include('Frontend.sections.products-hero')
+    @include('Frontend.sections.hero')
     @include('Frontend.sections.process-content')
 @endsection

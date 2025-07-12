@@ -133,6 +133,9 @@
 
     /* Mobile Navigation Enhancements */
     @media (max-width: 1023px) {
+        .sm-hidden {
+            display: none !important;
+        }
         .mobile-nav-scroll {
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
