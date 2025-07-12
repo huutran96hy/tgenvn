@@ -5,13 +5,13 @@
     }
     
     .hero-bg {
-        background-image: url('{{ asset("assets/images/hero-bg.jpg") }}');
+        background-image: url('{{ asset("assets/images/hero-bg.png") }}');
         background-size: cover;
         background-position: center;
     }
     
     .precision-tools-bg {
-        background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-jtCBcWufoJI0CiVFfLHDeqzeUMv8QP.png');
+        background-image: url('{{ asset("assets/images/precision-tools-bg.jpg") }}');
         background-size: cover;
         background-position: center;
     }
