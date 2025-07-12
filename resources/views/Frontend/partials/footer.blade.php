@@ -39,13 +39,13 @@
             </p>
             
             <!-- Copyright -->
-            <p class="text-gray-500 pt-2 border-t border-gray-100">
+            <!-- <p class="text-gray-500 pt-2 border-t border-gray-100">
                 <span data-ko="저작권 © 2025년부터 TGENVN.CO.KR 모든 권리 보유" 
                       data-en="Copyright © Since 2025 TGENVN.CO.KR All Rights Reserved" 
                       data-vi="Bản quyền © Từ năm 2025 TGENVN.CO.KR Tất cả quyền được bảo lưu">
                     Copyright © Since 2025 TGENVN.CO.KR All Rights Reserved
                 </span>
-            </p>
+            </p> -->
         </div>
     </div>
 </footer>
