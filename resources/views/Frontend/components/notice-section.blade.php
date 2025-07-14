@@ -1,5 +1,5 @@
 <div class="space-y-6">
-    <div class="bg-white rounded-lg shadow-sm">
+    <!-- <div class="bg-white rounded-lg shadow-sm">
         <div class="border-b border-gray-200 p-4">
             <div class="flex items-center justify-between">
                 <h3 class="text-lg font-bold text-blue-600" data-ko="공지사항" data-en="Notice" data-vi="Thông báo">공지사항</h3>
@@ -24,7 +24,7 @@
                 </div>
             @endforeach
         </div>
-    </div>
+    </div> -->
 
     <!-- Service Icons -->
     <div class="bg-white p-6 rounded-lg shadow-sm">

@@ -11,15 +11,11 @@
     <div class="space-y-2 text-sm">
         <div class="flex items-center">
             <span class="font-bold mr-2">📞</span>
-            <span>031) 431-4418</span>
-        </div>
-        <div class="flex items-center">
-            <span class="font-bold mr-2">📠</span>
-            <span>Fax : 031) 358-4418</span>
+            <span>+84-338-221-216</span>
         </div>
         <div class="flex items-center">
             <span class="font-bold mr-2">✉️</span>
-            <span>tgenc@tg-enc.co.kr</span>
+            <span>tgenvn@gmail.com</span>
         </div>
     </div>
 

@@ -14,7 +14,7 @@
                                 <span class="text-red-500 text-400 lg:text-7xl ">T</span><span class="text-blue-400">GEN VN</span>
                             </h1>
                             <p class="text-red-500 text-lg font-semibold ml-2" style="font-size: 24px;" data-ko="기술을 선도하는" data-en="LEADING TECHNOLOGY" data-vi="CÔNG NGHỆ DẪN ĐẦU">
-                                CÔNG NGHỆ DẪN ĐẦU
+                                기술을 선도하는
                             </p>
                         </div>
                         <div>
@@ -25,19 +25,8 @@
                                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                         </svg>
                                     </div>
-                                    <span class="text-sm lg:text-base" data-ko="화강암 표면판" data-en="Granite Surface Plates" data-vi="Tấm bề mặt đá Granit">
-                                        Tấm bề mặt đá Granit
-                                    </span>
-                                </div>
-
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
-                                        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                                        </svg>
-                                    </div>
-                                    <span class="text-sm lg:text-base" data-ko="자동 검사 장비" data-en="Automatic Testing Equipment" data-vi="Thiết bị kiểm tra tự động">
-                                        Thiết bị kiểm tra tự động
+                                    <span class="text-sm lg:text-base" data-ko="정밀 화강암 평판" data-en="Precision Granite Surface Plate" data-vi="Tấm bề mặt đá granit chính xác">
+                                        정밀 화강암 평판
                                     </span>
                                 </div>
 
@@ -48,7 +37,7 @@
                                         </svg>
                                     </div>
                                     <span class="text-sm lg:text-base" data-ko="3D 자동화 장비" data-en="3D Automation Equipment" data-vi="Thiết bị tự động hoá 3D">
-                                        Thiết bị tự động hoá 3D
+                                        3D 자동화 장비
                                     </span>
                                 </div>
 
@@ -58,8 +47,19 @@
                                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                         </svg>
                                     </div>
-                                    <span class="text-sm lg:text-base" data-ko="정밀 측정 도구" data-en="Precision Measuring Tools" data-vi="Dụng cụ đo chính xác">
-                                        Dụng cụ đo chính xác
+                                    <span class="text-sm lg:text-base" data-ko="자동화 검사 장비" data-en="Automation Inspection Equipment" data-vi="Thiết bị tự động hoá 3D">
+                                        자동화 검사 장비
+                                    </span>
+                                </div>
+
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm lg:text-base" data-ko="정밀 측정 도구" data-en="Precision Measuring Instruments" data-vi="Dụng cụ đo lường chính xác">
+                                        정밀 측정 도구
                                     </span>
                                 </div>
                             </div>
@@ -80,11 +80,6 @@
                             <div class="slider-wrapper flex transition-transform duration-500 ease-in-out" id="heroSlider">
 
                                 <!-- Slide 1 - Air Bearing Stage -->
-                                <div class="slide w-full flex-shrink-0">
-                                    <div class="bg-white rounded-lg p-3 text-center">
-                                        <img src="{{ asset('assets/images/products/Picture2.png') }}" alt="Air Bearing Stage" class="w-full h-32 lg:h-60 rounded-lg object-contain">
-                                    </div>
-                                </div>
 
                                 <!-- Slide 2 - Granite Surface Plate -->
                                 <div class="slide w-full flex-shrink-0">

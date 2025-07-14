@@ -15,7 +15,7 @@
         <div class="p-4">
             <div class="mb-4">
                 <div class="w-full h-58 bg-gray-200 rounded-lg flex items-center justify-center">
-                    <img src="{{ asset('assets/images/product-placeholder.png') }}" alt="Product Image" class="max-w-full max-h-full object-cover rounded-lg">
+                    <img src="{{ asset('assets/images/products/Picture3.png') }}" alt="Product Image" class="max-w-full max-h-full object-cover rounded-lg">
                 </div>
             </div>
 

@@ -7,38 +7,45 @@
 
         <!-- Company Info Box -->
         <div class="bg-gray-100 p-4 rounded-lg mb-6">
-            <p class="text-sm text-gray-700" data-ko="(주)티지이엔씨 홈페이지를 방문해 주셔서 대단히 감사합니다." data-en="Thank you very much for visiting TG ENC website." data-vi="Cảm ơn bạn rất nhiều vì đã ghé thăm website TG ENC.">
-                (주)티지이엔씨 홈페이지를 방문해 주셔서 대단히 감사합니다.
+            <p class="text-sm text-gray-700" data-ko="TGEN VN의 홈페이지를 방문해 주셔서 대단히 감사합니다." data-en="Thank you very much for visiting the homepage of TGEN VN." data-vi="Chân thành cảm ơn bạn đã ghé thăm trang chủ của TGEN VN.">
+                TGEN VN의 홈페이지를 방문해 주셔서 대단히 감사합니다.
             </p>
         </div>
 
         <!-- Main Content -->
         <div class="space-y-6 text-gray-700 leading-relaxed">
-            <p data-ko="㈜티지이엔씨는 FPD장비 및 반도체 장비의 Granite Stage, 특허소재 개발 Stage, 고급 지원 센터 전문업체입니다." data-en="TG ENC Co., Ltd. is a company specializing in Granite Stage for FPD and semiconductor equipment, patented material development Stage, and advanced support center." data-vi="TG ENC Co., Ltd. là công ty chuyên về Granite Stage cho thiết bị FPD và bán dẫn, Stage phát triển vật liệu được cấp bằng sáng chế, và trung tâm hỗ trợ tiên tiến.">
-                <strong>㈜티지이엔씨는</strong><br>
-                FPD장비 및 반도체 장비의 Granite Stage, 특허소재 개발 Stage,<br>
-                고급 지원 센터 전문업체입니다.
+            <p data-ko="TGEN VN은" data-en="TGEN VN is" data-vi="TGEN VN là">
+                <strong>TGEN VN은</strong><br>
             </p>
 
-            <p data-ko="15년 이상 Motion Control 분야의 정밀 Granite Stage 전문 기업으로서 고객의 2011년 설립된 ㈜티지이엔씨의 임직원은 지속적인 R&D와 지리적 Stage 개발을 최우선 과제로, Stage 분야의 최고의 기술력 축적을 통해 기술력 기업입니다." data-en="As a precision Granite Stage specialist in the Motion Control field for over 15 years, TG ENC Co., Ltd., established in 2011, prioritizes continuous R&D and geographical Stage development, accumulating the best technology in the Stage field." data-vi="Là chuyên gia về Granite Stage chính xác trong lĩnh vực Motion Control hơn 15 năm, TG ENC Co., Ltd., được thành lập năm 2011, ưu tiên R&D liên tục và phát triển Stage địa lý, tích lũy công nghệ tốt nhất trong lĩnh vực Stage.">
-                15년 이상 Motion Control 분야의 정밀 Granite Stage 전문 기업으로서<br>
-                고객의 2011년 설립된 <strong>㈜티지이엔씨</strong>의 임직원은 지속적인 R&D와<br>
-                지리적 Stage 개발을 최우선 과제로, Stage 분야의 최고의 기술력 축적을<br>
-                통해 기술력 기업입니다.
+            <p data-ko="  정밀 측정용 석정반 및 측정구를 제조 판매하며, 
+                반도체 장비, 자동화 생산 및 검사장비를 설계 제조하는 
+                전문 특화기업입니다." data-en="TGEN VN is a specialized company that manufactures and sells precision granite surface plates and measuring tools, and designs and produces semiconductor equipment, as well as automated production and inspection equipment." data-vi="TGEN VN là doanh nghiệp chuyên biệt, sản xuất và kinh doanh tấm đá granit chính xác cùng các dụng cụ đo lường, đồng thời thiết kế và chế tạo thiết bị bán dẫn, thiết bị sản xuất và kiểm tra tự động.">
+                정밀 측정용 석정반 및 측정구를 제조 판매하며,<br/>
+                반도체 장비, 자동화 생산 및 검사장비를 설계 제조하는<br/>
+                전문 특화기업입니다.<br/>
             </p>
 
-            <p data-ko="기술 중심의 창의력, 개발 중심의 시고력, 고객 중심의 주인의식으로 준비된 ㈜티지이엔씨는 차별 구모이지만 FPD, 반도체 및 특허소재 개발 Stage 제조분야에서 고객 만족도 1위 기업이 되도록 노력해 갈 것입니다." data-en="Prepared with technology-centered creativity, development-centered thinking, and customer-centered ownership, TG ENC will strive to become the No. 1 customer satisfaction company in FPD, semiconductor, and patented material development Stage manufacturing." data-vi="Được chuẩn bị với sự sáng tạo tập trung vào công nghệ, tư duy tập trung vào phát triển, và tinh thần chủ nhân tập trung vào khách hàng, TG ENC sẽ nỗ lực trở thành công ty hài lòng khách hàng số 1 trong sản xuất Stage FPD, bán dẫn và phát triển vật liệu được cấp bằng sáng chế.">
-                기술 중심의 창의력, 개발 중심의 시고력, 고객 중심의 주인의식으로 준비된<br>
-                <strong>㈜티지이엔씨는</strong> 차별 구모이지만 FPD, 반도체 및 특허소재 개발 Stage 제조분야에서<br>
-                고객 만족도 1위 기업이 되도록 노력해 갈 것입니다.
+            <p data-ko="Motion Control 분야의 한국 엔지니어가 상주하며 고객
+                        지원을 하고 있으며, 지속적인 R&D로 정밀 측정 공정의
+                        신공정 기술에 매진합니다." data-en="A Korean engineer specializing in the field of Motion Control is stationed to provide customer support, and we are dedicated to developing new technologies for precision measurement processes through continuous R&D." data-vi="Kỹ sư người Hàn Quốc chuyên về lĩnh vực Điều khiển Chuyển động (Motion Control) thường trực để hỗ trợ khách hàng, đồng thời chúng tôi không ngừng nghiên cứu và phát triển (R&D) để tập trung vào công nghệ quy trình mới trong đo lường chính xác.">
+                <strong>Motion Control</strong> 분야의 한국 엔지니어가 상주하며 고객 <br/>
+                지원을 하고 있으며, 지속적인 R&D로 정밀 측정 공정의<br/>
+                신공정 기술에 매진합니다.<br/>
+            </p>
+             <p data-ko="기술 중심의 창의력, 개발 중심의 사고력, 고객 중심의
+                        대응력으로 고객 만족도 1위 기업으로 노력하겠습니다." 
+                        data-en="With technology-driven creativity, development-oriented thinking, and customer-centered responsiveness, we will strive to become the No.1 company in customer satisfaction." data-vi="Với sức sáng tạo dựa trên công nghệ, tư duy lấy phát triển làm trọng tâm và khả năng phản ứng lấy khách hàng làm trung tâm, chúng tôi sẽ nỗ lực trở thành doanh nghiệp số 1 về sự hài lòng của khách hàng.">
+                기술 중심의 창의력, 개발 중심의 사고력, 고객 중심의<br/>
+                대응력으로 고객 만족도 1위 기업으로 노력하겠습니다.<br/>
             </p>
         </div>
 
         <!-- Signature -->
         <div class="mt-12 text-center">
             <div class="inline-block">
-                <p class="text-lg font-bold text-gray-800" data-ko="(주)티지이엔씨 임직원 일동" data-en="TG ENC Co., Ltd. All Employees" data-vi="Toàn thể nhân viên TG ENC Co., Ltd.">
-                    (주)티지이엔씨 임직원 일동
+                <p class="text-lg font-bold text-gray-800" data-ko="TGEN VN 임직원 일동." data-en="All employees of TGEN VN." data-vi="Toàn thể cán bộ nhân viên TGEN VN.">
+                    TGEN VN 임직원 일동.
                 </p>
             </div>
         </div>

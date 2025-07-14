@@ -24,9 +24,8 @@
                 </svg>
             </div>
             <div class="flex-1 min-w-0">
-                <div class="text-xl font-bold text-green-600 mb-1">031) 431-4418</div>
-                <div class="text-sm text-gray-600 mb-1">Fax : 031) 358-4418</div>
-                <div class="text-sm text-blue-600 break-all">tgenc@tg-enc.co.kr</div>
+                <div class="text-xl font-bold text-green-600 mb-1">+84-338-221-216</div>
+                <div class="text-sm text-blue-600 break-all"> tgenvn@gmail.com</div>
             </div>
         </div>
         
