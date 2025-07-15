@@ -9,12 +9,12 @@
                 <div class="lg:col-span-3 bg-black bg-opacity-80 rounded-lg p-6 lg:p-8 text-white h-full">
                     <!-- Logo and Company Name -->
                     <div class="mb-6 items-center space-x-4">
-                        <div class="w-80 mb-10">
-                            <h1 class="text-4xl lg:text-6xl font-bold mb-2">
-                                <span class="text-red-500 text-400 lg:text-7xl ">T</span><span class="text-blue-400">GEN VN</span>
+                        <div class="w-90 mb-10">
+                            <h1 class="text-4xl lg:text-7xl font-bold mb-2">
+                                <span class="text-red-500 text-400 lg:text-8xl ">T</span><span class="text-blue-400">GEN VN</span>
                             </h1>
-                            <p class="text-red-500 text-lg font-semibold ml-2" style="font-size: 24px;" data-ko="기술을 선도하는" data-en="LEADING TECHNOLOGY" data-vi="CÔNG NGHỆ DẪN ĐẦU">
-                                기술을 선도하는
+                            <p class="text-red-500 text-lg font-semibold ml-2" style="font-size: 28px;" data-ko="기술을 선도하는 1등 주자" data-en="LEADING TECHNOLOGY" data-vi="CÔNG NGHỆ DẪN ĐẦU">
+                                기술을 선도하는 1등 주자
                             </p>
                         </div>
                         <div>
@@ -25,7 +25,7 @@
                                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                         </svg>
                                     </div>
-                                    <span class="text-sm lg:text-base" data-ko="정밀 화강암 평판" data-en="Precision Granite Surface Plate" data-vi="Tấm bề mặt đá granit chính xác">
+                                    <span class="text-sm lg:text-lg" data-ko="정밀 화강암 평판" data-en="Precision Granite Surface Plate" data-vi="Tấm bề mặt đá granit chính xác">
                                         정밀 화강암 평판
                                     </span>
                                 </div>
@@ -36,7 +36,7 @@
                                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                         </svg>
                                     </div>
-                                    <span class="text-sm lg:text-base" data-ko="3D 자동화 장비" data-en="3D Automation Equipment" data-vi="Thiết bị tự động hoá 3D">
+                                    <span class="text-sm lg:text-lg" data-ko="3D 자동화 장비" data-en="3D Automation Equipment" data-vi="Thiết bị tự động hoá 3D">
                                         3D 자동화 장비
                                     </span>
                                 </div>
@@ -47,7 +47,7 @@
                                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                         </svg>
                                     </div>
-                                    <span class="text-sm lg:text-base" data-ko="자동화 검사 장비" data-en="Automation Inspection Equipment" data-vi="Thiết bị tự động hoá 3D">
+                                    <span class="text-sm lg:text-lg" data-ko="자동화 검사 장비" data-en="Automation Inspection Equipment" data-vi="Thiết bị kiểm tra tự động">
                                         자동화 검사 장비
                                     </span>
                                 </div>
@@ -58,7 +58,7 @@
                                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                         </svg>
                                     </div>
-                                    <span class="text-sm lg:text-base" data-ko="정밀 측정 도구" data-en="Precision Measuring Instruments" data-vi="Dụng cụ đo lường chính xác">
+                                    <span class="text-sm lg:text-lg" data-ko="정밀 측정 도구" data-en="Precision Measuring Instruments" data-vi="Dụng cụ đo lường chính xác">
                                         정밀 측정 도구
                                     </span>
                                 </div>
@@ -83,21 +83,26 @@
 
                                 <!-- Slide 2 - Granite Surface Plate -->
                                 <div class="slide w-full flex-shrink-0">
-                                    <div class="bg-white rounded-lg p-3 text-center">
-                                        <img src="{{ asset('assets/images/products/Picture1.png') }}" alt="Air Bearing Stage" class="w-full h-32 lg:h-60 rounded-lg object-contain">
+                                    <div class="rounded-lg p-3 text-center">
+                                        <img src="{{ asset('assets/images/products/Picture1.png') }}" alt="Air Bearing Stage" class="w-full h-32 lg:h-72 rounded-lg object-contain">
                                     </div>
                                 </div>
 
                                 <!-- Slide 3 - Precision Tools -->
                                 <div class="slide w-full flex-shrink-0">
-                                    <div class="bg-white rounded-lg p-3 text-center">
-                                        <img src="{{ asset('assets/images/products/Picture3.png') }}" alt="Air Bearing Stage" class="w-full h-32 lg:h-60 rounded-lg object-contain">
+                                    <div class="rounded-lg p-3 text-center">
+                                        <img src="{{ asset('assets/images/products/Picture3.png') }}" alt="Air Bearing Stage" class="w-full h-32 lg:h-72 rounded-lg object-contain">
                                     </div>
                                 </div>
 
                                  <div class="slide w-full flex-shrink-0">
-                                    <div class="bg-white rounded-lg p-3 text-center">
-                                        <img src="{{ asset('assets/images/products/Picture4.png') }}" alt="Air Bearing Stage" class="w-full h-32 lg:h-60 rounded-lg object-contain">
+                                    <div class="rounded-lg p-3 text-center">
+                                        <img src="{{ asset('assets/images/products/Picture4.png') }}" alt="Air Bearing Stage" class="w-full h-32 lg:h-72 rounded-lg object-contain">
+                                    </div>
+                                </div>
+                                 <div class="slide w-full flex-shrink-0">
+                                    <div class="rounded-lg p-3 text-center">
+                                        <img src="{{ asset('assets/images/products/Picture5.png') }}" alt="Air Bearing Stage" class="w-full h-32 lg:h-72 rounded-lg object-contain">
                                     </div>
                                 </div>
 
