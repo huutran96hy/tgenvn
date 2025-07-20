@@ -83,7 +83,7 @@
                                     data-ko="{{ $product->description_ko }}"
                                     data-en="{{ $product->description_en }}"
                                     data-vi="{{ $product->description_vi }}">
-                                    {{ $product->description_ko ?? 'No description available' }}
+                                    {{ $product->description_ko ?? '' }}
                                 </p>
                             </div>
 
