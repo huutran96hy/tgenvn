@@ -15,7 +15,11 @@ use App\Http\Controllers\Admin\{
     CandidateController,
     SkillController,
     ContactController,
-    CompanyPositionController
+    CompanyPositionController,
+    ProcessCategoryController,
+    ProcessController,
+    ProductsController,
+    ProductsCategoryController
 };
 use App\Http\Middleware\AdminAccess;
 use App\Http\Middleware\RedirectIfAdmin;
@@ -54,5 +58,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('configs', ConfigController::class);
         Route::delete('/delete-banner', [ConfigController::class, 'deleteBanner'])->name('configs.deleteBanner');
         Route::resource('company-position', CompanyPositionController::class);
+
+        Route::resource('products', ProductsController::class);
+        Route::resource('products-categories', ProductsCategoryController::class);
+        Route::resource('process-categories', ProcessCategoryController::class);
+        Route::resource('processes', ProcessController::class);
     });
 });

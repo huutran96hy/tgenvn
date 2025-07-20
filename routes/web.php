@@ -10,9 +10,17 @@ use App\Http\Controllers\Frontend\{
     ContactController,
     HomeController,
     JobDetailController,
-    QuoteController
+    ProductController,
+    QuoteController,
+    ProductCategoryController,
+    ProcessController,
+    ProcessCategoryController
 };
 use App\Mail\QuoteMail;
+use App\Models\ProcessCategory;
+use App\Models\Product;
+use App\Models\ProductsCategory;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 
 require __DIR__ . '/admin.php';
@@ -65,11 +73,12 @@ Route::get('/support', function () {
 })->name('support');
 
 Route::get('/products', function () {
-    return view('Frontend.products-main');
+    return redirect()->route('products.general');
 })->name('products');
 
 Route::get('/products/general', function () {
-    return view('Frontend.products-main');
+    $productCategories = ProductsCategory::all();
+    return view('Frontend.products-main', compact('productCategories'));
 })->name('products.general');
 Route::get('/products/precision', function () {
     $precisionTools = [
@@ -78,6 +87,7 @@ Route::get('/products/precision', function () {
             'en' => 'Straight Edge',
             'vi' => 'Thước thẳng',
             'icon' => 'straight-edge',
+            'slug' => 'straight-edge',
             'description_ko' => '직선도 측정용 정밀 도구',
             'description_en' => 'Precision tool for straightness measurement',
             'description_vi' => 'Công cụ chính xác để đo độ thẳng',
@@ -88,6 +98,7 @@ Route::get('/products/precision', function () {
             'en' => 'Parallel Bar',
             'vi' => 'Thanh song song',
             'icon' => 'parallel-bar',
+            'slug' => 'parallel-bar',
             'description_ko' => '평행도 측정 및 설정용',
             'description_en' => 'For parallelism measurement and setup',
             'description_vi' => 'Để đo và thiết lập độ song song',
@@ -98,16 +109,19 @@ Route::get('/products/precision', function () {
             'en' => 'Right Angle Plate (Triangle)',
             'vi' => 'Bàn vuông góc (tam giác)',
             'icon' => 'triangle',
+            'slug' => 'right-angle-plate-triangle',
             'description_ko' => '직각도 검사용 삼각 정반',
             'description_en' => 'Triangle plate for right angle inspection',
             'description_vi' => 'Bàn tam giác để kiểm tra góc vuông',
             'link'=>'http://tg-enc.co.kr/xe/files/cache/thumbnails/362/040/170x130.crop.jpg'
+
         ],
         [
             'ko' => '직각정반(사각)',
             'en' => 'Right Angle Plate (Square)',
             'vi' => 'Bàn vuông góc (vuông)',
             'icon' => 'square',
+            'slug' => 'right-angle-plate-square',
             'description_ko' => '직각도 검사용 사각 정반',
             'description_en' => 'Square plate for right angle inspection',
             'description_vi' => 'Bàn vuông để kiểm tra góc vuông',
@@ -118,6 +132,7 @@ Route::get('/products/precision', function () {
             'en' => 'Stone Dial Ball Parameter',
             'vi' => 'Thông số bóng quay đá',
             'icon' => 'dial-ball',
+            'slug' => 'stone-dial-ball-parameter',
             'description_ko' => '정밀 측정용 다이얼 게이지',
             'description_en' => 'Dial gauge for precision measurement',
             'description_vi' => 'Đồng hồ so để đo chính xác',
@@ -128,6 +143,7 @@ Route::get('/products/precision', function () {
             'en' => 'V-Block',
             'vi' => 'Khối V',
             'icon' => 'v-block',
+            'slug' => 'v-block',
             'description_ko' => '원형 부품 고정 및 측정용',
             'description_en' => 'For holding and measuring round parts',
             'description_vi' => 'Để giữ và đo các bộ phận tròn',
@@ -135,7 +151,7 @@ Route::get('/products/precision', function () {
         ]
     ];
 
-    return view('Frontend.product-category', [
+    return view('frontend.product-category', [
         'activePage' => 'precision',
         'pageTitle' => '정밀 측정구',
         'pageTitleEn' => 'Precision Measuring Tools',
@@ -147,62 +163,62 @@ Route::get('/products/precision', function () {
 Route::get('/products/custom', function () {
     $customFopProducts = [
         [
-            'ko' => '검사장비',
+            'ko' => '대형 FOP 정반',
             'en' => 'Large FOP Surface Plate',
             'vi' => 'Bàn FOP lớn',
+            'slug' => 'large-fop-surface-plate',
             'description_ko' => '대형 장비용 맞춤 제작 정반',
             'description_en' => 'Custom large surface plate for heavy equipment',
-            'description_vi' => 'Bàn tùy chỉnh lớn cho thiết bị nặng',
-            'link' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/061/041/170x130.crop.jpg'
+            'description_vi' => 'Bàn tùy chỉnh lớn cho thiết bị nặng'
         ],
         [
-            'ko' => '검사장비',
+            'ko' => '특수형 FOP 정반',
             'en' => 'Special FOP Surface Plate',
             'vi' => 'Bàn FOP đặc biệt',
+            'slug' => 'special-fop-surface-plate',
             'description_ko' => '특수 용도 맞춤 설계 정반',
             'description_en' => 'Custom designed plate for special applications',
-            'description_vi' => 'Bàn thiết kế tùy chỉnh cho ứng dụng đặc biệt',
-            'link' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/057/041/170x130.crop.jpg'
+            'description_vi' => 'Bàn thiết kế tùy chỉnh cho ứng dụng đặc biệt'
         ],
         [
-            'ko' => '칼라강판 코팅장비',
+            'ko' => '정밀 FOP 정반',
             'en' => 'Precision FOP Surface Plate',
             'vi' => 'Bàn FOP chính xác',
+            'slug' => 'precision-fop-surface-plate',
             'description_ko' => '초정밀 측정용 FOP 정반',
             'description_en' => 'Ultra-precision FOP plate for measurement',
-            'description_vi' => 'Bàn FOP siêu chính xác để đo lường',
-            'link' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/053/041/170x130.crop.jpg'
+            'description_vi' => 'Bàn FOP siêu chính xác để đo lường'
         ],
         [
-            'ko' => '공정 자동화 장비',
+            'ko' => '모듈형 FOP 정반',
             'en' => 'Modular FOP Surface Plate',
             'vi' => 'Bàn FOP mô-đun',
+            'slug' => 'modular-fop-surface-plate',
             'description_ko' => '조립식 모듈형 FOP 정반',
             'description_en' => 'Modular assembly FOP surface plate',
-            'description_vi' => 'Bàn FOP lắp ráp mô-đun',
-            'link' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/048/041/170x130.crop.jpg'
+            'description_vi' => 'Bàn FOP lắp ráp mô-đun'
         ],
         [
-            'ko' => 'Grinding Stage',
+            'ko' => '휴대용 FOP 정반',
             'en' => 'Portable FOP Surface Plate',
             'vi' => 'Bàn FOP di động',
+            'slug' => 'portable-fop-surface-plate',
             'description_ko' => '이동 가능한 소형 FOP 정반',
             'description_en' => 'Portable compact FOP surface plate',
-            'description_vi' => 'Bàn FOP nhỏ gọn di động',
-            'link' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/489/040/170x130.crop.jpg'
+            'description_vi' => 'Bàn FOP nhỏ gọn di động'
         ],
         [
-            'ko' => 'Grinding Stage',
+            'ko' => '산업용 FOP 정반',
             'en' => 'Industrial FOP Surface Plate',
             'vi' => 'Bàn FOP công nghiệp',
+            'slug' => 'industrial-fop-surface-plate',
             'description_ko' => '산업 현장용 내구성 FOP 정반',
             'description_en' => 'Durable FOP plate for industrial sites',
-            'description_vi' => 'Bàn FOP bền cho các địa điểm công nghiệp',
-            'link' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/486/040/170x130.crop.jpg'
+            'description_vi' => 'Bàn FOP bền cho các địa điểm công nghiệp'
         ]
     ];
 
-    return view('Frontend.product-category', [
+    return view('frontend.product-category', [
         'activePage' => 'custom',
         'pageTitle' => '주문형 FOP 정반',
         'pageTitleEn' => 'Custom FOP Surface Plate',
@@ -214,62 +230,62 @@ Route::get('/products/custom', function () {
 Route::get('/products/air-bearing', function () {
     $airBearingStages = [
         [
-            'ko' => '다기능측정기',
+            'ko' => '정밀 Air Bearing Stage',
             'en' => 'Precision Air Bearing Stage',
             'vi' => 'Sân khấu Air Bearing chính xác',
+            'slug' => 'precision-air-bearing-stage',
             'description_ko' => '초정밀 위치 제어 스테이지',
             'description_en' => 'Ultra-precision positioning stage',
-            'description_vi' => 'Sân khấu định vị siêu chính xác',
-            'link' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/494/040/170x130.crop.jpg'
+            'description_vi' => 'Sân khấu định vị siêu chính xác'
         ],
         [
-            'ko' => 'Gantry Air bearing Stage(7G)',
+            'ko' => '대형 Air Bearing Stage',
             'en' => 'Large Air Bearing Stage',
             'vi' => 'Sân khấu Air Bearing lớn',
+            'slug' => 'large-air-bearing-stage',
             'description_ko' => '대형 부품 가공용 스테이지',
             'description_en' => 'Stage for large part processing',
-            'description_vi' => 'Sân khấu để xử lý bộ phận lớn',
-            'link' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/328/040/170x130.crop.jpg'
+            'description_vi' => 'Sân khấu để xử lý bộ phận lớn'
         ],
         [
-            'ko' => 'Sprit type Air Bearing Stage',
+            'ko' => '고속 Air Bearing Stage',
             'en' => 'High Speed Air Bearing Stage',
             'vi' => 'Sân khấu Air Bearing tốc độ cao',
+            'slug' => 'high-speed-air-bearing-stage',
             'description_ko' => '고속 이송 전용 스테이지',
             'description_en' => 'High-speed transfer dedicated stage',
-            'description_vi' => 'Sân khấu chuyên dụng truyền tốc độ cao',
-            'link' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/191/170x130.crop.jpg'
+            'description_vi' => 'Sân khấu chuyên dụng truyền tốc độ cao'
         ],
         [
             'ko' => '다축 Air Bearing Stage',
             'en' => 'Multi-Axis Air Bearing Stage',
             'vi' => 'Sân khấu Air Bearing đa trục',
+            'slug' => 'multi-axis-air-bearing-stage',
             'description_ko' => '다축 동시 제어 스테이지',
             'description_en' => 'Multi-axis simultaneous control stage',
-            'description_vi' => 'Sân khấu điều khiển đồng thời đa trục',
-            'link' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/179/170x130.crop.jpg'
+            'description_vi' => 'Sân khấu điều khiển đồng thời đa trục'
         ],
         [
             'ko' => '회전형 Air Bearing Stage',
             'en' => 'Rotary Air Bearing Stage',
             'vi' => 'Sân khấu Air Bearing quay',
+            'slug' => 'rotary-air-bearing-stage',
             'description_ko' => '회전 운동 전용 스테이지',
             'description_en' => 'Rotary motion dedicated stage',
-            'description_vi' => 'Sân khấu chuyên dụng chuyển động quay',
-            'link' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/176/170x130.crop.jpg'
+            'description_vi' => 'Sân khấu chuyên dụng chuyển động quay'
         ],
         [
             'ko' => '진공 Air Bearing Stage',
             'en' => 'Vacuum Air Bearing Stage',
             'vi' => 'Sân khấu Air Bearing chân không',
+            'slug' => 'vacuum-air-bearing-stage',
             'description_ko' => '진공 환경용 스테이지',
             'description_en' => 'Stage for vacuum environment',
-            'description_vi' => 'Sân khấu cho môi trường chân không',
-            'link' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/173/170x130.crop.jpg'
+            'description_vi' => 'Sân khấu cho môi trường chân không'
         ]
     ];
 
-    return view('Frontend.product-category', [
+    return view('frontend.product-category', [
         'activePage' => 'air-bearing',
         'pageTitle' => 'Air Bearing Stage',
         'pageTitleEn' => 'Air Bearing Stage',
@@ -277,10 +293,137 @@ Route::get('/products/air-bearing', function () {
         'products' => $airBearingStages
     ]);
 })->name('products.air-bearing');
+
+Route::get('/products/{category}', [ProductCategoryController::class, 'detail'])->name('products.category');
+Route::get('/product/{slug}', [ProductController::class, 'detail'])->name('product.detail');
+// // Product Detail Routes
+// Route::get('/products/{category}/{slug}', function ($category, $slug) {
+//     // Get all products data
+//     $allProducts = [];
+//     $categoryTitle = '';
+    
+//     if ($category === 'precision') {
+//         $categoryTitle = '정밀 측정구';
+//         $allProducts = [
+//             [
+//                 'ko' => '스트레이트 엣지',
+//                 'en' => 'Straight Edge',
+//                 'vi' => 'Thước thẳng',
+//                 'icon' => 'straight-edge',
+//                 'slug' => 'straight-edge',
+//                 'description_ko' => '직선도 측정용 정밀 도구',
+//                 'description_en' => 'Precision tool for straightness measurement',
+//                 'description_vi' => 'Công cụ chính xác để đo độ thẳng',
+//                 'link' => 'http://tg-enc.co.kr/xe/files/cache/thumbnails/370/040/170x130.crop.jpg'
+//             ],
+//             [
+//                 'ko' => '파라렐바',
+//                 'en' => 'Parallel Bar',
+//                 'vi' => 'Thanh song song',
+//                 'icon' => 'parallel-bar',
+//                 'slug' => 'parallel-bar',
+//                 'description_ko' => '평행도 측정 및 설정용',
+//                 'description_en' => 'For parallelism measurement and setup',
+//                 'description_vi' => 'Để đo và thiết lập độ song song',
+//                 'detailed_description_ko' => '파라렐바는 기계 부품의 평행도를 정확하게 측정하고 설정하기 위한 정밀 도구입니다. 높은 정밀도와 안정성을 제공하여 품질 관리에 필수적입니다.',
+//                 'detailed_description_en' => 'Parallel Bar is a precision tool for accurately measuring and setting parallelism of machine parts. It provides high precision and stability, essential for quality control.',
+//                 'detailed_description_vi' => 'Thanh song song là công cụ chính xác để đo và thiết lập độ song song của các bộ phận máy một cách chính xác. Nó cung cấp độ chính xác và ổn định cao, cần thiết cho kiểm soát chất lượng.',
+//                 'features' => [
+//                     ['ko' => '정밀 평행도 측정', 'en' => 'Precision parallelism measurement', 'vi' => 'Đo độ song song chính xác'],
+//                     ['ko' => '안정적인 구조', 'en' => 'Stable structure', 'vi' => 'Cấu trúc ổn định'],
+//                     ['ko' => '쉬운 조작', 'en' => 'Easy operation', 'vi' => 'Vận hành dễ dàng'],
+//                     ['ko' => '다목적 사용', 'en' => 'Multi-purpose use', 'vi' => 'Sử dụng đa mục đích']
+//                 ],
+//                 'specifications' => [
+//                     ['label_ko' => '길이', 'label_en' => 'Length', 'label_vi' => 'Chiều dài', 'value' => '200mm - 1000mm'],
+//                     ['label_ko' => '정확도', 'label_en' => 'Accuracy', 'label_vi' => 'Độ chính xác', 'value' => '±0.003mm'],
+//                     ['label_ko' => '소재', 'label_en' => 'Material', 'label_vi' => 'Vật liệu', 'value' => 'Hardened Steel'],
+//                     ['label_ko' => '경도', 'label_en' => 'Hardness', 'label_vi' => 'Độ cứng', 'value' => 'HRC 58-62']
+//                 ]
+//             ]
+//         ];
+//     } elseif ($category === 'custom') {
+//         $categoryTitle = '주문형 FOP 정반';
+//         $allProducts = [
+//             [
+//                 'ko' => '대형 FOP 정반',
+//                 'en' => 'Large FOP Surface Plate',
+//                 'vi' => 'Bàn FOP lớn',
+//                 'slug' => 'large-fop-surface-plate',
+//                 'description_ko' => '대형 장비용 맞춤 제작 정반',
+//                 'description_en' => 'Custom large surface plate for heavy equipment',
+//                 'description_vi' => 'Bàn tùy chỉnh lớn cho thiết bị nặng',
+//                 'detailed_description_ko' => '대형 FOP 정반은 대형 장비 및 부품의 정밀 측정을 위해 특별히 설계된 맞춤형 솔루션입니다. 뛰어난 평면도와 안정성을 제공합니다.',
+//                 'detailed_description_en' => 'Large FOP Surface Plate is a custom solution specially designed for precision measurement of large equipment and parts. It provides excellent flatness and stability.',
+//                 'detailed_description_vi' => 'Bàn FOP lớn là giải pháp tùy chỉnh được thiết kế đặc biệt để đo lường chính xác các thiết bị và bộ phận lớn. Nó cung cấp độ phẳng và ổn định tuyệt vời.',
+//                 'features' => [
+//                     ['ko' => '대형 크기 지원', 'en' => 'Large size support', 'vi' => 'Hỗ trợ kích thước lớn'],
+//                     ['ko' => '맞춤형 설계', 'en' => 'Custom design', 'vi' => 'Thiết kế tùy chỉnh'],
+//                     ['ko' => '높은 평면도', 'en' => 'High flatness', 'vi' => 'Độ phẳng cao'],
+//                     ['ko' => '내구성 보장', 'en' => 'Durability guaranteed', 'vi' => 'Đảm bảo độ bền']
+//                 ],
+//                 'specifications' => [
+//                     ['label_ko' => '크기', 'label_en' => 'Size', 'label_vi' => 'Kích thước', 'value' => '맞춤 제작 / Custom'],
+//                     ['label_ko' => '평면도', 'label_en' => 'Flatness', 'label_vi' => 'Độ phẳng', 'value' => '±0.01mm'],
+//                     ['label_ko' => '소재', 'label_en' => 'Material', 'label_vi' => 'Vật liệu', 'value' => 'Cast Iron / Granite'],
+//                     ['label_ko' => '표면 처리', 'label_en' => 'Surface Treatment', 'label_vi' => 'Xử lý bề mặt', 'value' => 'Precision Ground']
+//                 ]
+//             ]
+//         ];
+//     } elseif ($category === 'air-bearing') {
+//         $categoryTitle = 'Air Bearing Stage';
+//         $allProducts = [
+//             [
+//                 'ko' => '정밀 Air Bearing Stage',
+//                 'en' => 'Precision Air Bearing Stage',
+//                 'vi' => 'Sân khấu Air Bearing chính xác',
+//                 'slug' => 'precision-air-bearing-stage',
+//                 'description_ko' => '초정밀 위치 제어 스테이지',
+//                 'description_en' => 'Ultra-precision positioning stage',
+//                 'description_vi' => 'Sân khấu định vị siêu chính xác',
+//                 'detailed_description_ko' => '정밀 Air Bearing Stage는 마찰 없는 공기 베어링 기술을 사용하여 나노미터 수준의 정밀도로 위치 제어가 가능한 첨단 스테이지입니다.',
+//                 'detailed_description_en' => 'Precision Air Bearing Stage is an advanced stage that enables position control with nanometer-level precision using frictionless air bearing technology.',
+//                 'detailed_description_vi' => 'Sân khấu Air Bearing chính xác là một sân khấu tiên tiến cho phép điều khiển vị trí với độ chính xác cấp nanometer bằng công nghệ ổ khí không ma sát.',
+//                 'features' => [
+//                     ['ko' => '나노미터 정밀도', 'en' => 'Nanometer precision', 'vi' => 'Độ chính xác nanometer'],
+//                     ['ko' => '마찰 없는 동작', 'en' => 'Frictionless operation', 'vi' => 'Hoạt động không ma sát'],
+//                     ['ko' => '고속 응답', 'en' => 'High-speed response', 'vi' => 'Phản hồi tốc độ cao'],
+//                     ['ko' => '긴 수명', 'en' => 'Long lifespan', 'vi' => 'Tuổi thọ dài']
+//                 ],
+//                 'specifications' => [
+//                     ['label_ko' => '정밀도', 'label_en' => 'Precision', 'label_vi' => 'Độ chính xác', 'value' => '±10nm'],
+//                     ['label_ko' => '이동 범위', 'label_en' => 'Travel Range', 'label_vi' => 'Phạm vi di chuyển', 'value' => '100mm x 100mm'],
+//                     ['label_ko' => '최대 속도', 'label_en' => 'Max Speed', 'label_vi' => 'Tốc độ tối đa', 'value' => '500mm/s'],
+//                     ['label_ko' => '공기 압력', 'label_en' => 'Air Pressure', 'label_vi' => 'Áp suất khí', 'value' => '0.4-0.6 MPa']
+//                 ]
+//             ]
+//         ];
+//     }
+    
+//     // Find the specific product
+//     $product = collect($allProducts)->firstWhere('slug', $slug);
+    
+//     if (!$product) {
+//         abort(404);
+//     }
+    
+//     // Get related products (exclude current product)
+//     $relatedProducts = collect($allProducts)->where('slug', '!=', $slug)->take(3)->toArray();
+    
+//     return view('frontend.product-detail', [
+//         'product' => $product,
+//         'category' => $category,
+//         'categoryTitle' => $categoryTitle,
+//         'relatedProducts' => $relatedProducts
+//     ]);
+// })->name('product.detail');
 Route::get('/process', function () {
-    return redirect()->route('process.material');
+    $category = ProcessCategory::first();
+    return redirect()->route('processes.category', ['category' => $category->slug]);
 })->name('process');
 
+Route::get('/processes/{category}', [ProcessCategoryController::class, 'detail'])->name('processes.category');
+Route::get('/process/{slug}', [ProcessController::class, 'detail'])->name('process.detail');
 Route::get('/process/material', function () {
     $materialProcesses = [
         [
@@ -538,7 +681,6 @@ Route::get('/test-mail', function () {
             'mailConfig' => $mailConfig,
             'testFormData' => $testFormData
         ]);
-
     } catch (\Exception $e) {
         return response()->json([
             'error' => 'Mail test failed',
@@ -551,7 +693,7 @@ Route::get('/test-mail', function () {
 Route::get('/test-mail-1', function () {
     Mail::raw('Đây là email test gửi từ hệ thống Laravel.', function ($message) {
         $message->to('huutran96hy@gmail.com')
-                ->subject('Test gửi mail Laravel');
+            ->subject('Test gửi mail Laravel');
     });
 
     return 'Đã gửi thử mail!';

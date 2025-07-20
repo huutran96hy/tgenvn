@@ -1,6 +1,8 @@
 <div class="container mx-auto px-0 py-8">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         @foreach($products as $index => $product)
+        {{-- Product Card --}}
+        <a href="{{ route('product.detail', ['slug' => $product['slug']]) }}" class="no-underline">
             <div class="product-card bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer">
                 {{-- Image Container with correct aspect ratio --}}
                 <div class="bg-gray-50 flex items-center justify-center p-1 border-b border-gray-100 image-container">
@@ -13,8 +15,8 @@
                         >
                     @elseif(isset($product['image']))
                         <img
-                            src="{{ $paroduct['image'] }}"
-                            alt="{{ $product['ko'] }}"
+                            src="{{ url($product['image']) }}"
+                            alt="{{ $product['product_name_ko'] }}"
                             class="w-full h-full object-cover"
                             loading="lazy"
                         >
@@ -77,14 +79,15 @@
                 <div class="p-4">
                     <h3
                         class="text-lg font-medium text-blue-600 text-center leading-relaxed"
-                        data-ko="{{ $product['ko'] }}"
-                        data-en="{{ $product['en'] }}"
-                        data-vi="{{ $product['vi'] }}"
+                        data-ko="{{ $product['product_name_ko'] }}"
+                        data-en="{{ $product['product_name_en'] }}"
+                        data-vi="{{ $product['product_name_vi'] }}"
                     >
-                        {{ $product['ko'] }}
+                        {{ $product['product_name_ko'] }}
                     </h3>
                 </div>
             </div>
+            </a>
         @endforeach
     </div>
 </div>

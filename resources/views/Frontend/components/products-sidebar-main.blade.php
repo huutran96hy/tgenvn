@@ -1,13 +1,6 @@
 @php
-    $activePage = $activePage ?? 'general';
-    $productCategories = [
-        ['route' => 'products.general', 'key' => 'general', 'ko' => '일반정반', 'en' => 'General Surface Plate', 'vi' => 'Bàn chuẩn chung'],
-        ['route' => 'products.precision', 'key' => 'precision', 'ko' => '정밀 측정구', 'en' => 'Precision Measuring Tools', 'vi' => 'Dụng cụ đo chính xác'],
-        ['route' => 'products.custom', 'key' => 'custom', 'ko' => '주문형 FOP 정반', 'en' => 'Custom FOP Surface Plate', 'vi' => 'Bàn FOP tùy chỉnh'],
-        ['route' => 'products.air-bearing', 'key' => 'air-bearing', 'ko' => 'Air Bearing Stage', 'en' => 'Air Bearing Stage', 'vi' => 'Air Bearing Stage']
-    ];
+$activePage = $activePage ?? 'general';
 @endphp
-
 <div class="w-full lg:col-span-1">
     <!-- Mobile Navigation -->
     <div class="block lg:hidden mb-6">
@@ -18,20 +11,24 @@
                     <span data-ko="제품정보" data-en="PRODUCTS INFO" data-vi="THÔNG TIN SẢN PHẨM">제품정보</span>
                 </h3>
             </div>
-            
+
             <!-- Mobile Navigation Tabs -->
             <div class="p-3">
                 <div class="flex overflow-x-auto space-x-2 pb-2 scrollbar-hide">
+                    <a href="{{ route('products.general') }}"
+                        class="flex-shrink-0 px-3 py-2.5 rounded-full text-xs font-medium transition-all duration-200 whitespace-nowrap min-w-0 {{ 'general' === $activePage ? 'bg-blue-600 text-white shadow-md' : 'bg-gray-100 text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
+                        <span data-ko="일반정반" data-en="General Surface Plate" data-vi="Bàn chuẩn chung">일반정반</span>
+                    </a>
                     @foreach($productCategories as $category)
-                        <a href="{{ route($category['route']) }}" 
-                           class="flex-shrink-0 px-3 py-2.5 rounded-full text-xs font-medium transition-all duration-200 whitespace-nowrap min-w-0 {{ $category['key'] === $activePage ? 'bg-blue-600 text-white shadow-md' : 'bg-gray-100 text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
-                            <span data-ko="{{ $category['ko'] }}" data-en="{{ $category['en'] }}" data-vi="{{ $category['vi'] }}">{{ $category['ko'] }}</span>
-                        </a>
+                    <a href="{{ route('products.category', ['category' => $category['slug']]) }}"
+                        class="flex-shrink-0 px-3 py-2.5 rounded-full text-xs font-medium transition-all duration-200 whitespace-nowrap min-w-0 {{ $category['slug'] === $activePage ? 'bg-blue-600 text-white shadow-md' : 'bg-gray-100 text-gray-700 hover:bg-blue-50 hover:text-blue-600' }}">
+                        <span data-ko="{{ $category['category_name_ko'] }}" data-en="{{ $category['category_name_en'] }}" data-vi="{{ $category['category_name_vi'] }}">{{ $category['category_name_ko'] }}</span>
+                    </a>
                     @endforeach
                 </div>
             </div>
         </div>
-        
+
         <!-- Mobile Customer Support -->
         @include('Frontend.components.customer-support-mobile')
     </div>
@@ -45,14 +42,19 @@
                 <h3 class="text-xl font-light text-white mb-0">INFORMATION</h3>
                 <div class="w-full h-1 bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
             </div>
-            
+
             <nav class="pb-4">
+                 <a href="{{ route('products.general') }}"
+                    class="flex items-center px-6 py-3 transition-all duration-200 group {{ 'general' === $activePage ? 'text-blue-600 font-medium border-l-4 border-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50' }}">
+                    <span class="w-2 h-2 {{ $category['key'] === $activePage ? 'bg-blue-600' : 'bg-gray-400 group-hover:bg-blue-500' }} rounded-full mr-3 flex-shrink-0 transition-colors duration-200"></span>
+                    <span data-ko="일반정반" data-en="General Surface Plate" data-vi="Bàn chuẩn chung">일반정반</span>
+                </a>
                 @foreach($productCategories as $category)
-                    <a href="{{ route($category['route']) }}" 
-                       class="flex items-center px-6 py-3 transition-all duration-200 group {{ $category['key'] === $activePage ? 'text-blue-600 font-medium border-l-4 border-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50' }}">
-                        <span class="w-2 h-2 {{ $category['key'] === $activePage ? 'bg-blue-600' : 'bg-gray-400 group-hover:bg-blue-500' }} rounded-full mr-3 flex-shrink-0 transition-colors duration-200"></span>
-                        <span data-ko="{{ $category['ko'] }}" data-en="{{ $category['en'] }}" data-vi="{{ $category['vi'] }}">{{ $category['ko'] }}</span>
-                    </a>
+                <a href="{{ route('products.category', ['category' => $category['slug']]) }}"
+                    class="flex items-center px-6 py-3 transition-all duration-200 group {{ $category['slug'] === $activePage ? 'text-blue-600 font-medium border-l-4 border-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50' }}">
+                    <span class="w-2 h-2 {{ $category['key'] === $activePage ? 'bg-blue-600' : 'bg-gray-400 group-hover:bg-blue-500' }} rounded-full mr-3 flex-shrink-0 transition-colors duration-200"></span>
+                    <span data-ko="{{ $category['category_name_ko'] }}" data-en="{{ $category['category_name_en'] }}" data-vi="{{ $category['category_name_vi'] }}">{{ $category['category_name_ko'] }}</span>
+                </a>
                 @endforeach
             </nav>
         </div>

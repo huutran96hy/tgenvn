@@ -30,7 +30,7 @@
         </div>
         
         <p class="text-sm text-gray-700 text-center mb-4 leading-relaxed" data-ko="문의 전화 및 메일을 주시면 친절하고 신속하게 안내해드리겠습니다." data-en="Please contact us by phone or email, and we will assist you promptly and kindly." data-vi="Vui lòng liên hệ qua điện thoại hoặc email, chúng tôi sẽ hỗ trợ bạn một cách nhanh chóng và tận tình.">
-            문의 전화 및 메일을 주시면 친절하고 신속하게 안내해드리겠습니다.
+            문의 전화 및 메일을 주시면 <br/> 친절하고 신속하게 안내해드리겠습니다.
         </p>
     </div>
 </div>

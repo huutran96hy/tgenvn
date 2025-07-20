@@ -1,5 +1,5 @@
 @php
-    $paginator = $products; // hoặc $paginator = $yourPaginationVariable;
+    $paginator = $processes; // hoặc $paginator = $yourPaginationVariable;
 @endphp
 
 <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
