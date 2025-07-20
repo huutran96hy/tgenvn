@@ -43,7 +43,7 @@ $activePage = $activePage ?? 'general';
             <nav class="pb-4">
                 @foreach($processCategories as $category)
                 <a href="{{ route('processes.category', ['category' => $category['slug']]) }}"
-                    class="flex items-center px-6 py-3 transition-all duration-200 group {{ $category['key'] === $activePage ? 'text-blue-600 font-medium border-l-4 border-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50' }}">
+                    class="flex items-center px-6 py-3 transition-all duration-200 group {{ $category['slug'] === $activePage ? 'text-blue-600 font-medium border-l-4 border-blue-600 bg-blue-50' : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50' }}">
                     <span class="w-2 h-2 {{ $category['slug'] === $activePage ? 'bg-blue-600' : 'bg-gray-400 group-hover:bg-blue-500' }} rounded-full mr-3 flex-shrink-0 transition-colors duration-200"></span>
                     <span data-ko="{{ $category['category_name_ko'] }}" data-en="{{ $category['category_name_en'] }}" data-vi="{{ $category['category_name_vi'] }}">{{ $category['category_name_ko'] }}</span>
                 </a>
