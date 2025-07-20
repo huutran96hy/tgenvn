@@ -68,9 +68,9 @@
                             <img
                                 src="{{ url($product->image) }}"
                                 alt="{{ $product->product_name_ko }}"
-                                class="max-w-full h-auto rounded-lg shadow-lg">
+                                class="max-w-full h-auto shadow-lg">
                             @else
-                            <div class="lg:grid-span-2 w-80 h-60 bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
+                            <div class="lg:grid-span-2 w-80 h-60 bg-gradient-to-r from-blue-600 to-blue-800 flex items-center justify-center">
                                 <img src="{{$product->image}}" alt="No Image Available" class="w-full h-full object-cover">
                             </div>
                             @endif
@@ -98,13 +98,13 @@
                 <!-- Related Products -->
                 @if(isset($relatedProducts) && count($relatedProducts) > 0)
                 <div class="mt-8">
-                    <div class="bg-white rounded-lg shadow-sm p-6">
+                    <div class="bg-white shadow-sm p-6">
                         <h3 class="text-xl font-bold text-gray-900 mb-6" data-ko="관련 제품" data-en="Related Products" data-vi="Sản phẩm liên quan">관련 제품</h3>
                         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                             @foreach($relatedProducts as $relatedProduct)
                             <a href="{{ route('product.detail', ['slug' => $relatedProduct['slug']]) }}">
                                 <div class=" text-center group cursor-pointer">
-                                    <div class="bg-gray-50 rounded-lg p-4 mb-3 group-hover:bg-blue-50 transition-colors">
+                                    <div class="bg-gray-50 p-4 mb-3 group-hover:bg-blue-50 transition-colors">
                                         @if(isset($relatedProduct['image']) || isset($relatedProduct['link']))
                                         <img src="{{ url($relatedProduct['image']) }}"
                                             alt="{{ $relatedProduct['product_name_ko'] }}"
