@@ -18,7 +18,7 @@ class ProductController extends Controller
             ->where('slug', '!=', $slug)
             ->take(4)
             ->get();
-        return view('frontend.product-detail', [
+        return view('Frontend.product-detail', [
             'activePage' => $productCategory->slug,
             'product' => $product,
             'productCategories' => $productCategories,

@@ -13,7 +13,7 @@ class ProcessCategoryController extends Controller
        $category = ProcessCategory::where('slug', $slug)->firstOrFail();
        $processCategories = ProcessCategory::all();
        $processes = $category->processes()->paginate(9);
-        return view('frontend.process', [
+        return view('Frontend.process', [
             'activePage' => $category->slug,
             'processes' => $processes,
             'processCategories' => $processCategories,

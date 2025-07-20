@@ -13,7 +13,7 @@ class ProductCategoryController extends Controller
        $category = ProductsCategory::where('slug', $slug)->firstOrFail();
        $productCategories = ProductsCategory::all();
        $products = $category->products()->paginate(9);
-        return view('frontend.product-category', [
+        return view('Frontend.product-category', [
             'activePage' => $category->slug,
             'products' => $products,
             'productCategories' => $productCategories,

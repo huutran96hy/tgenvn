@@ -18,7 +18,7 @@ class ProcessController extends Controller
             ->where('slug', '!=', $slug)
             ->take(4)
             ->get();
-        return view('frontend.process-detail', [
+        return view('Frontend.process-detail', [
             'activePage' => $processCategory->slug,
             'process' => $process,
             'processCategories' => $processCategories,
