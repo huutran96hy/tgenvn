@@ -80,5 +80,5 @@
             </tbody>
         </table>
     </div>
-    @include('frontend.components.support-pagination')
+    @include('Frontend.components.support-pagination')
 </div>

@@ -1,5 +1,5 @@
 <div class="bg-white rounded-lg shadow-sm">
-    @include('frontend.components.support-header')
-    @include('frontend.components.support-list')
-    @include('frontend.components.support-pagination')
+    @include('Frontend.components.support-header')
+    @include('Frontend.components.support-list')
+    @include('Frontend.components.support-pagination')
 </div>

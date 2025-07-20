@@ -1,6 +1,6 @@
-@extends('frontend.layouts.app')
+@extends('Frontend.layouts.app')
 
 @section('content')
-    @include('frontend.sections.hero')
-    @include('frontend.sections.process-detail-content')
+    @include('Frontend.sections.hero')
+    @include('Frontend.sections.process-detail-content')
 @endsection

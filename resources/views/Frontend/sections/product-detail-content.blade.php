@@ -1,7 +1,7 @@
 <div class="container mx-auto px-4 py-8">
     <div class="flex flex-col lg:grid lg:grid-cols-4 gap-6">
         <!-- Sidebar -->
-        @include('frontend.components.products-sidebar-main', ['activePage' => $activePage])
+        @include('Frontend.components.products-sidebar-main', ['activePage' => $activePage])
         <!-- Main Content -->
         <div class="lg:col-span-3">
             <div class="bg-white rounded-lg shadow-sm">
@@ -111,7 +111,7 @@
                                             class="w-full h-16 object-contain mx-auto">
                                         @elseif($category === 'precision' && isset($relatedProduct['icon']))
                                         <div class="h-16 flex items-center justify-center">
-                                            @include('frontend.components.product-icons.' . $relatedProduct['icon'])
+                                            @include('Frontend.components.product-icons.' . $relatedProduct['icon'])
                                         </div>
                                         @else
                                         <div class="w-full h-16 bg-gradient-to-r from-gray-400 to-gray-600 rounded flex items-center justify-center">
