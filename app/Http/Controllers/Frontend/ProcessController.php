@@ -16,7 +16,7 @@ class ProcessController extends Controller
         $processCategories = ProcessCategory::all();
         $relatedProcesses = Process::where('process_category_id', $process->process_category_id)
             ->where('slug', '!=', $slug)
-            ->take(4)
+            ->take(6)
             ->get();
         return view('Frontend.process-detail', [
             'activePage' => $processCategory->slug,

@@ -16,7 +16,7 @@ class ProductController extends Controller
         $productCategories = ProductsCategory::all();
         $relatedProducts = Product::where('products_category_id', $product->products_category_id)
             ->where('slug', '!=', $slug)
-            ->take(4)
+            ->take(6)
             ->get();
         return view('Frontend.product-detail', [
             'activePage' => $productCategory->slug,

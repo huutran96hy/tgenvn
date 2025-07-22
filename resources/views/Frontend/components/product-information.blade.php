@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const container = document.getElementById('productSliderContainer1');
     
     let currentSlide = 0;
-    const totalSlides = 7;
+    const totalSlides = 6;
     let autoSlideInterval;
 
     function updateSlider() {
