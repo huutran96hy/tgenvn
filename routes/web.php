@@ -50,6 +50,15 @@ Route::get('/about/directions', function () {
     return view('Frontend.directions');
 })->name('about.directions');
 
+Route::get('/equipment', function () {
+    $processCategories = ProcessCategory::all();
+    $activePage = "equipment";
+    $pageTitle = "장비 소개";
+    $pageTitleEn = "Equipment Introduction";
+    $pageTitleVi = "Giới thiệu thiết bị";
+    return view('Frontend.equipment', compact('processCategories', 'activePage', 'pageTitle', 'pageTitleEn', 'pageTitleVi'));
+})->name('equipment');
+
 Route::get('/products', function () {
     return view('Frontend.products-main');
 })->name('products');
