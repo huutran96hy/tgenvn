@@ -9,12 +9,12 @@
         <div class="grid grid-cols-2 gap-2">
             <a href="tel:031-431-4418" class="flex flex-col items-center justify-center bg-green-50 hover:bg-green-100 text-green-700 py-3 rounded-lg transition-colors duration-200">
                 <span class="text-lg mb-1">📞</span>
-                <span class="text-xs font-bold">031-431-4418</span>
+                <span class="text-xs font-bold">+84-338-221-216</span>
                 <span class="text-xs" data-ko="전화상담" data-en="Phone" data-vi="Điện thoại">전화상담</span>
             </a>
             <a href="mailto:tgenc@tg-enc.co.kr" class="flex flex-col items-center justify-center bg-blue-50 hover:bg-blue-100 text-blue-700 py-3 rounded-lg transition-colors duration-200">
                 <span class="text-lg mb-1">✉️</span>
-                <span class="text-xs font-bold">Email</span>
+                <span class="text-xs font-bold">tgenvn@gmail.com</span>
                 <span class="text-xs" data-ko="이메일상담" data-en="Email" data-vi="Email">이메일상담</span>
             </a>
         </div>
