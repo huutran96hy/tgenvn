@@ -53,9 +53,9 @@ Route::get('/about/directions', function () {
 Route::get('/equipment', function () {
     $processCategories = ProcessCategory::all();
     $activePage = "equipment";
-    $pageTitle = "장비 소개";
-    $pageTitleEn = "Equipment Introduction";
-    $pageTitleVi = "Giới thiệu thiết bị";
+    $pageTitle = "보유 장비";
+    $pageTitleEn = "Available equipment";
+    $pageTitleVi = "Thiết bị hiện có";
     return view('Frontend.equipment', compact('processCategories', 'activePage', 'pageTitle', 'pageTitleEn', 'pageTitleVi'));
 })->name('equipment');
 
