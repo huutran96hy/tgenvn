@@ -4,7 +4,7 @@
         <div class="bg-white rounded-lg shadow-sm p-4 mb-4">
             <div class="flex items-center justify-center mb-2">
                 <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
-                <h1 class="text-lg font-bold text-blue-600 text-center" data-ko="제조기술현황" data-en="Technology Status" data-vi="Tình trạng công nghệ">제조기술현황</h1>
+                <h1 class="text-lg font-bold text-blue-600 text-center" data-ko="제조기술연혁" data-en="Manufacturing Technology History" data-vi="Lịch sử công nghệ sản xuất">제조기술연혁</h1>
             </div>
             <p class="text-center text-xs text-gray-500">Technical Granite Stage Technology</p>
         </div>
@@ -16,7 +16,7 @@
             <div class="flex flex-col lg:flex-row lg:items-center mb-4 lg:mb-0">
                 <div class="flex items-center mb-2 lg:mb-0">
                     <span class="w-3 h-3 bg-blue-600 rounded-full mr-3"></span>
-                    <h1 class="text-2xl lg:text-3xl font-bold text-blue-600 mr-0 lg:mr-4" data-ko="제조기술현황" data-en="Technology Status" data-vi="Tình trạng công nghệ">제조기술현황</h1>
+                    <h1 class="text-2xl lg:text-3xl font-bold text-blue-600 mr-0 lg:mr-4" data-ko="제조기술연혁" data-en="Manufacturing Technology History" data-vi="Lịch sử công nghệ sản xuất">제조기술연혁</h1>
                 </div>
                 <span class="text-gray-400 text-sm lg:text-lg">Technical Granite Stage Technology</span>
             </div>
@@ -25,7 +25,7 @@
                 <span>></span>
                 <span data-ko="회사소개" data-en="About Us" data-vi="Giới thiệu">회사소개</span>
                 <span>></span>
-                <span class="text-blue-600" data-ko="제조기술현황" data-en="Technology Status" data-vi="Tình trạng công nghệ">제조기술현황</span>
+                <span class="text-blue-600" data-ko="제조기술연혁" data-en="Manufacturing Technology History" data-vi="Lịch sử công nghệ sản xuất">제조기술연혁</span>
             </div>
         </div>
     </div>

@@ -31,8 +31,6 @@
                             <div class="flex items-center space-x-2 text-xs lg:text-sm text-gray-500 flex-wrap">
                                 <span data-ko="HOME" data-en="HOME" data-vi="TRANG CHỦ">HOME</span>
                                 <span>></span>
-                                <span data-ko="제품안내" data-en="Products" data-vi="Sản phẩm">제품안내</span>
-                                <span>></span>
                                 <span class="text-blue-600" data-ko="{{ $pageTitle ?? '제품안내' }}" data-en="{{ $pageTitleEn ?? 'Products' }}" data-vi="{{ $pageTitleVi ?? 'Sản phẩm' }}">{{ $pageTitle ?? '제품안내' }}</span>
                             </div>
                         </div>

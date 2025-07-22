@@ -2,7 +2,7 @@
     $activePage = $activePage ?? 'greeting';
     $companyCategories = [
         ['route' => 'about.greeting', 'key' => 'greeting', 'ko' => '인사말', 'en' => 'Greeting', 'vi' => 'Lời chào'],
-        ['route' => 'about.technology', 'key' => 'technology', 'ko' => '제조기술현황', 'en' => 'Technology Status', 'vi' => 'Tình trạng công nghệ'],
+        ['route' => 'about.technology', 'key' => 'technology', 'ko' => '제조기술연혁', 'en' => 'Manufacturing technology history', 'vi' => 'Lịch sử công nghệ sản xuất'],
         ['route' => 'about.directions', 'key' => 'directions', 'ko' => '찾아오시는 길', 'en' => 'Directions', 'vi' => 'Chỉ đường']
     ];
 @endphp
