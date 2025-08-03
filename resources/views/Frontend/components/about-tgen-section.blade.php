@@ -22,8 +22,8 @@
                         
                         <p class="text-lg lg:text-xl font-semibold text-gray-800 leading-relaxed" 
                            data-ko="TGEN VN는 석정반 및 측정구를 자체 제조·판매하며,반도체·자동화 생산 및 검사 장비를 직접 설계·제작합니다.한국 엔지니어 상주와 지속적 R&D로 정밀 공정 혁신에 앞장섭니다" 
-                           data-en="TGEN VN is a specialized manufacturer of precision granite surface plates and measuring equipment,<br>providing solutions that maximize customer performance and enhance<br>product competitiveness through differentiated technology." 
-                           data-vi="TGEN VN là nhà sản xuất chuyên về tấm bề mặt đá granite chính xác và thiết bị đo lường,<br>cung cấp các giải pháp tối đa hóa hiệu suất khách hàng và nâng cao<br>khả năng cạnh tranh sản phẩm thông qua công nghệ khác biệt.">
+                           data-en="TGEN VN is a specialized manufacturer of precision granite surface plates and measuring equipment, providing solutions that maximize customer performance and enhance product competitiveness through differentiated technology." 
+                           data-vi="TGEN VN là nhà sản xuất chuyên về tấm bề mặt đá granite chính xác và thiết bị đo lường, cung cấp các giải pháp tối đa hóa hiệu suất khách hàng và nâng cao khả năng cạnh tranh sản phẩm thông qua công nghệ khác biệt.">
                             TGEN VN는 석정반 및 측정구를 자체 제조·판매하며,<br>
                             반도체·자동화 생산 및 검사 장비를 직접 설계·제작합니다.<br>
                             한국 엔지니어 상주와 지속적 R&D로 정밀 공정 혁신에 앞장섭니다
