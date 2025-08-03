@@ -2,14 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\{
-    AuthController,
-    CandidateController,
-    EmployerController,
-    JobController,
-    NewsController,
-    ContactController,
-    HomeController,
-    JobDetailController,
     ProductController,
     QuoteController,
     ProductCategoryController,

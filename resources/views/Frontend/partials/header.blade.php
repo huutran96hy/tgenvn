@@ -4,7 +4,7 @@
             <!-- Logo -->
             <div class="flex items-center space-x-2">
                 <a href="{{ route('home') }}" class="flex items-center">
-                    <img src="{{ asset('assets/images/logo_width.png') }}" alt="TG-ENC Logo" class="h-16 w-auto">
+                    <img src="{{ asset('assets/images/logo_width.png') }}" alt="TG-ENC Logo" class="h-24 w-auto">
                 </a>
             </div>
 

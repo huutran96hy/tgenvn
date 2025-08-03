@@ -1,6 +1,6 @@
 <div class="space-y-6">
     <div class="bg-white rounded-lg shadow-sm">
-        <div class="border-b border-gray-200 p-4">
+        <!-- <div class="border-b border-gray-200 p-4">
             <div class="flex items-center justify-between">
                 <h3 class="text-lg font-bold text-blue-600" data-ko="제품정보" data-en="Product Info" data-vi="Thông tin sản phẩm">제품정보</h3>
                 <div class="flex items-center text-sm text-gray-500">
@@ -10,7 +10,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="p-4">
             <!-- Fixed Product Image Slider -->
             <div class="mb-4 relative">

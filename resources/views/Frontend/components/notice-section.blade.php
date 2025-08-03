@@ -58,13 +58,7 @@
             'link' => route('about')
 
             ],
-            [
-            'ko' => '보유장비',
-            'en' => 'Equipment',
-            'vi' => 'Thiết bị',
-            'icon' => 'tools',
-            'link' => route('equipment')
-            ],
+            
             [
             'ko' => '견적의뢰',
             'en' => 'Quote',

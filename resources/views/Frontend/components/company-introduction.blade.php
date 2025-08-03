@@ -1,6 +1,6 @@
 <div class="space-y-6">
     <div class="relative">
-        <div class="precision-tools-bg w-full h-48 rounded-lg"></div>
+        <div class="precision-tools-bg w-full h-60 rounded-lg"></div>
         <div class="absolute bottom-4 left-4 bg-black bg-opacity-70 text-white px-3 py-1 rounded text-sm" data-ko="정밀 측정 도구" data-en="Precision Measurement Tools" data-vi="Dụng cụ đo lường chính xác">
             정밀 측정 도구
         </div>
