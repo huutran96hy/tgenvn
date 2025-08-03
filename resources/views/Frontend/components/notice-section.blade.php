@@ -47,7 +47,7 @@
     <!-- Service Icons -->
     <div class="bg-white p-6 rounded-lg shadow-sm">
         <h4 class="text-lg font-bold text-blue-600 mb-4" data-ko="바로가기" data-en="Quick Links" data-vi="Liên kết nhanh">바로가기</h4>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="grid grid-cols-3 sm:grid-cols-3 gap-4">
             @php
             $quickLinks = [
             [

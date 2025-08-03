@@ -11,7 +11,7 @@
     <div class="space-y-2 text-sm">
         <div class="flex items-center">
             <span class="font-bold mr-2">📞</span>
-            <span>+84-338-221-216</span>
+            <span>+0388.221.216</span>
         </div>
         <div class="flex items-center">
             <span class="font-bold mr-2">✉️</span>

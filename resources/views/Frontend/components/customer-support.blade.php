@@ -24,7 +24,7 @@
                 </svg>
             </div>
             <div class="flex-1 min-w-0">
-                <div class="text-xl font-bold text-green-600 mb-1">+84-338-221-216</div>
+                <div class="text-xl font-bold text-green-600 mb-1">+</div>
                 <div class="text-xl text-blue-600 break-all"> tgenvn@gmail.com</div>
             </div>
         </div>
