@@ -1,5 +1,5 @@
 <div class="space-y-6">
-    <div class="space-y-2">
+    <div class="space-y-1">
         @php
         $categories = [
         ['ko' => '01 규격 정반', 'en' => '01 Standard Surface Plate', 'vi' => '01 Bàn chuẩn', 'bg' => 'bg-gray-800 hover:bg-gray-700','link'=> route('products.general')],
@@ -11,42 +11,16 @@
 
         @foreach($categories as $index => $category)
         <a href="{{ $category['link'] }}" class="block">
-            <div class="{{ $category['bg'] }} text-white p-3 {{ $index === 0 ? 'rounded-t-lg' : ($index === count($categories) - 1 ? 'rounded-b-lg' : '') }} cursor-pointer transition-colors">
+            <div class="{{ $category['bg'] }} text-white p-4 {{ $index === 0 ? 'rounded-t-lg' : ($index === count($categories) - 1 ? 'rounded-b-lg' : '') }} cursor-pointer transition-colors">
                 <span class="text-sm font-medium" data-ko="{{ $category['ko'] }}" data-en="{{ $category['en'] }}" data-vi="{{ $category['vi'] }}">{{ $category['ko'] }}</span>
             </div>
         </a>
         @endforeach
     </div>
-    <!-- <div class="bg-white rounded-lg shadow-sm">
-        <div class="border-b border-gray-200 p-4">
-            <div class="flex items-center justify-between">
-                <h3 class="text-lg font-bold text-blue-600" data-ko="공지사항" data-en="Notice" data-vi="Thông báo">공지사항</h3>
-                <span class="text-sm text-gray-500">NOTICE</span>
-            </div>
-        </div>
-
-        <div class="p-4 space-y-3">
-            @php
-                $notices = [
-                    ['date' => '12.10.04', 'ko' => '• 티지이엔씨 홈페이지를 오픈하였습니다.', 'en' => '• TG ENC website has been opened.', 'vi' => '• Website TG ENC đã được mở.'],
-                    ['date' => '12.10.02', 'ko' => '• 많은 성원 부탁드립니다.', 'en' => '• Thank you for your support.', 'vi' => '• Cảm ơn sự hỗ trợ của bạn.'],
-                    ['date' => '12.10.27', 'ko' => '• 티지이엔씨 홈페이지를 오픈하였습니다.', 'en' => '• TG ENC website has been opened.', 'vi' => '• Website TG ENC đã được mở.'],
-                    ['date' => '12.10.22', 'ko' => '• 많은 성원 부탁드립니다.', 'en' => '• Thank you for your support.', 'vi' => '• Cảm ơn sự hỗ trợ của bạn.']
-                ];
-            @endphp
-
-            @foreach($notices as $index => $notice)
-                <div class="flex justify-between items-center py-2 {{ $index < count($notices) - 1 ? 'border-b border-gray-100' : '' }}">
-                    <span class="text-sm text-gray-700" data-ko="{{ $notice['ko'] }}" data-en="{{ $notice['en'] }}" data-vi="{{ $notice['vi'] }}">{{ $notice['ko'] }}</span>
-                    <span class="text-xs text-gray-500">[{{ $notice['date'] }}]</span>
-                </div>
-            @endforeach
-        </div>
-    </div> -->
-
+    
     <!-- Service Icons -->
-    <div class="bg-white p-6 rounded-lg shadow-sm">
-        <h4 class="text-lg font-bold text-blue-600 mb-4" data-ko="바로가기" data-en="Quick Links" data-vi="Liên kết nhanh">바로가기</h4>
+    <div class="bg-white p-4 rounded-lg shadow-sm" style="margin-top:10px!important">
+        <!-- <h4 class="text-lg font-bold text-blue-600 mb-2" data-ko="바로가기" data-en="Quick Links" data-vi="Liên kết nhanh">바로가기</h4> -->
         <div class="grid grid-cols-3 sm:grid-cols-3 gap-4">
             @php
             $quickLinks = [
@@ -79,7 +53,7 @@
             @foreach($quickLinks as $link)
             <div class="text-center">
                 <a href="{{ $link['link'] ?? '#' }}" class="group">
-                    <div class="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-3 hover:bg-blue-100 transition-colors cursor-pointer group">
+                    <div class="w-8 h-8 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-3 hover:bg-blue-100 transition-colors cursor-pointer group">
                         @if($link['icon'] === 'chart')
                         <!-- Business Status - Bar Chart Icon -->
                         <svg class="w-6 h-6 text-blue-500 group-hover:text-blue-600" fill="currentColor" viewBox="0 0 24 24">

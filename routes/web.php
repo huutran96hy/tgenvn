@@ -603,7 +603,7 @@ Route::get('/support', function () {
 })->name('support');
 
 Route::get('/support/notices', function () {
-    return view('frontend.support-notices');
+    return view('Frontend.support-notices');
 })->name('support.notices');
 
 Route::get('/support/consultation', function () {
