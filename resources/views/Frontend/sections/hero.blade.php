@@ -25,8 +25,8 @@
                                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                         </svg>
                                     </div>
-                                    <span class="text-sm lg:text-lg" data-ko="정밀 화강암 평판" data-en="Precision Granite Surface Plate" data-vi="Tấm bề mặt đá granit chính xác">
-                                        정밀 화강암 평판
+                                    <span class="text-sm lg:text-lg" data-ko="정밀 석정반" data-en="Precision Granite Surface Plate" data-vi="Bàn mặt đá granite chính xác">
+                                        정밀 석정반
                                     </span>
                                 </div>
 

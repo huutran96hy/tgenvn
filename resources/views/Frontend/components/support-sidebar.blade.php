@@ -1,8 +1,8 @@
 @php
     $activePage = $activePage ?? '';
     $supportCategories = [
-        ['route' => 'support.notices', 'key' => 'notices', 'ko' => '공지 사항', 'en' => 'Notices', 'vi' => 'Thông báo'],
-        ['route' => 'support.consultation', 'key' => 'consultation', 'ko' => '견적 상담', 'en' => 'Quote Consultation', 'vi' => 'Tư vấn báo giá']
+        ['route' => 'support.notices', 'key' => 'notices', 'ko' => '공지 사항', 'en' => 'Notices', 'vi' => 'Thông báo']
+        
     ];
 @endphp
 

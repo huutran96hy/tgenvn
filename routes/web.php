@@ -602,7 +602,7 @@ Route::get('/support', function () {
     return redirect()->route('support.consultation');
 })->name('support');
 
-Route::get('/support/notices', function () {
+Route::get('/notices', function () {
     return view('Frontend.support-notices');
 })->name('support.notices');
 
