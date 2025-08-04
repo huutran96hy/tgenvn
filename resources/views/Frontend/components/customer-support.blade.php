@@ -24,7 +24,7 @@
                 </svg>
             </div>
             <div class="flex-1 min-w-0">
-                <div class="text-xl font-bold text-green-600 mb-1">+0388.221.216</div>
+                <div class="text-xl font-bold text-green-600 mb-1">+84 (0)388.221.216</div>
                 <div class="text-xl text-blue-600 break-all"> tgenvn@gmail.com</div>
             </div>
         </div>
@@ -38,18 +38,18 @@
 <div class="bg-white rounded-lg shadow-sm overflow-hidden">
     <!-- Header -->
     <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-4 py-3">
-        <h3 class="text-white font-bold text-center text-sm" data-ko="고객 지원 센터" data-en="Customer Support Center" data-vi="Trung tâm hỗ trợ khách hàng">고객 지원 센터</h3>
+        <h3 class="text-white font-bold text-center text-sm" data-ko="협력지원 파트너" data-en="Cooperation Support Partner" data-vi="Đối tác hỗ trợ hợp tác">협력지원 파트너</h3>
     </div>
 
     <!-- Content -->
     <div class="p-4">
         <div class="items-start mb-4 ">
-            <div class="flex-shrink-0 w-40 mr-3" style="width:100%;border:1px solid #1e50da;margin-bottom:10px;">
+            <div class="flex-shrink-0 w-40 mr-3" style="width:100%;border:0.5px solid #a8a8a8;margin-bottom:10px;">
                 <a href="http://tg-enc.co.kr/" target="_blank" class="block w-full h-full p-1">
                     <img src="{{ asset('assets/images/tgenc.jpg') }}" style="margin: 0 auto;" alt="Support Icon" class="w-36 h-full">
                 </a>
             </div>
-            <div class="flex-shrink-0 w-40 mr-3 p-2" style="width:100%;border:1px solid #1e50da;">
+            <div class="flex-shrink-0 w-40 mr-3 p-2" style="width:100%;border:0.5px solid #a8a8a8;">
                 <a href="https://supercalib.vn/" target="_blank" class="text-xl font-bold text-blue-600 hover:text-blue-800 transition-colors duration-300">
                     <img src="{{ asset('assets/images/kaizen.jpg') }}" alt="Support Icon" class="w-full h-full">
                 </a>
