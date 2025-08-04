@@ -11,7 +11,7 @@
 
         @foreach($categories as $index => $category)
         <a href="{{ $category['link'] }}" class="block">
-            <div class="{{ $category['bg'] }} text-white p-4 {{ $index === 0 ? 'rounded-t-lg' : ($index === count($categories) - 1 ? 'rounded-b-lg' : '') }} cursor-pointer transition-colors">
+            <div class="{{ $category['bg'] }} text-white p-4 {{ $index === 0 ? 'rounded-t-lg' : ($index === count($categories) - 1 ? 'rounded-b-lg' : '') }} cursor-pointer transition-colors" style="padding:1.2rem">
                 <span class="text-sm font-medium" data-ko="{{ $category['ko'] }}" data-en="{{ $category['en'] }}" data-vi="{{ $category['vi'] }}">{{ $category['ko'] }}</span>
             </div>
         </a>
@@ -19,7 +19,7 @@
     </div>
     
     <!-- Service Icons -->
-    <div class="bg-white p-4 rounded-lg shadow-sm" style="margin-top:10px!important">
+    <div class="bg-white p-2 rounded-lg shadow-sm" style="margin-top:8px!important">
         <!-- <h4 class="text-lg font-bold text-blue-600 mb-2" data-ko="바로가기" data-en="Quick Links" data-vi="Liên kết nhanh">바로가기</h4> -->
         <div class="grid grid-cols-3 sm:grid-cols-3 gap-4">
             @php
@@ -53,7 +53,7 @@
             @foreach($quickLinks as $link)
             <div class="text-center">
                 <a href="{{ $link['link'] ?? '#' }}" class="group">
-                    <div class="w-8 h-8 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-3 hover:bg-blue-100 transition-colors cursor-pointer group">
+                    <div class="w-8 h-8 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-1 hover:bg-blue-100 transition-colors cursor-pointer group">
                         @if($link['icon'] === 'chart')
                         <!-- Business Status - Bar Chart Icon -->
                         <svg class="w-6 h-6 text-blue-500 group-hover:text-blue-600" fill="currentColor" viewBox="0 0 24 24">

@@ -179,7 +179,7 @@
                 <label class="sm:col-span-2 text-sm text-gray-700 font-medium" data-ko="답변 방법" data-en="Response Method" data-vi="Phương thức phản hồi">답변 방법 *</label>
                 <div class="sm:col-span-4">
                     <select name="response_method" class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('response_method') border-red-500 @enderror" required>
-                        <option value="">선택해주세요</option>
+                        <option value="" data-ko="선택해주세요" data-en="Please select" data-vi="Vui lòng chọn">선택해주세요</option>
                         <option value="phone" {{ old('response_method') === 'phone' ? 'selected' : '' }} data-ko="전화" data-en="Phone" data-vi="Điện thoại">전화</option>
                         <option value="email" {{ old('response_method') === 'email' ? 'selected' : '' }} data-ko="이메일" data-en="Email" data-vi="Email">이메일</option>
                         <option value="both" {{ old('response_method') === 'both' ? 'selected' : '' }} data-ko="전화+이메일" data-en="Phone+Email" data-vi="Điện thoại+Email">전화+이메일</option>
@@ -193,7 +193,7 @@
 
         <!-- Quill Rich Text Editor -->
         <div class="mb-6">
-            <label class="block text-sm text-gray-700 font-medium mb-2">요청 내용 *</label>
+            <label class="block text-sm text-gray-700 font-medium mb-2" data-ko="요청 내용" data-en="Request Content" data-vi="Nội dung yêu cầu">요청 내용 *</label>
             <div id="quill-toolbar" class="border border-gray-300 rounded-t bg-gray-50">
                 <!-- Custom toolbar -->
                 <span class="ql-formats">
@@ -272,7 +272,7 @@
 
         <!-- File Upload Section -->
         <div class="mb-6">
-            <label class="block text-sm text-gray-700 font-medium mb-2">첨부파일</label>
+            <label class="block text-sm text-gray-700 font-medium mb-2" data-en="Attachments" data-ko="첨부파일" data-vi="Tệp đính kèm">첨부파일</label>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <!-- Upload Area -->
                 <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors">
@@ -283,23 +283,23 @@
                                 <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </div>
-                        <p class="text-sm text-gray-600">파일을 선택하거나 드래그하세요</p>
-                        <p class="text-xs text-gray-500 mt-1">최대 2MB, jpg, png, pdf, doc, txt, zip 파일</p>
+                        <p class="text-sm text-gray-600" data-vi="Chọn hoặc kéo tệp vào đây" data-en="Select or drag files here" data-ko="파일을 선택하거나 드래그하세요">파일을 선택하거나 드래그하세요</p>
+                        <p class="text-xs text-gray-500 mt-1" data-vi="Tối đa 2MB, jpg, png, pdf, doc, txt, zip" data-en="Max 2MB, jpg, png, pdf, doc, txt, zip" data-ko="최대 2MB, jpg, png, pdf, doc, txt, zip 파일">최대 2MB, jpg, png, pdf, doc, txt, zip 파일</p>
                     </label>
                 </div>
                 
                 <!-- File Info -->
                 <div class="text-sm text-gray-600 space-y-2">
                     <div class="flex items-center justify-between">
-                        <span class="font-medium">업로드된 파일</span>
+                        <span class="font-medium" data-en="Uploaded Files" data-ko="업로드된 파일" data-vi="Tệp đã tải lên">업로드된 파일</span>
                         <button type="button" id="clearFiles" class="text-red-600 hover:text-red-800 text-xs">모두 삭제</button>
                     </div>
                     <div id="fileList" class="space-y-1 max-h-32 overflow-y-auto">
                         <!-- Files will be listed here -->
                     </div>
                     <div class="text-xs text-gray-500 pt-2 border-t">
-                        <p>• 파일 크기: <span id="totalSize">0KB</span> / 2MB</p>
-                        <p>• 허용 형식: jpg, jpeg, png, pdf, doc, docx, txt, zip</p>
+                        <p><span data-vi="• Kích thước tệp:" data-ko="• 파일 크기:" data-en="• File Size:">• 파일 크기:</span> <span id="totalSize">0KB</span> / 2MB</p>
+                        <p><span data-vi="• Định dạng cho phép:" data-ko="• 허용 형식:" data-en="• Allowed Formats:">• 허용 형식:</span> jpg, jpeg, png, pdf, doc, docx, txt, zip</p>
                     </div>
                 </div>
             </div>
@@ -310,12 +310,12 @@
 
         <!-- Tags Section -->
         <div class="mb-6">
-            <label class="block text-sm text-gray-700 font-medium mb-2">태그</label>
+            <label class="block text-sm text-gray-700 font-medium mb-2" data-en="Tags" data-ko="태그" data-vi="Thẻ">태그</label>
             <div class="flex items-center gap-2">
                 <span class="text-gray-400">🏷️</span>
-                <input type="text" name="tags" value="{{ old('tags') }}" class="flex-1 px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('tags') border-red-500 @enderror" placeholder="태그를 쉼표(,)로 구분하여 입력하세요">
+                <input type="text" name="tags" value="{{ old('tags') }}" class="flex-1 px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('tags') border-red-500 @enderror" placeholder="" >
             </div>
-            <p class="text-xs text-gray-500 mt-1">예: 견적요청, 긴급, 대량주문</p>
+            <p class="text-xs text-gray-500 mt-1" data-en="Example: Quote Request, Urgent, Bulk Order" data-ko="예: 견적요청, 긴급, 대량주문" data-vi="Ví dụ: Yêu cầu báo giá, Khẩn cấp, Đơn hàng số lượng lớn">예: 견적요청, 긴급, 대량주문</p>
             @error('tags')
                 <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
             @enderror
@@ -327,13 +327,13 @@
                 📄 미리보기
             </button>
             <button type="submit" id="submit-btn" class="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed" data-ko="견적 요청" data-en="Submit Quote" data-vi="Gửi báo giá">
-                <span class="submit-text">📨 견적 요청</span>
+                <span class="submit-text" data-ko="📨 견적 요청" data-en="📨 Submit Quote" data-vi="📨 Gửi báo giá">📨 견적 요청</span>
                 <span class="loading-text hidden">
                     <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    전송 중...
+                    <span data-ko="처리 중..." data-en="Processing..." data-vi="Đang xử lý...">처리 중...</span>
                 </span>
             </button>
         </div>
@@ -357,7 +357,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 userOnly: false
             }
         },
-        placeholder: '견적 요청 내용을 상세히 입력해 주세요...\n\n예시:\n- 제품명 및 사양\n- 수량\n- 납기 희망일\n- 특별 요구사항',
+        placeholder: '',
         formats: [
             'header', 'font', 'size',
             'bold', 'italic', 'underline', 'strike',
