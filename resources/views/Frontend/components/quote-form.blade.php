@@ -292,7 +292,7 @@
                 <div class="text-sm text-gray-600 space-y-2">
                     <div class="flex items-center justify-between">
                         <span class="font-medium" data-en="Uploaded Files" data-ko="업로드된 파일" data-vi="Tệp đã tải lên">업로드된 파일</span>
-                        <button type="button" id="clearFiles" class="text-red-600 hover:text-red-800 text-xs">모두 삭제</button>
+                        <button type="button" id="clearFiles" class="text-red-600 hover:text-red-800 text-xs" data-vi="Xóa tất cả" data-ko="모두 삭제" data-en="Clear All">모두 삭제</button>
                     </div>
                     <div id="fileList" class="space-y-1 max-h-32 overflow-y-auto">
                         <!-- Files will be listed here -->
