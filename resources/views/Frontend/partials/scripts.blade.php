@@ -42,9 +42,18 @@
 
         // Config cho tên và icon
         const langConfig = {
-            'ko': { text: '한국어', flag: 'flag-kr' },
-            'en': { text: 'English', flag: 'flag-us' },
-            'vi': { text: 'Tiếng Việt', flag: 'flag-vn' }
+            'ko': {
+                text: '한국어',
+                flag: 'flag-kr'
+            },
+            'en': {
+                text: 'English',
+                flag: 'flag-us'
+            },
+            'vi': {
+                text: 'Tiếng Việt',
+                flag: 'flag-vn'
+            }
         };
 
         // --- Đọc ngôn ngữ lưu từ localStorage (nếu có) ---
@@ -86,7 +95,13 @@
                     }
                 }
             });
-
+            const langImgs = document.querySelectorAll('img[src-vi], img[src-en], img[src-ko]');
+            langImgs.forEach(img => {
+                const newSrc = img.getAttribute(`src-${lang}`);
+                if (newSrc) {
+                    img.setAttribute('src', newSrc);
+                }
+            });
             // Close dropdown
             languageDropdown.classList.remove('active');
             langArrow.style.transform = 'rotate(0deg)';
@@ -149,7 +164,7 @@
             card.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-5px)';
             });
-            
+
             card.addEventListener('mouseleave', function() {
                 this.style.transform = 'translateY(0)';
             });
@@ -164,7 +179,7 @@
             btn.addEventListener('click', function() {
                 const sortType = this.dataset.sort;
                 const arrow = this.querySelector('.sort-arrow');
-                
+
                 // If clicking the same button, toggle direction
                 if (currentSort === sortType) {
                     sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
@@ -173,7 +188,7 @@
                     sortDirection = 'asc';
                     currentSort = sortType;
                 }
-                
+
                 // Reset all buttons
                 sortBtns.forEach(b => {
                     b.classList.remove('active', 'bg-blue-100', 'text-blue-700');
@@ -181,19 +196,19 @@
                     b.querySelector('.sort-arrow').style.opacity = '0';
                     b.querySelector('.sort-arrow').style.transform = 'rotate(0deg)';
                 });
-                
+
                 // Activate current button
                 this.classList.remove('bg-gray-200', 'text-gray-700');
                 this.classList.add('active', 'bg-blue-100', 'text-blue-700');
                 arrow.style.opacity = '1';
-                
+
                 // Set arrow direction
                 if (sortDirection === 'desc') {
                     arrow.style.transform = 'rotate(180deg)';
                 } else {
                     arrow.style.transform = 'rotate(0deg)';
                 }
-                
+
                 // Sort products (you can implement actual sorting logic here)
                 sortProducts(sortType, sortDirection);
             });
@@ -202,10 +217,10 @@
         function sortProducts(sortType, direction) {
             const productsGrid = document.querySelector('.grid.md\\:grid-cols-2');
             const products = Array.from(productsGrid.children);
-            
+
             // Simple sorting simulation - you can implement real sorting logic
             console.log(`Sorting by ${sortType} in ${direction} order`);
-            
+
             // Example: shuffle products to simulate sorting
             if (sortType !== 'all') {
                 const shuffled = products.sort(() => direction === 'asc' ? Math.random() - 0.5 : 0.5 - Math.random());

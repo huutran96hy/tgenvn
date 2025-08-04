@@ -27,7 +27,7 @@
             [
             'ko' => '사업안내',
             'en' => 'Business Information',
-            'vi' => 'Giới thiệu doanh nghiệp',
+            'vi' => 'Giới thiệu',
             'icon' => 'chart',
             'link' => route('about')
 
