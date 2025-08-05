@@ -21,21 +21,21 @@
             <p data-ko="본사: 베트남 하이퐁시 지민면 년리 마을 신규 주거지역| 전화: 0388.221.216" 
                data-en="Head Office: New residential area, Nhan Ly Hamlet, Chi Minh Commune, Hai Phong City, Vietnam | Tel: 0388.221.216" 
                data-vi="Trụ sở chính: Khu dân cư mới thôn Nhân Lý , Xã Chí Minh, Thành phố Hải Phòng, Việt Nam | ĐT: 0388.221.216">
-                Trụ sở chính: Khu dân cư mới thôn Nhân Lý , Xã Chí Minh, Thành phố Hải Phòng, Việt Nam | ĐT: 0388.221.216
+                본사: 베트남 하이퐁시 지민면 년리 마을 신규 주거지역| 전화: 0388.221.216
             </p>
             
             <!-- Registration Details -->
             <p data-ko="등록일: 2025년 6월 11일 " 
                data-en="Registration Date: June 11, 2025" 
                data-vi="Ngày đăng ký: 11/06/2025">
-                Ngày đăng ký: 11/06/2025 
+                등록일: 2025년 6월 11일
             </p>
             
             <!-- Email -->
             <p data-ko="이메일: tgenvn@gmail.com" 
                data-en="E-mail: tgenvn@gmail.com" 
                data-vi="E-mail: tgenvn@gmail.com">
-                E-mail: tgenvn@gmail.com
+                이메일: tgenvn@gmail.com
             </p>
             
             <!-- Copyright -->
