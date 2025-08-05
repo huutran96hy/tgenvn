@@ -14,7 +14,7 @@
         <div class="p-4">
             <!-- Fixed Product Image Slider -->
             <div class="mb-4 relative">
-                <div class="w-full h-58 bg-gray-200 rounded-lg overflow-hidden relative" id="productSliderContainer1">
+                <div class="w-full h-60 bg-gray-200 rounded-lg overflow-hidden relative" id="productSliderContainer1">
                     <!-- Slide Images Container -->
                     <div class="slider-wrapper-1 h-62 h-full relative">
                         <div class="slider-track-1 flex h-62 transition-transform duration-500 ease-in-out" id="productSlider1">
