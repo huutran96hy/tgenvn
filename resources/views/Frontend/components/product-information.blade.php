@@ -53,7 +53,7 @@
             
             <div class="space-y-2">
                 <h4 class="font-bold text-blue-600" data-ko="TGEN VN 제품 정보" data-en="TGEN VN product information" data-vi="Thông tin sản phẩm của TGEN VN">TGEN VN 제품 정보</h4>
-                <p class="text-sm text-gray-600" data-ko="TGEN VN에서는 다양한 제품을 판매 및 제작하고 있습니다." data-en="At TGEN VN, we manufacture and sell a wide range of products." data-vi="Tại TGEN VN, chúng tôi sản xuất và kinh doanh nhiều loại sản phẩm đa dạng.">
+                <p class="text-sm text-gray-600 pb-2" data-ko="TGEN VN에서는 다양한 제품을 판매 및 제작하고 있습니다." data-en="At TGEN VN, we manufacture and sell a wide range of products." data-vi="Tại TGEN VN, chúng tôi sản xuất và kinh doanh nhiều loại sản phẩm đa dạng.">
                     TGEN VN에서는 다양한 제품을 판매 및 제작하고 있습니다.
                 </p>
             </div>
