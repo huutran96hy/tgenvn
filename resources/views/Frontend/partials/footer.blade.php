@@ -18,10 +18,10 @@
             </p>
             
             <!-- Address and Contact -->
-            <p data-ko="본사: 베트남 하이즈엉성 뜨끼현 치민사 응이케촌 | 전화: 0977.112.185" 
-               data-en="Head Office: Thon Nghi Khe, Xa Chi Minh, Huyen Tu Ky, Tinh Hai Duong, Viet Nam | Tel: 0977.112.185" 
-               data-vi="Trụ sở chính: Thôn Nghi Khê, xã Chi Minh, Huyện Tứ Kỳ, Tỉnh Hải Dương, Việt Nam | ĐT: 0977.112.185">
-                Trụ sở chính: Thôn Nghi Khê, xã Chi Minh, Huyện Tứ Kỳ, Tỉnh Hải Dương, Việt Nam | ĐT: 0977.112.185
+            <p data-ko="본사: 베트남 하이퐁시 지민면 년리 마을 신규 주거지역| 전화: 0388.221.216" 
+               data-en="Head Office: New residential area, Nhan Ly Hamlet, Chi Minh Commune, Hai Phong City, Vietnam | Tel: 0388.221.216" 
+               data-vi="Trụ sở chính: Khu dân cư mới thôn Nhân Lý , Xã Chí Minh, Thành phố Hải Phòng, Việt Nam | ĐT: 0388.221.216">
+                Trụ sở chính: Khu dân cư mới thôn Nhân Lý , Xã Chí Minh, Thành phố Hải Phòng, Việt Nam | ĐT: 0388.221.216
             </p>
             
             <!-- Registration Details -->

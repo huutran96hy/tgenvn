@@ -5,7 +5,7 @@
             <div class="bg-white rounded-lg shadow-sm p-4 mb-4">
                 <div class="flex items-center justify-center mb-2">
                     <span class="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
-                    <h1 class="text-lg font-bold text-blue-600 text-center" data-ko="견적 상담" data-en="Quote Request" data-vi="Yêu cầu báo giá">견적 상담</h1>
+                    <h1 class="text-lg font-bold text-blue-600 text-center" data-ko="공지 사항" data-en="Notices" data-vi="Thông báo">공지 사항</h1>
                 </div>
                 <p class="text-center text-xs text-gray-500">Technical Granite Stage Technology</p>
             </div>
@@ -17,7 +17,7 @@
                 <div class="flex flex-col lg:flex-row lg:items-center mb-4 lg:mb-0">
                     <div class="flex items-center mb-2 lg:mb-0">
                         <span class="w-3 h-3 bg-blue-600 rounded-full mr-3"></span>
-                        <h1 class="text-2xl lg:text-3xl font-bold text-blue-600 mr-0 lg:mr-4" data-ko="견적 상담" data-en="Quote Request" data-vi="Yêu cầu báo giá">견적 상담</h1>
+                        <h1 class="text-2xl lg:text-3xl font-bold text-blue-600 mr-0 lg:mr-4" data-ko="공지 사항" data-en="Notices" data-vi="Thông báo">공지 사항</h1>
                     </div>
                     <span class="text-gray-400 text-sm lg:text-lg">Technical Granite Stage Technology</span>
                 </div>
@@ -26,7 +26,7 @@
                     <span class="mx-2">></span>
                     <a href="{{ route('support') }}" class="hover:text-blue-600" data-ko="고객지원" data-en="Customer Support" data-vi="Hỗ trợ khách hàng">고객지원</a>
                     <span class="mx-2">></span>
-                    <span class="text-blue-600" data-ko="견적 상담" data-en="Notices" data-vi="Thông báo">견적 상담</span>
+                    <span class="text-blue-600" data-ko="공지 사항" data-en="Notices" data-vi="Thông báo">공지 사항</span>
                 </div>
             </div>
         </div>
