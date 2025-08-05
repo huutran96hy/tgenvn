@@ -14,7 +14,7 @@
             <p data-ko="회사명: TGEN VN COMPANY LIMITED | 사업자등록번호: 0801452209" 
                data-en="Company: TGEN VN COMPANY LIMITED | Business Registration: 0801452209" 
                data-vi="Công ty: TGEN VN COMPANY LIMITED | Mã số doanh nghiệp: 0801452209">
-                Công ty: TGEN VN COMPANY LIMITED | Đại diện: NGUYỄN HỮU THÀNH | Mã số doanh nghiệp: 0801452209
+                회사명: TGEN VN COMPANY LIMITED | 사업자등록번호: 0801452209
             </p>
             
             <!-- Address and Contact -->
