@@ -12,29 +12,18 @@ class News extends Model
 
     protected $primaryKey = 'news_id';
     protected $fillable = [
-        'title',
+        'title_vi',
+        'title_en',
+        'title_ko',
         'slug',
-        'images',
-        'content',
-        'author_id',
-        'news_category_id',
-        'published_date',
-        'updated_date',
-        'status'
+        'content_vi',
+        'content_en',
+        'content_ko',
     ];
-
-    public function category()
-    {
-        return $this->belongsTo(NewsCategory::class, 'news_category_id');
-    }
 
     public function author()
     {
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function getPublishedDateAttribute($value)
-    {
-        return Carbon::parse($value)->format('d-m-Y');
-    }
 }

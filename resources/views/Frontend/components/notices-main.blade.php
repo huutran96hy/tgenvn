@@ -41,32 +41,24 @@
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-ko="제목" data-en="Title" data-vi="Tiêu đề">제목</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-32" data-ko="작성자" data-en="Author" data-vi="Người gửi">작성자</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-32" data-ko="작성일" data-en="Date" data-vi="Ngày gửi">작성일</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-20" data-ko="조회" data-en="Views" data-vi="Đã xem">조회</th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-                @php
-                $supportItems = [];
-                $supportItem = [
-                ['id' => 1, 'title' => '사업인 견적 요청드립니다. 🔒', 'author' => '정동수', 'date' => '08-12-2023', 'views' => 3],
-                ];
-                @endphp
-
-                @foreach($supportItems as $item)
+                @foreach($notices as $key=>$item)
                 <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">{{ $item['id'] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">{{ $key + 1 }}</td>
                     <td class="px-6 py-4 text-sm text-gray-900">
-                        <a href="#" class="hover:text-blue-600 transition-colors">
-                            {{ $item['title'] }}
+                        <a href="{{route('support.notice.detail',$item['slug'])}}" class="hover:text-blue-600 transition-colors" data-ko="{{ $item['title_ko'] }}" data-en="{{ $item['title_en'] }}" data-vi="{{ $item['title_vi'] }}">
+                            {{ $item['title_ko'] }}
                         </a>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $item['author'] }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $item['date'] }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">{{ $item['views'] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Admin</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ date('d/m/Y H:i:s', strtotime($item['created_at'])) }}</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+        @include('Frontend.components.support-pagination')
     </div>
     
 </div>

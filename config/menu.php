@@ -17,6 +17,11 @@ return [
             ]
         ],
         [
+            'route'=>'admin.news.index',
+            'label'=>'Thông báo',
+            'icon'=>'ph-briefcase'
+        ],
+        [
             'route' => '#',
             'label' => 'Quy trình',
             'icon' => 'ph-gear',

@@ -88,11 +88,9 @@
             elements.forEach(element => {
                 const text = element.getAttribute(`data-${lang}`);
                 if (text) {
-                    if (element.innerHTML.includes('<br>')) {
+                    
                         element.innerHTML = text;
-                    } else {
-                        element.textContent = text;
-                    }
+                   
                 }
             });
             const langImgs = document.querySelectorAll('img[src-vi], img[src-en], img[src-ko]');

@@ -16,51 +16,41 @@ class NewsController extends Controller
     use SlugCheck;
     public function index(Request $request)
     {
-        $query = News::with('category', 'author')->latest();
+        $query = News::latest();
 
-        if ($request->filled('search')) {
-            $query->where('title', 'like', "%{$request->search}%");
+       if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('title_vi', 'like', "%{$search}%")
+                    ->orWhere('title_en', 'like', "%{$search}%")
+                    ->orWhere('title_ko', 'like', "%{$search}%");
+            });
         }
-
-        if ($request->filled('news_category_id')) {
-            $query->where('news_category_id', $request->news_category_id);
-        }
-
         $news = $query->paginate(10);
-
-        $categories = NewsCategory::all();
-
-        return view('Admin.pages.news.index', compact('news', 'categories'));
+        return view('Admin.pages.news.index', compact('news'));
     }
 
     public function create()
     {
-        $categories = NewsCategory::all();
         $users = User::all();
-        return view('Admin.pages.news.add_edit', compact('categories', 'users'));
+        return view('Admin.pages.news.add_edit', compact('users'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'images' => 'nullable',
-            'content' => 'required',
-            'published_date' => 'required',
-            'status' => 'required|in:draft,published',
-            'author_id' => 'required|exists:users,id',
-            'news_category_id' => 'required|exists:news_categories,news_category_id',
+            'title_vi' => 'required|string|max:255',
+            'title_en'=>'required|string|max:255',
+            'title_ko'=>'required|string|max:255',
+            'content_vi' => 'required',
+            'content_en' => 'required',
+            'content_ko' => 'required',
         ]);
 
         $slug = $request->input('slug');
 
         $slug = $this->getStorySlugExist($slug, News::class, 'slug', 'news_id');
         $validated['slug'] = $slug;
-
-        $validated['published_date'] = Carbon::createFromFormat(
-            'd-m-Y',
-            $request->input('published_date')
-        )->format('Y-m-d');
 
         News::create($validated);
 
@@ -69,7 +59,6 @@ class NewsController extends Controller
 
     public function edit(News $news)
     {
-        $categories = NewsCategory::all();
         $users = User::all();
         return view('Admin.pages.news.add_edit', compact('news', 'categories', 'users'));
     }
@@ -77,26 +66,19 @@ class NewsController extends Controller
     public function update(Request $request, News $news)
     {
         $validated =  $request->validate([
-            'title' => 'required|string|max:255',
+            'title_vi' => 'required|string|max:255',
+            'title_en'=>'required|string|max:255',
+            'title_ko'=>'required|string|max:255',
             'slug' => 'required',
-            'images' => 'nullable',
-            'content' => 'required',
-            'published_date' => 'required',
-            'status' => 'required|in:draft,published',
-            'author_id' => 'required|exists:users,id',
-            'news_category_id' => 'required|exists:news_categories,news_category_id',
+            'content_vi' => 'required',
+            'content_en' => 'required',
+            'content_ko' => 'required',
         ]);
 
         $slug = $request->input('slug');
 
         $slug = $this->getStorySlugExist($slug, News::class, 'slug', 'news_id', $news->news_id);
         $validated['slug'] = $slug;
-
-        // Xử lý ngày
-        $validated['published_date'] = Carbon::createFromFormat(
-            'd-m-Y',
-            $request->input('published_date')
-        )->format('Y-m-d');
 
         $news->update($validated);
 
@@ -105,23 +87,8 @@ class NewsController extends Controller
 
     public function destroy(News $news)
     {
-        // Xóa iamges
-        // if ($news->images) {
-        //     Storage::disk('public')->delete($news->images);
-        // }
 
         $news->delete();
         return back()->with('success', 'Xóa thành công.');
-    }
-
-    public function updateStatus(Request $request, News $news)
-    {
-        $request->validate([
-            'status' => 'required|in:draft,published'
-        ]);
-
-        $news->update(['status' => $request->status]);
-
-        return response()->json(['success' => true]);
     }
 }

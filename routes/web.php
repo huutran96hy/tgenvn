@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\NewsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\{
     ProductController,
@@ -602,9 +603,8 @@ Route::get('/support', function () {
     return redirect()->route('support.consultation');
 })->name('support');
 
-Route::get('/notices', function () {
-    return view('Frontend.support-notices');
-})->name('support.notices');
+Route::get('/notices', [NewsController::class, 'list'])->name('support.notices');
+Route::get('/notice/{slug}', [NewsController::class, 'detail'])->name('support.notice.detail');
 
 Route::get('/support/consultation', function () {
     return view('frontend.customer-support');
