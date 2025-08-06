@@ -53,7 +53,7 @@
 
                 <!-- notice Content -->
                 <div class="px-6 py-8">
-                    <div class="space-y-6" data-vi="{!!$notice->content_vi!!}" data-en="{!!$notice->content_en!!}" data-ko="{!!$notice->content_ko!!}">
+                    <div class="space-y-6" data-vi="{{$notice->content_vi}}" data-en="{{$notice->content_en}}" data-ko="{{$notice->content_ko}}">
                         {!! $notice->content_ko !!}
                         <!-- Technical Specifications Table -->
                     </div>

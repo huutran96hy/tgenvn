@@ -60,7 +60,7 @@ class NewsController extends Controller
     public function edit(News $news)
     {
         $users = User::all();
-        return view('Admin.pages.news.add_edit', compact('news', 'categories', 'users'));
+        return view('Admin.pages.news.add_edit', compact('news'));
     }
 
     public function update(Request $request, News $news)
