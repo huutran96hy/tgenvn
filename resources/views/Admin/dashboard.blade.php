@@ -7,25 +7,7 @@
     <!-- Content area -->
     <div class="content">
         <div class="row">
-            <div class="col-sm-6 col-xl-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <a href="{{ route('admin.users.index') }}"
-                                class="bg-primary bg-opacity-10 text-primary lh-1 rounded-pill p-2 me-3">
-                                <i class="ph-users-three"></i>
-                            </a>
-                            <div class="flex-fill">
-                                <div class="fw-semibold">Tài khoản</div>
-                                <span class="text-muted">Tổng số người dùng</span>
-                            </div>
-                            <h3 class="mb-0">{{ number_format($stats['users']) }}</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-xl-4">
+            <div class="col-sm-6 col-xl-6">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
@@ -43,7 +25,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-6 col-xl-4">
+            <div class="col-sm-6 col-xl-6">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex align-items-center">

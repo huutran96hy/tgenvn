@@ -41,26 +41,7 @@
             height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .auth-brand-logo {
-            width: 72px;
-            height: 72px;
-            border-radius: 18px;
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(8px);
-            display: flex;
-            align-items: center;
             justify-content: center;
-            padding: 12px;
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
-        }
-
-        .auth-brand-logo img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
         }
 
         .auth-brand-title {
@@ -75,21 +56,6 @@
             font-size: 1.05rem;
             line-height: 1.7;
             color: rgba(255, 255, 255, 0.82);
-        }
-
-        .auth-brand-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-        }
-
-        .auth-brand-badge {
-            padding: 0.55rem 0.9rem;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.14);
-            font-size: 0.875rem;
-            backdrop-filter: blur(6px);
         }
 
         .auth-panel {
@@ -263,22 +229,10 @@
         <aside class="auth-brand">
             <div class="auth-brand-content">
                 <div>
-                    <div class="auth-brand-logo">
-                        <img src="{{ asset(\App\Models\Config::getLogo()) }}" alt="Logo">
-                    </div>
-                </div>
-
-                <div>
                     <h2 class="auth-brand-title">Hệ thống quản trị<br>TGEN Vietnam</h2>
                     <p class="auth-brand-desc">
                         Quản lý nội dung, sản phẩm và quy trình một cách nhanh chóng, an toàn và trực quan.
                     </p>
-                </div>
-
-                <div class="auth-brand-badges">
-                    <span class="auth-brand-badge"><i class="ph-shield-check me-1"></i> Bảo mật</span>
-                    <span class="auth-brand-badge"><i class="ph-chart-line-up me-1"></i> Thống kê</span>
-                    <span class="auth-brand-badge"><i class="ph-gear-six me-1"></i> Quản lý</span>
                 </div>
             </div>
         </aside>

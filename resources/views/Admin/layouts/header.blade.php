@@ -35,20 +35,11 @@
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
-                    {{-- <a href="#" class="dropdown-item">
-                        <i class="ph-user-circle me-2"></i>
-                        My profile
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <i class="ph-envelope-open me-2"></i>
-                        My inbox
-                        <span class="badge bg-primary rounded-pill ms-auto">26</span>
+                    <a href="{{ route('admin.password.edit') }}" class="dropdown-item">
+                        <i class="ph-lock-key me-2"></i>
+                        Đổi mật khẩu
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="ph-gear me-2"></i>
-                        Account settings
-                    </a> --}}
                     <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>

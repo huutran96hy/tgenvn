@@ -3,11 +3,6 @@
 return [
     'admin_menu' => [
         [
-            'route' => 'admin.users.index',
-            'label' => 'Danh sách người dùng',
-            'icon' => 'ph-briefcase',
-        ],
-        [
             'route' => '#',
             'label' => 'Sản phẩm',
             'icon' => 'ph-shopping-cart',
@@ -24,6 +19,11 @@ return [
                 ['route' => 'admin.processes.index', 'label' => 'Danh sách quy trình'],
                 ['route' => 'admin.process-categories.index', 'label' => 'Danh mục quy trình'],
             ]
+        ],
+        [
+            'route' => 'admin.password.edit',
+            'label' => 'Đổi mật khẩu',
+            'icon' => 'ph-lock-key',
         ],
     ]
 ];

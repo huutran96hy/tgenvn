@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\{
     JobController,
     NewsController,
     ConfigController,
+    ProfileController,
     JobCategoryController,
     EmployerController,
     NewsCategoryController,
@@ -35,6 +36,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Cần đăng nhập admin hoặc content manager
     Route::middleware([AdminAccess::class])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/password', [ProfileController::class, 'editPassword'])->name('password.edit');
+        Route::put('/password', [ProfileController::class, 'updatePassword'])->name('password.update');
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
         Route::resource('users', UserController::class);
