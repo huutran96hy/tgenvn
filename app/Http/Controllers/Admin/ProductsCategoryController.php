@@ -4,18 +4,24 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ProductsCategory;
+use App\Traits\SlugCheck;
 use Illuminate\Http\Request;
 
 class ProductsCategoryController extends Controller
 {
+    use SlugCheck;
+
     public function index(Request $request)
     {
         $query = ProductsCategory::latest();
 
         if ($request->filled('search')) {
-            $query->orWhere('category_name_vi', 'like', "%{$request->search}%");
-            $query->orWhere('category_name_en', 'like', "%{$request->search}%");
-            $query->orWhere('category_name_ko', 'like', "%{$request->search}%");
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('category_name_vi', 'like', "%{$search}%")
+                    ->orWhere('category_name_en', 'like', "%{$search}%")
+                    ->orWhere('category_name_ko', 'like', "%{$search}%");
+            });
         }
 
         $categories = $query->paginate(10);
@@ -33,12 +39,20 @@ class ProductsCategoryController extends Controller
         $validated = $request->validate([
             'category_name_vi' => 'required|string|max:255|unique:products_categories,category_name_vi',
             'category_name_en' => 'required|string|max:255|unique:products_categories,category_name_en',
-            'category_name_ko' => 'required|string|max:255|unique:products_categories,category_name_ko',
-            'slug' => 'required|string|max:255|unique:products_categories,slug',
+            'category_name_ko' => 'nullable|string|max:255|unique:products_categories,category_name_ko',
             'description_vi' => 'nullable|string',
             'description_en' => 'nullable|string',
-            'description_ko' => 'nullable|string'
+            'description_ko' => 'nullable|string',
         ]);
+
+        $slug = $this->getStorySlugExist(
+            $request->input('slug'),
+            ProductsCategory::class,
+            'slug',
+            'products_category_id'
+        );
+        $validated['slug'] = $slug;
+        $validated['category_name_ko'] = $validated['category_name_ko'] ?: null;
 
         ProductsCategory::create($validated);
 
@@ -55,12 +69,21 @@ class ProductsCategoryController extends Controller
         $validated = $request->validate([
             'category_name_vi' => 'required|string|max:255|unique:products_categories,category_name_vi,' . $productsCategory->products_category_id . ',products_category_id',
             'category_name_en' => 'required|string|max:255|unique:products_categories,category_name_en,' . $productsCategory->products_category_id . ',products_category_id',
-            'category_name_ko' => 'required|string|max:255|unique:products_categories,category_name_ko,' . $productsCategory->products_category_id . ',products_category_id',
+            'category_name_ko' => 'nullable|string|max:255|unique:products_categories,category_name_ko,' . $productsCategory->products_category_id . ',products_category_id',
             'description_vi' => 'nullable|string',
             'description_en' => 'nullable|string',
             'description_ko' => 'nullable|string',
-            'slug' => 'required|string|max:255|unique:products_categories,slug,' . $productsCategory->products_category_id . ',products_category_id'
         ]);
+
+        $slug = $this->getStorySlugExist(
+            $request->input('slug'),
+            ProductsCategory::class,
+            'slug',
+            'products_category_id',
+            $productsCategory->products_category_id
+        );
+        $validated['slug'] = $slug;
+        $validated['category_name_ko'] = $validated['category_name_ko'] ?: null;
 
         $productsCategory->update($validated);
 

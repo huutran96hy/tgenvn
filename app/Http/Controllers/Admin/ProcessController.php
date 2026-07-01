@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ProcessCategory;
 use App\Models\Process;
-use App\Models\User;
 use App\Traits\SlugCheck;
 
 class ProcessController extends Controller
@@ -39,8 +38,8 @@ class ProcessController extends Controller
     public function create()
     {
         $categories = ProcessCategory::all();
-        $users = User::all();
-        return view('Admin.pages.processes.add_edit', compact('categories', 'users'));
+
+        return view('Admin.pages.processes.add_edit', compact('categories'));
     }
 
     public function store(Request $request)
@@ -48,7 +47,7 @@ class ProcessController extends Controller
         $validated = $request->validate([
             'process_name_vi' => 'required|string|max:255',
             'process_name_en' => 'required|string|max:255',
-            'process_name_ko' => 'required|string|max:255',
+            'process_name_ko' => 'nullable|string|max:255',
             'description_vi' => 'nullable|string',
             'description_en' => 'nullable|string',
             'description_ko' => 'nullable|string',
@@ -61,6 +60,7 @@ class ProcessController extends Controller
 
         $slug = $this->getStorySlugExist($slug, Process::class, 'slug', 'process_id');
         $validated['slug'] = $slug;
+        $validated['process_name_ko'] = $validated['process_name_ko'] ?: null;
         Process::create($validated);
 
         return redirect()->route('admin.processes.index')->with('success', 'Thêm mới thành công.');
@@ -69,8 +69,8 @@ class ProcessController extends Controller
     public function edit(Process $process)
     {
         $categories = ProcessCategory::all();
-        $users = User::all();
-        return view('Admin.pages.processes.add_edit', compact('process', 'categories', 'users'));
+
+        return view('Admin.pages.processes.add_edit', compact('process', 'categories'));
     }
 
     public function update(Request $request, Process $process)
@@ -78,7 +78,7 @@ class ProcessController extends Controller
         $validated =  $request->validate([
             'process_name_vi' => 'required|string|max:255',
             'process_name_en' => 'required|string|max:255',
-            'process_name_ko' => 'required|string|max:255',
+            'process_name_ko' => 'nullable|string|max:255',
             'description_vi' => 'nullable|string',
             'description_en' => 'nullable|string',
             'description_ko' => 'nullable|string',
@@ -91,6 +91,7 @@ class ProcessController extends Controller
 
         $slug = $this->getStorySlugExist($slug, Process::class, 'slug', 'process_id', $process->process_id);
         $validated['slug'] = $slug;
+        $validated['process_name_ko'] = $validated['process_name_ko'] ?: null;
 
         $process->update($validated);
 

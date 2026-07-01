@@ -24,8 +24,8 @@
                                 <option value="">Tất cả danh mục</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->process_category_id }}"
-                                        {{ request('category') == $category->process_category_id ? 'selected' : '' }}>
-                                        {{ $category->category_name_ko ?? $category->category_name_vi }}</option>
+                                        {{ (string) request('process_category_id') === (string) $category->process_category_id ? 'selected' : '' }}>
+                                        {{ $category->category_name_vi ?? $category->category_name_en ?? $category->category_name_ko }}
                                     </option>
                                 @endforeach
                             </select>
@@ -39,8 +39,13 @@
                 <x-table-wrapper-cms :headers="['Tên quy trình', 'Danh mục', 'Hành động']">
                     @foreach ($processes as $item)
                         <tr>
-                            <td>{{ $item->process_name_ko ?? $item->process_name_vi }}</td>
-                            <td>{{ $item->category->category_name_ko ?? 'Không có' }}</td>
+                            <td>
+                                <div class="fw-semibold">{{ $item->process_name_vi ?? $item->process_name_en ?? $item->process_name_ko }}</div>
+                                @if ($item->process_name_en && $item->process_name_en !== $item->process_name_vi)
+                                    <div class="text-muted fs-sm">EN: {{ $item->process_name_en }}</div>
+                                @endif
+                            </td>
+                            <td>{{ $item->category->category_name_vi ?? $item->category->category_name_en ?? 'Không có' }}</td>
                             <td class="text-center">
                                 <x-action-dropdown editRoute="admin.processes.edit" deleteRoute="admin.processes.destroy"
                                     :id="$item->process_id" />

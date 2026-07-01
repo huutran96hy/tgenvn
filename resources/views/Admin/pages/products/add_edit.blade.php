@@ -1,6 +1,6 @@
 @extends('Admin.layouts.master')
 
-@section('pageTitle', isset($product) ? 'Chỉnh sửa tin tức' : 'Thêm tin tức')
+@section('pageTitle', isset($product) ? 'Chỉnh sửa sản phẩm' : 'Thêm sản phẩm')
 
 @section('content')
 @include('Admin.snippets.page_header')
@@ -11,75 +11,91 @@
             <h5 class="mb-0">{{ isset($product) ? 'Chỉnh sửa sản phẩm' : 'Thêm sản phẩm' }}</h5>
         </div>
         <div class="card-body">
-            <form action="{{ isset($product) ? route('admin.products.update', $product->products_id) : route('admin.products.store') }}"
-                method="POST" enctype="multipart/form-data">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <div class="fw-semibold mb-1">Vui lòng kiểm tra lại thông tin:</div>
+                    <ul class="mb-0 ps-3">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form
+                action="{{ isset($product) ? route('admin.products.update', $product->products_id) : route('admin.products.store') }}"
+                method="POST"
+                enctype="multipart/form-data"
+            >
                 @csrf
                 @if (isset($product))
-                @method('PUT')
+                    @method('PUT')
                 @endif
-                <div class="mb-3">
-                    <label class="form-label">Danh mục <span class="text-danger">*</span></label>
-                    <select name="products_category_id" class="form-control select2" required>
-                        <option value="">Chọn danh mục</option>
-                        @foreach ($categories as $category)
-                        <option value="{{ $category->products_category_id }}"
-                            {{ isset($product) && $product->products_category_id == $category->products_category_id ? 'selected' : '' }}>
-                            {{ $category->category_name_ko ?? $category->category_name_vi }}
-                        </option>
-                        </option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Tên sản phẩm (Tiếng Việt) <span class="text-danger">*</span></label>
-                    <input type="text" name="product_name_vi" class="form-control"
-                        value="{{ old('product_name_vi', $product->product_name_vi ?? '') }}" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Tên sản phẩm (Tiếng Anh) <span class="text-danger">*</span></label>
-                    <input type="text" name="product_name_en" class="form-control text-to-slug"
-                        value="{{ old('product_name_en', $product->product_name_en ?? '') }}" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Tên sản phẩm (Tiếng Hàn)</label>
-                    <input type="text" name="product_name_ko" class="form-control"
-                        value="{{ old('product_name_ko', $product->product_name_ko ?? '') }}">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Slug</label>
-                    <input type="text" name="slug" class="form-control text-to-slug"
-                        value="{{ old('slug', $employer->slug ?? '') }}" readonly>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-12">
+                        <label class="form-label">Danh mục <span class="text-danger">*</span></label>
+                        <select name="products_category_id" class="form-control select2" required>
+                            <option value="">Chọn danh mục</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->products_category_id }}"
+                                    {{ (string) old('products_category_id', $product->products_category_id ?? '') === (string) $category->products_category_id ? 'selected' : '' }}>
+                                    {{ $category->category_name_vi ?? $category->category_name_en ?? $category->category_name_ko }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('products_category_id')
+                            <div class="text-danger fs-sm mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
 
-                <div class="file-input-wrapper mb-3">
+                <x-hidden-slug :value="$product->slug ?? ''" />
+
+                <div class="file-input-wrapper mb-4">
                     <label class="form-label">Hình ảnh</label>
                     <input type="hidden" name="image" class="all-images"
-                        value="{{ isset($product) && $product->image ? $product->image : '' }}">
-
-                    <!-- Vẫn giữ input file nhưng dùng để trigger popup -->
+                        value="{{ old('image', isset($product) && $product->image ? $product->image : '') }}">
                     <input type="file" class="file-input-preview" data-browse-on-zone-click="true">
+                    @error('image')
+                        <div class="text-danger fs-sm mt-1">{{ $message }}</div>
+                    @enderror
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Mô tả ngắn (Tiếng Việt)</label>
-                    <textarea name="description_vi" class="form-control">{{ old('description_vi', $product->description_vi ?? '') }}</textarea>
+
+                <x-locale-tabs
+                    :entity="$product ?? null"
+                    name-prefix="product_name"
+                    desc-prefix="description"
+                    name-label="Tên sản phẩm"
+                    desc-label="Mô tả ngắn"
+                    :required-locales="['vi', 'en']"
+                    slug-source-locale="vi"
+                    :name-placeholders="[
+                        'vi' => 'Nhập tên sản phẩm bằng tiếng Việt',
+                        'en' => 'Enter product name in English',
+                        'ko' => '제품명을 한국어로 입력하세요',
+                    ]"
+                    :desc-placeholders="[
+                        'vi' => 'Nhập mô tả ngắn bằng tiếng Việt',
+                        'en' => 'Enter short description in English',
+                        'ko' => '한국어로 간단한 설명을 입력하세요',
+                    ]"
+                />
+
+                <div class="mt-4">
+                    <label class="form-label">Nội dung chi tiết</label>
+                    <textarea name="content" class="form-control ckeditor" rows="8">{{ old('content', $product->content ?? '') }}</textarea>
+                    @error('content')
+                        <div class="text-danger fs-sm mt-1">{{ $message }}</div>
+                    @enderror
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Mô tả ngắn (Tiếng Anh)</label>
-                    <textarea name="description_en" class="form-control">{{ old('description_en', $product->description_en ?? '') }}</textarea>
+
+                <div class="d-flex flex-wrap gap-2 mt-4">
+                    <button type="submit" class="btn btn-success">
+                        {{ isset($product) ? 'Cập nhật sản phẩm' : 'Thêm sản phẩm' }}
+                    </button>
+                    <a href="{{ route('admin.products.index') }}" class="btn btn-secondary">Quay lại</a>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Mô tả ngắn (Tiếng Hàn)</label>
-                    <textarea name="description_ko" class="form-control">{{ old('description_ko', $product->description_ko ?? '') }}</textarea>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Nội dung <span class="text-danger">*</span></label>
-                    <textarea name="content" class="form-control ckeditor" required>
-                    {{ old('content', $product->content ?? '') }}
-                    </textarea>
-                </div>
-                <button type="submit"
-                    class="btn btn-success">{{ isset($product) ? 'Cập nhật sản phẩm' : 'Thêm sản phẩm' }}</button>
-                <a href="{{ route('admin.products.index') }}" class="btn btn-secondary">Quay lại</a>
             </form>
         </div>
     </div>
@@ -91,17 +107,21 @@
 
 <script>
     $(document).ready(function() {
-        // bỏ dấu tiếng Việt
+        $('.select2').select2({
+            placeholder: 'Chọn danh mục',
+            allowClear: true,
+            width: '100%'
+        });
+
         function removeVietnameseTones(str) {
             str = str.normalize('NFD');
-            str = str.replace(/[\u0300-\u036f]/g, "");
-            str = str.replace(/đ/g, "d");
-            str = str.replace(/Đ/g, "D");
+            str = str.replace(/[\u0300-\u036f]/g, '');
+            str = str.replace(/đ/g, 'd');
+            str = str.replace(/Đ/g, 'D');
             str = str.replace(/([^0-9a-z-\s])/g, '');
             return str;
         }
 
-        // tạo slug từ tên
         function slugify(text) {
             text = text.toLowerCase();
             text = removeVietnameseTones(text);
@@ -113,19 +133,13 @@
                 .replace(/-+$/, '');
         }
 
-        $('.text-to-slug[name="product_name_en"]').on('input', function() {
-            var name = $(this).val();
-            var slug = slugify(name);
-            $('.text-to-slug[name="slug"]').val(slug);
-        });
-
-        @if(isset($product))
-        var initialName = $('.text-to-slug[name="product_name_en"]').val();
-        if (initialName) {
-            var initialSlug = slugify(initialName);
-            $('.text-to-slug[name="slug"]').val(initialSlug);
+        function updateSlug() {
+            const name = $('.slug-source').val() || '';
+            $('.slug-output').val(slugify(name));
         }
-        @endif
+
+        $('.slug-source').on('input', updateSlug);
+        updateSlug();
     });
 </script>
 @endpush

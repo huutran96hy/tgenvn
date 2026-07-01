@@ -1,77 +1,83 @@
 @extends('Admin.layouts.master')
+
 @section('pageTitle', isset($processCategory) ? 'Chỉnh sửa danh mục quy trình' : 'Thêm danh mục quy trình')
+
 @section('content')
 @include('Admin.snippets.page_header')
 
 <div class="content">
     <div class="card">
         <div class="card-header">
-            <h5 class="mb-0">{{ isset($processCategory) ? 'Chỉnh sửa danh mục quy trình' : 'Thêm danh mục quy trình' }}
-            </h5>
+            <h5 class="mb-0">{{ isset($processCategory) ? 'Chỉnh sửa danh mục quy trình' : 'Thêm danh mục quy trình' }}</h5>
         </div>
 
         <div class="card-body">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <div class="fw-semibold mb-1">Vui lòng kiểm tra lại thông tin:</div>
+                    <ul class="mb-0 ps-3">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <form
                 action="{{ isset($processCategory) ? route('admin.process-categories.update', $processCategory->process_category_id) : route('admin.process-categories.store') }}"
-                method="POST">
+                method="POST"
+            >
                 @csrf
                 @if (isset($processCategory))
-                @method('PUT')
+                    @method('PUT')
                 @endif
-                <div class="mb-3">
-                    <label class="form-label">Tên danh mục tiếng Việt <span class="text-danger">*</span></label>
-                    <input type="text" name="category_name_vi" class="form-control"
-                        value="{{ old('category_name_vi', $processCategory->category_name_vi ?? '') }}" required>
+
+                <x-hidden-slug :value="$processCategory->slug ?? ''" />
+
+                <x-locale-tabs
+                    :entity="$processCategory ?? null"
+                    name-prefix="category_name"
+                    desc-prefix="description"
+                    name-label="Tên danh mục"
+                    desc-label="Mô tả"
+                    :required-locales="['vi', 'en']"
+                    slug-source-locale="vi"
+                    :name-placeholders="[
+                        'vi' => 'Nhập tên danh mục bằng tiếng Việt',
+                        'en' => 'Enter category name in English',
+                        'ko' => '한국어로 카테고리 이름을 입력하세요',
+                    ]"
+                    :desc-placeholders="[
+                        'vi' => 'Nhập mô tả danh mục bằng tiếng Việt',
+                        'en' => 'Enter category description in English',
+                        'ko' => '한국어로 카테고리 설명을 입력하세요',
+                    ]"
+                />
+
+                <div class="d-flex flex-wrap gap-2 mt-4">
+                    <button type="submit" class="btn btn-success">
+                        {{ isset($processCategory) ? 'Cập nhật danh mục' : 'Thêm danh mục' }}
+                    </button>
+                    <a href="{{ route('admin.process-categories.index') }}" class="btn btn-secondary">Quay lại</a>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Tên danh mục tiếng Anh <span class="text-danger">*</span></label>
-                    <input type="text" name="category_name_en" class="form-control text-to-slug"
-                        value="{{ old('category_name_en', $processCategory->category_name_en ?? '') }}" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Tên danh mục tiếng Hàn <span class="text-danger">*</span></label>
-                    <input type="text" name="category_name_ko" class="form-control"
-                        value="{{ old('category_name_ko', $processCategory->category_name_ko ?? '') }}" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Slug</label>
-                    <input type="text" name="slug" class="form-control text-to-slug"
-                        value="{{ old('slug', $processCategory->slug ?? '') }}" readonly>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Mô tả tiếng việt</label>
-                    <textarea name="description_vi" class="form-control">{{ old('description_vi', $processCategory->description_vi ?? '') }}</textarea>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Mô tả tiếng anh</label>
-                    <textarea name="description_en" class="form-control">{{ old('description_en', $processCategory->description_en ?? '') }}</textarea>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Mô tả tiếng hàn</label>
-                    <textarea name="description_ko" class="form-control">{{ old('description_ko', $processCategory->description_ko ?? '') }}</textarea>
-                </div>
-                <button type="submit"
-                    class="btn btn-success">{{ isset($processCategory) ? 'Cập nhật' : 'Thêm mới' }}</button>
-                <a href="{{ route('admin.process-categories.index') }}" class="btn btn-secondary">Quay lại</a>
             </form>
         </div>
     </div>
 </div>
 @endsection
+
 @push('scripts')
 <script>
     $(document).ready(function() {
-        // bỏ dấu tiếng Việt
         function removeVietnameseTones(str) {
             str = str.normalize('NFD');
-            str = str.replace(/[\u0300-\u036f]/g, "");
-            str = str.replace(/đ/g, "d");
-            str = str.replace(/Đ/g, "D");
+            str = str.replace(/[\u0300-\u036f]/g, '');
+            str = str.replace(/đ/g, 'd');
+            str = str.replace(/Đ/g, 'D');
             str = str.replace(/([^0-9a-z-\s])/g, '');
             return str;
         }
 
-        // tạo slug từ tên
         function slugify(text) {
             text = text.toLowerCase();
             text = removeVietnameseTones(text);
@@ -83,19 +89,13 @@
                 .replace(/-+$/, '');
         }
 
-        $('.text-to-slug[name="category_name_en"]').on('input', function() {
-            var name = $(this).val();
-            var slug = slugify(name);
-            $('.text-to-slug[name="slug"]').val(slug);
-        });
-
-        @if(isset($processCategory))
-        var initialName = $('.text-to-slug[name="category_name_en"]').val();
-        if (initialName) {
-            var initialSlug = slugify(initialName);
-            $('.text-to-slug[name="slug"]').val(initialSlug);
+        function updateSlug() {
+            const name = $('.slug-source').val() || '';
+            $('.slug-output').val(slugify(name));
         }
-        @endif
+
+        $('.slug-source').on('input', updateSlug);
+        updateSlug();
     });
 </script>
 @endpush

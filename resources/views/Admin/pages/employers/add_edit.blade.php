@@ -34,18 +34,14 @@
                     </div> --}}
 
                     <div class="row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-12 mb-3">
                             <label class="form-label">Tên nhà tuyển dụng <span class="text-danger">*</span></label>
-                            <input type="text" name="company_name" class="form-control text-to-slug"
+                            <input type="text" name="company_name" class="form-control slug-source"
                                 value="{{ old('company_name', $employer->company_name ?? '') }}" required>
                         </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Slug</label>
-                            <input type="text" name="slug" class="form-control text-to-slug"
-                                value="{{ old('slug', $employer->slug ?? '') }}" readonly>
-                        </div>
                     </div>
+
+                    <x-hidden-slug :value="$employer->slug ?? ''" />
 
                     <div class="file-input-wrapper mb-3">
                         <label class="form-label">Logo</label>
@@ -343,17 +339,16 @@
                     .replace(/-+$/, '');
             }
 
-            $('.text-to-slug[name="company_name"]').on('input', function() {
+            $('.slug-source').on('input', function() {
                 var name = $(this).val();
                 var slug = slugify(name);
-                $('.text-to-slug[name="slug"]').val(slug);
+                $('.slug-output').val(slug);
             });
 
             @if (isset($employer))
-                var initialName = $('.text-to-slug[name="company_name"]').val();
+                var initialName = $('.slug-source').val();
                 if (initialName) {
-                    var initialSlug = slugify(initialName);
-                    $('.text-to-slug[name="slug"]').val(initialSlug);
+                    $('.slug-output').val(slugify(initialName));
                 }
             @endif
         });

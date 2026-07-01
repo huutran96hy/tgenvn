@@ -14,6 +14,9 @@ class ProcessCategory extends Model
         'category_name_vi',
         'category_name_en',
         'category_name_ko',
+        'description_vi',
+        'description_en',
+        'description_ko',
     ];
 
     public function processes()

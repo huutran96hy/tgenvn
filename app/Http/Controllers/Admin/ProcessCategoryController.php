@@ -3,19 +3,25 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\ProcessCategory;
+use App\Traits\SlugCheck;
+use Illuminate\Http\Request;
 
 class ProcessCategoryController extends Controller
 {
+    use SlugCheck;
+
     public function index(Request $request)
     {
         $query = ProcessCategory::latest();
 
         if ($request->filled('search')) {
-            $query->orWhere('category_name_vi', 'like', "%{$request->search}%");
-            $query->orWhere('category_name_en', 'like', "%{$request->search}%");
-            $query->orWhere('category_name_ko', 'like', "%{$request->search}%");
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('category_name_vi', 'like', "%{$search}%")
+                    ->orWhere('category_name_en', 'like', "%{$search}%")
+                    ->orWhere('category_name_ko', 'like', "%{$search}%");
+            });
         }
 
         $categories = $query->paginate(10);
@@ -33,12 +39,20 @@ class ProcessCategoryController extends Controller
         $validated = $request->validate([
             'category_name_vi' => 'required|string|max:255|unique:process_categories,category_name_vi',
             'category_name_en' => 'required|string|max:255|unique:process_categories,category_name_en',
-            'category_name_ko' => 'required|string|max:255|unique:process_categories,category_name_ko',
-            'slug' => 'required|string|max:255|unique:process_categories,slug',
+            'category_name_ko' => 'nullable|string|max:255|unique:process_categories,category_name_ko',
             'description_vi' => 'nullable|string',
             'description_en' => 'nullable|string',
-            'description_ko' => 'nullable|string'
+            'description_ko' => 'nullable|string',
         ]);
+
+        $slug = $this->getStorySlugExist(
+            $request->input('slug'),
+            ProcessCategory::class,
+            'slug',
+            'process_category_id'
+        );
+        $validated['slug'] = $slug;
+        $validated['category_name_ko'] = $validated['category_name_ko'] ?: null;
 
         ProcessCategory::create($validated);
 
@@ -55,12 +69,21 @@ class ProcessCategoryController extends Controller
         $validated = $request->validate([
             'category_name_vi' => 'required|string|max:255|unique:process_categories,category_name_vi,' . $processCategory->process_category_id . ',process_category_id',
             'category_name_en' => 'required|string|max:255|unique:process_categories,category_name_en,' . $processCategory->process_category_id . ',process_category_id',
-            'category_name_ko' => 'required|string|max:255|unique:process_categories,category_name_ko,' . $processCategory->process_category_id . ',process_category_id',
+            'category_name_ko' => 'nullable|string|max:255|unique:process_categories,category_name_ko,' . $processCategory->process_category_id . ',process_category_id',
             'description_vi' => 'nullable|string',
             'description_en' => 'nullable|string',
             'description_ko' => 'nullable|string',
-            'slug' => 'required|string|max:255|unique:process_categories,slug,' . $processCategory->process_category_id . ',process_category_id'
         ]);
+
+        $slug = $this->getStorySlugExist(
+            $request->input('slug'),
+            ProcessCategory::class,
+            'slug',
+            'process_category_id',
+            $processCategory->process_category_id
+        );
+        $validated['slug'] = $slug;
+        $validated['category_name_ko'] = $validated['category_name_ko'] ?: null;
 
         $processCategory->update($validated);
 

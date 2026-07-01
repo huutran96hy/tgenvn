@@ -18,25 +18,23 @@
                     @if (isset($news))
                         @method('PUT')
                     @endif
+
+                    <x-hidden-slug :value="$news->slug ?? ''" />
+
                     <div class="mb-3">
                         <label class="form-label">Tiêu đề (Tiếng Việt)<span class="text-danger">*</span></label>
-                        <input type="text" name="title_vi" class="form-control text-to-slug"
+                        <input type="text" name="title_vi" class="form-control slug-source"
                             value="{{ old('title_vi', $news->title_vi ?? '') }}" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Tiêu đề (Tiếng Anh)<span class="text-danger">*</span></label>
-                        <input type="text" name="title_en" class="form-control text-to-slug"
+                        <input type="text" name="title_en" class="form-control"
                             value="{{ old('title_en', $news->title_en ?? '') }}" required>
                     </div>
                      <div class="mb-3">
                         <label class="form-label">Tiêu đề (Tiếng Hàn)<span class="text-danger">*</span></label>
-                        <input type="text" name="title_ko" class="form-control text-to-slug"
+                        <input type="text" name="title_ko" class="form-control"
                             value="{{ old('title_ko', $news->title_ko ?? '') }}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Slug</label>
-                        <input type="text" name="slug" class="form-control text-to-slug"
-                            value="{{ old('slug', $employer->slug ?? '') }}" readonly>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Nội dung (Tiếng Việt) <span class="text-danger">*</span></label>
@@ -92,17 +90,16 @@
                     .replace(/-+$/, '');
             }
 
-            $('.text-to-slug[name="title_en"]').on('input', function() {
+            $('.slug-source').on('input', function() {
                 var name = $(this).val();
                 var slug = slugify(name);
-                $('.text-to-slug[name="slug"]').val(slug);
+                $('.slug-output').val(slug);
             });
 
             @if (isset($news))
-                var initialName = $('.text-to-slug[name="title_en"]').val();
+                var initialName = $('.slug-source').val();
                 if (initialName) {
-                    var initialSlug = slugify(initialName);
-                    $('.text-to-slug[name="slug"]').val(initialSlug);
+                    $('.slug-output').val(slugify(initialName));
                 }
             @endif
         });

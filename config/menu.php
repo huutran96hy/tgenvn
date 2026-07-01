@@ -17,11 +17,6 @@ return [
             ]
         ],
         [
-            'route'=>'admin.news.index',
-            'label'=>'Thông báo',
-            'icon'=>'ph-briefcase'
-        ],
-        [
             'route' => '#',
             'label' => 'Quy trình',
             'icon' => 'ph-gear',
@@ -29,11 +24,6 @@ return [
                 ['route' => 'admin.processes.index', 'label' => 'Danh sách quy trình'],
                 ['route' => 'admin.process-categories.index', 'label' => 'Danh mục quy trình'],
             ]
-        ],
-        [
-            'route' => 'admin.configs.index',
-            'label' => 'Cấu hình',
-            'icon' => 'ph-gear',
         ],
     ]
 ];

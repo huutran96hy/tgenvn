@@ -27,8 +27,13 @@
                 <x-table-wrapper-cms :headers="['Tên danh mục', 'Mô tả', 'Hành động']">
                     @foreach ($categories as $category)
                         <tr>
-                            <td>{{ Str::words($category->category_name_ko ?? 'Không có mô tả', 5) }}</td>
-                            <td>{{ Str::words($category->description_ko ?? 'Không có mô tả', 5) }}</td>
+                            <td>
+                                <div class="fw-semibold">{{ $category->category_name_vi ?? $category->category_name_en ?? $category->category_name_ko }}</div>
+                                @if ($category->category_name_en && $category->category_name_en !== $category->category_name_vi)
+                                    <div class="text-muted fs-sm">EN: {{ $category->category_name_en }}</div>
+                                @endif
+                            </td>
+                            <td>{{ Str::words($category->description_vi ?? $category->description_en ?? 'Không có mô tả', 8) }}</td>
                             <td class="text-center">
                                 <x-action-dropdown editRoute="admin.products-categories.edit"
                                     deleteRoute="admin.products-categories.destroy" :id="$category->products_category_id" />

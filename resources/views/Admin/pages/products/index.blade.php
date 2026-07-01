@@ -24,8 +24,8 @@
                                 <option value="">Tất cả danh mục</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->products_category_id }}"
-                                        {{ request('category') == $category->products_category_id ? 'selected' : '' }}>
-                                        {{ $category->category_name_ko ?? $category->category_name_vi }}</option>
+                                        {{ (string) request('products_category_id') === (string) $category->products_category_id ? 'selected' : '' }}>
+                                        {{ $category->category_name_vi ?? $category->category_name_en ?? $category->category_name_ko }}
                                     </option>
                                 @endforeach
                             </select>
@@ -39,8 +39,13 @@
                 <x-table-wrapper-cms :headers="['Tên sản phẩm', 'Danh mục', 'Hành động']">
                     @foreach ($products as $item)
                         <tr>
-                            <td>{{ $item->product_name_ko ?? $item->product_name_vi }}</td>
-                            <td>{{ $item->category->category_name_ko ?? 'Không có' }}</td>
+                            <td>
+                                <div class="fw-semibold">{{ $item->product_name_vi ?? $item->product_name_en ?? $item->product_name_ko }}</div>
+                                @if ($item->product_name_en && $item->product_name_en !== $item->product_name_vi)
+                                    <div class="text-muted fs-sm">EN: {{ $item->product_name_en }}</div>
+                                @endif
+                            </td>
+                            <td>{{ $item->category->category_name_vi ?? $item->category->category_name_en ?? 'Không có' }}</td>
                             <td class="text-center">
                                 <x-action-dropdown editRoute="admin.products.edit" deleteRoute="admin.products.destroy"
                                     :id="$item->products_id" />
