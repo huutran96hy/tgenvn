@@ -44,14 +44,9 @@
     <!-- Content -->
     <div class="p-4">
         <div class="items-start mb-4 ">
-            <div class="flex-shrink-0 w-40 mr-3" style="width:100%;border:0.5px solid #a8a8a8;margin-bottom:10px;">
+            <div class="flex-shrink-0 w-40 mr-3" style="width:100%;border:0.5px solid #a8a8a8;">
                 <a href="http://tg-enc.co.kr/" target="_blank" class="block w-full h-full p-1">
                     <img src="{{ asset('assets/images/tgenc.jpg') }}" style="margin: 0 auto;" alt="Support Icon" class="w-36 h-full">
-                </a>
-            </div>
-            <div class="flex-shrink-0 w-40 mr-3 p-2" style="width:100%;border:0.5px solid #a8a8a8;">
-                <a href="https://supercalib.vn/" target="_blank" class="text-xl font-bold text-blue-600 hover:text-blue-800 transition-colors duration-300">
-                    <img src="{{ asset('assets/images/kaizen.jpg') }}" alt="Support Icon" class="w-full h-full">
                 </a>
             </div>
         </div>
